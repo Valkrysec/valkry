@@ -9,13 +9,14 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #1a1a1d; /* Dark background */
-            color: #e0e0e0;
+            background-color: #0B0B0B; /* Dark background */
+            color: #E0E0E0;
         }
         .header {
-            background: linear-gradient(to right, #2c3e50, #4ca1af); /* Gradient from dark blue to tech blue */
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: relative;
         }
         .header h1 {
             color: #ffffff;
@@ -25,7 +26,7 @@
         }
         .content {
             padding: 20px;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 20px auto;
             text-align: center;
         }
@@ -36,8 +37,40 @@
             width: 100%;
             height: 100%;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 0 L100 0 L100 100 L0 100 Z" fill="url(%23circuitPattern)"/><defs><pattern id="circuitPattern" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)"><path d="M0 10 L10 10 M10 0 L10 20" stroke="%234A90E2" stroke-width="0.5" fill="none"/></pattern></defs></svg>');
-            opacity: 0.1; /* Subtle pattern */
+            opacity: 0.1;
             z-index: -1;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .docs-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .about-section {
+            background-color: #1a1a1d;
+            padding: 50px 0;
+            margin: 50px 0;
+        }
+        .footer {
+            background-color: #111111;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin: 0 10px;
         }
     </style>
 </head>
@@ -45,16 +78,26 @@
     <div class="ai-security-bg"></div>
     <div class="header">
         <h1>xOne Secure</h1>
+        <a href="#" class="btn docs-btn">Docs</a>
     </div>
     <div class="content">
         <h1>Your Trusted Web3 Security Solution</h1>
         <p>The xOne Secure Protocol was built by Developers and Pen Testers with a passion for Web3. Protect your digital assets, and ensure your online activities remain secure.</p>
         <p>Start with a Security Audit and Vulnerabilty Scan Report Free of Charge</p>
-        <button style="background-color: gray; color: black; padding: 15px 25px; font-size: 15px; border: none; cursor: pointer;">Free Web3 Assessment</button>
+        <a href="#" class="btn">Free Web3 Assessment</a>
         
-        <div class="center-content">
-        <hr> <!-- Horizontal rule for a page break -->
-        <p>Here's where you can describe your company. Talk about what you do, your mission, vision, and what makes you unique. This is the place to share your story with your visitors.</p>
+        <section class="about-section">
+            <h2>About Us</h2>
+            <p>At xOne Secure, we are dedicated to providing top-notch security solutions for the Web3 ecosystem. Our mission is to empower users and developers to navigate the digital world with confidence. We combine cutting-edge technology with deep security expertise to offer unparalleled protection against threats.</p>
+        </section>
     </div>
+    <footer class="footer">
+        <div>
+            <p>&copy; 2025 xOne Secure. All rights reserved.</p>
+            <a href="#" target="_blank">Twitter</a> 
+            <a href="#" target="_blank">LinkedIn</a> 
+            <a href="#" target="_blank">GitHub</a>
+        </div>
+    </footer>
 </body>
 </html>
