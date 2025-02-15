@@ -119,14 +119,40 @@
     
     <section class="welcome-section">
         <h1>Your Trusted Web3 Security Solution</h1>
-        <form action="https://formspree.io/f/xpwqyrka" method="POST" enctype="application/x-www-form-urlencoded">
-    <button type="submit" class="btn">Free Web3 Assessment</button>
-</form>
+        <form id="assessmentForm">
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit" class="btn">Free Web3 Assessment</button>
+        </form>
     </section>
 
     <section class="about-section">
         <h2>About Us</h2>
         <p>At xOne Secure, we are dedicated to providing top-notch security solutions for the Web3 ecosystem. Our mission is to empower users and developers to navigate the digital world with confidence. We combine cutting-edge AI technology with deep security expertise to offer unparalleled protection against threats.</p>
     </section>
+
+    <script>
+        document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            fetch('https://formspree.io/f/xpwqyrka', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert('Assessment request sent successfully!');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('There was an error sending your request. Please try again.');
+            });
+        });
+    </script>
 </body>
 </html>
