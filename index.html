@@ -14,11 +14,23 @@
             color: #E0E0E0;
         }
         
+        /* Futuristic Background */
+        .ai-security-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 0 L100 0 L100 100 L0 100 Z" fill="url(%23circuitPattern)"/><defs><pattern id="circuitPattern" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)"><path d="M0 10 L10 10 M10 0 L10 20" stroke="%234A90E2" stroke-width="0.5" fill="none"/></pattern></defs></svg>');
+            opacity: 0.1;
+            z-index: -1;
+        }
+
         /* Header styles */
         .header {
-            background: linear-gradient(to right, #000000, #333333);
+            background: transparent; /* Make header transparent to see the bg through */
             padding: 10px 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: none; /* Remove shadow since it's over the bg */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -48,7 +60,7 @@
 
         /* Welcome Section - Adjusted for tighter layout */
         .welcome-section {
-            min-height: 60vh; /* Reduced from 100vh to make content appear higher */
+            min-height: 60vh; /* Maintain reduced height for content positioning */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -58,26 +70,29 @@
         .welcome-section h1 {
             font-size: 3em;
             margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Add text shadow for visibility */
         }
 
-        /* About Section */
+        /* About Section - Adjust for background */
         .about-section {
-            background-color: #1a1a1d;
+            background-color: transparent; /* Make this transparent */
             padding: 100px 20px;
             text-align: center;
         }
         .about-section h2 {
             font-size: 2.5em;
             margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Add text shadow for visibility */
         }
         .about-section p {
             font-size: 1.5em;
             line-height: 1.8;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Add subtle text shadow for readability */
         }
     </style>
 </head>
 <body>
-    <!-- Removed the ai-security-bg div -->
+    <div class="ai-security-bg"></div>
     
     <div class="header">
         <img src="logo02.png" alt="xOne Secure Logo" width="175" height="125">
