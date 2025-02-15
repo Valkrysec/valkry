@@ -69,27 +69,6 @@
             font-size: 3em;
             margin-bottom: 20px;
         }
-        .welcome-section form {
-            margin-top: 20px;
-        }
-        .welcome-section input, .welcome-section button {
-            padding: 10px;
-            margin: 5px;
-            border: 1px solid #4CAF50;
-            border-radius: 4px;
-        }
-        .welcome-section input {
-            background: #1a1a1d;
-            color: #E0E0E0;
-        }
-        .welcome-section button {
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-        .welcome-section button:hover {
-            background-color: #45a049;
-        }
 
         /* About Section */
         .about-section {
@@ -119,39 +98,12 @@
     
     <section class="welcome-section">
         <h1>Your Trusted Web3 Security Solution</h1>
-        <form id="assessmentForm"> 
-            <button type="submit" class="btn">Free Web3 Assessment</button>
-        </form>
+        <a href="assessment-form.html" class="btn">Free Web3 Assessment</a>
     </section>
 
     <section class="about-section">
         <h2>About Us</h2>
         <p>At xOne Secure, we are dedicated to providing top-notch security solutions for the Web3 ecosystem. Our mission is to empower users and developers to navigate the digital world with confidence. We combine cutting-edge AI technology with deep security expertise to offer unparalleled protection against threats.</p>
     </section>
-
-    <script>
-        document.getElementById('assessmentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-            
-            fetch('https://formspree.io/f/xpwqyrka', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                alert('Assessment request sent successfully!');
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('There was an error sending your request. Please try again.');
-            });
-        });
-    </script>
 </body>
 </html>
