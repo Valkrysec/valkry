@@ -40,6 +40,10 @@
             margin: 4px 2px;
             cursor: pointer;
             border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #45a049;
         }
         .ai-security-bg {
             position: fixed;
@@ -54,7 +58,7 @@
 
         /* Welcome Section */
         .welcome-section {
-            min-height: 100vh; /* Ensures this section takes up at least the full viewport height */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -65,11 +69,32 @@
             font-size: 3em;
             margin-bottom: 20px;
         }
+        .welcome-section form {
+            margin-top: 20px;
+        }
+        .welcome-section input, .welcome-section button {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #4CAF50;
+            border-radius: 4px;
+        }
+        .welcome-section input {
+            background: #1a1a1d;
+            color: #E0E0E0;
+        }
+        .welcome-section button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        .welcome-section button:hover {
+            background-color: #45a049;
+        }
 
         /* About Section */
         .about-section {
             background-color: #1a1a1d;
-            padding: 100px 20px; /* Increased padding for a larger view */
+            padding: 100px 20px;
             text-align: center;
         }
         .about-section h2 {
@@ -77,7 +102,7 @@
             margin-bottom: 30px;
         }
         .about-section p {
-            font-size: 1.5em; /* Larger text for the about section */
+            font-size: 1.5em;
             line-height: 1.8;
         }
     </style>
@@ -94,7 +119,11 @@
     
     <section class="welcome-section">
         <h1>Your Trusted Web3 Security Solution</h1>
-        <a href="#" class="btn">Free Web3 Assessment</a>
+        <form action="https://formspree.io/f/your-unique-form-id" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <button type="submit" class="btn">Free Web3 Assessment</button>
+        </form>
     </section>
 
     <section class="about-section">
