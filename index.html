@@ -5,20 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>xOne - Internet Security</title>
     <style>
+        /* Base styles */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #0B0B0B; /* Dark background */
+            background-color: #0B0B0B;
             color: #E0E0E0;
         }
-        p {
-            font-size: 18px;
-            line-height: 1.5;
-        }
+        
+        /* Header styles */
         .header {
             background: linear-gradient(to right, #000000, #333333);
-            padding: 5px 20px;
+            padding: 10px 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
@@ -27,7 +26,7 @@
         }
         .header-buttons {
             position: absolute;
-            top: 10px;
+            top: 15px;
             right: 20px;
         }
         .btn {
@@ -42,12 +41,6 @@
             cursor: pointer;
             border-radius: 4px;
         }
-        .content {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 20px auto;
-            text-align: center;
-        }
         .ai-security-bg {
             position: fixed;
             top: 0;
@@ -58,20 +51,34 @@
             opacity: 0.1;
             z-index: -1;
         }
-        .about-section {
-            background-color: #1a1a1d;
-            padding: 50px 0;
-            margin: 50px 0;
-        }
-        .footer {
-            background-color: #111111;
-            padding: 20px 0;
+
+        /* Welcome Section */
+        .welcome-section {
+            min-height: 100vh; /* Ensures this section takes up at least the full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
         }
-        .footer a {
-            color: #4CAF50;
-            text-decoration: none;
-            margin: 0 10px;
+        .welcome-section h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: #1a1a1d;
+            padding: 100px 20px; /* Increased padding for a larger view */
+            text-align: center;
+        }
+        .about-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        .about-section p {
+            font-size: 1.5em; /* Larger text for the about section */
+            line-height: 1.8;
         }
     </style>
 </head>
@@ -84,23 +91,15 @@
             <a href="#" class="btn">Docs</a>
         </div>
     </div>
-    <div class="content">
+    
+    <section class="welcome-section">
         <h1>Your Trusted Web3 Security Solution</h1>
-        <p>The xOne Secure Protocol was built by Developers and Pen Testers with a passion for Web3. Protect your digital assets, and ensure your online activities remain secure.</p>
-        <p>Start With A Free Risk Assessment on Your Website & Web3 Infrastructure</p>
         <a href="#" class="btn">Free Web3 Assessment</a>
-        
-        <section class="about-section">
-            <h2>About Us</h2>
-            <p>At xOne Secure, we are dedicated to providing top-notch security solutions for the Web3 ecosystem. Our mission is to empower users and developers to navigate the digital world with confidence. We combine cutting-edge AI technology with deep security expertise to offer unparalleled protection against threats.</p>
-        </section>
-    </div>
-    <footer class="footer">
-        <div>
-            <p>© 2025 xOne Secure. All rights reserved.</p>
-            <a href="#" target="_blank">Twitter</a> 
-            <a href="#" target="_blank">GitHub</a>
-        </div>
-    </footer>
+    </section>
+
+    <section class="about-section">
+        <h2>About Us</h2>
+        <p>At xOne Secure, we are dedicated to providing top-notch security solutions for the Web3 ecosystem. Our mission is to empower users and developers to navigate the digital world with confidence. We combine cutting-edge AI technology with deep security expertise to offer unparalleled protection against threats.</p>
+    </section>
 </body>
 </html>
