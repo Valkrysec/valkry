@@ -143,5 +143,17 @@
             <p>© 2025 All Rights Reserved by xOne Secure LLC</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const appButton = document.querySelector('a[href="#"][class="btn"]:contains("xOne App")');
+            if (appButton) {
+                appButton.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent the default link behavior
+                    alert("We are in the process of finalizing the last steps on testnet. The app will be available soon!");
+                });
+            }
+        });
+    </script>
 </body>
 </html>
