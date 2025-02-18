@@ -1,1 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xOne - Services</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #0B0B0B;
+            color: #E0E0E0;
+        }
+        .ai-security-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 0 L100 0 L100 100 L0 100 Z" fill="url(%23circuitPattern)"/><defs><pattern id="circuitPattern" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)"><path d="M0 10 L10 10 M10 0 L10 20" stroke="%234A90E2" stroke-width="0.5" fill="none"/></pattern></defs></svg>');
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        /* Header styles */
+        .header {
+            background: transparent;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        .header-buttons {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
 
+        /* Service boxes */
+        .service-container {
+            display: flex;
+            justify-content: space-around;
+            padding: 50px 20px;
+            flex-wrap: wrap; /* Allows services to stack on smaller screens */
+        }
+        .service-box {
+            background-color: #1a1a1a; /* Darker shade for contrast */
+            border: 1px solid #4A90E2;
+            border-radius: 10px;
+            padding: 20px;
+            width: 30%; /* Adjust width as needed */
+            min-width: 250px; /* Minimum width for each box */
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+        .service-box:hover {
+            transform: translateY(-5px);
+        }
+        .service-box h3 {
+            color: #4A90E2;
+            margin-bottom: 10px;
+        }
+        .service-box ul {
+            text-align: left;
+            padding-left: 20px;
+        }
+        .service-box li {
+            margin: 10px 0;
+        }
+
+        /* Footer styles */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #1f8f9fa;
+            position: relative;
+        }
+        .footer-links a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .copyright {
+            margin-top: 10px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="ai-security-bg"></div>
+    
+    <div class="header">
+        <img src="logo4.png" alt="xOne Secure Logo" width="100" height="100">
+        <div class="header-buttons">
+            <a href="index.html" class="btn">Home</a>
+            <a href="#" class="btn app-button">xOne App</a>
+            <a href="https://xone-secure-protocol.gitbook.io/xone-secure" class="btn">Docs</a>
+        </div>
+    </div>
+
+    <section class="service-container">
+        <div class="service-box">
+            <h3>Service 1</h3>
+            <ul>
+                <li>Detail 1</li>
+                <li>Detail 2</li>
+                <li>Detail 3</li>
+            </ul>
+        </div>
+        <div class="service-box">
+            <h3>Service 2</h3>
+            <ul>
+                <li>Detail 1</li>
+                <li>Detail 2</li>
+                <li>Detail 3</li>
+            </ul>
+        </div>
+        <div class="service-box">
+            <h3>Service 3</h3>
+            <ul>
+                <li>Detail 1</li>
+                <li>Detail 2</li>
+                <li>Detail 3</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://twitter.com/xOnesecure">X</a>
+            <a href="https://github.com/xOneSecure">Gitbook</a>
+            <a href="https://github.com/xOneSecure/xone">Github</a>
+        </div>
+        <div class="copyright">
+            <p>© 2025 All Rights Reserved by xOne Secure LLC</p>
+        </div>
+    </footer>
+
+</body>
+</html>
