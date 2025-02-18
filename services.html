@@ -91,7 +91,7 @@
         }
         .service-box:hover .dropdown-content, 
         .service-box.active .dropdown-content {
-             display: block;
+            display: block;
         }
         .expand-prompt {
             cursor: pointer;
@@ -147,7 +147,7 @@
     </div>
 
     <section class="service-container">
-        <div class="service-box" onclick="toggleDropdown(this)">
+        <div class="service-box" id="box1" onclick="toggleDropdown('box1')">
             <h3>Web3 Infrastructure Assessment</h3>
             <ul>
                 <li>Comprehensive Network Analysis</li>
@@ -159,7 +159,7 @@
                 <p>Our Web3 Infrastructure Assessment provides a comprehensive analysis, from network connectivity to smart contract security. We delve into the intricacies of your blockchain setup, ensuring your infrastructure is not only secure but also optimized for performance and scalability. This service is crucial for identifying vulnerabilities before they can be exploited, safeguarding your digital assets in the complex landscape of decentralized technologies.</p>
             </div>
         </div>
-        <div class="service-box" onclick="toggleDropdown(this)">
+        <div class="service-box" id="box2" onclick="toggleDropdown('box2')">
             <h3>Auditing & Compliance</h3>
             <ul>
                 <li>Smart Contract Audits</li>
@@ -171,7 +171,7 @@
                 <p>Through our Auditing & Compliance services, we conduct thorough smart contract audits to detect any coding errors or security loopholes. We ensure your projects adhere to the latest regulatory frameworks, providing peace of mind in the ever-evolving Web3 regulatory environment. Our continuous monitoring post-audit helps in maintaining compliance and security over time, adapting to new threats and regulatory changes.</p>
             </div>
         </div>
-        <div class="service-box" onclick="toggleDropdown(this)">
+        <div class="service-box" id="box3" onclick="toggleDropdown('box3')">
             <h3>Penetration Testing</h3>
             <ul>
                 <li>Ethical Hacking</li>
@@ -183,7 +183,7 @@
                 <p>Our Penetration Testing service involves ethical hacking where we simulate attacks on your Web3 applications to uncover security flaws. We focus on testing decentralized apps for vulnerabilities unique to blockchain technology, like reentrancy or front-running attacks. By creating tailored attack scenarios, we ensure your infrastructure is resilient against both common and sophisticated threats, offering concrete recommendations for security enhancements.</p>
             </div>
         </div>
-        <div class="service-box" onclick="toggleDropdown(this)">
+        <div class="service-box" id="box4" onclick="toggleDropdown('box4')">
             <h3>xOne App & Extension</h3>
             <ul>
                 <li>Site Source Code Validation</li>
@@ -209,7 +209,8 @@
     </footer>
 
     <script>
-        function toggleDropdown(element) {
+        function toggleDropdown(id) {
+            var element = document.getElementById(id);
             element.classList.toggle("active");
         }
     </script>
