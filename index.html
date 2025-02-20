@@ -28,9 +28,9 @@
 
         /* Header styles */
         .header {
-            background: transparent; /* Make header transparent to see the bg through */
+            background: transparent;
             padding: 10px 20px;
-            box-shadow: none; /* Remove shadow since it's over the bg */
+            box-shadow: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -60,34 +60,35 @@
 
         /* Welcome Section - Adjusted for tighter layout */
         .welcome-section {
-            min-height: 60vh; /* Maintain reduced height for content positioning */
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            gap: 20px; /* Added spacing between buttons */
         }
         .welcome-section h1 {
             font-size: 3em;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Add text shadow for visibility */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         /* About Section - Adjust for background */
         .about-section {
-            background-color: transparent; /* Make this transparent */
+            background-color: transparent;
             padding: 100px 20px;
             text-align: center;
         }
         .about-section h2 {
             font-size: 2.5em;
             margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Add text shadow for visibility */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         .about-section p {
             font-size: 1.5em;
             line-height: 1.8;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Add subtle text shadow for readability */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
         /* Footer styles */
@@ -120,13 +121,13 @@
         <div class="header-buttons">
             <a href="services.html" class="btn">Services</a>
             <a href="#" class="btn app-button">xOne App</a>
-            <a href="https://xone-secure-protocol.gitbook.io/xone-secure" class="btn">Docs</a>
         </div>
     </div>
     
     <section class="welcome-section">
         <h1>Your Trusted Web3 Security Solution</h1>
         <a href="assessment-form.html" class="btn">Free Web3 Assessment</a>
+        <a href="https://xone-secure-protocol.gitbook.io/xone-secure" class="btn">Docs</a>
     </section>
 
     <section class="about-section">
@@ -148,10 +149,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const appButton = document.querySelector('.app-button'); // Simplified selector
+            const appButton = document.querySelector('.app-button');
             if (appButton) {
                 appButton.addEventListener('click', function(e) {
-                    e.preventDefault(); // Prevent the default link behavior
+                    e.preventDefault();
                     alert("We are in the process of finalizing the last steps on testnet. The app will be available soon!");
                 });
             }
