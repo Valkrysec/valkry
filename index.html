@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xOne - Internet Security</title>
+    <title>About - xOne Secure</title>
     <style>
         /* Base styles */
         body {
@@ -12,6 +12,9 @@
             font-family: 'Arial', sans-serif;
             background-color: #0B0B0B;
             color: #E0E0E0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         /* Futuristic Background */
@@ -30,54 +33,49 @@
         .header {
             background: transparent;
             padding: 10px 20px;
-            box-shadow: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        .menu {
             position: relative;
         }
-        .header-buttons {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-        }
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
+        .hamburger {
+            background: none;
+            border: none;
+            font-size: 30px;
+            color: #4CAF50;
             cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.3s;
         }
-        .btn:hover {
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: #1F1F1F;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .menu-content a {
+            display: block;
+            color: #E0E0E0;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .menu-content a:hover {
             background-color: #45a049;
         }
-
-        /* Welcome Section - Adjusted for tighter layout */
-        .welcome-section {
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            gap: 20px; /* Added spacing between buttons */
-        }
-        .welcome-section h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        .menu.open .menu-content {
+            display: block;
         }
 
-        /* About Section - Adjust for background */
+        /* About Section */
         .about-section {
+            flex: 1;
             background-color: transparent;
-            padding: 100px 20px;
+            padding: 50px 20px;
             text-align: center;
         }
         .about-section h2 {
@@ -89,6 +87,8 @@
             font-size: 1.5em;
             line-height: 1.8;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         /* Footer styles */
@@ -97,7 +97,6 @@
             text-align: center;
             padding: 20px 0;
             background-color: #1f8f9fa;
-            position: relative;
         }
         .footer-links a {
             color: #007bff;
@@ -118,22 +117,19 @@
     
     <div class="header">
         <img src="logo4.png" alt="xOne Secure Logo" width="100" height="100">
-        <div class="header-buttons">
-            <a href="services.html" class="btn">Services</a>
-            <a href="#" class="btn app-button">xOne App</a>
+        <div class="menu">
+            <button class="hamburger">☰</button>
+            <div class="menu-content">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="#" class="app-link">xOne App</a>
+            </div>
         </div>
     </div>
     
-    <section class="welcome-section">
-        <h1>Your Trusted Web3 Security Solution</h1>
-        <a href="assessment-form.html" class="btn">Free Web3 Assessment</a>
-        <a href="https://xone-secure-protocol.gitbook.io/xone-secure" class="btn">Docs</a>
-    </section>
-
     <section class="about-section">
         <h2>About Us</h2>
-        <p>At xOne Secure, we're at the forefront of Web3 security, offering specialized Web3 Assessments and Audits to protect the decentralized ecosystem. Our team, composed of seasoned PenTesters and DevOps Engineers, conducts meticulous smart contract audits, dApp security evaluations, and network assessments to ensure your projects are robust against vulnerabilities. We provide insights and solutions to keep your digital assets safe in this dynamic landscape. Additionally, our xOne Secure Extension enhances your Web3 security experience with real-time alerts, and we're gearing up for our token launch to further integrate security into the Web3 framework.
-</p>
+        <p>At xOne Secure, we're at the forefront of Web3 security, offering specialized Web3 Assessments and Audits to protect the decentralized ecosystem. Our team, composed of seasoned PenTesters and DevOps Engineers, conducts meticulous smart contract audits, dApp security evaluations, and network assessments to ensure your projects are robust against vulnerabilities. We provide insights and solutions to keep your digital assets safe in this dynamic landscape. Additionally, our xOne Secure Extension enhances your Web3 security experience with real-time alerts, and we're gearing up for our token launch to further integrate security into the Web3 framework.</p>
     </section>
 
     <footer>
@@ -149,9 +145,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const appButton = document.querySelector('.app-button');
-            if (appButton) {
-                appButton.addEventListener('click', function(e) {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.querySelector('.menu');
+            const appLink = document.querySelector('.app-link');
+
+            hamburger.addEventListener('click', () => {
+                menu.classList.toggle('open');
+            });
+
+            if (appLink) {
+                appLink.addEventListener('click', function(e) {
                     e.preventDefault();
                     alert("We are in the process of finalizing the last steps on testnet. The app will be available soon!");
                 });
