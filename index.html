@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - xOne Secure</title>
+    <title>xOne - Internet Security</title>
     <style>
         /* Base styles */
         body {
@@ -12,9 +12,11 @@
             font-family: 'Arial', sans-serif;
             background-color: #0B0B0B;
             color: #E0E0E0;
-            min-height: 100vh;
+            height: 100vh; /* Full viewport height */
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden; /* Prevents scrolling */
         }
         
         /* Futuristic Background */
@@ -71,24 +73,32 @@
             display: block;
         }
 
-        /* About Section */
-        .about-section {
-            flex: 1;
-            background-color: transparent;
-            padding: 50px 20px;
+        /* Welcome Section */
+        .welcome-section {
+            flex: 1; /* Takes remaining space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            gap: 20px;
         }
-        .about-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 30px;
+        .welcome-section h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-        .about-section p {
-            font-size: 1.5em;
-            line-height: 1.8;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            max-width: 800px;
-            margin: 0 auto;
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #45a049;
         }
 
         /* Footer styles */
@@ -120,16 +130,17 @@
         <div class="menu">
             <button class="hamburger">☰</button>
             <div class="menu-content">
-                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
                 <a href="services.html">Services</a>
                 <a href="#" class="app-link">xOne App</a>
             </div>
         </div>
     </div>
     
-    <section class="about-section">
-        <h2>About Us</h2>
-        <p>At xOne Secure, we're at the forefront of Web3 security, offering specialized Web3 Assessments and Audits to protect the decentralized ecosystem. Our team, composed of seasoned PenTesters and DevOps Engineers, conducts meticulous smart contract audits, dApp security evaluations, and network assessments to ensure your projects are robust against vulnerabilities. We provide insights and solutions to keep your digital assets safe in this dynamic landscape. Additionally, our xOne Secure Extension enhances your Web3 security experience with real-time alerts, and we're gearing up for our token launch to further integrate security into the Web3 framework.</p>
+    <section class="welcome-section">
+        <h1>Your Trusted Web3 Security Solution</h1>
+        <a href="assessment-form.html" class="btn">Free Web3 Assessment</a>
+        <a href="https://xone-secure-protocol.gitbook.io/xone-secure" class="btn">Docs</a>
     </section>
 
     <footer>
