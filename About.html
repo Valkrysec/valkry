@@ -1,1 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - xOne Secure</title>
+    <style>
+        /* Base styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #0B0B0B;
+            color: #E0E0E0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Futuristic Background */
+        .ai-security-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 0 L100 0 L100 100 L0 100 Z" fill="url(%23circuitPattern)"/><defs><pattern id="circuitPattern" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)"><path d="M0 10 L10 10 M10 0 L10 20" stroke="%234A90E2" stroke-width="0.5" fill="none"/></pattern></defs></svg>');
+            opacity: 0.1;
+            z-index: -1;
+        }
 
+        /* Header styles */
+        .header {
+            background: transparent;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu {
+            position: relative;
+        }
+        .hamburger {
+            background: none;
+            border: none;
+            font-size: 30px;
+            color: #4CAF50;
+            cursor: pointer;
+        }
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: #1F1F1F;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .menu-content a {
+            display: block;
+            color: #E0E0E0;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .menu-content a:hover {
+            background-color: #45a049;
+        }
+        .menu.open .menu-content {
+            display: block;
+        }
+
+        /* About Section */
+        .about-section {
+            flex: 1;
+            background-color: transparent;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .about-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .about-section p {
+            font-size: 1.5em;
+            line-height: 1.8;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer styles */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #1f8f9fa;
+        }
+        .footer-links a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .copyright {
+            margin-top: 10px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="ai-security-bg"></div>
+    
+    <div class="header">
+        <img src="logo4.png" alt="xOne Secure Logo" width="100" height="100">
+        <div class="menu">
+            <button class="hamburger">☰</button>
+            <div class="menu-content">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="#" class="app-link">xOne App</a>
+            </div>
+        </div>
+    </div>
+    
+    <section class="about-section">
+        <h2>About Us</h2>
+        <p>At xOne Secure, we're at the forefront of Web3 security, offering specialized Web3 Assessments and Audits to protect the decentralized ecosystem. Our team, composed of seasoned PenTesters and DevOps Engineers, conducts meticulous smart contract audits, dApp security evaluations, and network assessments to ensure your projects are robust against vulnerabilities. We provide insights and solutions to keep your digital assets safe in this dynamic landscape. Additionally, our xOne Secure Extension enhances your Web3 security experience with real-time alerts, and we're gearing up for our token launch to further integrate security into the Web3 framework.</p>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://twitter.com/xOnesecure">X</a>
+            <a href="https://github.com/xOneSecure">Gitbook</a>
+            <a href="https://github.com/xOneSecure/xone">Github</a>
+        </div>
+        <div class="copyright">
+            <p>© 2025 All Rights Reserved by xOne Secure LLC</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.querySelector('.menu');
+            const appLink = document.querySelector('.app-link');
+
+            hamburger.addEventListener('click', () => {
+                menu.classList.toggle('open');
+            });
+
+            if (appLink) {
+                appLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert("We are in the process of finalizing the last steps on testnet. The app will be available soon!");
+                });
+            }
+        });
+    </script>
+</body>
+</html>
