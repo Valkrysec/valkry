@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>xOne - Internet Security</title>
     <style>
-        /* Hide scrollbars globally */
-        html, body {
+        /* Base styles */
+        html {
+            height: 100%; /* Ensure html takes full height */
+        }
+        body {
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
@@ -16,7 +19,12 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            overflow: hidden; /* Hides scroll bar */
+            /* Hide scroll bar cosmetically */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
         }
         
         /* Futuristic Background */
@@ -185,3 +193,43 @@
     </script>
 </body>
 </html>
+Changes Made
+Scroll Bar Hidden Visually:
+Removed overflow: hidden from body.
+Added scrollbar-width: none (Firefox), -ms-overflow-style: none (IE/Edge), and body::-webkit-scrollbar { display: none; } (Chrome/Safari) to hide the scroll bar without affecting overscroll behavior.
+This keeps the elastic overscroll on mobile (the slight movement you like) while ensuring no scroll bar appears on desktop.
+Background Restored:
+The .ai-security-bg styles are unchanged and should now render correctly since overflow: hidden isn’t clipping it. The position: fixed and z-index: -1 ensure it stays behind all content.
+Layout Consistency:
+Kept min-height: 100vh and Flexbox (justify-content: space-between) to maintain the header, welcome section, and footer layout.
+Retained footer padding for mobile visibility.
+For about.html
+Since you mentioned the background is also gone from about.html, you’ll need to apply a similar fix there. Replace the html, body block in your current about.html with this:
+css
+html {
+    height: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #0B0B0B;
+    color: #E0E0E0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+This ensures the background reappears and scrolling behavior aligns with your intent (though about.html can scroll naturally since it has more content).
+Testing
+Deploy: Upload this updated index.html (and tweak about.html as noted) to your hosting platform.
+Desktop: Check that the background is back, no scroll bar appears, and the page moves slightly if dragged (depending on browser behavior).
+Mobile (iPhone):
+Verify the background is visible.
+Drag up/down to confirm the elastic overscroll works (slight movement), with the footer fully visible and no scroll bar.
+Let Me Know
+If the background is back and the mobile behavior is restored (slight movement, no scroll bar), we’re good! If something’s still off—like the background not showing or no movement—tell me what you see on both desktop and mobile, and I’ll pinpoint the issue. Sorry again for the confusion!
