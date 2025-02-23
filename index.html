@@ -12,11 +12,11 @@
             font-family: 'Arial', sans-serif;
             background-color: #0B0B0B;
             color: #E0E0E0;
-            height: 100vh; /* Full viewport height */
+            min-height: 100vh; /* Changed from height to min-height */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            overflow: hidden; /* Prevents scrolling */
+            /* Removed overflow: hidden to allow slight scrolling if needed */
         }
         
         /* Futuristic Background */
@@ -107,6 +107,7 @@
             text-align: center;
             padding: 20px 0;
             background-color: #1f8f9fa;
+            padding-bottom: 40px; /* Added extra padding to ensure visibility on mobile */
         }
         .footer-links a {
             color: #007bff;
@@ -119,6 +120,16 @@
         .copyright {
             margin-top: 10px;
             color: #6c757d;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 768px) {
+            .welcome-section h1 {
+                font-size: 2em; /* Reduce font size on mobile */
+            }
+            footer {
+                padding-bottom: 60px; /* Extra padding for mobile browsers */
+            }
         }
     </style>
 </head>
