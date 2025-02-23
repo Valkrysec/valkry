@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>xOne - Internet Security</title>
     <style>
-        /* Base styles */
         html {
-            height: 100%; /* Ensure html takes full height */
+            height: 100%;
         }
         body {
             margin: 0;
@@ -15,19 +14,17 @@
             font-family: 'Arial', sans-serif;
             background-color: #0B0B0B;
             color: #E0E0E0;
-            min-height: 100vh; /* Full viewport height minimum */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            /* Hide scroll bar cosmetically */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE/Edge */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
         body::-webkit-scrollbar {
-            display: none; /* Chrome, Safari */
+            display: none;
         }
         
-        /* Futuristic Background */
         .ai-security-bg {
             position: fixed;
             top: 0;
@@ -39,7 +36,6 @@
             z-index: -1;
         }
 
-        /* Header styles */
         .header {
             background: transparent;
             padding: 10px 20px;
@@ -81,9 +77,8 @@
             display: block;
         }
 
-        /* Welcome Section */
         .welcome-section {
-            flex: 1; /* Takes remaining space */
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -109,13 +104,12 @@
             background-color: #45a049;
         }
 
-        /* Footer styles */
         footer {
             width: 100%;
             text-align: center;
             padding: 20px 0;
             background-color: #1f8f9fa;
-            padding-bottom: 40px; /* Ensures visibility on mobile */
+            padding-bottom: 40px;
         }
         .footer-links a {
             color: #007bff;
@@ -130,13 +124,12 @@
             color: #6c757d;
         }
 
-        /* Media query for smaller screens */
         @media (max-width: 768px) {
             .welcome-section h1 {
-                font-size: 2em; /* Reduce font size on mobile */
+                font-size: 2em;
             }
             footer {
-                padding-bottom: 60px; /* Extra padding for mobile browsers */
+                padding-bottom: 60px;
             }
         }
     </style>
@@ -193,43 +186,3 @@
     </script>
 </body>
 </html>
-Changes Made
-Scroll Bar Hidden Visually:
-Removed overflow: hidden from body.
-Added scrollbar-width: none (Firefox), -ms-overflow-style: none (IE/Edge), and body::-webkit-scrollbar { display: none; } (Chrome/Safari) to hide the scroll bar without affecting overscroll behavior.
-This keeps the elastic overscroll on mobile (the slight movement you like) while ensuring no scroll bar appears on desktop.
-Background Restored:
-The .ai-security-bg styles are unchanged and should now render correctly since overflow: hidden isn’t clipping it. The position: fixed and z-index: -1 ensure it stays behind all content.
-Layout Consistency:
-Kept min-height: 100vh and Flexbox (justify-content: space-between) to maintain the header, welcome section, and footer layout.
-Retained footer padding for mobile visibility.
-For about.html
-Since you mentioned the background is also gone from about.html, you’ll need to apply a similar fix there. Replace the html, body block in your current about.html with this:
-css
-html {
-    height: 100%;
-}
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #0B0B0B;
-    color: #E0E0E0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-}
-body::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
-}
-This ensures the background reappears and scrolling behavior aligns with your intent (though about.html can scroll naturally since it has more content).
-Testing
-Deploy: Upload this updated index.html (and tweak about.html as noted) to your hosting platform.
-Desktop: Check that the background is back, no scroll bar appears, and the page moves slightly if dragged (depending on browser behavior).
-Mobile (iPhone):
-Verify the background is visible.
-Drag up/down to confirm the elastic overscroll works (slight movement), with the footer fully visible and no scroll bar.
-Let Me Know
-If the background is back and the mobile behavior is restored (slight movement, no scroll bar), we’re good! If something’s still off—like the background not showing or no movement—tell me what you see on both desktop and mobile, and I’ll pinpoint the issue. Sorry again for the confusion!
