@@ -12,8 +12,11 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0B0B0B 0%, #2A1B3D 100%) center/cover no-repeat, url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 1000"><circle cx="150" cy="150" r="50" fill="url(%23glow1)" opacity="0.5"/><circle cx="700" cy="300" r="70" fill="url(%23glow2)" opacity="0.4"/><circle cx="400" cy="600" r="40" fill="url(%23glow3)" opacity="0.6"/><defs><radialGradient id="glow1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%234CAF50" stop-opacity="1"/><stop offset="100%" stop-color="%230B0B0B" stop-opacity="0"/></radialGradient><radialGradient id="glow2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%234A90E2" stop-opacity="1"/><stop offset="100%" stop-color="%230B0B0B" stop-opacity="0"/></radialGradient><radialGradient id="glow3" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23FFFFFF" stop-opacity="1"/><stop offset="100%" stop-color="%230B0B0B" stop-opacity="0"/></radialGradient></defs></svg>') center/cover no-repeat;
-            background-color: #0B0B0B; /* Fallback */
+            background-image: url('futuristic-spheres-bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #0B0B0B; /* Fallback if image fails */
             color: #E0E0E0;
             min-height: 100vh;
             display: flex;
