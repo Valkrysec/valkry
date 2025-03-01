@@ -32,10 +32,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1;
+            z-index: 10; /* Ensure header is above content */
         }
         .menu {
             position: relative;
+            z-index: 11; /* Menu above header */
         }
         .hamburger {
             background: none;
@@ -57,6 +58,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             border-radius: 8px;
             padding: 10px;
+            z-index: 12; /* Ensure dropdown is clickable */
         }
         .menu-content a {
             display: block;
@@ -184,11 +186,9 @@
             const menu = document.querySelector('.menu');
             const appLink = document.querySelector('.app-link');
 
-            if (hamburger && menu) {
-                hamburger.addEventListener('click', () => {
-                    menu.classList.toggle('open');
-                });
-            }
+            hamburger.addEventListener('click', function() {
+                menu.classList.toggle('open');
+            });
 
             if (appLink) {
                 appLink.addEventListener('click', function(e) {
