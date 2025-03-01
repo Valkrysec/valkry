@@ -12,10 +12,8 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(180deg, #0B0B0B 0%, #1A1A2E 100%); /* Space gradient */
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 1000"><circle cx="100" cy="100" r="2" fill="%23FFFFFF" opacity="0.3"/><circle cx="200" cy="300" r="1" fill="%23FFFFFF" opacity="0.2"/><circle cx="400" cy="150" r="3" fill="%23FFFFFF" opacity="0.4"/><circle cx="600" cy="500" r="2" fill="%23FFFFFF" opacity="0.3"/><circle cx="800" cy="200" r="1" fill="%23FFFFFF" opacity="0.2"/><circle cx="300" cy="700" r="2" fill="%23FFFFFF" opacity="0.3"/></svg>'); /* Starry effect */
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(180deg, #0B0B0B 0%, #1A1A2E 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 1000"><circle cx="100" cy="100" r="2" fill="%23FFFFFF" opacity="0.3"/><circle cx="200" cy="300" r="1" fill="%23FFFFFF" opacity="0.2"/><circle cx="400" cy="150" r="3" fill="%23FFFFFF" opacity="0.4"/><circle cx="600" cy="500" r="2" fill="%23FFFFFF" opacity="0.3"/><circle cx="800" cy="200" r="1" fill="%23FFFFFF" opacity="0.2"/><circle cx="300" cy="700" r="2" fill="%23FFFFFF" opacity="0.3"/></svg>') center/cover no-repeat;
+            background-color: #0B0B0B; /* Fallback */
             color: #E0E0E0;
             min-height: 100vh;
             display: flex;
@@ -30,7 +28,7 @@
 
         .header {
             background: transparent;
-            padding: 20px 30px; /* Increased padding for a cleaner look */
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -42,7 +40,7 @@
         .hamburger {
             background: none;
             border: none;
-            font-size: 32px; /* Slightly larger for prominence */
+            font-size: 32px;
             color: #4CAF50;
             cursor: pointer;
             transition: color 0.3s;
@@ -82,12 +80,12 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            gap: 30px; /* Increased gap for breathing room */
+            gap: 30px;
             padding: 0 20px;
             z-index: 1;
         }
         .welcome-section h1 {
-            font-size: 3.5em; /* Larger for impact */
+            font-size: 3.5em;
             font-weight: bold;
             margin-bottom: 25px;
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
@@ -96,7 +94,7 @@
         .btn {
             background-color: #4CAF50;
             color: white;
-            padding: 12px 28px; /* Larger buttons */
+            padding: 12px 28px;
             text-decoration: none;
             font-size: 18px;
             border-radius: 6px;
@@ -111,14 +109,14 @@
         footer {
             width: 100%;
             text-align: center;
-            padding: 40px 0 60px; /* Increased padding to lower content */
+            padding: 40px 0 60px;
             background-color: #1f8f9fa;
             z-index: 1;
         }
         .footer-links a {
             color: #007bff;
             text-decoration: none;
-            margin: 0 15px; /* Wider spacing */
+            margin: 0 15px;
             font-size: 16px;
             transition: color 0.3s;
         }
@@ -127,7 +125,7 @@
             text-decoration: underline;
         }
         .copyright {
-            margin-top: 20px; /* Increased to lower it */
+            margin-top: 20px;
             color: #6c757d;
             font-size: 14px;
         }
