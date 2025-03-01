@@ -12,7 +12,10 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #0B0B0B;
+            background: linear-gradient(180deg, #0B0B0B 0%, #1A1A2E 100%); /* Space gradient */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1000 1000"><circle cx="100" cy="100" r="2" fill="%23FFFFFF" opacity="0.3"/><circle cx="200" cy="300" r="1" fill="%23FFFFFF" opacity="0.2"/><circle cx="400" cy="150" r="3" fill="%23FFFFFF" opacity="0.4"/><circle cx="600" cy="500" r="2" fill="%23FFFFFF" opacity="0.3"/><circle cx="800" cy="200" r="1" fill="%23FFFFFF" opacity="0.2"/><circle cx="300" cy="700" r="2" fill="%23FFFFFF" opacity="0.3"/></svg>'); /* Starry effect */
+            background-size: cover;
+            background-position: center;
             color: #E0E0E0;
             min-height: 100vh;
             display: flex;
@@ -24,24 +27,14 @@
         body::-webkit-scrollbar {
             display: none; /* Chrome, Safari */
         }
-        
-        .ai-security-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 0 L100 0 L100 100 L0 100 Z" fill="url(%23circuitPattern)"/><defs><pattern id="circuitPattern" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)"><path d="M0 10 L10 10 M10 0 L10 20" stroke="%234A90E2" stroke-width="0.5" fill="none"/></pattern></defs></svg>');
-            opacity: 0.1;
-            z-index: -1;
-        }
 
         .header {
             background: transparent;
-            padding: 10px 20px;
+            padding: 20px 30px; /* Increased padding for a cleaner look */
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 1;
         }
         .menu {
             position: relative;
@@ -49,26 +42,31 @@
         .hamburger {
             background: none;
             border: none;
-            font-size: 30px;
+            font-size: 32px; /* Slightly larger for prominence */
             color: #4CAF50;
             cursor: pointer;
+            transition: color 0.3s;
+        }
+        .hamburger:hover {
+            color: #45a049;
         }
         .menu-content {
             display: none;
             position: absolute;
-            top: 40px;
+            top: 45px;
             right: 0;
             background-color: #1F1F1F;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
             padding: 10px;
         }
         .menu-content a {
             display: block;
             color: #E0E0E0;
             text-decoration: none;
-            padding: 10px;
+            padding: 12px 16px;
             font-size: 16px;
+            transition: background-color 0.3s;
         }
         .menu-content a:hover {
             background-color: #45a049;
@@ -84,59 +82,75 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            gap: 20px;
+            gap: 30px; /* Increased gap for breathing room */
+            padding: 0 20px;
+            z-index: 1;
         }
         .welcome-section h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 3.5em; /* Larger for impact */
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
         }
         .btn {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 28px; /* Larger buttons */
             text-decoration: none;
-            font-size: 16px;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            font-size: 18px;
+            border-radius: 6px;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         .btn:hover {
             background-color: #45a049;
+            transform: translateY(-2px);
         }
 
         footer {
             width: 100%;
             text-align: center;
-            padding: 20px 0;
+            padding: 40px 0 60px; /* Increased padding to lower content */
             background-color: #1f8f9fa;
-            padding-bottom: 40px;
+            z-index: 1;
         }
         .footer-links a {
             color: #007bff;
             text-decoration: none;
-            margin: 0 10px;
+            margin: 0 15px; /* Wider spacing */
+            font-size: 16px;
+            transition: color 0.3s;
         }
         .footer-links a:hover {
+            color: #0056b3;
             text-decoration: underline;
         }
         .copyright {
-            margin-top: 10px;
+            margin-top: 20px; /* Increased to lower it */
             color: #6c757d;
+            font-size: 14px;
         }
 
         @media (max-width: 768px) {
             .welcome-section h1 {
-                font-size: 2em;
+                font-size: 2.5em;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+            .footer-links a {
+                margin: 0 10px;
+                font-size: 14px;
             }
             footer {
-                padding-bottom: 60px;
+                padding: 30px 0 50px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="ai-security-bg"></div>
-    
     <div class="header">
         <img src="logo4.png" alt="xOne Secure Logo" width="100" height="100">
         <div class="menu">
