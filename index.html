@@ -184,9 +184,11 @@
             const menu = document.querySelector('.menu');
             const appLink = document.querySelector('.app-link');
 
-            hamburger.addEventListener('click', () => {
-                menu.classList.toggle('open');
-            });
+            if (hamburger && menu) {
+                hamburger.addEventListener('click', () => {
+                    menu.classList.toggle('open');
+                });
+            }
 
             if (appLink) {
                 appLink.addEventListener('click', function(e) {
