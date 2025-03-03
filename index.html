@@ -19,7 +19,7 @@
             background-repeat: no-repeat;
             background-color: #0B0B0B;
             color: #E0E0E0;
-            display: flex; /* Removed min-height: 100vh */
+            display: flex;
             flex-direction: column;
         }
         body::-webkit-scrollbar {
@@ -137,7 +137,7 @@
         footer {
             width: 100%;
             text-align: center;
-            padding: 20px 0;
+            padding: 20px 0 5px; /* Top: 20px, Bottom: 5px */
             background: transparent;
             z-index: 1;
         }
@@ -179,7 +179,7 @@
                 font-size: 14px;
             }
             footer {
-                padding: 10px 0; /* Reduced to minimize space below text */
+                padding: 10px 0 5px; /* Top: 10px, Bottom: 5px */
             }
         }
     </style>
