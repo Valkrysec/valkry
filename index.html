@@ -110,13 +110,14 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centers content vertically */
+            justify-content: center;
             align-items: center;
             text-align: center;
             gap: 30px;
             padding: 0 20px;
             z-index: 1;
-            position: relative; /* For down arrow */
+            position: relative;
+            margin-top: -60px; /* Nudges title and buttons up higher */
         }
         .welcome-section h1 {
             font-size: 3.5em;
@@ -141,12 +142,12 @@
         }
         .scroll-down {
             position: absolute;
-            bottom: 20px;
+            bottom: 30px; /* Adjusted to ensure visibility */
             font-size: 2em;
             color: #4CAF50;
             cursor: pointer;
             animation: bounce 2s infinite;
-            z-index: 2; /* Ensures visibility */
+            z-index: 2;
         }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
@@ -164,15 +165,15 @@
             z-index: 1;
         }
         .terminal-window {
-            width: 90%; /* Increased from 80% */
-            max-width: 1000px; /* Increased from 800px */
+            width: 90%;
+            max-width: 1000px;
             background: #1C2526;
             border: 4px solid #4CAF50;
             border-radius: 8px;
-            padding: 30px; /* Increased from 20px */
+            padding: 30px;
             box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
             font-family: 'VT323', monospace;
-            font-size: 1.5em; /* Increased from 1.2em */
+            font-size: 1.5em;
             color: #E0E0E0;
         }
         .terminal-window .prompt {
@@ -235,12 +236,15 @@
             }
             .terminal-window {
                 width: 95%;
-                font-size: 1.3em; /* Slightly smaller increase for mobile */
+                font-size: 1.3em;
                 padding: 20px;
             }
             .scroll-down {
                 font-size: 1.5em;
-                bottom: 15px;
+                bottom: 20px; /* Adjusted for mobile */
+            }
+            .welcome-section {
+                margin-top: -40px; /* Slightly less nudge on mobile */
             }
         }
     </style>
