@@ -110,13 +110,14 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centers content vertically */
+            justify-content: center;
             align-items: center;
             text-align: center;
             gap: 30px;
             padding: 0 20px;
             z-index: 1;
             position: relative;
+            margin-top: -100px; /* Moves title and buttons up higher */
         }
         .welcome-section h1 {
             font-size: 3.5em;
@@ -141,7 +142,7 @@
         }
         .scroll-down {
             position: absolute;
-            bottom: 20px; /* Positions arrow at bottom of section */
+            bottom: 20px;
             font-size: 2em;
             color: #4CAF50;
             cursor: pointer;
@@ -241,6 +242,9 @@
             .scroll-down {
                 font-size: 1.5em;
                 bottom: 20px;
+            }
+            .welcome-section {
+                margin-top: -80px; /* Slightly less nudge on mobile */
             }
         }
     </style>
