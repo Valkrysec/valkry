@@ -15,12 +15,11 @@
             font-family: 'Arial', sans-serif;
             background-image: url('futuristic-spheres-bg.png');
             background-size: cover;
-            background-position: center top; /* Adjusted to start from top */
+            background-position: center top;
             background-repeat: no-repeat;
-            background-color: #0B0B0B; /* Fallback */
+            background-color: #0B0B0B;
             color: #E0E0E0;
-            min-height: 100vh;
-            display: flex;
+            display: flex; /* Removed min-height: 100vh */
             flex-direction: column;
         }
         body::-webkit-scrollbar {
@@ -138,8 +137,8 @@
         footer {
             width: 100%;
             text-align: center;
-            padding: 40px 0; /* Increased top padding to lower text */
-            background: transparent; /* No black background */
+            padding: 20px 0;
+            background: transparent;
             z-index: 1;
         }
         .footer-links a {
@@ -180,7 +179,7 @@
                 font-size: 14px;
             }
             footer {
-                padding: 60px 0; /* More padding on mobile to lower text */
+                padding: 10px 0; /* Reduced to minimize space below text */
             }
         }
     </style>
