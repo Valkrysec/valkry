@@ -55,7 +55,7 @@
 
         .header {
             background: transparent;
-            padding: 0px 30px 20px; /* Top: 5px, Right: 30px, Bottom: 20px */
+            padding: 0px 10px 20px; /* Step 1: Left padding reduced to 10px for desktop */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -181,6 +181,9 @@
             }
             footer {
                 padding: 10px 0 5px;
+            }
+            .header { /* Step 2: Mobile adjustment */
+                padding: 0px 5px 20px; /* Left padding reduced to 5px for mobile */
             }
         }
     </style>
