@@ -58,9 +58,7 @@
             justify-content: space-between;
             align-items: center;
             z-index: 10;
-            position: relative;
-            top: 0; /* Locks it to the top */
-            margin: 0; /* No margins */
+            margin-top: -15px; /* Pulls header up to overlap award-banner bottom */
         }
         .header img {
             max-width: 300px; /* Suitable for horizontal logo */
@@ -121,7 +119,7 @@
             padding: 0 20px;
             z-index: 1;
             position: relative;
-            margin-top: calc(-100% + 60px); /* Pulls background up to just below award-banner */
+            margin-top: -200px; /* Restored original value */
             background-image: url('futuristic-spheres-bg.png');
             background-size: cover;
             background-position: center top;
@@ -342,13 +340,14 @@
             }
             .header {
                 padding: 0 5px; /* No vertical padding on mobile */
+                margin-top: -10px; /* Adjusted for mobile */
             }
             .header img {
                 max-width: 200px; /* Smaller for mobile */
                 margin-left: 5px; /* Less nudge on mobile */
             }
             .welcome-section {
-                margin-top: calc(-100% + 50px); /* Adjusted for mobile */
+                margin-top: -180px; /* Restored mobile value */
             }
             .welcome-section h1 {
                 font-size: 2.5em;
@@ -485,3 +484,4 @@
     </script>
 </body>
 </html>
+
