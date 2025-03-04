@@ -19,8 +19,7 @@
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-color: #0B0B0B;
+            background-color: #0B0B0B; /* Removed background-attachment: fixed */
             color: #E0E0E0;
             min-height: 100vh;
             display: flex;
@@ -168,7 +167,7 @@
             margin-bottom: 30px;
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
             line-height: 1.2;
-            font-family: 'Orbitron', sans-serif; /* Matches Section 1 */
+            font-family: 'Orbitron', sans-serif;
         }
         .terminal-window {
             width: 90%;
@@ -194,12 +193,12 @@
         }
         .terminal-window .prompt {
             color: #4CAF50;
-            font-family: 'VT323', monospace; /* Matches .terminal-header */
+            font-family: 'VT323', monospace;
         }
         .terminal-window p {
             margin: 10px 0;
             line-height: 1.4;
-            font-family: 'Arial', sans-serif; /* White text only */
+            font-family: 'Arial', sans-serif;
         }
 
         footer {
@@ -256,7 +255,7 @@
                 width: 95%;
                 font-size: 1.3em;
                 padding: 20px;
-                margin: 0 auto; /* Ensures centering on mobile */
+                margin: 0 auto;
             }
             .scroll-down {
                 font-size: 1.5em;
@@ -305,7 +304,7 @@
         <h1>Who is xOne?</h1>
         <div class="terminal-window">
             <span class="terminal-header">Linux '95 (v1.2)</span>
-            <p class="prompt">C:\xOne> ABOUT</p> <!-- Updated to xOne -->
+            <p class="prompt">C:\xOne> ABOUT</p>
             <p>At xOne Secure, we're at the forefront of Web3 security, offering specialized Web3 Assessments and Audits to protect the decentralized ecosystem.</p>
             <p>Our team, composed of seasoned PenTesters and DevOps Engineers, conducts meticulous smart contract audits, dApp security evaluations, and network assessments to ensure your projects are robust against vulnerabilities.</p>
             <p>We provide insights and solutions to keep your digital assets safe in this dynamic landscape.</p>
