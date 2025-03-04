@@ -157,12 +157,17 @@
 
         .about-section {
             min-height: 100vh;
-            padding: 60px 20px; /* Increased top padding from 40px to 60px */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 60px 20px; /* Keeps terminal nudged down */
+            text-align: center; /* Centers title */
             background: transparent;
             z-index: 1;
+        }
+        .about-section h1 {
+            font-size: 3.5em; /* Matches Section 1 h1 */
+            font-weight: bold;
+            margin-bottom: 30px; /* Space between title and terminal */
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
         }
         .terminal-window {
             width: 90%;
@@ -175,7 +180,8 @@
             font-family: 'VT323', monospace;
             font-size: 1.5em;
             color: #E0E0E0;
-            position: relative; /* For terminal-header positioning */
+            position: relative;
+            margin: 0 auto; /* Centers terminal horizontally */
         }
         .terminal-header {
             position: absolute;
@@ -255,6 +261,10 @@
             .welcome-section {
                 margin-top: -120px;
             }
+            .about-section h1 {
+                font-size: 2.5em; /* Matches Section 1 mobile adjustment */
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
@@ -288,9 +298,9 @@
     </section>
 
     <section class="about-section" id="about-section">
-        <h1>Who is xOne?</h1> <!-- Added title matching Section 1 -->
+        <h1>Who is xOne?</h1>
         <div class="terminal-window">
-            <span class="terminal-header">Linux '95 (v1.2)</span> <!-- Added Linux label -->
+            <span class="terminal-header">Linux '95 (v1.2)</span>
             <p class="prompt">C:\xONE> ABOUT</p>
             <p>At xOne Secure, we're at the forefront of Web3 security, offering specialized Web3 Assessments and Audits to protect the decentralized ecosystem.</p>
             <p>Our team, composed of seasoned PenTesters and DevOps Engineers, conducts meticulous smart contract audits, dApp security evaluations, and network assessments to ensure your projects are robust against vulnerabilities.</p>
