@@ -16,7 +16,7 @@
             padding: 0;
             font-family: 'Arial', sans-serif;
             background-image: url('futuristic-spheres-bg.png');
-            background-size: cover; /* Restored for desktop */
+            background-size: cover; /* Single rule for all devices */
             background-position: center top;
             background-repeat: no-repeat;
             background-color: #0B0B0B;
@@ -226,9 +226,6 @@
         }
 
         @media (max-width: 768px) {
-            body {
-                background-size: auto 100%; /* Mobile fix for black gap */
-            }
             .award-banner {
                 font-size: 1.2em;
                 padding: 10px 0;
