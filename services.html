@@ -9,20 +9,33 @@
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #0B0B0B;
+            background-color: #0B0B0B; /* Fallback */
+            background-image: url('futuristic-spheres-bg.png'); /* Background moved to body */
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             color: #E0E0E0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
         .ai-security-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('futuristic-spheres-bg.png');
-            opacity: 0.1;
+            background: linear-gradient(135deg, #0B0B0B 0%, #1A1F2E 100%), url('futuristic-spheres-bg.png');
+            background-size: cover;
+            opacity: 0.3; /* Subtle depth */
             z-index: -1;
         }
-        
+
         /* Header styles */
         .header {
             background: transparent;
@@ -30,88 +43,113 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
         }
         .header-buttons {
-            position: absolute;
-            top: 15px;
-            right: 20px;
+            display: flex;
+            gap: 10px;
         }
         .btn {
-            background-color: #808080;
+            background-color: #4CAF50; /* CertiK-like vibrant green */
             color: white;
             padding: 10px 20px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
             border-radius: 4px;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
         }
         .btn:hover {
-            background-color: #696969;
+            background-color: #66BB6A; /* Lighter green on hover */
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
         }
 
         /* Service boxes */
         .service-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 50px 20px;
+            justify-content: center;
+            padding: 80px 20px 50px; /* Extra top padding to clear header */
         }
         .service-box {
-            background-color: #1a1a1a;
-            border: 1px solid #4A90E2;
+            background: linear-gradient(145deg, #1A1A1A, #2B2B2B); /* Subtle gradient */
+            border: 1px solid #4CAF50; /* Green border */
             border-radius: 10px;
-            padding: 20px;
-            width: calc(50% - 20px); /* Adjust for 2 boxes per row */
-            min-width: 250px; /* Adjust min-width as needed */
-            margin: 10px;
+            padding: 25px;
+            width: calc(50% - 30px); /* Two per row with spacing */
+            min-width: 300px;
+            margin: 15px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            transition: transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 5px rgba(76, 175, 80, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .service-box:hover {
-            transform: translateY(0);
-        }
-        .service-box:hover h3 {
-            transform: translateY(-5px);
+            transform: scale(1.03); /* Slight scale like CertiK */
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 10px rgba(76, 175, 80, 0.5);
         }
         .service-box h3 {
-            color: #4A90E2;
-            margin-bottom: 10px;
+            color: #FFFFFF; /* Bold white like CertiK */
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
             cursor: pointer;
+            transition: color 0.3s;
+        }
+        .service-box h3:hover {
+            color: #4CAF50; /* Green on hover */
+        }
+        .service-box h3 span {
+            color: #4CAF50; /* Green accent */
         }
         .dropdown-content {
             display: none;
-            background-color: #2b2b2b;
-            padding: 10px;
+            background: #2B2B2B;
+            padding: 15px;
             text-align: left;
             border-radius: 5px;
             margin-top: 10px;
+            border-left: 3px solid #4CAF50; /* Green sideline */
+            color: #E0E0E0;
+            font-size: 1em;
+            line-height: 1.5;
         }
         .service-box.active .dropdown-content {
             display: block;
         }
         .expand-prompt {
             cursor: pointer;
-            color: #4A90E2;
-            margin-top: 10px;
+            color: #4CAF50; /* Green accent */
+            margin-top: 15px;
             font-size: 0.9em;
+            transition: color 0.3s;
+        }
+        .expand-prompt:hover {
+            color: #66BB6A; /* Lighter green on hover */
         }
 
         /* Bullet point alignment */
         .service-box ul {
             text-align: left;
-            padding-left: 20px;
+            padding-left: 25px;
             margin: 0;
+            list-style: none;
         }
         .service-box li {
-            margin: 10px 0;
-            text-indent: -1em;
-            padding-left: 1em;
+            margin: 12px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+        .service-box li:before {
+            content: "▹"; /* Custom bullet */
+            color: #4CAF50; /* Green accent */
+            position: absolute;
+            left: 0;
         }
 
         /* Footer styles */
@@ -119,20 +157,41 @@
             width: 100%;
             text-align: center;
             padding: 20px 0;
-            background-color: #1f8f9fa;
+            background: transparent;
             position: relative;
+            z-index: 1;
         }
         .footer-links a {
-            color: #007bff;
+            color: #4CAF50; /* Match green theme */
             text-decoration: none;
-            margin: 0 10px;
+            margin: 0 15px;
+            font-size: 16px;
+            transition: color 0.3s;
         }
         .footer-links a:hover {
-            text-decoration: underline;
+            color: #66BB6A; /* Lighter green on hover */
         }
         .copyright {
             margin-top: 10px;
             color: #6c757d;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .service-box {
+                width: calc(100% - 30px); /* One per row on mobile */
+            }
+            .header-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .btn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            .service-box h3 {
+                font-size: 1.5em;
+            }
         }
     </style>
 </head>
@@ -150,7 +209,7 @@
 
     <section class="service-container">
         <div class="service-box" id="box1" onclick="toggleDropdown('box1')">
-            <h3>Web3 Infrastructure Assessment</h3>
+            <h3><span>Web3</span> Infrastructure Assessment</h3>
             <ul>
                 <li>Comprehensive Network Analysis</li>
                 <li>Smart Contract Evaluation</li>
@@ -162,7 +221,7 @@
             </div>
         </div>
         <div class="service-box" id="box2" onclick="toggleDropdown('box2')">
-            <h3>Auditing & Compliance</h3>
+            <h3>Auditing & <span>Compliance</span></h3>
             <ul>
                 <li>Smart Contract Audits</li>
                 <li>Regulatory Compliance Assessment</li>
@@ -174,7 +233,7 @@
             </div>
         </div>
         <div class="service-box" id="box3" onclick="toggleDropdown('box3')">
-            <h3>Penetration Testing</h3>
+            <h3><span>Penetration</span> Testing</h3>
             <ul>
                 <li>Ethical Hacking</li>
                 <li>dApp Security Testing</li>
@@ -186,7 +245,7 @@
             </div>
         </div>
         <div class="service-box" id="box4" onclick="toggleDropdown('box4')">
-            <h3>xOne App & Extension</h3>
+            <h3>xOne <span>App</span> & Extension</h3>
             <ul>
                 <li>Site Source Code Validation</li>
                 <li>Smart Contract & Token CA Validation</li>
@@ -216,6 +275,5 @@
             element.classList.toggle("active");
         }
     </script>
-
 </body>
 </html>
