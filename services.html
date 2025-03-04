@@ -10,7 +10,7 @@
             padding: 0;
             font-family: 'Arial', sans-serif;
             background-color: #0B0B0B; /* Fallback */
-            background-image: url('futuristic-spheres-bg.png'); /* Background moved to body */
+            background-image: url('futuristic-spheres-bg.png'); /* Background on body */
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;
@@ -36,25 +36,31 @@
             z-index: -1;
         }
 
-        /* Header styles */
+        /* Header styles (matched to index.html) */
         .header {
             background: transparent;
-            padding: 10px 20px;
+            padding: 0 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 10;
             position: absolute;
-            top: 0;
+            top: -10px; /* Matches index.html nudge */
             left: 0;
             right: 0;
-            z-index: 10;
+        }
+        .header img {
+            max-width: 300px; /* Matches index.html */
+            height: auto;
+            margin-left: 0px; /* Matches index.html */
+            object-fit: contain;
         }
         .header-buttons {
             display: flex;
             gap: 10px;
         }
         .btn {
-            background-color: #4CAF50; /* CertiK-like vibrant green */
+            background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             text-align: center;
@@ -66,8 +72,22 @@
             box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
         }
         .btn:hover {
-            background-color: #66BB6A; /* Lighter green on hover */
+            background-color: #66BB6A;
             box-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
+        }
+
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            padding: 80px 20px 20px; /* Space above service boxes */
+            color: #FFFFFF;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+            z-index: 1;
+        }
+        .page-title span {
+            color: #4CAF50; /* Green accent */
         }
 
         /* Service boxes */
@@ -75,14 +95,14 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 80px 20px 50px; /* Extra top padding to clear header */
+            padding: 20px 20px 50px; /* Adjusted top padding to push down */
         }
         .service-box {
-            background: linear-gradient(145deg, #1A1A1A, #2B2B2B); /* Subtle gradient */
-            border: 1px solid #4CAF50; /* Green border */
+            background: linear-gradient(145deg, #1A1A1A, #2B2B2B);
+            border: 1px solid #4CAF50;
             border-radius: 10px;
             padding: 25px;
-            width: calc(50% - 30px); /* Two per row with spacing */
+            width: calc(50% - 30px);
             min-width: 300px;
             margin: 15px;
             text-align: center;
@@ -90,11 +110,11 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .service-box:hover {
-            transform: scale(1.03); /* Slight scale like CertiK */
+            transform: scale(1.03);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 10px rgba(76, 175, 80, 0.5);
         }
         .service-box h3 {
-            color: #FFFFFF; /* Bold white like CertiK */
+            color: #FFFFFF;
             font-size: 1.8em;
             font-weight: bold;
             margin-bottom: 15px;
@@ -102,10 +122,10 @@
             transition: color 0.3s;
         }
         .service-box h3:hover {
-            color: #4CAF50; /* Green on hover */
+            color: #4CAF50;
         }
         .service-box h3 span {
-            color: #4CAF50; /* Green accent */
+            color: #4CAF50;
         }
         .dropdown-content {
             display: none;
@@ -114,7 +134,7 @@
             text-align: left;
             border-radius: 5px;
             margin-top: 10px;
-            border-left: 3px solid #4CAF50; /* Green sideline */
+            border-left: 3px solid #4CAF50;
             color: #E0E0E0;
             font-size: 1em;
             line-height: 1.5;
@@ -124,13 +144,13 @@
         }
         .expand-prompt {
             cursor: pointer;
-            color: #4CAF50; /* Green accent */
+            color: #4CAF50;
             margin-top: 15px;
             font-size: 0.9em;
             transition: color 0.3s;
         }
         .expand-prompt:hover {
-            color: #66BB6A; /* Lighter green on hover */
+            color: #66BB6A;
         }
 
         /* Bullet point alignment */
@@ -146,8 +166,8 @@
             padding-left: 20px;
         }
         .service-box li:before {
-            content: "▹"; /* Custom bullet */
-            color: #4CAF50; /* Green accent */
+            content: "▹";
+            color: #4CAF50;
             position: absolute;
             left: 0;
         }
@@ -162,14 +182,14 @@
             z-index: 1;
         }
         .footer-links a {
-            color: #4CAF50; /* Match green theme */
+            color: #4CAF50;
             text-decoration: none;
             margin: 0 15px;
             font-size: 16px;
             transition: color 0.3s;
         }
         .footer-links a:hover {
-            color: #66BB6A; /* Lighter green on hover */
+            color: #66BB6A;
         }
         .copyright {
             margin-top: 10px;
@@ -178,8 +198,22 @@
         }
 
         @media (max-width: 768px) {
+            .header {
+                padding: 0 5px;
+            }
+            .header img {
+                max-width: 200px; /* Matches index.html mobile */
+                margin-left: 0px;
+            }
+            .page-title {
+                font-size: 2em;
+                padding: 60px 20px 10px;
+            }
+            .service-container {
+                padding: 10px 20px 40px;
+            }
             .service-box {
-                width: calc(100% - 30px); /* One per row on mobile */
+                width: calc(100% - 30px);
             }
             .header-buttons {
                 flex-direction: column;
@@ -199,13 +233,15 @@
     <div class="ai-security-bg"></div>
     
     <div class="header">
-        <img src="X1-3.png" alt="xOne Secure Logo" width="160" height="160">
+        <img src="xonesecurelogo2.png" alt="xOne Secure Logo"> <!-- Updated to X1-3 logo -->
         <div class="header-buttons">
             <a href="index.html" class="btn">Home</a>
             <a href="#" class="btn app-button">xOne App</a>
             <a href="https://xone-secure-protocol.gitbook.io/xone-secure" class="btn">Docs</a>
         </div>
     </div>
+
+    <div class="page-title"><span>Web3</span> Security Services</div>
 
     <section class="service-container">
         <div class="service-box" id="box1" onclick="toggleDropdown('box1')">
