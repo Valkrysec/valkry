@@ -53,11 +53,13 @@
 
         .header {
             background: transparent;
-            padding: 0 10px; /* No vertical padding */
+            padding: 0 10px; /* Horizontal padding only */
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 10;
+            position: relative;
+            top: 0; /* Locks it to the top */
             margin: 0; /* No margins */
         }
         .header img {
@@ -119,7 +121,7 @@
             padding: 0 20px;
             z-index: 1;
             position: relative;
-            margin-top: -250px; /* Increased to pull background up */
+            margin-top: calc(-100% + 60px); /* Pulls background up to just below award-banner */
             background-image: url('futuristic-spheres-bg.png');
             background-size: cover;
             background-position: center top;
@@ -345,6 +347,9 @@
                 max-width: 200px; /* Smaller for mobile */
                 margin-left: 5px; /* Less nudge on mobile */
             }
+            .welcome-section {
+                margin-top: calc(-100% + 50px); /* Adjusted for mobile */
+            }
             .welcome-section h1 {
                 font-size: 2.5em;
             }
@@ -380,9 +385,6 @@
             .scroll-down {
                 font-size: 1.5em;
                 bottom: 20px;
-            }
-            .welcome-section {
-                margin-top: -230px; /* Adjusted for mobile */
             }
             .about-section {
                 padding: 30px 20px;
