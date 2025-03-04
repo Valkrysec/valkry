@@ -53,12 +53,12 @@
 
         .header {
             background: transparent;
-            padding: 0 10px; /* Removed top/bottom padding, kept horizontal */
+            padding: 0 10px; /* No vertical padding */
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 10;
-            margin-top: 0; /* Ensure no extra top margin */
+            margin: 0; /* No margins */
         }
         .header img {
             max-width: 300px; /* Suitable for horizontal logo */
@@ -119,7 +119,7 @@
             padding: 0 20px;
             z-index: 1;
             position: relative;
-            margin-top: -200px;
+            margin-top: -250px; /* Increased to pull background up */
             background-image: url('futuristic-spheres-bg.png');
             background-size: cover;
             background-position: center top;
@@ -339,7 +339,7 @@
                 height: 24px;
             }
             .header {
-                padding: 0 5px; /* Tightened for mobile */
+                padding: 0 5px; /* No vertical padding on mobile */
             }
             .header img {
                 max-width: 200px; /* Smaller for mobile */
@@ -382,7 +382,7 @@
                 bottom: 20px;
             }
             .welcome-section {
-                margin-top: -180px;
+                margin-top: -230px; /* Adjusted for mobile */
             }
             .about-section {
                 padding: 30px 20px;
