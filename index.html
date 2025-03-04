@@ -53,16 +53,17 @@
 
         .header {
             background: transparent;
-            padding: 10px; /* Reduced bottom padding to remove gap */
+            padding: 0 10px; /* Removed top/bottom padding, kept horizontal */
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 10;
+            margin-top: 0; /* Ensure no extra top margin */
         }
         .header img {
             max-width: 300px; /* Suitable for horizontal logo */
             height: auto; /* Maintains aspect ratio */
-            margin-left: 10px; /* Slight nudge left, avoids bleeding */
+            margin-left: 10px; /* Slight nudge left */
             object-fit: contain; /* Ensures no stretching */
         }
         .menu {
@@ -142,7 +143,7 @@
             font-size: 3.5em;
             font-weight: bold;
             margin-bottom: 25px;
-            text-shadow: 0 0 5px rgba(76, 175, 80, 0.4); /* Reduced glow for readability */
+            text-shadow: 0 0 5px rgba(76, 175, 80, 0.4); /* Reduced glow */
             line-height: 1.2;
             position: relative;
             z-index: 1;
@@ -337,6 +338,9 @@
                 width: 24px;
                 height: 24px;
             }
+            .header {
+                padding: 0 5px; /* Tightened for mobile */
+            }
             .header img {
                 max-width: 200px; /* Smaller for mobile */
                 margin-left: 5px; /* Less nudge on mobile */
@@ -366,9 +370,6 @@
             }
             footer {
                 padding: 10px 0 5px;
-            }
-            .header {
-                padding: 5px; /* Adjusted for mobile */
             }
             .terminal-window {
                 width: calc(95% - 40px);
