@@ -60,7 +60,10 @@
             z-index: 10;
         }
         .header img {
-            margin-left: -10px; /* Nudge logo left */
+            max-width: 300px; /* Adjust based on your logo’s natural width */
+            height: auto; /* Maintains aspect ratio */
+            margin-left: 10px; /* Slight nudge left, avoids bleeding */
+            object-fit: contain; /* Ensures no stretching or cropping */
         }
         .menu {
             position: relative;
@@ -397,7 +400,7 @@
     </div>
 
     <div class="header">
-        <img src="xonesecurelogo2.png" alt="xOne Secure Logo" width="150" height="150">
+        <img src="xonesecurelogo2.png" alt="xOne Secure Logo">
         <div class="menu">
             <button class="hamburger">☰</button>
             <div class="menu-content">
