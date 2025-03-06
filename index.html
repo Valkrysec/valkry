@@ -388,10 +388,23 @@
             }
             .welcome-section h1 {
                 font-size: 2.5em;
+                display: flex;
+                flex-direction: column; /* Stack icon above text */
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
             }
             .sphere-icon {
                 width: 30px;
                 height: 30px;
+                margin-right: 0; /* Remove right margin */
+                margin-bottom: 10px; /* Space between icon and text */
+            }
+            .title-text {
+                display: inline-block;
+                text-align: center;
+                max-width: 100%;
+
             }
             .btn {
                 padding: 10px 20px;
