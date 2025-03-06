@@ -50,7 +50,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.2em; /* Add this */
+            font-size: 18px; /* Absolute size, smaller than 1.5em (~24px) */
         }
         .award-banner svg {
             width: 30px;
@@ -278,6 +278,9 @@
             .award-banner img {
                 max-width: 150px;
             }
+            .award-banner span {
+                font-size: 14px; /* Absolute size, smaller than 18px */
+                padding-left: 160px; /* Prevents overlap with logo */
             .page-title {
                 font-size: 2em;
                 padding: 55px 20px 10px;
