@@ -76,8 +76,8 @@
             justify-content: flex-end;
             align-items: center;
             z-index: 10;
-            position: absolute; /* Overlay on background */
-            top: -25px; /* Below award-banner (15px padding top + bottom + content) */
+            position: absolute;
+            top: -25px;
             left: 0;
             right: 0;
         }
@@ -115,12 +115,10 @@
             transition: background-color 0.3s;
         }
         .menu-content a:hover {
-            background-color: #4CAF50; /* Changed from #45a049 to match services.html */
+            background-color: #4CAF50;
             border-radius: 4px;
         }
-        .menu.open .menu-content {
-            display: block;
-        }
+        /* Removed .menu.open .menu-content - it was breaking things */
 
         .welcome-section {
             min-height: 100vh;
@@ -133,7 +131,6 @@
             padding: 0 20px;
             z-index: 1;
             position: relative;
-            /* No background here - moved to body */
         }
         .welcome-section::after {
             content: '';
@@ -400,7 +397,6 @@
                 font-size: 2.5em;
                 margin-bottom: 20px;
             }
-            /* Hamburger menu for mobile */
             .hamburger {
                 display: block;
             }
@@ -468,10 +464,10 @@
                 </svg>
                 5K+ Verified Audits
             </span>
-              <svg viewBox="0 0 24 24">
-                    <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
-                </svg>
-                Ehtical Hackers With Real Experience
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
+            </svg>
+            Ehtical Hackers With Real Experience
             </span>
         </div>
     </div>
