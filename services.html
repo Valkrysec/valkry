@@ -76,45 +76,19 @@
             z-index: -1;
         }
 
+        /* Hamburger Menu Styles from index.html */
         .header {
             background: transparent;
             padding: 0 10px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             z-index: 10;
             position: absolute;
-            top: -25px;
+            top: 45px;
             left: 0;
             right: 0;
         }
-        .header img {
-            max-width: 300px;
-            height: auto;
-            margin-left: 0px;
-            object-fit: contain;
-        }
-        .header-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 4px;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-        }
-        .btn:hover {
-            background-color: #66BB6A;
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
-        }
-        /* Hamburger Menu Styles */
         .menu {
             position: relative;
             z-index: 11;
@@ -122,18 +96,42 @@
         .hamburger {
             background: none;
             border: none;
-            font-size: 36px;
-            color: #808080;
+            width: 40px; /* Bigger */
+            height: 30px;
             cursor: pointer;
-            transition: color 0.3s;
-            display: none; /* Hidden on desktop */
+            display: block;
+            position: relative;
+            top: 94px; /* Nudge down from index.html */
+            right: 10px; /* Nudge left from index.html */
         }
-        .hamburger:hover {
-            color: #45a049;
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 4px; /* Thicker lines */
+            background: #808080;
+            position: absolute;
+            transition: background 0.3s;
+        }
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 13px; } /* Middle line */
+        .hamburger span:nth-child(3) { bottom: 0; }
+        .hamburger:hover span {
+            background: #45a049;
         }
         .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px; /* Adjusted for bigger hamburger */
+            right: 10px;
+            background: #1F1F1F;
+            flex-direction: column;
+            width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .menu-content.active {
             display: flex;
-            gap: 10px;
         }
         .menu-content a {
             color: #E0E0E0;
@@ -141,6 +139,8 @@
             padding: 10px 15px;
             font-size: 16px;
             transition: background-color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
         }
         .menu-content a:hover {
             background-color: #4CAF50;
@@ -302,29 +302,6 @@
                 width: 24px;
                 height: 24px;
             }
-            /* Mobile Hamburger Styles */
-            .hamburger {
-                display: block;
-            }
-            .menu-content {
-                display: none;
-                position: absolute;
-                top: 50px;
-                right: 10px;
-                background: #1F1F1F;
-                flex-direction: column;
-                width: 200px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-                border-radius: 8px;
-                padding: 10px;
-            }
-            .menu-content.active {
-                display: flex;
-            }
-            .menu-content a {
-                width: 100%;
-                box-sizing: border-box;
-            }
         }
     </style>
 </head>
@@ -339,6 +316,7 @@
         </span>
     </div>
     <div class="ai-security-bg"></div>
+    <!-- Hamburger menu from index.html -->
     <div class="header">
         <div class="menu">
             <button class="hamburger">
