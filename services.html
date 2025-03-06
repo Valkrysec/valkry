@@ -1,17 +1,19 @@
+Jj
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>xOne - Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet"> <!-- Added for banner -->
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #0B0B0B;
-            background-image: url('X1-5.png');
+            background-color: #0B0B0B; /* Fallback */
+            background-image: url('X1-5.png'); /* Background on body */
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;
@@ -25,9 +27,10 @@
             display: none;
         }
 
+        /* Added exact banner CSS from index.html */
         .award-banner {
             text-align: center;
-            padding: 15px 0; /* Unchanged */
+            padding: 15px 0;
             background: rgba(28, 28, 28, 0.8);
             color: #4CAF50;
             font-family: 'Orbitron', sans-serif;
@@ -35,14 +38,6 @@
             font-weight: 700;
             z-index: 15;
             animation: fadeIn 1s ease-in-out;
-            position: fixed; /* Make it fixed like CertiK */
-            top: 0;
-            left: 0;
-            right: 0;
-            display: flex; /* Add flex to align logo and text */
-            justify-content: center; /* Center everything */
-            align-items: center;
-            gap: 15px; /* Space between logo and text */
         }
         .award-banner span {
             display: inline-flex;
@@ -53,11 +48,6 @@
             width: 30px;
             height: 30px;
             fill: #4CAF50;
-        }
-        .award-banner img {
-            max-width: 200px; /* Current size from last working version */
-            height: auto;
-            object-fit: contain;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -72,21 +62,28 @@
             height: 100%;
             background: linear-gradient(135deg, #0B0B0B 0%, #1A1F2E 100%), url('futuristic-spheres-bg.png');
             background-size: cover;
-            opacity: 0.3;
+            opacity: 0.3; /* Subtle depth */
             z-index: -1;
         }
 
+        /* Header styles (matched to index.html) */
         .header {
             background: transparent;
             padding: 0 10px;
             display: flex;
-            justify-content: flex-end; /* Move buttons to right */
+            justify-content: space-between;
             align-items: center;
             z-index: 10;
             position: absolute;
-            top: -25px; /* Unchanged */
+            top: -25px; /* Matches index.html nudge */
             left: 0;
             right: 0;
+        }
+        .header img {
+            max-width: 300px; /* Matches index.html */
+            height: auto;
+            margin-left: 0px; /* Matches index.html */
+            object-fit: contain;
         }
         .header-buttons {
             display: flex;
@@ -109,9 +106,10 @@
             box-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
         }
 
+        /* Page Title */
         .page-title {
             text-align: center;
-            padding: 175px 20px 20px; /* Unchanged */
+            padding: 175px 20px 20px; /* Increased top padding to push down */
             color: #FFFFFF;
             font-size: 2.5em;
             font-weight: bold;
@@ -119,14 +117,15 @@
             z-index: 1;
         }
         .page-title span {
-            color: #4CAF50;
+            color: #4CAF50; /* Green accent */
         }
 
+        /* Service boxes */
         .service-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 84px 20px 50px; /* Unchanged */
+            padding: 84px 20px 50px; /* Increased top padding to push down further */
         }
         .service-box {
             background: linear-gradient(145deg, #1A1A1A, #2B2B2B);
@@ -184,6 +183,7 @@
             color: #66BB6A;
         }
 
+        /* Bullet point alignment */
         .service-box ul {
             text-align: left;
             padding-left: 25px;
@@ -202,6 +202,7 @@
             left: 0;
         }
 
+        /* Footer styles */
         footer {
             width: 100%;
             text-align: center;
@@ -230,15 +231,16 @@
             .header {
                 padding: 0 5px;
             }
-            .award-banner img {
-                max-width: 150px; /* Current mobile size */
+            .header img {
+                max-width: 200px; /* Matches index.html mobile */
+                margin-left: 0px;
             }
             .page-title {
                 font-size: 2em;
-                padding: 55px 20px 10px;
+                padding: 55px 20px 10px; /* Adjusted for mobile */
             }
             .service-container {
-                padding: 160px 20px 40px;
+                padding: 160px 20px 40px; /* Adjusted for mobile */
             }
             .service-box {
                 width: calc(100% - 30px);
@@ -254,23 +256,12 @@
             .service-box h3 {
                 font-size: 1.5em;
             }
-            .award-banner {
-                padding: 10px 5px; /* Slightly tighter for mobile */
-            }
-            .award-banner .award-text {
-                font-size: 1.2em;
-            }
-            .award-banner svg {
-                width: 24px;
-                height: 24px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="award-banner">
-        <img src="X1-7.png" alt="xOne Secure Logo">
-        <span class="award-text">
+        <span>
             <svg viewBox="0 0 24 24">
                 <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
             </svg>
@@ -279,6 +270,7 @@
     </div>
     <div class="ai-security-bg"></div>
     <div class="header">
+        <img src="X1-7.png" alt="xOne Secure Logo">
         <div class="header-buttons">
             <a href="index.html" class="btn">Home</a>
             <a href="#" class="btn app-button">xOne App</a>
