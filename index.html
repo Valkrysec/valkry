@@ -88,40 +88,36 @@
             object-fit: contain;
         }
         .menu {
-            position: relative;
-            z-index: 11;
-        }
-        .hamburger {
-            background: none;
-            border: none;
-            font-size: 48px;
-            color: #808080;
-            cursor: pointer;
-            transition: color 0.3s;
-            margin-top: -10px;
-        }
-        .hamburger:hover {
-            color: #45a049;
-        }
-        .menu-content {
-            display: none;
-            position: absolute;
-            top: 45px;
-            right: 0;
-            background-color: #1F1F1F;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
-            padding: 10px;
-            z-index: 12;
-        }
-        .menu-content a {
-            display: block;
-            color: #E0E0E0;
-            text-decoration: none;
-            padding: 12px 16px;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
+    position: relative;
+    z-index: 11;
+}
+.hamburger {
+    background: none;
+    border: none;
+    font-size: 36px;
+    color: #808080;
+    cursor: pointer;
+    transition: color 0.3s;
+    display: none; /* Hidden on desktop */
+}
+.hamburger:hover {
+    color: #45a049;
+}
+.menu-content {
+    display: flex; /* Inline on desktop */
+    gap: 10px;
+}
+.menu-content a {
+    color: #E0E0E0;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+.menu-content a:hover {
+    background-color: #4CAF50;
+    border-radius: 4px;
+}
         .menu-content a:hover {
             background-color: #45a049;
         }
@@ -421,14 +417,14 @@
      </span>
     </div>
     <div class="header">
-        <div class="menu">
-            <button class="hamburger">☰</button>
-            <div class="menu-content">
-                <a href="#about-section">About</a>
-                <a href="services.html">Services</a>
-                <a href="#" class="app-link">xOne App</a>
-            </div>
+    <div class="menu">
+        <button class="hamburger">☰</button>
+        <div class="menu-content">
+            <a href="#about-section">About</a>
+            <a href="services.html">Services</a>
+            <a href="#" class="app-link">xOne App</a>
         </div>
+      </div>
     </div>
     
     <section class="welcome-section">
