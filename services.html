@@ -26,7 +26,7 @@
         }
 
         .award-banner {
-            text-align: center;
+            text-align: center; /* Keeps text centered */
             padding: 15px 0; /* Unchanged */
             background: rgba(28, 28, 28, 0.8);
             color: #4CAF50;
@@ -35,14 +35,10 @@
             font-weight: 700;
             z-index: 15;
             animation: fadeIn 1s ease-in-out;
-            position: fixed; /* Make it fixed like CertiK */
+            position: fixed; /* Fixed like CertiK */
             top: 0;
             left: 0;
             right: 0;
-            display: flex; /* Add flex to align logo and text */
-            justify-content: center; /* Center everything */
-            align-items: center;
-            gap: 15px; /* Space between logo and text */
         }
         .award-banner span {
             display: inline-flex;
@@ -54,8 +50,13 @@
             height: 30px;
             fill: #4CAF50;
         }
+        /* Add this to position logo top-left */
         .award-banner img {
-            max-width: 200px; /* Current size from last working version */
+            position: absolute;
+            left: 10px; /* Offset from left edge like CertiK */
+            top: 50%; /* Center vertically */
+            transform: translateY(-50%); /* Adjust for exact vertical centering */
+            max-width: 100px; /* Smaller, like CertiK */
             height: auto;
             object-fit: contain;
         }
@@ -80,13 +81,19 @@
             background: transparent;
             padding: 0 10px;
             display: flex;
-            justify-content: flex-end; /* Move buttons to right */
+            justify-content: space-between;
             align-items: center;
             z-index: 10;
             position: absolute;
-            top: -25px; /* Unchanged */
+            top: -25px;
             left: 0;
             right: 0;
+        }
+        .header img {
+            max-width: 300px;
+            height: auto;
+            margin-left: 0px;
+            object-fit: contain;
         }
         .header-buttons {
             display: flex;
@@ -111,7 +118,7 @@
 
         .page-title {
             text-align: center;
-            padding: 175px 20px 20px; /* Unchanged */
+            padding: 175px 20px 20px;
             color: #FFFFFF;
             font-size: 2.5em;
             font-weight: bold;
@@ -126,7 +133,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 84px 20px 50px; /* Unchanged */
+            padding: 84px 20px 50px;
         }
         .service-box {
             background: linear-gradient(145deg, #1A1A1A, #2B2B2B);
@@ -231,7 +238,7 @@
                 padding: 0 5px;
             }
             .award-banner img {
-                max-width: 150px; /* Current mobile size */
+                max-width: 100px; /* Matches desktop for consistency */
             }
             .page-title {
                 font-size: 2em;
@@ -255,9 +262,9 @@
                 font-size: 1.5em;
             }
             .award-banner {
-                padding: 10px 5px; /* Slightly tighter for mobile */
+                padding: 10px 5px;
             }
-            .award-banner .award-text {
+            .award-banner span {
                 font-size: 1.2em;
             }
             .award-banner svg {
@@ -270,7 +277,7 @@
 <body>
     <div class="award-banner">
         <img src="X1-7.png" alt="xOne Secure Logo">
-        <span class="award-text">
+        <span>
             <svg viewBox="0 0 24 24">
                 <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
             </svg>
