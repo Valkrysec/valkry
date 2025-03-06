@@ -31,26 +31,39 @@
         }
 
         .award-banner {
-            text-align: center;
-            padding: 15px 0;
-            background: rgba(28, 28, 28, 0.8);
-            color: #4CAF50;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5em;
-            font-weight: 700;
-            z-index: 15;
-            animation: fadeIn 1s ease-in-out;
-        }
-        .award-banner span {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .award-banner svg {
-            width: 30px;
-            height: 30px;
-            fill: #4CAF50;
-        }
+    text-align: center;
+    padding: 15px 0;
+    background: rgba(28, 28, 28, 0.8);
+    color: #4CAF50;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    z-index: 15;
+    animation: fadeIn 1s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.award-banner span {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+.award-banner svg {
+    width: 30px;
+    height: 30px;
+    fill: #4CAF50;
+}
+.award-banner img {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 150px;
+    height: auto;
+    object-fit: contain;
+}
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -60,7 +73,7 @@
             background: transparent;
             padding: 0 10px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             z-index: 10;
             position: absolute; /* Overlay on background */
@@ -338,21 +351,18 @@
         }
 
         @media (max-width: 768px) {
-            .award-banner {
-                font-size: 1.2em;
-                padding: 10px 0;
-            }
-            .award-banner svg {
-                width: 24px;
-                height: 24px;
-            }
-            .header {
-                padding: 0 5px;
-                top: 40px; /* Adjusted for smaller award-banner */
-            }
-            .header img {
-                max-width: 200px;
-                margin-left: 5px;
+    .award-banner {
+        padding: 10px 5px;
+    }
+    .award-banner span {
+        font-size: 1.2em;
+    }
+    .award-banner svg {
+        width: 24px;
+        height: 24px;
+    }
+    .award-banner img {
+        max-width: 150px;
             }
             .welcome-section h1 {
                 font-size: 2.5em;
@@ -402,15 +412,15 @@
 </head>
 <body>
     <div class="award-banner">
-        <span>
-            <svg viewBox="0 0 24 24">
-                <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
-            </svg>
-            250 + Bug Bounty Awards
-        </span>
+    <img src="X1-7.png" alt="xOne Secure Logo">
+    <span>
+        <svg viewBox="0 0 24 24">
+            <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
+        </svg>
+        250 + Bug Bounty Awards
+     </span>
     </div>
     <div class="header">
-        <img src="X1-7.png" alt="xOne Secure Logo">
         <div class="menu">
             <button class="hamburger">☰</button>
             <div class="menu-content">
