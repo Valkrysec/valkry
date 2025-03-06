@@ -512,6 +512,12 @@
                 menuContent.classList.toggle('active');
             });
 
+            document.addEventListener('click', function(e) {
+            if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
+                menuContent.classList.remove('active');
+            }
+        });
+
             if (appLink) {
                 appLink.addEventListener('click', function(e) {
                     e.preventDefault();
