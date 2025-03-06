@@ -25,22 +25,27 @@
             display: none;
         }
 
-        /* Combined Banner/Header */
+        /* Banner with Logo */
         .banner-header {
-            position: fixed; /* Stays at top across pages */
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
             background: rgba(28, 28, 28, 0.8);
-            padding: 10px 20px;
+            padding: 15px 10px; /* Original padding */
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* Center everything */
             align-items: center;
             z-index: 15;
             animation: fadeIn 1s ease-in-out;
         }
+        .banner-header .logo-award {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Space between logo and text */
+        }
         .banner-header img {
-            max-width: 200px; /* Smaller for banner */
+            max-width: 200px; /* Current size */
             height: auto;
             object-fit: contain;
         }
@@ -75,10 +80,10 @@
             z-index: -1;
         }
 
-        /* Page Title */
+        /* Page Title - Reverted to original */
         .page-title {
             text-align: center;
-            padding: 175px 20px 20px;
+            padding: 175px 20px 20px; /* Original desktop position */
             color: #FFFFFF;
             font-size: 2.5em;
             font-weight: bold;
@@ -89,12 +94,12 @@
             color: #4CAF50;
         }
 
-        /* Service boxes */
+        /* Service boxes - Reverted to original */
         .service-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            padding: 84px 20px 50px;
+            padding: 84px 20px 50px; /* Original desktop position */
         }
         .service-box {
             background: linear-gradient(145deg, #1A1A1A, #2B2B2B);
@@ -198,13 +203,13 @@
 
         @media (max-width: 768px) {
             .banner-header {
-                padding: 5px 10px; /* Smaller padding for mobile */
+                padding: 10px 5px; /* Slightly tighter for mobile */
             }
             .banner-header img {
-                max-width: 150px; /* Smaller logo */
+                max-width: 150px; /* Current mobile size */
             }
             .banner-header .award-text {
-                font-size: 1.2em; /* Smaller text */
+                font-size: 1.2em; /* Original mobile size */
             }
             .banner-header .award-text svg {
                 width: 24px;
@@ -212,10 +217,10 @@
             }
             .page-title {
                 font-size: 2em;
-                padding: 55px 20px 10px;
+                padding: 55px 20px 10px; /* Original mobile position */
             }
             .service-container {
-                padding: 160px 20px 40px;
+                padding: 160px 20px 40px; /* Original mobile position */
             }
             .service-box {
                 width: calc(100% - 30px);
@@ -228,14 +233,15 @@
 </head>
 <body>
     <div class="banner-header">
-        <img src="X1-7.png" alt="xOne Secure Logo">
-        <div class="award-text">
-            <svg viewBox="0 0 24 24">
-                <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
-            </svg>
-            250 + Bug Bounty Awards
+        <div class="logo-award">
+            <img src="X1-7.png" alt="xOne Secure Logo">
+            <div class="award-text">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
+                </svg>
+                250 + Bug Bounty Awards
+            </div>
         </div>
-        <!-- Hamburger will go here after this step -->
     </div>
     <div class="ai-security-bg"></div>
 
@@ -254,7 +260,42 @@
                 <p>Our Web3 Infrastructure Assessment provides a comprehensive analysis, from network connectivity to smart contract security. We delve into the intricacies of your blockchain setup, ensuring your infrastructure is not only secure but also optimized for performance and scalability. This service is crucial for identifying vulnerabilities before they can be exploited, safeguarding your digital assets in the complex landscape of decentralized technologies.</p>
             </div>
         </div>
-        <!-- Other service boxes unchanged -->
+        <div class="service-box" id="box2" onclick="toggleDropdown('box2')">
+            <h3>Auditing & <span>Compliance</span></h3>
+            <ul>
+                <li>Smart Contract Audits</li>
+                <li>Regulatory Compliance Assessment</li>
+                <li>Continuous Monitoring</li>
+            </ul>
+            <p class="expand-prompt">Click to expand service details</p>
+            <div class="dropdown-content">
+                <p>Through our Auditing & Compliance services, we conduct thorough smart contract audits to detect any coding errors or security loopholes. We ensure your projects adhere to the latest regulatory frameworks, providing peace of mind in the ever-evolving Web3 regulatory environment. Our continuous monitoring post-audit helps in maintaining compliance and security over time, adapting to new threats and regulatory changes.</p>
+            </div>
+        </div>
+        <div class="service-box" id="box3" onclick="toggleDropdown('box3')">
+            <h3><span>Penetration</span> Testing</h3>
+            <ul>
+                <li>Ethical Hacking</li>
+                <li>dApp Security Testing</li>
+                <li>Tailored Attack Scenarios</li>
+            </ul>
+            <p class="expand-prompt">Click to expand service details</p>
+            <div class="dropdown-content">
+                <p>Our Penetration Testing service involves ethical hacking where we simulate attacks on your Web3 applications to uncover security flaws. We focus on testing decentralized apps for vulnerabilities unique to blockchain technology, like reentrancy or front-running attacks. By creating tailored attack scenarios, we ensure your infrastructure is resilient against both common and sophisticated threats, offering concrete recommendations for security enhancements.</p>
+            </div>
+        </div>
+        <div class="service-box" id="box4" onclick="toggleDropdown('box4')">
+            <h3>xOne <span>App</span> & Extension</h3>
+            <ul>
+                <li>Site Source Code Validation</li>
+                <li>Smart Contract & Token CA Validation</li>
+                <li>Malicious Script Scanning</li>
+            </ul>
+            <p class="expand-prompt">Click to expand service details</p>
+            <div class="dropdown-content">
+                <p>The xOne App & Extension is designed to provide users with an additional layer of security in their Web3 interactions. It performs three critical checks: validating website source code to prevent phishing, ensuring smart contracts and token contract addresses are legitimate, and scanning for any malicious scripts that might compromise user security. This tool acts as a vigilant guardian, ensuring your transactions are safe in the decentralized digital space.</p>
+            </div>
+        </div>
     </section>
 
     <footer>
