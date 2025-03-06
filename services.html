@@ -26,8 +26,8 @@
         }
 
         .award-banner {
-            text-align: center; /* Keeps text centered */
-            padding: 15px 0; /* Unchanged */
+            text-align: center;
+            padding: 15px 0;
             background: rgba(28, 28, 28, 0.8);
             color: #4CAF50;
             font-family: 'Orbitron', sans-serif;
@@ -35,7 +35,7 @@
             font-weight: 700;
             z-index: 15;
             animation: fadeIn 1s ease-in-out;
-            position: fixed; /* Fixed like CertiK */
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
@@ -50,13 +50,12 @@
             height: 30px;
             fill: #4CAF50;
         }
-        /* Add this to position logo top-left */
         .award-banner img {
             position: absolute;
-            left: 10px; /* Offset from left edge like CertiK */
-            top: 50%; /* Center vertically */
-            transform: translateY(-50%); /* Adjust for exact vertical centering */
-            max-width: 150px; /* Smaller, like CertiK */
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 150px;
             height: auto;
             object-fit: contain;
         }
@@ -114,6 +113,38 @@
         .btn:hover {
             background-color: #66BB6A;
             box-shadow: 0 0 10px rgba(76, 175, 80, 0.6);
+        }
+        /* Hamburger Menu Styles */
+        .menu {
+            position: relative;
+            z-index: 11;
+        }
+        .hamburger {
+            background: none;
+            border: none;
+            font-size: 36px;
+            color: #808080;
+            cursor: pointer;
+            transition: color 0.3s;
+            display: none; /* Hidden on desktop */
+        }
+        .hamburger:hover {
+            color: #45a049;
+        }
+        .menu-content {
+            display: flex;
+            gap: 10px;
+        }
+        .menu-content a {
+            color: #E0E0E0;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .menu-content a:hover {
+            background-color: #4CAF50;
+            border-radius: 4px;
         }
 
         .page-title {
@@ -238,7 +269,7 @@
                 padding: 0 5px;
             }
             .award-banner img {
-                max-width: 150px; /* Matches desktop for consistency */
+                max-width: 150px;
             }
             .page-title {
                 font-size: 2em;
@@ -271,6 +302,29 @@
                 width: 24px;
                 height: 24px;
             }
+            /* Mobile Hamburger Styles */
+            .hamburger {
+                display: block;
+            }
+            .menu-content {
+                display: none;
+                position: absolute;
+                top: 50px;
+                right: 10px;
+                background: #1F1F1F;
+                flex-direction: column;
+                width: 200px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+                border-radius: 8px;
+                padding: 10px;
+            }
+            .menu-content.active {
+                display: flex;
+            }
+            .menu-content a {
+                width: 100%;
+                box-sizing: border-box;
+            }
         }
     </style>
 </head>
@@ -289,11 +343,12 @@
         <div class="menu">
             <button class="hamburger">☰</button>
             <div class="menu-content">
-                <a href="index.html" class="btn">Home</a>
-                <a href="#" class="btn app-button">xOne App</a>
-                <a href="https://xone-secure-protocol.gitbook.io/xone-secure" class="btn">Docs</a>
+                <a href="index.html">Home</a>
+                <a href="#" class="app-link">xOne App</a>
+                <a href="https://xone-secure-protocol.gitbook.io/xone-secure">Docs</a>
             </div>
         </div>
+    </div>
 
     <div class="page-title"><span>Web3</span> Security Services</div>
 
@@ -360,6 +415,23 @@
     </footer>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const menuContent = document.querySelector('.menu-content');
+            const appLink = document.querySelector('.app-link');
+
+            hamburger.addEventListener('click', function() {
+                menuContent.classList.toggle('active');
+            });
+
+            if (appLink) {
+                appLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert("We are in the process of finalizing the last steps on testnet. The app will be available soon!");
+                });
+            }
+        });
+
         function toggleDropdown(id) {
             var element = document.getElementById(id);
             element.classList.toggle("active");
