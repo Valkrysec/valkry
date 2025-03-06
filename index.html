@@ -31,39 +31,39 @@
         }
 
         .award-banner {
-    text-align: center;
-    padding: 15px 0;
-    background: rgba(28, 28, 28, 0.8);
-    color: #4CAF50;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.5em;
-    font-weight: 700;
-    z-index: 15;
-    animation: fadeIn 1s ease-in-out;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-}
-.award-banner span {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-}
-.award-banner svg {
-    width: 30px;
-    height: 30px;
-    fill: #4CAF50;
-}
-.award-banner img {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    max-width: 150px;
-    height: auto;
-    object-fit: contain;
-}
+            text-align: center;
+            padding: 15px 0;
+            background: rgba(28, 28, 28, 0.8);
+            color: #4CAF50;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            z-index: 15;
+            animation: fadeIn 1s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        .award-banner span {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .award-banner svg {
+            width: 30px;
+            height: 30px;
+            fill: #4CAF50;
+        }
+        .award-banner img {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
+        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -88,38 +88,35 @@
             object-fit: contain;
         }
         .menu {
-    position: relative;
-    z-index: 11;
-}
-.hamburger {
-    background: none;
-    border: none;
-    font-size: 36px;
-    color: #808080;
-    cursor: pointer;
-    transition: color 0.3s;
-    display: none; /* Hidden on desktop */
-}
-.hamburger:hover {
-    color: #45a049;
-}
-.menu-content {
-    display: flex; /* Inline on desktop */
-    gap: 10px;
-}
-.menu-content a {
-    color: #E0E0E0;
-    text-decoration: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-.menu-content a:hover {
-    background-color: #4CAF50;
-    border-radius: 4px;
-}
+            position: relative;
+            z-index: 11;
+        }
+        .hamburger {
+            background: none;
+            border: none;
+            font-size: 36px;
+            color: #808080;
+            cursor: pointer;
+            transition: color 0.3s;
+            display: none; /* Hidden on desktop */
+        }
+        .hamburger:hover {
+            color: #45a049;
+        }
+        .menu-content {
+            display: flex; /* Inline on desktop */
+            gap: 10px;
+        }
+        .menu-content a {
+            color: #E0E0E0;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
         .menu-content a:hover {
-            background-color: #45a049;
+            background-color: #4CAF50; /* Changed from #45a049 to match services.html */
+            border-radius: 4px;
         }
         .menu.open .menu-content {
             display: block;
@@ -347,18 +344,18 @@
         }
 
         @media (max-width: 768px) {
-    .award-banner {
-        padding: 10px 5px;
-    }
-    .award-banner span {
-        font-size: 1.2em;
-    }
-    .award-banner svg {
-        width: 24px;
-        height: 24px;
-    }
-    .award-banner img {
-        max-width: 150px;
+            .award-banner {
+                padding: 10px 5px;
+            }
+            .award-banner span {
+                font-size: 1.2em;
+            }
+            .award-banner svg {
+                width: 24px;
+                height: 24px;
+            }
+            .award-banner img {
+                max-width: 150px;
             }
             .welcome-section h1 {
                 font-size: 2.5em;
@@ -403,28 +400,51 @@
                 font-size: 2.5em;
                 margin-bottom: 20px;
             }
+            /* Hamburger menu for mobile */
+            .hamburger {
+                display: block;
+            }
+            .menu-content {
+                display: none;
+                position: absolute;
+                top: 50px;
+                right: 10px;
+                background: #1F1F1F;
+                flex-direction: column;
+                width: 200px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+                border-radius: 8px;
+                padding: 10px;
+            }
+            .menu-content.active {
+                display: flex;
+            }
+            .menu-content a {
+                width: 100%;
+                box-sizing: border-box;
+            }
         }
     </style>
 </head>
 <body>
     <div class="award-banner">
-    <img src="X1-7.png" alt="xOne Secure Logo">
-    <span>
-        <svg viewBox="0 0 24 24">
-            <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
-        </svg>
-        250 + Bug Bounty Awards
-     </span>
+        <img src="X1-7.png" alt="xOne Secure Logo">
+        <span>
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
+            </svg>
+            250 + Bug Bounty Awards
+         </span>
     </div>
     <div class="header">
-    <div class="menu">
-        <button class="hamburger">☰</button>
-        <div class="menu-content">
-            <a href="#about-section">About</a>
-            <a href="services.html">Services</a>
-            <a href="#" class="app-link">xOne App</a>
+        <div class="menu">
+            <button class="hamburger">☰</button>
+            <div class="menu-content">
+                <a href="#about-section">About</a>
+                <a href="services.html">Services</a>
+                <a href="#" class="app-link">xOne App</a>
+            </div>
         </div>
-      </div>
     </div>
     
     <section class="welcome-section">
@@ -482,11 +502,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
-            const menu = document.querySelector('.menu');
+            const menuContent = document.querySelector('.menu-content');
             const appLink = document.querySelector('.app-link');
 
             hamburger.addEventListener('click', function() {
-                menu.classList.toggle('open');
+                menuContent.classList.toggle('active');
             });
 
             if (appLink) {
