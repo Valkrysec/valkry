@@ -5,28 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>xOne - Web3 Security Assessment</title>
     <style>
+        html {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
         body {
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif;
             background-color: #0B0B0B;
+            background-image: url('X1-5.png');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             color: #E0E0E0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        .assessment-form {
+            width: 90%;
+            max-width: 1200px; /* Larger than index.html's 1000px */
+            background: #1C2526; /* Matches terminal-window */
+            border: 4px solid #4CAF50; /* Matches terminal-window */
+            border-radius: 8px;
+            padding: 40px; /* Bigger padding for a larger feel */
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5); /* Matches terminal-window */
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-size: 1.5em; /* Matches terminal-window */
+            color: #E0E0E0;
+            position: relative;
+            margin: 20px auto; /* Slight margin to avoid edge clipping */
+            box-sizing: border-box;
+        }
+        .form-header {
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            font-size: 1.0em;
+            color: #4CAF50;
+            font-family: 'VT323', monospace;
         }
         form {
-            max-width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #1a1a1d;
-            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Spacing between fields */
         }
         input, textarea {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
+            margin: 0; /* Remove default margin */
             border: 1px solid #4CAF50;
             border-radius: 4px;
             background: #333333;
             color: #E0E0E0;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-size: 1em; /* Relative to parent’s 1.5em */
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical; /* Allow vertical resize only */
+            min-height: 100px; /* Slightly larger for usability */
         }
         button {
             background-color: #4CAF50;
@@ -34,26 +78,35 @@
             padding: 10px 20px;
             text-align: center;
             text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
+            font-size: 1em; /* Matches form’s scale */
             cursor: pointer;
             border: none;
             border-radius: 4px;
             transition: background-color 0.3s;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
         }
         button:hover {
             background-color: #45a049;
         }
+        @media (max-width: 768px) {
+            .assessment-form {
+                width: calc(95% - 40px);
+                font-size: 1.3em; /* Matches terminal-window mobile */
+                padding: 30px;
+            }
+        }
     </style>
 </head>
 <body>
-    <form id="assessmentForm" action="https://formspree.io/f/xpwqyrka" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="description" placeholder="Describe your security needs" rows="4" required></textarea>
-        <button type="submit">Submit Assessment Request</button>
-    </form>
+    <div class="assessment-form">
+        <span class="form-header">xOne Assessment Terminal</span>
+        <form id="assessmentForm" action="https://formspree.io/f/xpwqyrka" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="description" placeholder="Describe your security needs" rows="4" required></textarea>
+            <button type="submit">Submit Assessment Request</button>
+        </form>
+    </div>
 
     <script>
         document.getElementById('assessmentForm').addEventListener('submit', function(e) {
