@@ -17,7 +17,7 @@
             padding: 0;
             font-family: 'Arial', sans-serif;
             background-color: #0B0B0B;
-            background-image: url('X1-5.png'); /* Same as index.html */
+            background-image: url('X1-5.png');
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;
@@ -39,10 +39,18 @@
             text-align: center;
             color: white;
             text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
-            margin: 40px 0;
+            margin: 40px 0 10px 0; /* Reduced bottom margin for subtitle */
         }
         h1 .highlight {
             color: #4CAF50; /* Green for "xOne" */
+        }
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em; /* Smaller than h1 */
+            color: white;
+            text-align: center;
+            margin: 0 0 40px 0; /* Space below subtitle */
+            max-width: 800px; /* Keeps it readable */
         }
         .go-back-btn {
             position: absolute;
@@ -71,6 +79,7 @@
             width: 90%;
             max-width: 1000px;
             padding: 20px;
+            margin-top: 20px; /* Slight nudge down for subtitle space */
         }
         .team-box {
             background: #1C2526;
@@ -87,11 +96,10 @@
             gap: 20px;
         }
         .team-box img {
-            width: 200px; /* Bigger square images */
+            width: 200px;
             height: 200px;
             object-fit: cover;
             border: 2px solid #4CAF50;
-            /* Removed border-radius: 50% for square shape */
         }
         .team-box .name {
             color: #4CAF50;
@@ -107,6 +115,10 @@
             h1 {
                 font-size: 2.5em;
             }
+            .subtitle {
+                font-size: 1em; /* Smaller on mobile */
+                padding: 0 10px; /* Prevent edge clipping */
+            }
             .team-container {
                 width: calc(95% - 40px);
             }
@@ -116,7 +128,7 @@
                 font-size: 1.0em;
             }
             .team-box img {
-                width: 150px; /* Adjusted for mobile */
+                width: 150px;
                 height: 150px;
             }
             .team-box .name {
@@ -128,6 +140,7 @@
 <body>
     <button class="go-back-btn" onclick="window.location.href='index.html'">Go Back</button>
     <h1>Meet The <span class="highlight">xOne</span> Team</h1>
+    <div class="subtitle">Pentester identities stay anonymous until contracts are signed and a Teams call is scheduled. This security measure is taken due to the nature of our work as ethical hackers.</div>
     <div class="team-container">
         <div class="team-box">
             <img src="https://github.com/xOneSecure/xone/raw/main/X1agent.png" alt="X-1 Profile">
