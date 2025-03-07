@@ -34,10 +34,20 @@
             font-size: 3.5em;
             font-weight: 700;
             text-align: center;
-            color: #4CAF50;
+            color: white; /* Changed to white like services.html */
             text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
-            margin-bottom: 40px;
-            margin-top: 20px; /* Small top margin for spacing */
+            margin-bottom: 10px; /* Reduced to fit subtitle */
+            margin-top: 20px;
+        }
+        h1 .highlight {
+            color: #4CAF50; /* Green for "Web3" */
+        }
+        .subtitle {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em; /* Smaller than h1 */
+            color: white; /* All white */
+            text-align: center;
+            margin-bottom: 30px; /* Space before form */
         }
         .assessment-form {
             width: 90%;
@@ -51,7 +61,7 @@
             font-size: 1.5em;
             color: #E0E0E0;
             position: relative;
-            margin: 0 auto 20px auto; /* Bottom margin for balance */
+            margin: 0 auto 20px auto;
             box-sizing: border-box;
         }
         .terminal-header {
@@ -103,6 +113,9 @@
             h1 {
                 font-size: 2.5em;
             }
+            .subtitle {
+                font-size: 1em; /* Smaller on mobile */
+            }
             .assessment-form {
                 width: calc(95% - 40px);
                 font-size: 1.3em;
@@ -112,7 +125,8 @@
     </style>
 </head>
 <body>
-    <h1>xOne Web3 Assessment Terminal</h1>
+    <h1>xOne <span class="highlight">Web3</span> Assessment Terminal</h1>
+    <div class="subtitle">Reach out to our Web3 specialists for a Free no-hassle assessment of your current infrastructure.</div>
     <div class="assessment-form">
         <span class="terminal-header">Linux '95 (v1.2)</span>
         <form id="assessmentForm" action="https://formspree.io/f/xpwqyrka" method="POST">
