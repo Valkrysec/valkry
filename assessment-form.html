@@ -22,28 +22,39 @@
             color: #E0E0E0;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
         body::-webkit-scrollbar {
             display: none;
         }
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5em;
+            font-weight: 700;
+            text-align: center;
+            color: #4CAF50;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
+            margin-bottom: 40px;
+            margin-top: 20px; /* Small top margin for spacing */
+        }
         .assessment-form {
             width: 90%;
-            max-width: 1200px; /* Larger than index.html's 1000px */
-            background: #1C2526; /* Matches terminal-window */
-            border: 4px solid #4CAF50; /* Matches terminal-window */
+            max-width: 1200px;
+            background: #1C2526;
+            border: 4px solid #4CAF50;
             border-radius: 8px;
-            padding: 40px; /* Bigger padding for a larger feel */
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5); /* Matches terminal-window */
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
             font-family: 'IBM Plex Mono', 'Courier New', monospace;
-            font-size: 1.5em; /* Matches terminal-window */
+            font-size: 1.5em;
             color: #E0E0E0;
             position: relative;
-            margin: 20px auto; /* Slight margin to avoid edge clipping */
+            margin: 0 auto 20px auto; /* Bottom margin for balance */
             box-sizing: border-box;
         }
-        .form-header {
+        .terminal-header {
             position: absolute;
             top: 5px;
             left: 10px;
@@ -54,23 +65,23 @@
         form {
             display: flex;
             flex-direction: column;
-            gap: 15px; /* Spacing between fields */
+            gap: 15px;
         }
         input, textarea {
             width: 100%;
             padding: 10px;
-            margin: 0; /* Remove default margin */
+            margin: 0;
             border: 1px solid #4CAF50;
             border-radius: 4px;
             background: #333333;
             color: #E0E0E0;
             font-family: 'IBM Plex Mono', 'Courier New', monospace;
-            font-size: 1em; /* Relative to parent’s 1.5em */
+            font-size: 1em;
             box-sizing: border-box;
         }
         textarea {
-            resize: vertical; /* Allow vertical resize only */
-            min-height: 100px; /* Slightly larger for usability */
+            resize: vertical;
+            min-height: 100px;
         }
         button {
             background-color: #4CAF50;
@@ -78,7 +89,7 @@
             padding: 10px 20px;
             text-align: center;
             text-decoration: none;
-            font-size: 1em; /* Matches form’s scale */
+            font-size: 1em;
             cursor: pointer;
             border: none;
             border-radius: 4px;
@@ -89,17 +100,21 @@
             background-color: #45a049;
         }
         @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
             .assessment-form {
                 width: calc(95% - 40px);
-                font-size: 1.3em; /* Matches terminal-window mobile */
+                font-size: 1.3em;
                 padding: 30px;
             }
         }
     </style>
 </head>
 <body>
+    <h1>xOne Web3 Assessment Terminal</h1>
     <div class="assessment-form">
-        <span class="form-header">xOne Assessment Terminal</span>
+        <span class="terminal-header">Linux '95 (v1.2)</span>
         <form id="assessmentForm" action="https://formspree.io/f/xpwqyrka" method="POST">
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="email" name="email" placeholder="Your Email" required>
