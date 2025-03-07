@@ -44,6 +44,26 @@
         h1 .highlight {
             color: #4CAF50; /* Green for "xOne" */
         }
+        .go-back-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.9em;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            z-index: 10;
+        }
+        .go-back-btn:hover {
+            background-color: #45a049;
+        }
         .team-container {
             display: flex;
             flex-direction: column;
@@ -53,7 +73,7 @@
             padding: 20px;
         }
         .team-box {
-            background: #1C2526; /* Matches terminal-window */
+            background: #1C2526;
             border: 4px solid #4CAF50;
             border-radius: 8px;
             padding: 20px;
@@ -67,19 +87,11 @@
             gap: 20px;
         }
         .team-box img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
+            width: 200px; /* Bigger square images */
+            height: 200px;
             object-fit: cover;
             border: 2px solid #4CAF50;
-        }
-        .team-box .header {
-            position: absolute;
-            top: 5px;
-            left: 10px;
-            font-size: 1.0em;
-            color: #4CAF50;
-            font-family: 'VT323', monospace;
+            /* Removed border-radius: 50% for square shape */
         }
         .team-box .name {
             color: #4CAF50;
@@ -104,8 +116,8 @@
                 font-size: 1.0em;
             }
             .team-box img {
-                width: 120px;
-                height: 120px;
+                width: 150px; /* Adjusted for mobile */
+                height: 150px;
             }
             .team-box .name {
                 font-size: 1.3em;
@@ -114,27 +126,25 @@
     </style>
 </head>
 <body>
+    <button class="go-back-btn" onclick="window.location.href='index.html'">Go Back</button>
     <h1>Meet The <span class="highlight">xOne</span> Team</h1>
     <div class="team-container">
         <div class="team-box">
-            <span class="header">Linux '95 (v1.2)</span>
-            <img src="https://github.com/xOneSecure/xone/raw/main/TEAM_X1.png" alt="X-1 Profile">
+            <img src="https://github.com/xOneSecure/xone/raw/main/X1agent.png" alt="X-1 Profile">
             <div>
                 <p class="name">X-1</p>
                 <p>Lead pentester with a knack for cracking smart contracts. X-1 has exposed vulnerabilities in over 1,000 Web3 projects, ensuring decentralized dreams stay secure.</p>
             </div>
         </div>
         <div class="team-box">
-            <span class="header">Linux '95 (v1.2)</span>
-            <img src="https://github.com/xOneSecure/xone/raw/main/TEAM_X2.png" alt="X-2 Profile">
+            <img src="https://github.com/xOneSecure/xone/raw/main/X2agent.png" alt="X-2 Profile">
             <div>
                 <p class="name">X-2</p>
                 <p>Blockchain sleuth and ethical hacker extraordinaire. X-2 specializes in dApp security, turning code into fortresses with a sharp eye for detail.</p>
             </div>
         </div>
         <div class="team-box">
-            <span class="header">Linux '95 (v1.2)</span>
-            <img src="https://github.com/xOneSecure/xone/raw/main/TEAM_X3.png" alt="X-3 Profile">
+            <img src="https://github.com/xOneSecure/xone/raw/main/X3agent.png" alt="X-3 Profile">
             <div>
                 <p class="name">X-3</p>
                 <p>Web3 network guardian and bug bounty champ. X-3’s audits keep platforms running smoothly, with a passion for outsmarting even the sneakiest exploits.</p>
