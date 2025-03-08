@@ -6,7 +6,6 @@
     <title>xOne - xOne App</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
     <style>
         html {
             height: 100%;
@@ -166,19 +165,25 @@
             align-items: center;
             padding: 10px 20px;
         }
-        .app-box {
-            background: #1C2526;
-            border: 4px solid #4CAF50;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
-            font-family: 'IBM Plex Mono', 'Courier New', monospace;
-            font-size: 1.2em;
-            color: #E0E0E0;
+        .service-box {
+            background: linear-gradient(145deg, #1A1A1A, #2B2B2B);
+            border: 1px solid #4CAF50;
+            border-radius: 10px;
+            padding: 25px;
             width: 90%;
             max-width: 800px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 5px rgba(76, 175, 80, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.1em;
+            color: #E0E0E0;
         }
-        .app-box p {
+        .service-box:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+        .service-box p {
             margin: 0;
             line-height: 1.6;
         }
@@ -208,10 +213,10 @@
                 min-height: 50vh;
                 padding: 5px 10px;
             }
-            .app-box {
+            .service-box {
                 width: calc(95% - 40px);
                 font-size: 1.0em;
-                margin-bottom: 20px; /* Added space between boxes on mobile */
+                margin-bottom: 20px;
             }
         }
     </style>
@@ -245,19 +250,19 @@
     <h1><span class="highlight">xOne</span> App</h1>
     <section id="intro">
         <h2>xOne App Intro</h2>
-        <div class="app-box">
+        <div class="service-box">
             <p>Welcome to the xOne App—your ultimate Web3 security companion. Designed by ethical hackers, this tool integrates with your browser to protect your decentralized journey. Connect your wallet (e.g., MetaMask or Phantom) to unlock a dashboard of real-time stats—sites verified, security scores, and more. Whether you’re a DeFi trader, NFT collector, or dApp developer, xOne keeps your digital assets safe in a world of evolving threats.</p>
         </div>
     </section>
     <section id="security">
         <h2>Security Features</h2>
-        <div class="app-box">
+        <div class="service-box">
             <p>The xOne App brings cutting-edge protection to your fingertips. It scans websites in real-time, verifying Web3 connections to block phishing attempts and malicious dApps. Smart contract analysis flags vulnerabilities before you interact, while instant threat alerts warn you of suspicious activity. Built with Web3’s decentralized ethos, it syncs with your wallet to provide a personalized security score—empowering you to navigate the blockchain with confidence.</p>
         </div>
     </section>
     <section id="install">
         <h2>How to Install</h2>
-        <div class="app-box">
+        <div class="service-box">
             <p>xOne Extension in Chrome Web Store will be available for install on June 6th. Stay tuned! - xOne Dev Team</p>
         </div>
     </section>
@@ -280,3 +285,4 @@
     </script>
 </body>
 </html>
+
