@@ -6,7 +6,8 @@
     <title>xOne - xOne App</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@walletconnect/universal-provider@2.15.2/dist/index.umd.js"></script>
+    <!-- Web3Modal for WalletConnect -->
+    <script src="https://unpkg.com/@web3modal/ethers@3.4.0/dist/index.js"></script>
     <style>
         html {
             height: 100%;
@@ -222,6 +223,12 @@
         </div>
     </div>
     <h1><span class="highlight">xOne</span> App</h1>
+    <section id="dashboard-guide">
+        <h2>Accessing Your User Dashboard</h2>
+        <div class="service-box">
+            <p>Get started with your xOne User Dashboard in a snap! Click "Connect Wallet" above to link your wallet (e.g., MetaMask, Phantom, or any WalletConnect-supported wallet). You’ll be automatically redirected to your personalized dashboard. The stats there—like security scores and verified transactions—mirror the activity from the xOne extension installed in your browser. For the full experience, ensure the wallet you connect here matches the one used with our Chrome app or extension. Simple, secure, and ready to protect your Web3 journey!</p>
+        </div>
+    </section>
     <section id="intro">
         <h2>xOne App Intro</h2>
         <div class="service-box">
@@ -242,30 +249,39 @@
     </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', async function() {
-            const connectButton = document.getElementById('connect-wallet-btn');
-
-            // Initialize WalletConnect Provider
-            const provider = new WalletConnectProvider.UniversalProvider({
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Web3Modal
+            const web3Modal = new Web3Modal({
                 projectId: '12d8a3187458ac3f9e5927d01dbcc52a', // Your Project ID
-                relayUrl: 'wss://relay.walletconnect.com',
+                walletConnectVersion: 2,
+                themeMode: 'dark', // Matches your dark theme
+                themeVariables: {
+                    '--w3m-accent-color': '#4CAF50', // Green to match theme
+                    '--w3m-background-color': '#1A1A1A',
+                    '--w3m-text-color': '#E0E0E0'
+                }
             });
+
+            const connectButton = document.getElementById('connect-wallet-btn');
 
             connectButton.addEventListener('click', async () => {
                 try {
-                    // Connect wallet
-                    const accounts = await provider.enable();
-                    const walletAddress = accounts[0]; // First account
+                    console.log('Button clicked'); // Debug
+                    const provider = await web3Modal.connect();
+                    const ethersProvider = new ethers.providers.Web3Provider(provider);
+                    const signer = ethersProvider.getSigner();
+                    const walletAddress = await signer.getAddress();
 
-                    // Store address and redirect
+                    console.log('Connected wallet:', walletAddress); // Debug
                     localStorage.setItem('walletAddress', walletAddress);
                     window.location.href = 'dashboard.html';
                 } catch (error) {
                     console.error('Wallet connection failed:', error);
-                    alert('Failed to connect wallet. Please try again.');
+                    alert('Failed to connect wallet: ' + error.message);
                 }
             });
         });
     </script>
 </body>
 </html>
+
