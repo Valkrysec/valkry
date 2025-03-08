@@ -145,26 +145,26 @@
             text-align: center;
             color: white;
             text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
-            margin: 100px 0 40px 0; /* Adjusted for banner */
+            margin: 80px 0 20px 0; /* Reduced from 100px to 80px top */
         }
         h1 .highlight {
             color: #4CAF50;
         }
         h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2em; /* Smaller than h1 */
+            font-size: 2em;
             font-weight: 700;
             text-align: center;
             color: #4CAF50;
-            margin: 0 0 20px 0;
+            margin: 0 0 15px 0; /* Reduced bottom margin */
         }
         section {
-            min-height: 100vh;
+            min-height: 60vh; /* Reduced from 100vh for less space */
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start; /* Changed from center */
             align-items: center;
-            padding: 20px;
+            padding: 10px 20px; /* Reduced top padding */
         }
         .app-box {
             background: #1C2526;
@@ -176,7 +176,7 @@
             font-size: 1.2em;
             color: #E0E0E0;
             width: 90%;
-            max-width: 800px; /* Centered, narrower than 1000px */
+            max-width: 800px;
         }
         .app-box p {
             margin: 0;
@@ -199,9 +199,14 @@
             }
             h1 {
                 font-size: 2.5em;
+                margin: 70px 0 15px 0; /* Adjusted for mobile */
             }
             h2 {
                 font-size: 1.5em;
+            }
+            section {
+                min-height: 50vh; /* Reduced for mobile */
+                padding: 5px 10px;
             }
             .app-box {
                 width: calc(95% - 40px);
@@ -252,7 +257,7 @@
     <section id="install">
         <h2>How to Install</h2>
         <div class="app-box">
-            <p>Getting started with xOne is simple. Download the xOne Chrome extension from our official site or the Chrome Web Store (coming soon). Install it in seconds, then connect your wallet to activate. Once set up, the extension runs quietly in the background, filtering your Web3 activity and sending stats to your xOne App dashboard. No complex setup—just plug in, secure up, and explore the decentralized web safely.</p>
+            <p>xOne Extension in Chrome Web Store will be available for install on June 6th. Stay tuned! - xOne Dev Team</p>
         </div>
     </section>
 
