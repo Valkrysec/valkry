@@ -6,8 +6,8 @@
     <title>xOne - xOne App</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <!-- WalletConnect v1 as fallback (works standalone) -->
-    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
+    <!-- Local Web3Modal Bundle -->
+    <script src="./web3modal-bundle.js"></script>
     <style>
         html {
             height: 100%;
@@ -250,27 +250,32 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Check if WalletConnect is loaded
-            if (typeof window.WalletConnectProvider === 'undefined') {
-                console.error('WalletConnect v1 library not loaded from CDN!');
+            // Check if Web3Modal and WalletConnectProvider are loaded
+            if (typeof Web3Modal === 'undefined' || typeof WalletConnectProvider === 'undefined') {
+                console.error('Web3Modal bundle not loaded correctly!');
                 alert('Wallet connection library failed to load. Please refresh the page or check your network.');
                 return;
             }
 
-            // Initialize WalletConnect Provider with wallet options
-            const provider = new window.WalletConnectProvider.default({
-                rpc: {
-                    "1": "https://mainnet.infura.io/v3/YOUR_INFURA_ID" // Replace with Infura ID if you have one
-                },
-                qrcodeModalOptions: {
-                    mobileLinks: [
-                        "metamask",
-                        "trust",
-                        "rainbow",
-                        "argent",
-                        "imtoken",
-                        "phantom"
-                    ]
+            // Initialize Web3Modal
+            const providerOptions = {
+                walletconnect: {
+                    package: WalletConnectProvider.UniversalProvider,
+                    options: {
+                        projectId: '12d8a3187458ac3f9e5927d01dbcc52a'
+                    }
+                }
+            };
+
+            const web3Modal = new Web3Modal.default({
+                cacheProvider: false,
+                providerOptions,
+                theme: {
+                    background: '#1A1A1A',
+                    main: '#E0E0E0',
+                    secondary: '#4CAF50',
+                    border: '#4CAF50',
+                    hover: '#2B2B2B'
                 }
             });
 
@@ -279,8 +284,8 @@
             connectButton.addEventListener('click', async () => {
                 try {
                     console.log('Button clicked'); // Debug
-                    await provider.enable(); // Opens QR code with wallet options
-                    const accounts = provider.accounts;
+                    const provider = await web3Modal.connect();
+                    const accounts = await provider.request({ method: 'eth_accounts' });
                     const walletAddress = accounts[0]; // First account
 
                     console.log('Connected wallet:', walletAddress); // Debug
