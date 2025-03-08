@@ -6,8 +6,8 @@
     <title>xOne - xOne App</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <!-- Local Web3Modal Bundle -->
-    <script src="./web3modal-bundle.js"></script>
+    <!-- Local WalletConnect Bundle -->
+    <script src="./walletconnect-bundle.js"></script>
     <style>
         html {
             height: 100%;
@@ -252,7 +252,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Check if Web3Modal and WalletConnectProvider are loaded
             if (typeof Web3Modal === 'undefined' || typeof WalletConnectProvider === 'undefined') {
-                console.error('Web3Modal bundle not loaded correctly!');
+                console.error('WalletConnect bundle not loaded correctly!');
                 alert('Wallet connection library failed to load. Please refresh the page or check your network.');
                 return;
             }
@@ -260,7 +260,7 @@
             // Initialize Web3Modal
             const providerOptions = {
                 walletconnect: {
-                    package: WalletConnectProvider.UniversalProvider,
+                    package: WalletConnectProvider.EthereumProvider,
                     options: {
                         projectId: '12d8a3187458ac3f9e5927d01dbcc52a'
                     }
