@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xOne - xOne App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <style>
+        html {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #0B0B0B;
+            background-image: url('X1-5.png');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #E0E0E0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        .award-banner {
+            text-align: center;
+            padding: 15px 0;
+            background: #0B0B0B;
+            color: #4CAF50;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            z-index: 15;
+            animation: fadeIn 1s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        .award-banner span {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+        .award-banner svg {
+            width: 30px;
+            height: 30px;
+            fill: #4CAF50;
+        }
+        .award-banner img {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 180px;
+            height: auto;
+            object-fit: contain;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .header {
+            background: transparent;
+            padding: 0 10px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 10;
+            position: absolute;
+            top: 45px;
+            left: 0;
+            right: 0;
+        }
+        .menu {
+            position: relative;
+            z-index: 11;
+        }
+        .hamburger {
+            background: none;
+            border: none;
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            display: block;
+            position: relative;
+            top: 44px;
+            right: 10px;
+        }
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: #808080;
+            position: absolute;
+            transition: background 0.3s;
+        }
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 13px; }
+        .hamburger span:nth-child(3) { bottom: 0; }
+        .hamburger:hover span {
+            background: #45a049;
+        }
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            background: #1F1F1F;
+            flex-direction: column;
+            width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .menu-content.active {
+            display: flex;
+        }
+        .menu-content a {
+            color: #E0E0E0;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .menu-content a:hover {
+            background-color: #4CAF50;
+            border-radius: 4px;
+        }
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5em;
+            font-weight: 700;
+            text-align: center;
+            color: white;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
+            margin: 100px 0 20px 0; /* Adjusted for banner */
+        }
+        h1 .highlight {
+            color: #4CAF50;
+        }
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 90%;
+            max-width: 1000px;
+            padding: 20px;
+        }
+        .app-box {
+            background: #1C2526;
+            border: 4px solid #4CAF50;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-size: 1.2em;
+            color: #E0E0E0;
+        }
+        .app-box h2 {
+            color: #4CAF50;
+            font-size: 1.5em;
+            font-family: 'VT323', monospace;
+            margin: 0 0 10px 0;
+        }
+        .app-box p {
+            margin: 0;
+            line-height: 1.4;
+        }
+        @media (max-width: 768px) {
+            .award-banner {
+                padding: 10px 5px;
+            }
+            .award-banner span {
+                font-size: 14px;
+                padding-left: 190px;
+            }
+            .award-banner svg {
+                width: 24px;
+                height: 24px;
+            }
+            .award-banner img {
+                max-width: 150px;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            .app-container {
+                width: calc(95% - 40px);
+            }
+            .app-box {
+                font-size: 1.0em;
+            }
+            .app-box h2 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="award-banner">
+        <a href="index.html"><img src="X1-7.png" alt="xOne Secure Logo"></a>
+        <span>
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
+            </svg>
+            250 + Bug Bounty Awards
+         </span>
+    </div>
+    <div class="header">
+        <div class="menu">
+            <button class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="menu-content">
+                <a href="#about-section">About</a>
+                <a href="#web3-stats">Web3 Stats</a>
+                <a href="services.html">Services</a>
+                <a href="team.html">Team</a>
+                <a href="xoneapp.html">xOne App</a>
+            </div>
+        </div>
+    </div>
+    <h1><span class="highlight">xOne</span> App</h1>
+    <div class="app-container">
+        <div class="app-box">
+            <h2>xOne App Intro</h2>
+            <p>Welcome to the xOne App—your Web3 security companion. Connect your wallet to monitor your digital safety, track stats, and stay ahead of threats in the decentralized world.</p>
+        </div>
+        <div class="app-box">
+            <h2>Security Features</h2>
+            <p>Real-time site verification, smart contract scanning, and threat alerts. The xOne App keeps your Web3 interactions secure with cutting-edge tools built by ethical hackers.</p>
+        </div>
+        <div class="app-box">
+            <h2>How to Install</h2>
+            <p>Download the xOne Chrome extension from our site or the Chrome Web Store. Install it, connect your wallet, and start securing your Web3 journey in minutes.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const menuContent = document.querySelector('.menu-content');
+
+            hamburger.addEventListener('click', function() {
+                menuContent.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
+                    menuContent.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
