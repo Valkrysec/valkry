@@ -145,17 +145,25 @@
             text-align: center;
             color: white;
             text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
-            margin: 100px 0 20px 0; /* Adjusted for banner */
+            margin: 100px 0 40px 0; /* Adjusted for banner */
         }
         h1 .highlight {
             color: #4CAF50;
         }
-        .app-container {
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2em; /* Smaller than h1 */
+            font-weight: 700;
+            text-align: center;
+            color: #4CAF50;
+            margin: 0 0 20px 0;
+        }
+        section {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            gap: 30px;
-            width: 90%;
-            max-width: 1000px;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
         }
         .app-box {
@@ -167,16 +175,12 @@
             font-family: 'IBM Plex Mono', 'Courier New', monospace;
             font-size: 1.2em;
             color: #E0E0E0;
-        }
-        .app-box h2 {
-            color: #4CAF50;
-            font-size: 1.5em;
-            font-family: 'VT323', monospace;
-            margin: 0 0 10px 0;
+            width: 90%;
+            max-width: 800px; /* Centered, narrower than 1000px */
         }
         .app-box p {
             margin: 0;
-            line-height: 1.4;
+            line-height: 1.6;
         }
         @media (max-width: 768px) {
             .award-banner {
@@ -196,14 +200,12 @@
             h1 {
                 font-size: 2.5em;
             }
-            .app-container {
-                width: calc(95% - 40px);
+            h2 {
+                font-size: 1.5em;
             }
             .app-box {
+                width: calc(95% - 40px);
                 font-size: 1.0em;
-            }
-            .app-box h2 {
-                font-size: 1.3em;
             }
         }
     </style>
@@ -226,8 +228,8 @@
                 <span></span>
             </button>
             <div class="menu-content">
-                <a href="#about-section">About</a>
-                <a href="#web3-stats">Web3 Stats</a>
+                <a href="index.html#about-section">About</a>
+                <a href="index.html#web3-stats">Web3 Stats</a>
                 <a href="services.html">Services</a>
                 <a href="team.html">Team</a>
                 <a href="xoneapp.html">xOne App</a>
@@ -235,20 +237,24 @@
         </div>
     </div>
     <h1><span class="highlight">xOne</span> App</h1>
-    <div class="app-container">
+    <section id="intro">
+        <h2>xOne App Intro</h2>
         <div class="app-box">
-            <h2>xOne App Intro</h2>
-            <p>Welcome to the xOne App—your Web3 security companion. Connect your wallet to monitor your digital safety, track stats, and stay ahead of threats in the decentralized world.</p>
+            <p>Welcome to the xOne App—your ultimate Web3 security companion. Designed by ethical hackers, this tool integrates with your browser to protect your decentralized journey. Connect your wallet (e.g., MetaMask or Phantom) to unlock a dashboard of real-time stats—sites verified, security scores, and more. Whether you’re a DeFi trader, NFT collector, or dApp developer, xOne keeps your digital assets safe in a world of evolving threats.</p>
         </div>
+    </section>
+    <section id="security">
+        <h2>Security Features</h2>
         <div class="app-box">
-            <h2>Security Features</h2>
-            <p>Real-time site verification, smart contract scanning, and threat alerts. The xOne App keeps your Web3 interactions secure with cutting-edge tools built by ethical hackers.</p>
+            <p>The xOne App brings cutting-edge protection to your fingertips. It scans websites in real-time, verifying Web3 connections to block phishing attempts and malicious dApps. Smart contract analysis flags vulnerabilities before you interact, while instant threat alerts warn you of suspicious activity. Built with Web3’s decentralized ethos, it syncs with your wallet to provide a personalized security score—empowering you to navigate the blockchain with confidence.</p>
         </div>
+    </section>
+    <section id="install">
+        <h2>How to Install</h2>
         <div class="app-box">
-            <h2>How to Install</h2>
-            <p>Download the xOne Chrome extension from our site or the Chrome Web Store. Install it, connect your wallet, and start securing your Web3 journey in minutes.</p>
+            <p>Getting started with xOne is simple. Download the xOne Chrome extension from our official site or the Chrome Web Store (coming soon). Install it in seconds, then connect your wallet to activate. Once set up, the extension runs quietly in the background, filtering your Web3 activity and sending stats to your xOne App dashboard. No complex setup—just plug in, secure up, and explore the decentralized web safely.</p>
         </div>
-    </div>
+    </section>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
