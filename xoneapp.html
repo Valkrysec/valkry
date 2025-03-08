@@ -6,9 +6,8 @@
     <title>xOne - xOne App</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <!-- WalletConnect Dependencies -->
-    <script src="https://unpkg.com/@walletconnect/universal-provider@2.15.2/dist/index.umd.js"></script>
-    <script src="https://unpkg.com/@walletconnect/modal@2.6.2/dist/index.min.js"></script>
+    <!-- WalletConnect v1 -->
+    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
     <style>
         html {
             height: 100%;
@@ -250,28 +249,22 @@
     </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', async function() {
-            // Check if WalletConnect dependencies are loaded
-            if (typeof WalletConnectProvider === 'undefined' || typeof WalletConnectModal === 'undefined') {
-                console.error('WalletConnect libraries not loaded: Provider -', typeof WalletConnectProvider !== 'undefined', ', Modal -', typeof WalletConnectModal !== 'undefined');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if WalletConnect is loaded
+            if (typeof window.WalletConnectProvider === 'undefined') {
+                console.error('WalletConnect v1 library not loaded from CDN!');
                 alert('Wallet connection library failed to load. Please refresh the page or check your network.');
                 return;
             }
 
             // Initialize WalletConnect Provider
-            const provider = new WalletConnectProvider.UniversalProvider({
-                projectId: '12d8a3187458ac3f9e5927d01dbcc52a', // Your Project ID
-                relayUrl: 'wss://relay.walletconnect.com'
-            });
-
-            // Initialize WalletConnect Modal
-            const walletConnectModal = new WalletConnectModal({
-                projectId: '12d8a3187458ac3f9e5927d01dbcc52a',
-                themeMode: 'dark',
-                themeVariables: {
-                    '--wcm-accent-color': '#4CAF50',
-                    '--wcm-background-color': '#1A1A1A',
-                    '--wcm-text-color': '#E0E0E0'
+            const provider = new window.WalletConnectProvider.default({
+                infuraId: 'YOUR_INFURA_ID', // Optional: Replace with your Infura ID if you have one
+                rpc: {
+                    "1": "https://mainnet.infura.io/v3/YOUR_INFURA_ID" // Fallback RPC for Ethereum Mainnet
+                },
+                qrcodeModalOptions: {
+                    mobileLinks: ["metamask", "trust", "rainbow", "argent", "imtoken"]
                 }
             });
 
@@ -280,7 +273,8 @@
             connectButton.addEventListener('click', async () => {
                 try {
                     console.log('Button clicked'); // Debug
-                    const accounts = await provider.enable(); // Connects and opens modal
+                    await provider.enable(); // Opens QR code modal or MetaMask
+                    const accounts = provider.accounts;
                     const walletAddress = accounts[0]; // First account
 
                     console.log('Connected wallet:', walletAddress); // Debug
