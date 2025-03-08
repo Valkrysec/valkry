@@ -6,8 +6,8 @@
     <title>xOne - xOne App</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <!-- Web3Modal Standalone for WalletConnect -->
-    <script src="https://unpkg.com/@web3modal/standalone@2.4.1/dist/web3modal.js"></script>
+    <!-- WalletConnect Modal -->
+    <script src="https://unpkg.com/@walletconnect/modal@2.6.2/dist/index.min.js"></script>
     <style>
         html {
             height: 100%;
@@ -224,7 +224,7 @@
     </div>
     <h1><span class="highlight">xOne</span> App</h1>
     <section id="dashboard-guide">
-        <h2>Accessing Your User Dashboard</h2 CLASS=>
+        <h2>Accessing Your User Dashboard</h2>
         <div class="service-box">
             <p>Get started with your xOne User Dashboard in a snap! Click "Connect Wallet" above to link your wallet (e.g., MetaMask, Phantom, or any WalletConnect-supported wallet). You’ll be automatically redirected to your personalized dashboard. The stats there—like security scores and verified transactions—mirror the activity from the xOne extension installed in your browser. For the full experience, ensure the wallet you connect here matches the one used with our Chrome app or extension. Simple, secure, and ready to protect your Web3 journey!</p>
         </div>
@@ -250,18 +250,22 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Check if Web3Modal is loaded
-            if (typeof Web3Modal === 'undefined') {
-                console.error('Web3Modal library not loaded!');
+            // Check if WalletConnectModal is loaded
+            if (typeof WalletConnectModal === 'undefined') {
+                console.error('WalletConnectModal library not loaded from CDN!');
                 alert('Wallet connection library failed to load. Please refresh the page or check your network.');
                 return;
             }
 
-            // Initialize Web3Modal
-            const web3Modal = new Web3Modal.Standalone({
+            // Initialize WalletConnect Modal
+            const walletConnectModal = new WalletConnectModal({
                 projectId: '12d8a3187458ac3f9e5927d01dbcc52a', // Your Project ID
-                walletConnectVersion: 2,
-                theme: 'dark', // Matches your dark theme
+                themeMode: 'dark', // Matches your dark theme
+                themeVariables: {
+                    '--wcm-accent-color': '#4CAF50', // Green to match theme
+                    '--wcm-background-color': '#1A1A1A',
+                    '--wcm-text-color': '#E0E0E0'
+                }
             });
 
             const connectButton = document.getElementById('connect-wallet-btn');
@@ -269,7 +273,18 @@
             connectButton.addEventListener('click', async () => {
                 try {
                     console.log('Button clicked'); // Debug
-                    const provider = await web3Modal.connect();
+                    const { uri, approval } = await walletConnectModal.connect({
+                        requiredNamespaces: {
+                            eip155: {
+                                methods: ['eth_accounts'],
+                                chains: ['eip155:1'], // Ethereum Mainnet
+                                events: []
+                            }
+                        }
+                    });
+
+                    // Wait for wallet approval and get provider
+                    const provider = await approval();
                     const accounts = await provider.request({ method: 'eth_accounts' });
                     const walletAddress = accounts[0]; // First account
 
