@@ -6,6 +6,7 @@
     <title>xOne - xOne App</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@walletconnect/universal-provider@2.15.2/dist/index.umd.js"></script>
     <style>
         html {
             height: 100%;
@@ -84,58 +85,36 @@
             position: relative;
             z-index: 11;
         }
-        .hamburger {
+        .connect-wallet {
             background: none;
-            border: none;
-            width: 40px;
-            height: 30px;
+            border: 1px solid #4CAF50;
+            border-radius: 6px;
+            width: 140px;
+            height: 40px;
             cursor: pointer;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
             top: 44px;
             right: 10px;
+            color: #4CAF50;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            transition: background-color 0.3s, color 0.3s;
         }
-        .hamburger span {
-            display: block;
-            width: 100%;
-            height: 4px;
-            background: #808080;
-            position: absolute;
-            transition: background 0.3s;
+        .connect-wallet svg {
+            margin-right: 8px;
         }
-        .hamburger span:nth-child(1) { top: 0; }
-        .hamburger span:nth-child(2) { top: 13px; }
-        .hamburger span:nth-child(3) { bottom: 0; }
-        .hamburger:hover span {
-            background: #45a049;
-        }
-        .menu-content {
-            display: none;
-            position: absolute;
-            top: 40px;
-            right: 10px;
-            background: #1F1F1F;
-            flex-direction: column;
-            width: 200px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
-            padding: 10px;
-        }
-        .menu-content.active {
-            display: flex;
-        }
-        .menu-content a {
-            color: #E0E0E0;
-            text-decoration: none;
-            padding: 10px 15px;
-            font-size: 16px;
-            transition: background-color 0.3s;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .menu-content a:hover {
+        .connect-wallet:hover {
             background-color: #4CAF50;
-            border-radius: 4px;
+            color: #FFFFFF;
+        }
+        .connect-wallet:hover svg path:first-child {
+            fill: #FFFFFF;
+        }
+        .connect-wallet:hover svg path:last-child {
+            fill: #4CAF50;
         }
         h1 {
             font-family: 'Orbitron', sans-serif;
@@ -233,18 +212,13 @@
     </div>
     <div class="header">
         <div class="menu">
-            <button class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="connect-wallet" id="connect-wallet-btn">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 7H5C3.9 7 3 7.9 3 9V15C3 16.1 3.9 17 5 17H19C20.1 17 21 16.1 21 15V9C21 7.9 20.1 7 19 7ZM19 15H5V9H19V15Z" fill="#4CAF50"/>
+                    <path d="M16 11H8C7.45 11 7 11.45 7 12C7 12.55 7.45 13 8 13H16C16.55 13 17 12.55 17 12C17 11.45 16.55 11 16 11Z" fill="#FFFFFF"/>
+                </svg>
+                <span>Connect Wallet</span>
             </button>
-            <div class="menu-content">
-                <a href="index.html#about-section">About</a>
-                <a href="index.html#web3-stats">Web3 Stats</a>
-                <a href="services.html">Services</a>
-                <a href="team.html">Team</a>
-                <a href="xoneapp.html">xOne App</a>
-            </div>
         </div>
     </div>
     <h1><span class="highlight">xOne</span> App</h1>
@@ -268,21 +242,30 @@
     </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.querySelector('.hamburger');
-            const menuContent = document.querySelector('.menu-content');
+        document.addEventListener('DOMContentLoaded', async function() {
+            const connectButton = document.getElementById('connect-wallet-btn');
 
-            hamburger.addEventListener('click', function() {
-                menuContent.classList.toggle('active');
+            // Initialize WalletConnect Provider
+            const provider = new WalletConnectProvider.UniversalProvider({
+                projectId: '12d8a3187458ac3f9e5927d01dbcc52a', // Your Project ID
+                relayUrl: 'wss://relay.walletconnect.com',
             });
 
-            document.addEventListener('click', function(e) {
-                if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
-                    menuContent.classList.remove('active');
+            connectButton.addEventListener('click', async () => {
+                try {
+                    // Connect wallet
+                    const accounts = await provider.enable();
+                    const walletAddress = accounts[0]; // First account
+
+                    // Store address and redirect
+                    localStorage.setItem('walletAddress', walletAddress);
+                    window.location.href = 'dashboard.html';
+                } catch (error) {
+                    console.error('Wallet connection failed:', error);
+                    alert('Failed to connect wallet. Please try again.');
                 }
             });
         });
     </script>
 </body>
 </html>
-
