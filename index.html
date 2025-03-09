@@ -3,646 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xOne - Internet Security</title>
+    <title>xOne Secure</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
-        html {
-            height: 100%;
-            scroll-behavior: smooth;
-        }
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #0B0B0B;
-            background-image: url('X1-5.png');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #E0E0E0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            margin: 0; padding: 0; font-family: 'Arial', sans-serif;
+            background-color: #0B0B0B; background-image: url('X1-5.png');
+            background-size: cover; background-position: center top;
+            background-repeat: no-repeat; background-attachment: fixed;
+            color: #E0E0E0; min-height: 100vh; display: flex; flex-direction: column;
         }
-        body::-webkit-scrollbar {
-            display: none;
-        }
-
         .award-banner {
-            text-align: center;
-            padding: 15px 0;
-            background: #0B0B0B; /* Solid jet matte black */
-            color: #4CAF50;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5em;
-            font-weight: 700;
-            z-index: 15;
-            animation: fadeIn 1s ease-in-out;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            text-align: center; padding: 15px 0; background: #0B0B0B; color: #4CAF50;
+            font-family: 'Orbitron', sans-serif; font-size: 1.5em; font-weight: 700;
+            position: fixed; top: 0; left: 0; right: 0;
         }
-        .award-banner span {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 18px; /* Absolute size, smaller than 1.5em (~24px) */
-        }
-        .award-banner svg {
-            width: 30px;
-            height: 30px;
-            fill: #4CAF50;
-        }
-        .award-banner img {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            max-width: 180px;
-            height: auto;
-            object-fit: contain;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
+        .award-banner span { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; }
+        .award-banner img { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); max-width: 180px; }
         .header {
-            background: transparent;
-            padding: 0 10px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            z-index: 10;
-            position: absolute;
-            top: 45px; /* Moved below banner (15px padding top + bottom + content) */
-            left: 0;
-            right: 0;
-        }
-        .header img {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            max-width: 150px;
-            height: auto;
-            object-fit: contain;
-        }
-        .menu {
-            position: relative;
-            z-index: 11;
+            padding: 0 10px; display: flex; justify-content: space-between; align-items: center;
+            position: absolute; top: 45px; left: 0; right: 0;
         }
         .hamburger {
-            background: none;
-            border: none;
-            width: 40px; /* Bigger */
-            height: 30px;
-            cursor: pointer;
-            display: block;
-            position: relative;
-            top: 44px; /* 70px banner height + 48px nudge */
-            right: 10px; /* Nudge left by 10px */
+            cursor: pointer; font-size: 24px; color: #4CAF50; padding: 10px;
         }
-        .hamburger span {
-            display: block;
-            width: 100%;
-            height: 4px; /* Thicker lines */
-            background: #808080;
-            position: absolute;
-            transition: background 0.3s;
+        .menu {
+            display: none; position: absolute; top: 60px; left: 10px;
+            background: #1A1A1A; border: 1px solid #4CAF50; border-radius: 5px;
         }
-        .hamburger span:nth-child(1) { top: 0; }
-        .hamburger span:nth-child(2) { top: 13px; } /* Middle line */
-        .hamburger span:nth-child(3) { bottom: 0; }
-        .hamburger:hover span {
-            background: #45a049;
+        .menu a { display: block; padding: 10px; color: #4CAF50; text-decoration: none; }
+        .menu a:hover { background: #4CAF50; color: #FFFFFF; }
+        .menu.active { display: block; }
+        .launch-app {
+            background: none; border: 1px solid #4CAF50; border-radius: 6px; width: 140px; height: 40px;
+            cursor: pointer; color: #4CAF50; font-size: 18px; display: flex; align-items: center; justify-content: center;
+            transition: background-color 0.3s, color 0.3s;
         }
-        .menu-content {
-            display: none;
-            position: absolute;
-            top: 40px; /* Adjusted for bigger hamburger */
-            right: 10px;
-            background: #1F1F1F;
-            flex-direction: column;
-            width: 200px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
-            padding: 10px;
+        .launch-app:hover { background-color: #4CAF50; color: #FFFFFF; }
+        .launch-app svg { margin-right: 8px; }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5em; text-align: center; color: white; margin: 80px 0 44px 0; }
+        h1 .highlight { color: #4CAF50; }
+        h2 { font-family: 'Orbitron', sans-serif; font-size: 2em; color: #4CAF50; text-align: center; }
+        section {
+            min-height: 60vh; display: flex; flex-direction: column; align-items: center; padding: 20px;
         }
-        .menu-content.active {
-            display: flex;
-        }
-        .menu-content a {
-            color: #E0E0E0;
-            text-decoration: none;
-            padding: 10px 15px;
-            font-size: 16px;
-            transition: background-color 0.3s;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .menu-content a:hover {
-            background-color: #4CAF50;
-            border-radius: 4px;
-        }
-        .launch-app-btn {
-            position: absolute;
-            top: 42px; /* Aligns with hamburger’s top: 44px + slight offset */
-            right: 80px; /* Left of hamburger’s right: 10px */
-            background-color: #4CAF50;
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-            font-size: 18px;
-            border-radius: 4px;
-            transition: background-color 0.3s, transform 0.2s;
-            z-index: 10;
-        }
-        .launch-app-btn:hover {
-            background-color: #45a049;
-            transform: scale(1.05);
-        }
-        @media (max-width: 768px) {
-            .launch-app-btn {
-                top: 44px;
-                right: 74px;
-                padding: 6px 12px;
-                font-size: 0.9em;
-            }
-        }
-        .welcome-section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            gap: 30px;
-            padding: 0 20px;
-            z-index: 1;
-            position: relative;
-            margin-top: -50px; /* Nudges title and buttons up 50px */
-        }
-        .welcome-section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-            animation: float 20s infinite linear;
-            opacity: 0.2;
-            z-index: 0;
-        }
-        .welcome-section h1 {
-            font-size: 3.5em;
-            font-weight: bold;
-            margin-bottom: 25px;
-            text-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
-            line-height: 1.2;
-            position: relative;
-            z-index: 1;
-        }
-        .sphere-icon {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: url('sphere-icon.png') no-repeat center;
-            animation: rotate 10s infinite linear;
-            margin-right: 10px;
-        }
-        .highlight {
-            background: linear-gradient(45deg, #000000, #3533cd);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: #4CAF50;
-        }
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 28px;
-            text-decoration: none;
-            font-size: 18px;
-            border-radius: 6px;
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
-            position: relative;
-            z-index: 1;
-        }
-        .btn:hover {
-            background-color: #45a049;
-            transform: scale(1.1);
-            box-shadow: 0 0 25px rgba(76, 175, 80, 0.8);
-        }
-        .scroll-down {
-            position: absolute;
-            bottom: 100px;
-            font-size: 2em;
-            color: #4CAF50;
-            cursor: pointer;
-            animation: bounce 2s infinite;
-            z-index: 2;
-        }
-        .scroll-down:hover {
-            animation: pulse 1s infinite;
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-        @keyframes float {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-100%); }
-        }
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        .marquee-banner {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px 0;
-            text-align: center;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8em;
-            color: #4CAF50;
-            overflow: hidden;
-            position: relative;
-            z-index: 5;
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
-        }
-        .marquee-content {
-            display: inline-block;
-            white-space: nowrap;
-            animation: marquee 15s linear infinite;
-        }
-        .marquee-content span {
-            margin: 0 50px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .marquee-content svg {
-            width: 30px;
-            height: 30px;
-            fill: #4CAF50;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* New Web3 Stats Section */
-        .web3-stats-section {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #0B0B0B;
-            padding: 20px;
-            z-index: 1;
-        }
-        .stats-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-            max-width: 300px;
-        }
-        .stat-box {
-            background: #1C2526;
-            border: 2px solid #4CAF50;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-        }
-        .stat-number {
-            display: block;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2em;
-            color: #4CAF50;
-            font-weight: 700;
-        }
-        .stat-label {
-            display: block;
-            font-family: 'IBM Plex Mono', 'Courier New', monospace;
-            font-size: 1.2em;
-            color: #E0E0E0;
-            margin-top: 5px;
-        }
-
-        .about-section {
-            min-height: 100vh;
-            padding: 60px 20px;
-            text-align: center;
-            background: linear-gradient(to bottom, #000000, #3533cd);
-            z-index: 1;
-            position: relative;
-        }
-        .about-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 25%, rgba(76, 175, 80, 0.05) 25%, rgba(76, 175, 80, 0.05) 75%, transparent 75%) 0 0 / 50px 50px;
-            opacity: 0.3;
-            z-index: 0;
-        }
-        .about-section h1 {
-            font-size: 3.5em;
-            font-weight: bold;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
-            line-height: 1.2;
-            font-family: 'Orbitron', sans-serif;
-            position: relative;
-            z-index: 1;
-        }
-        .terminal-window {
-            width: 90%;
-            max-width: 1000px;
-            background: #1C2526;
-            border: 4px solid #4CAF50;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
-            font-family: 'IBM Plex Mono', 'Courier New', monospace;
-            font-size: 1.2em;
-            color: #E0E0E0;
-            position: relative;
-            margin: 0 auto;
-            z-index: 1;
-        }
-        .terminal-header {
-            position: absolute;
-            top: 5px;
-            left: 10px;
-            font-size: 1.0em;
-            color: #4CAF50;
-            font-family: 'VT323', monospace;
-        }
-        .terminal-window .prompt {
-            color: #4CAF50;
-            font-family: 'VT323', monospace;
-            font-size: 1.7em;
-        }
-        .terminal-window p {
-            margin: 10px 0;
-            line-height: 1.4;
-            font-family: 'IBM Plex Mono', 'Courier New', monospace;
-            color: #E0E0E0;
-            text-shadow: 0 0 2px rgba(76, 175, 80, 0.6);
-            letter-spacing: 0.5px;
-            line-height: 1.6;
-        }
-
-        footer {
-            width: 100%;
-            text-align: center;
-            padding: 20px 0 5px;
-            background: transparent;
-            z-index: 1;
-        }
-        .footer-links a {
-            color: #4CAF50;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-        .footer-links a:hover {
-            color: #0056b3;
-            text-decoration: underline;
-        }
-        .copyright {
-            margin-top: 10px;
-            color: #6c757d;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .award-banner {
-                padding: 10px 5px;
-            }
-            .award-banner span {
-                font-size: 14px; /* Absolute size, smaller than 18px */
-                padding-left: 190px; /* Prevents overlap with logo */
-            }
-            .award-banner svg {
-                width: 24px;
-                height: 24px;
-            }
-            .award-banner img {
-                max-width: 150px;
-            }
-            .welcome-section h1 {
-                font-size: 2.5em;
-                display: flex;
-                flex-direction: column; /* Stack icon above text */
-                justify-content: center;
-                align-items: center;
-                flex-wrap: wrap;
-            }
-            .sphere-icon {
-                width: 30px;
-                height: 30px;
-                margin-right: 0; /* Remove right margin */
-                margin-bottom: 10px; /* Space between icon and text */
-            }
-            .title-text {
-                display: inline-block;
-                text-align: center;
-                max-width: 100%;
-            }
-            .btn {
-                padding: 10px 20px;
-                font-size: 16px;
-            }
-            .marquee-banner {
-                font-size: 1.2em;
-                padding: 15px 0;
-            }
-            .marquee-content svg {
-                width: 20px;
-                height: 20px;
-            }
-            .footer-links a {
-                margin: 0 10px;
-                font-size: 14px;
-            }
-            footer {
-                padding: 10px 0 5px;
-            }
-            .terminal-window {
-                width: calc(95% - 40px);
-                font-size: 1.3em;
-                padding: 20px;
-                margin: 0 auto;
-            }
-            .scroll-down {
-                font-size: 1.5em;
-                bottom: 60px;
-            }
-            .about-section {
-                padding: 30px 20px;
-            }
-            .about-section h1 {
-                font-size: 2.5em;
-                margin-bottom: 20px;
-            }
-            /* Mobile styles for Web3 Stats */
-            .stats-container {
-                max-width: 250px;
-            }
-            .stat-number {
-                font-size: 1.8em;
-            }
-            .stat-label {
-                font-size: 1em;
-            }
+        .service-box {
+            background: linear-gradient(145deg, #1A1A1A, #2B2B2B); border: 1px solid #4CAF50; border-radius: 10px;
+            padding: 25px; width: 90%; max-width: 800px; text-align: center; color: #E0E0E0;
         }
     </style>
 </head>
 <body>
     <div class="award-banner">
         <a href="index.html"><img src="X1-7.png" alt="xOne Secure Logo"></a>
-        <span>
-            <svg viewBox="0 0 24 24">
-                <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
-            </svg>
-            250 + Bug Bounty Awards
-         </span>
+        <span>250 + Bug Bounty Awards</span>
     </div>
     <div class="header">
-        <a href="xoneapp.html" class="launch-app-btn">Launch App</a>
-        <div class="menu">
-            <button class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <div class="menu-content">
-                <a href="#about-section">About</a>
-                <a href="#web3-stats">Web3 Stats</a> <!-- Added new menu item -->
-                <a href="services.html">Services</a>
-                <a href="team.html">Team</a> <!-- Add this -->
-                <a href="xoneapp.html">xOne App</a>
-            </div>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <div class="menu" id="menu">
+            <a href="#user-guide">User Guide</a>
         </div>
-    </div>
-    
-    <section class="welcome-section">
-        <h1><span class="sphere-icon"></span>Your Trusted <span class="highlight">Web3</span> Security Solution</h1>
-        <a href="assessment-form.html" class="btn">Free Web3 Assessment</a>
-        <a href="https://xone-secure-protocol.gitbook.io/xone-secure" class="btn">Docs</a>
-        <div class="scroll-down">↓</div>
-    </section>
-
-    <div class="marquee-banner">
-        <div class="marquee-content">
-            <span>
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
-                </svg>
-                Pentesting Web3 Pioneers
-            </span>
-            <span>
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
-                </svg>
-                DeFi Vulernability Slayers
-            </span>
-            <svg viewBox="0 0 24 24">
-                <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
+        <button class="launch-app" onclick="window.location.href='dashboard.html'">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                <path d="M19 7H5C3.9 7 3 7.9 3 9V15C3 16.1 3.9 17 5 17H19C20.1 17 21 16.1 21 15V9C21 7.9 20.1 7 19 7ZM19 15H5V9H19V15Z" fill="#4CAF50"/>
+                <path d="M16 11H8C7.45 11 7 11.45 7 12C7 12.55 7.45 13 8 13H16C16.55 13 17 12.55 17 12C17 11.45 16.55 11 16 11Z" fill="#FFFFFF"/>
             </svg>
-            Ehtical Hackers With Real Experience
-            </span>
-        </div>
+            <span>Launch App</span>
+        </button>
     </div>
-
-    <!-- New Section 2: Web3 Stats -->
-    <section class="web3-stats-section" id="web3-stats">
-        <div class="stats-container">
-            <div class="stat-box">
-                <span class="stat-number">5,065</span>
-                <span class="stat-label">Bugs Detected</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-number">2,010</span>
-                <span class="stat-label">Clients Serviced</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-number">506</span>
-                <span class="stat-label">Platforms Monitored</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-number">250</span>
-                <span class="stat-label">Audits Performed</span>
-            </div>
+    <h1><span class="highlight">xOne</span> Secure</h1>
+    <section id="intro">
+        <h2>xOne App Intro</h2>
+        <div class="service-box">
+            <p>Welcome to the xOne App—your ultimate Web3 security companion. Designed by ethical hackers, this tool integrates with your browser to protect your decentralized journey. Connect your wallet (e.g., MetaMask or Phantom) to unlock a dashboard of real-time stats—sites verified, security scores, and more.</p>
         </div>
     </section>
-
-    <!-- Moved to Section 3: About -->
-    <section class="about-section" id="about-section">
-        <h1>Who is xOne?</h1>
-        <div class="terminal-window">
-            <span class="terminal-header">Linux '95 (v1.2)</span>
-            <p class="prompt">C:\xOne> About</p>
-            <p>At xOne Secure, we're at the forefront of Web3 security, offering specialized Web3 Assessments and Audits to protect the decentralized ecosystem.</p>
-            <p>Our team, composed of seasoned PenTesters and DevOps Engineers, conducts meticulous smart contract audits, dApp security evaluations, and network assessments to ensure your projects are robust against vulnerabilities.</p>
-            <p>We provide insights and solutions to keep your digital assets safe in this dynamic landscape.</p>
-            <p>Additionally, our xOne Secure Extension enhances your Web3 security experience with real-time alerts, and we're gearing up for our token launch to further integrate security into the Web3 framework.</p>
+    <section id="user-guide">
+        <h2>Accessing Your User Dashboard</h2>
+        <div class="service-box">
+            <p>Get started with your xOne.app in a snap! Click "Launch App" above to go to your dashboard. There, connect your wallet (e.g., MetaMask, Phantom, or any WalletConnect-supported wallet). Your wallet serves as your unique account identifier (name). You’ll see personalized stats like your Web3 Security Scores and Verified Transactions, reflecting activity from the xOne extension in your browser. For the best experience, use the same wallet here as with our Chrome app or extension.</p>
         </div>
     </section>
-
-    <footer>
-        <div class="footer-links">
-            <a href="https://twitter.com/xOnesecure">X</a>
-            <a href="https://github.com/xOneSecure">Gitbook</a>
-            <a href="https://github.com/xOneSecure/xone">Github</a>
-        </div>
-        <div class="copyright">
-            <p>© 2025 All Rights Reserved by xOne Secure LLC</p>
-        </div>
-    </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.querySelector('.hamburger');
-            const menuContent = document.querySelector('.menu-content');
-            const appLink = document.querySelector('.app-link');
+    function toggleMenu() {
+        const menu = document.getElementById('menu');
+        menu.classList.toggle('active');
+    }
+    </script>
+</body>
+</html>
 
-            hamburger.addEventListener('click', function() {
-                menuContent.classList.toggle('active');
-            });
+New dashboard.html (dApp-Style)
+html
 
-            document.addEventListener('click', function(e) {
-            if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
-                menuContent.classList.remove('active');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xOne Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <script src="web3modal.min.js"></script>
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="https://unpkg.com/@solana/web3.js@1.95.2/dist/index.iife.min.js"></script>
+    <style>
+        body {
+            margin: 0; padding: 0; font-family: 'Arial', sans-serif;
+            background-color: #0B0B0B; color: #E0E0E0; min-height: 100vh;
+        }
+        .header {
+            padding: 20px; display: flex; justify-content: space-between; align-items: center;
+        }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5em; color: #4CAF50; margin: 0; }
+        .connect-wallet {
+            background: none; border: 1px solid #4CAF50; border-radius: 6px;
+            padding: 10px 20px; color: #4CAF50; cursor: pointer; font-size: 18px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .connect-wallet:hover { background-color: #4CAF50; color: #FFFFFF; }
+        #dashboard-content {
+            text-align: center; padding: 50px;
+        }
+        #wallet-address { margin-top: 20px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>xOne Dashboard</h1>
+        <button class="connect-wallet" id="connect-wallet-btn">Connect Wallet</button>
+    </div>
+    <div id="dashboard-content">
+        <div id="wallet-address"></div>
+        <!-- Placeholder for future stats -->
+        <p>Stats coming soon...</p>
+    </div>
+
+    <script>
+    function waitForScripts(callback) {
+        const checkScripts = setInterval(() => {
+            if (
+                typeof window.Web3Modal !== 'undefined' &&
+                typeof ethers !== 'undefined' &&
+                typeof SolanaWeb3 !== 'undefined'
+            ) {
+                clearInterval(checkScripts);
+                callback();
+            }
+        }, 100);
+        setTimeout(() => {
+            clearInterval(checkScripts);
+            console.error('One or more libraries failed to load');
+            alert('Wallet connection setup failed. Please refresh the page.');
+        }, 5000);
+    }
+
+    waitForScripts(function() {
+        const connectButton = document.getElementById('connect-wallet-btn');
+        const walletAddressDiv = document.getElementById('wallet-address');
+
+        const projectId = 'YOUR_PROJECT_ID_HERE'; // Replace with your WalletConnect Cloud projectId
+        const web3Modal = new window.Web3Modal({
+            projectId: projectId,
+            standaloneChains: [
+                'eip155:1',      // Ethereum Mainnet
+                'eip155:137',    // Polygon
+                'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp' // Solana Mainnet
+            ],
+            walletConnectVersion: 2,
+            theme: {
+                background: '#1A1A1A',
+                main: '#E0E0E0',
+                secondary: '#4CAF50',
+                border: '#4CAF50',
+                hover: '#4CAF50'
             }
         });
 
-            if (appLink) {
-                appLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert("We are in the process of finalizing the last steps on testnet. The app will be available soon!");
-                });
+        connectButton.addEventListener('click', async () => {
+            console.log('Connect button clicked');
+            try {
+                const provider = await web3Modal.connect();
+                let walletAddress;
+
+                if (provider.isMetaMask || provider.request) {
+                    const ethersProvider = new ethers.providers.Web3Provider(provider);
+                    const accounts = await ethersProvider.request({ method: 'eth_requestAccounts' });
+                    walletAddress = accounts[0];
+                    console.log('Ethereum wallet connected:', walletAddress);
+                } else if (provider.isPhantom || provider.solana) {
+                    const solana = new SolanaWeb3.Connection('https://rpc.ankr.com/solana');
+                    const phantomProvider = provider;
+                    const response = await phantomProvider.connect();
+                    walletAddress = response.publicKey.toString();
+                    console.log('Phantom connected:', walletAddress);
+                } else {
+                    const ethersProvider = new ethers.providers.Web3Provider(provider);
+                    const accounts = await ethersProvider.request({ method: 'eth_requestAccounts' });
+                    walletAddress = accounts[0];
+                    console.log('WalletConnect wallet connected:', walletAddress);
+                }
+
+                localStorage.setItem('walletAddress', walletAddress);
+                walletAddressDiv.textContent = `Connected: ${walletAddress}`;
+                connectButton.style.display = 'none';
+            } catch (error) {
+                console.error('Wallet connection failed:', error);
+                alert('Failed to connect wallet: ' + error.message);
             }
         });
+
+        const savedAddress = localStorage.getItem('walletAddress');
+        if (savedAddress) {
+            walletAddressDiv.textContent = `Connected: ${savedAddress}`;
+            connectButton.style.display = 'none';
+        }
+    });
     </script>
 </body>
 </html>
