@@ -87,32 +87,26 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js"></script>
-    <script src="https://unpkg.com/@web3-react/core@6.1.9/dist/web3-react.js"></script>
-    <script src="https://unpkg.com/@web3-react/injected-connector@6.0.7/dist/injected-connector.js"></script>
-    <script src="https://unpkg.com/@web3-react/walletconnect-connector@6.2.13/dist/walletconnect-connector.js"></script>
+    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
     <script>
-        const { Web3ReactProvider, useWeb3React } = window.Web3React;
-        const { InjectedConnector } = window.InjectedConnector;
-        const { WalletConnectConnector } = window.WalletConnectConnector;
-
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        let walletConnectProvider = null;
 
-        const injected = new InjectedConnector({
-            supportedChainIds: [50, 51] // XDC Mainnet and Apothem
-        });
+        async function initWalletConnect() {
+            if (!isMobile || walletConnectProvider) return;
+            walletConnectProvider = new WalletConnectProvider({
+                rpc: {
+                    50: 'https://rpc.xinfin.network',
+                    51: 'https://rpc.apothem.network'
+                },
+                chainId: 50,
+                qrcode: true,
+                pollingInterval: 15000 // Avoid hang with reasonable polling
+            });
+            console.log('WalletConnect initialized');
+        }
 
-        const walletconnect = new WalletConnectConnector({
-            rpc: {
-                50: 'https://rpc.xinfin.network',
-                51: 'https://rpc.apothem.network'
-            },
-            chainId: 50,
-            bridge: 'https://bridge.walletconnect.org',
-            qrcode: true
-        });
-
-        function App() {
-            const { active, account, library, connector, activate, deactivate } = useWeb3React();
+        document.addEventListener('DOMContentLoaded', function() {
             const walletDisplay = document.getElementById('wallet-address');
             const connectButton = document.getElementById('connect-wallet');
             const walletModal = document.getElementById('wallet-modal');
@@ -121,52 +115,67 @@
 
             // Check stored wallet
             const storedWallet = localStorage.getItem('walletAddress');
-            if (storedWallet && !active) {
+            if (storedWallet) {
                 walletDisplay.textContent = storedWallet;
                 connectButton.textContent = 'Disconnect';
             }
 
+            // Connect wallet function
             async function connectWallet() {
                 if (connectButton.textContent === 'Disconnect') {
-                    await disconnectWallet();
+                    localStorage.removeItem('walletAddress');
+                    walletDisplay.textContent = 'No wallet connected';
+                    connectButton.textContent = 'Connect Wallet';
+                    if (isMobile && walletConnectProvider) {
+                        await walletConnectProvider.disconnect();
+                        walletConnectProvider = null;
+                        console.log('WalletConnect disconnected');
+                    }
                     return;
                 }
+
                 if (isMobile) {
-                    walletModal.classList.add('active');
+                    walletModal.classList.add('active'); // Show modal on mobile
                 } else {
-                    try {
-                        await activate(injected);
-                        const web3 = new Web3(library.provider);
-                        const accounts = await web3.eth.getAccounts();
-                        const address = accounts[0];
-                        localStorage.setItem('walletAddress', address);
-                        walletDisplay.textContent = address;
-                        connectButton.textContent = 'Disconnect';
-                        console.log('Connected to MetaMask:', address);
-                    } catch (error) {
-                        console.error('MetaMask connection failed:', error);
-                        alert('Failed to connect MetaMask.');
+                    // Desktop: Original working logic
+                    if (window.ethereum) {
+                        try {
+                            const web3 = new Web3(window.ethereum);
+                            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                            const address = accounts[0];
+                            localStorage.setItem('walletAddress', address);
+                            walletDisplay.textContent = address;
+                            connectButton.textContent = 'Disconnect';
+                            console.log('Connected to MetaMask:', address);
+                        } catch (error) {
+                            console.error('MetaMask connection failed:', error);
+                            alert('Failed to connect MetaMask.');
+                        }
+                    } else if (window.solana && window.solana.isPhantom) {
+                        try {
+                            const response = await window.solana.connect();
+                            const address = response.publicKey.toString();
+                            localStorage.setItem('walletAddress', address);
+                            walletDisplay.textContent = address;
+                            connectButton.textContent = 'Disconnect';
+                            console.log('Connected to Phantom:', address);
+                        } catch (error) {
+                            console.error('Phantom connection failed:', error);
+                            alert('Failed to connect Phantom.');
+                        }
+                    } else {
+                        alert('No wallet detected. Please install MetaMask or Phantom.');
                     }
                 }
             }
 
-            async function disconnectWallet() {
-                try {
-                    await deactivate();
-                    localStorage.removeItem('walletAddress');
-                    walletDisplay.textContent = 'No wallet connected';
-                    connectButton.textContent = 'Connect Wallet';
-                    console.log('Wallet disconnected');
-                } catch (error) {
-                    console.error('Disconnect failed:', error);
-                }
-            }
-
+            // Mobile: MetaMask via WalletConnect
             metamaskOption.addEventListener('click', async () => {
                 if (!isMobile) return;
                 try {
-                    await activate(walletconnect);
-                    const web3 = new Web3(library.provider);
+                    await initWalletConnect();
+                    await walletConnectProvider.enable();
+                    const web3 = new Web3(walletConnectProvider);
                     const accounts = await web3.eth.getAccounts();
                     const address = accounts[0];
                     localStorage.setItem('walletAddress', address);
@@ -174,17 +183,23 @@
                     connectButton.textContent = 'Disconnect';
                     walletModal.classList.remove('active');
                     console.log('Connected via MetaMask (WalletConnect):', address);
+
+                    walletConnectProvider.on('accountsChanged', (accounts) => handleAccountsChanged(accounts));
+                    walletConnectProvider.on('chainChanged', (chainId) => console.log('Chain changed:', chainId));
+                    walletConnectProvider.on('disconnect', () => disconnectWallet());
                 } catch (error) {
                     console.error('MetaMask (WalletConnect) failed:', error);
-                    alert('MetaMask connection failed. Please try again.');
+                    alert('Failed to connect MetaMask via WalletConnect. Please try again.');
                 }
             });
 
+            // Mobile: Generic WalletConnect
             walletconnectOption.addEventListener('click', async () => {
                 if (!isMobile) return;
                 try {
-                    await activate(walletconnect);
-                    const web3 = new Web3(library.provider);
+                    await initWalletConnect();
+                    await walletConnectProvider.enable();
+                    const web3 = new Web3(walletConnectProvider);
                     const accounts = await web3.eth.getAccounts();
                     const address = accounts[0];
                     localStorage.setItem('walletAddress', address);
@@ -192,44 +207,54 @@
                     connectButton.textContent = 'Disconnect';
                     walletModal.classList.remove('active');
                     console.log('Connected via WalletConnect:', address);
+
+                    walletConnectProvider.on('accountsChanged', (accounts) => handleAccountsChanged(accounts));
+                    walletConnectProvider.on('chainChanged', (chainId) => console.log('Chain changed:', chainId));
+                    walletConnectProvider.on('disconnect', () => disconnectWallet());
                 } catch (error) {
                     console.error('WalletConnect failed:', error);
-                    alert('WalletConnect failed. Please try again.');
+                    alert('Failed to connect WalletConnect. Please try again.');
                 }
             });
 
+            // Disconnect helper
+            function disconnectWallet() {
+                localStorage.removeItem('walletAddress');
+                walletDisplay.textContent = 'No wallet connected';
+                connectButton.textContent = 'Connect Wallet';
+                if (isMobile && walletConnectProvider) {
+                    walletConnectProvider.disconnect();
+                    walletConnectProvider = null;
+                }
+                console.log('Wallet disconnected');
+            }
+
+            // Accounts changed handler
+            function handleAccountsChanged(accounts) {
+                if (accounts.length > 0) {
+                    localStorage.setItem('walletAddress', accounts[0]);
+                    walletDisplay.textContent = accounts[0];
+                    connectButton.textContent = 'Disconnect';
+                } else {
+                    disconnectWallet();
+                }
+            }
+
+            // Button handler
             connectButton.addEventListener('click', connectWallet);
 
             // Desktop event listeners
-            if (window.ethereum && !isMobile) {
+            if (window.ethereum) {
                 window.ethereum.on('accountsChanged', (accounts) => {
-                    if (accounts.length > 0) {
-                        localStorage.setItem('walletAddress', accounts[0]);
-                        walletDisplay.textContent = accounts[0];
-                        connectButton.textContent = 'Disconnect';
-                    } else {
-                        disconnectWallet();
-                    }
+                    if (!isMobile) handleAccountsChanged(accounts);
                 });
             }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const script = document.createElement('script');
-            script.text = `
-                ReactDOM.render(
-                    React.createElement(
-                        Web3ReactProvider,
-                        { getLibrary: (provider) => provider },
-                        React.createElement(${App.toString()})
-                    ),
-                    document.body
-                );
-            `;
-            document.body.appendChild(script);
+            if (window.solana) {
+                window.solana.on('disconnect', () => {
+                    if (!isMobile) disconnectWallet();
+                });
+            }
         });
     </script>
-    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
 </body>
 </html>
