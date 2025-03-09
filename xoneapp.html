@@ -6,12 +6,6 @@
     <title>xOne - xOne App</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <!-- WalletConnect v1 -->
-    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
-    <!-- Web3Modal v1 -->
-    <script src="https://unpkg.com/web3modal@1.9.12/dist/index.min.js"></script>
-    <!-- Ethers.js for provider management -->
-    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <style>
         /* All your existing styles unchanged */
         html { height: 100%; scroll-behavior: smooth; }
@@ -157,6 +151,10 @@
         </div>
     </div>
 
+    <!-- Moved scripts to bottom for load order -->
+    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
+    <script src="https://unpkg.com/web3modal@1.9.12/dist/index.min.js"></script>
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const connectButton = document.getElementById('connect-wallet-btn');
@@ -164,15 +162,22 @@
         const connectWalletBtnModal = document.getElementById('connect-wallet-btn-modal');
         const closeModal = document.getElementById('close-modal');
 
+        // Check if Web3Modal loaded
+        if (typeof Web3Modal === 'undefined') {
+            console.error('Web3Modal not loaded');
+            alert('Wallet connection library failed to load. Please refresh the page.');
+            return;
+        }
+
         // Web3Modal setup
         const providerOptions = {
             walletconnect: {
                 package: WalletConnectProvider,
                 options: {
-                    infuraId: '8386e4d5fb4f4398a202a53f74e08e7b', // Optional: Ethereum RPC via Infura
+                    infuraId: '8386e4d5fb4f4398a202a53f74e08e7b',
                     rpc: {
-                        1: 'https://mainnet.infura.io/v3/8386e4d5fb4f4398a202a53f74e08e7b', // Ethereum
-                        137: 'https://polygon-rpc.com/' // Polygon (optional)
+                        1: 'https://mainnet.infura.io/v3/8386e4d5fb4f4398a202a53f74e08e7b',
+                        137: 'https://polygon-rpc.com/'
                     },
                     qrcodeModalOptions: {
                         mobileLinks: ['metamask', 'phantom', 'trust', 'rainbow']
@@ -180,23 +185,17 @@
                 }
             },
             injected: {
-                display: {
-                    name: 'MetaMask',
-                    description: 'Connect with MetaMask extension'
-                },
-                package: null // Uses window.ethereum
+                display: { name: 'MetaMask', description: 'Connect with MetaMask extension' },
+                package: null
             },
             phantom: {
-                display: {
-                    name: 'Phantom',
-                    description: 'Connect with Phantom extension'
-                },
-                package: null // Uses window.solana
+                display: { name: 'Phantom', description: 'Connect with Phantom extension' },
+                package: null
             }
         };
 
         const web3Modal = new Web3Modal({
-            cacheProvider: false, // Don’t cache wallet choice
+            cacheProvider: false,
             providerOptions,
             theme: {
                 background: '#1A1A1A',
@@ -227,7 +226,7 @@
                 const ethersProvider = new ethers.providers.Web3Provider(provider);
                 const accounts = await ethersProvider.listAccounts();
                 const walletAddress = accounts[0];
-                
+
                 if (!walletAddress) {
                     throw new Error('No accounts found');
                 }
@@ -242,7 +241,7 @@
             }
         });
 
-        // Handle provider events (e.g., disconnect)
+        // Provider events
         if (provider && provider.on) {
             provider.on('accountsChanged', (accounts) => {
                 if (accounts.length === 0) {
