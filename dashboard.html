@@ -89,16 +89,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js"></script>
     <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
     <script>
-        // Debug WalletConnectProvider
-        console.log('Checking WalletConnectProvider:', typeof window.WalletConnectProvider, window.WalletConnectProvider);
-        if (typeof window.WalletConnectProvider === 'undefined') {
-            console.error('WalletConnectProvider not loaded from script');
-        } else if (typeof window.WalletConnectProvider.default === 'function') {
-            console.log('Using WalletConnectProvider.default as constructor');
-        } else {
-            console.log('WalletConnectProvider loaded but not a constructor:', window.WalletConnectProvider);
-        }
-
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         let walletConnectProvider = null;
 
@@ -116,10 +106,7 @@
                         51: 'https://rpc.apothem.network'
                     },
                     chainId: 50,
-                    qrcode: true,
-                    qrcodeModalOptions: {
-                        mobileLinks: ['metamask', 'trust', 'rainbow']
-                    },
+                    qrcode: false, // No QR code on mobile
                     pollingInterval: 12000
                 });
                 console.log('WalletConnect initialized successfully');
@@ -191,7 +178,7 @@
                 }
             }
 
-            // Mobile: MetaMask via WalletConnect with QR
+            // Mobile: MetaMask via WalletConnect with deep-link
             metamaskOption.addEventListener('click', async () => {
                 if (!isMobile) return;
                 try {
@@ -212,11 +199,11 @@
                     walletConnectProvider.on('disconnect', () => disconnectWallet());
                 } catch (error) {
                     console.error('MetaMask (WalletConnect) failed:', error.message, error.stack);
-                    alert('Failed to connect MetaMask via WalletConnect. Please scan the QR code with MetaMask or try again.');
+                    alert('Failed to connect MetaMask via WalletConnect. Ensure MetaMask is installed and try again.');
                 }
             });
 
-            // Mobile: Generic WalletConnect with QR
+            // Mobile: Generic WalletConnect with deep-link
             walletconnectOption.addEventListener('click', async () => {
                 if (!isMobile) return;
                 try {
@@ -237,7 +224,7 @@
                     walletConnectProvider.on('disconnect', () => disconnectWallet());
                 } catch (error) {
                     console.error('WalletConnect failed:', error.message, error.stack);
-                    alert('Failed to connect WalletConnect. Please scan the QR code with a compatible wallet or try again.');
+                    alert('Failed to connect WalletConnect. Ensure a compatible wallet is installed and try again.');
                 }
             });
 
