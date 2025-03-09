@@ -167,6 +167,11 @@
             return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         }
 
+        // Detect if in Phantom's in-app browser
+        function isPhantomInApp() {
+            return navigator.userAgent.includes('Phantom');
+        }
+
         // Show wallet selection modal
         connectButton.addEventListener('click', () => {
             console.log('Button clicked');
@@ -211,14 +216,44 @@
         connectPhantom.addEventListener('click', async () => {
             const mobile = isMobile();
             if (mobile) {
-                const currentUrl = window.location.href;
-                const phantomDeeplink = `https://phantom.app/ul/browse/${encodeURIComponent(currentUrl)}`;
-                window.location.href = phantomDeeplink;
-                setTimeout(() => {
-                    if (document.hasFocus()) {
-                        alert('Please approve the connection in Phantom and return to this page.');
+                if (isPhantomInApp() && window.solana) {
+                    try {
+                        const response = await window.solana.connect();
+                        const walletAddress = response.publicKey.toString();
+                        console.log('Connected wallet:', walletAddress);
+                        localStorage.setItem('walletAddress', walletAddress);
+                        modal.style.display = 'none';
+                        window.location.href = 'dashboard.html';
+                    } catch (error) {
+                        console.error('Phantom connection failed in-app:', error);
+                        alert('Failed to connect Phantom: ' + error.message);
                     }
-                }, 1000);
+                } else {
+                    // Use WalletConnect for mobile Phantom from Safari
+                    try {
+                        if (typeof window.WalletConnectProvider === 'undefined') {
+                            throw new Error('WalletConnect library not loaded');
+                        }
+                        const provider = new window.WalletConnectProvider.default({
+                            rpc: {
+                                1: 'https://mainnet.infura.io/v3/8386e4d5fb4f4398a202a53f74e08e7b'
+                            },
+                            qrcodeModalOptions: {
+                                mobileLinks: ['phantom']
+                            }
+                        });
+                        await provider.enable();
+                        const accounts = provider.accounts;
+                        const walletAddress = accounts[0];
+                        console.log('Connected wallet via WalletConnect:', walletAddress);
+                        localStorage.setItem('walletAddress', walletAddress);
+                        modal.style.display = 'none';
+                        window.location.href = 'dashboard.html';
+                    } catch (error) {
+                        console.error('WalletConnect for Phantom failed:', error);
+                        alert('Failed to connect Phantom via WalletConnect: ' + error.message);
+                    }
+                }
             } else {
                 try {
                     if (typeof window.solana === 'undefined') {
@@ -237,7 +272,7 @@
             }
         });
 
-        // WalletConnect connection
+        // WalletConnect connection (fallback for other wallets)
         connectWalletConnect.addEventListener('click', async () => {
             try {
                 if (typeof window.WalletConnectProvider === 'undefined') {
