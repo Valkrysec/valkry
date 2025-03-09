@@ -118,11 +118,10 @@
 
     <!-- Web3.js for Ethereum/MetaMask -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js"></script>
-    <!-- Web3Modal and WalletConnect for Mobile -->
-    <script src="https://unpkg.com/web3modal@1.9.12/dist/index.js"></script>
-    <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
+    <!-- WalletConnect v2 Ethereum Provider -->
+    <script src="https://unpkg.com/@walletconnect/ethereum-provider@2.14.0/dist/index.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
             const walletDisplay = document.getElementById('wallet-address');
             const connectButton = document.getElementById('connect-wallet');
 
@@ -137,24 +136,27 @@
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-            // Web3Modal setup for mobile only
-            let web3Modal;
-            let provider;
+            // WalletConnect v2 provider for mobile
+            let wcProvider;
             if (isMobile && isSafari) {
-                const providerOptions = {
-                    walletconnect: {
-                        package: WalletConnectProvider,
-                        options: {
-                            projectId: '12d8a3187458ac3f9e5927d01dbcc52a', // Your Reown Project ID
-                            rpc: { 1: 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161' }
+                console.log('Initializing WalletConnect v2 for Mobile Safari');
+                try {
+                    wcProvider = await EthereumProvider.init({
+                        projectId: '12d8a3187458ac3f9e5927d01dbcc52a', // Your Reown Project ID
+                        chains: [1], // Ethereum Mainnet
+                        showQrModal: false, // No QR on mobile, use deep links
+                        methods: ['eth_requestAccounts'],
+                        metadata: {
+                            name: 'xOne Dashboard',
+                            description: 'Web3 Security Dashboard',
+                            url: 'https://xonesecure.github.io',
+                            icons: ['https://xonesecure.github.io/xone/X1-5.png']
                         }
-                    }
-                };
-                web3Modal = new Web3Modal({
-                    network: 'mainnet',
-                    cacheProvider: false,
-                    providerOptions
-                });
+                    });
+                    console.log('WalletConnect v2 provider initialized');
+                } catch (error) {
+                    console.error('Failed to initialize WalletConnect v2:', error);
+                }
             }
 
             // Connect wallet function
@@ -163,32 +165,36 @@
                     localStorage.removeItem('walletAddress');
                     walletDisplay.textContent = 'No wallet connected';
                     connectButton.textContent = 'Connect Wallet';
-                    if (isMobile && isSafari && provider) {
+                    if (isMobile && isSafari && wcProvider) {
                         try {
-                            await provider.disconnect();
-                            await web3Modal.clearCachedProvider();
-                            console.log('Mobile provider disconnected');
+                            await wcProvider.disconnect();
+                            console.log('WalletConnect v2 disconnected');
                         } catch (error) {
-                            console.error('Mobile disconnect failed:', error);
+                            console.error('WalletConnect v2 disconnect failed:', error);
                         }
                     }
                     return;
                 }
 
-                // Mobile Safari: Use Web3Modal
+                // Mobile Safari: Use WalletConnect v2
                 if (isMobile && isSafari) {
-                    console.log('Attempting Web3Modal connection on Mobile Safari');
+                    if (!wcProvider) {
+                        console.error('WalletConnect v2 provider not initialized');
+                        alert('Wallet connection setup failed. Please try again.');
+                        return;
+                    }
+                    console.log('Attempting WalletConnect v2 connection');
                     try {
-                        provider = await web3Modal.connect();
-                        const web3 = new Web3(provider);
+                        await wcProvider.connect(); // Triggers wallet app via deep link
+                        const web3 = new Web3(wcProvider);
                         const accounts = await web3.eth.getAccounts();
                         const address = accounts[0];
                         localStorage.setItem('walletAddress', address);
                         walletDisplay.textContent = address;
                         connectButton.textContent = 'Disconnect';
-                        console.log('Connected via Web3Modal:', address);
+                        console.log('Connected via WalletConnect v2:', address);
 
-                        provider.on('accountsChanged', (accounts) => {
+                        wcProvider.on('accountsChanged', (accounts) => {
                             if (accounts.length > 0) {
                                 localStorage.setItem('walletAddress', accounts[0]);
                                 walletDisplay.textContent = accounts[0];
@@ -200,13 +206,13 @@
                             }
                         });
 
-                        provider.on('disconnect', () => {
+                        wcProvider.on('disconnect', () => {
                             localStorage.removeItem('walletAddress');
                             walletDisplay.textContent = 'No wallet connected';
                             connectButton.textContent = 'Connect Wallet';
                         });
                     } catch (error) {
-                        console.error('Web3Modal connection failed:', error);
+                        console.error('WalletConnect v2 connection failed:', error);
                         alert('Failed to connect wallet. Ensure MetaMask or Phantom is installed.');
                     }
                 }
