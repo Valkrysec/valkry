@@ -118,7 +118,7 @@
 
     <!-- Web3.js for Ethereum/MetaMask -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js"></script>
-    <!-- Web3Modal and WalletConnect -->
+    <!-- Web3Modal and WalletConnect for Mobile -->
     <script src="https://unpkg.com/web3modal@1.9.12/dist/index.js"></script>
     <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
     <script>
@@ -137,24 +137,25 @@
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-            // Web3Modal setup
-            const providerOptions = {
-                walletconnect: {
-                    package: WalletConnectProvider,
-                    options: {
-                        projectId: '12d8a3187458ac3f9e5927d01dbcc52a', // Your Reown Project ID
-                        rpc: { 1: 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161' }
+            // Web3Modal setup for mobile only
+            let web3Modal;
+            let provider;
+            if (isMobile && isSafari) {
+                const providerOptions = {
+                    walletconnect: {
+                        package: WalletConnectProvider,
+                        options: {
+                            projectId: '12d8a3187458ac3f9e5927d01dbcc52a', // Your Reown Project ID
+                            rpc: { 1: 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161' }
+                        }
                     }
-                }
-            };
-
-            const web3Modal = new Web3Modal({
-                network: 'mainnet',
-                cacheProvider: false,
-                providerOptions
-            });
-
-            let provider; // Global provider for disconnect
+                };
+                web3Modal = new Web3Modal({
+                    network: 'mainnet',
+                    cacheProvider: false,
+                    providerOptions
+                });
+            }
 
             // Connect wallet function
             async function connectWallet() {
