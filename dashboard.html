@@ -30,6 +30,11 @@
         .stat-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.1em; color: #4CAF50; margin: 0 0 10px 0; }
         .stat-card p { font-size: 1.4em; margin: 0; color: #E0E0E0; }
         .stat-card .label { font-size: 0.85em; color: #A0A0A0; }
+        .wallet-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 20; justify-content: center; align-items: center; }
+        .wallet-modal.active { display: flex; }
+        .wallet-options { background: #1A1A1A; padding: 20px; border-radius: 10px; text-align: center; }
+        .wallet-option { background: #4CAF50; color: white; padding: 10px; margin: 10px 0; border-radius: 5px; cursor: pointer; }
+        .wallet-option:hover { background: #45a049; }
         @media (max-width: 1200px) { .stats-grid { grid-template-columns: repeat(2, minmax(200px, 1fr)); } }
         @media (max-width: 768px) {
             .header { padding: 10px; }
@@ -73,13 +78,59 @@
             <div class="stat-card"><h3>Suspicious Scripts Flagged</h3><p>0</p><span class="label">Early Detections</span></div>
         </div>
     </div>
+    <div class="wallet-modal" id="wallet-modal">
+        <div class="wallet-options">
+            <div class="wallet-option" id="metamask-option">MetaMask</div>
+            <div class="wallet-option" id="walletconnect-option">WalletConnect</div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js"></script>
+    <script src="https://unpkg.com/@walletconnect/ethereum-provider@2.14.0/dist/index.min.js" onload="initWalletConnect()" onerror="console.error('Failed to load WalletConnect script'); alert('WalletConnect library failed to load. Please refresh the page or install MetaMask manually.');"></script>
     <script>
+        let wcProvider = null;
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        async function initWalletConnect() {
+            if (!isMobile) return; // Only init on mobile
+            console.log('Initializing WalletConnect v2 for mobile');
+            if (typeof EthereumProvider === 'undefined') {
+                console.error('EthereumProvider not available after script load');
+                return;
+            }
+            try {
+                wcProvider = await EthereumProvider.init({
+                    projectId: '12d8a3187458ac3f9e5927d01dbcc52a',
+                    chains: [50], // XDC Mainnet
+                    optionalChains: [51], // Apothem
+                    showQrModal: false,
+                    methods: ['eth_requestAccounts'],
+                    events: ['accountsChanged', 'chainChanged', 'disconnect'],
+                    rpcMap: {
+                        50: 'https://rpc.xinfin.network',
+                        51: 'https://rpc.apothem.network'
+                    },
+                    metadata: {
+                        name: 'xOne Dashboard',
+                        description: 'Web3 Security Dashboard',
+                        url: 'https://xonesecure.github.io',
+                        icons: ['https://xonesecure.github.io/xone/X1-5.png']
+                    }
+                });
+                console.log('WalletConnect v2 initialized successfully');
+            } catch (error) {
+                console.error('WalletConnect initialization failed:', error.message);
+                wcProvider = null;
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             const walletDisplay = document.getElementById('wallet-address');
             const connectButton = document.getElementById('connect-wallet');
+            const walletModal = document.getElementById('wallet-modal');
+            const metamaskOption = document.getElementById('metamask-option');
+            const walletconnectOption = document.getElementById('walletconnect-option');
 
             // Check stored wallet
             const storedWallet = localStorage.getItem('walletAddress');
@@ -94,61 +145,147 @@
                     localStorage.removeItem('walletAddress');
                     walletDisplay.textContent = 'No wallet connected';
                     connectButton.textContent = 'Connect Wallet';
+                    if (isMobile && wcProvider) {
+                        await wcProvider.disconnect();
+                        console.log('WalletConnect disconnected');
+                    }
                     return;
                 }
 
-                if (window.ethereum) {
-                    try {
-                        const web3 = new Web3(window.ethereum);
-                        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                        const address = accounts[0];
-                        localStorage.setItem('walletAddress', address);
-                        walletDisplay.textContent = address;
-                        connectButton.textContent = 'Disconnect';
-                        console.log('Connected to MetaMask:', address);
-                    } catch (error) {
-                        console.error('MetaMask connection failed:', error);
-                        alert('Failed to connect MetaMask.');
-                    }
-                } else if (window.solana && window.solana.isPhantom) {
-                    try {
-                        const response = await window.solana.connect();
-                        const address = response.publicKey.toString();
-                        localStorage.setItem('walletAddress', address);
-                        walletDisplay.textContent = address;
-                        connectButton.textContent = 'Disconnect';
-                        console.log('Connected to Phantom:', address);
-                    } catch (error) {
-                        console.error('Phantom connection failed:', error);
-                        alert('Failed to connect Phantom.');
-                    }
+                if (isMobile) {
+                    walletModal.classList.add('active'); // Show modal on mobile
                 } else {
-                    alert('No wallet detected. Please install MetaMask or Phantom.');
+                    // Desktop: Original working logic
+                    if (window.ethereum) {
+                        try {
+                            const web3 = new Web3(window.ethereum);
+                            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                            const address = accounts[0];
+                            localStorage.setItem('walletAddress', address);
+                            walletDisplay.textContent = address;
+                            connectButton.textContent = 'Disconnect';
+                            console.log('Connected to MetaMask:', address);
+                        } catch (error) {
+                            console.error('MetaMask connection failed:', error);
+                            alert('Failed to connect MetaMask.');
+                        }
+                    } else if (window.solana && window.solana.isPhantom) {
+                        try {
+                            const response = await window.solana.connect();
+                            const address = response.publicKey.toString();
+                            localStorage.setItem('walletAddress', address);
+                            walletDisplay.textContent = address;
+                            connectButton.textContent = 'Disconnect';
+                            console.log('Connected to Phantom:', address);
+                        } catch (error) {
+                            console.error('Phantom connection failed:', error);
+                            alert('Failed to connect Phantom.');
+                        }
+                    } else {
+                        alert('No wallet detected. Please install MetaMask or Phantom.');
+                    }
+                }
+            }
+
+            // Mobile: MetaMask via WalletConnect
+            metamaskOption.addEventListener('click', async () => {
+                if (!isMobile) return;
+                if (!wcProvider) {
+                    console.error('WalletConnect not initialized for MetaMask');
+                    window.location.href = 'metamask://wc?uri=wc:12d8a3187458ac3f9e5927d01dbcc52a@2?relay-protocol=irn&chainId=50';
+                    setTimeout(() => {
+                        if (document.hasFocus()) alert('MetaMask not installed or WalletConnect failed. Please install MetaMask.');
+                    }, 2000);
+                    return;
+                }
+                try {
+                    await wcProvider.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: '0x32' }]
+                    });
+                    console.log('Switched to XDC chain (50)');
+                    await wcProvider.connect();
+                    const web3 = new Web3(wcProvider);
+                    const accounts = await web3.eth.getAccounts();
+                    const address = accounts[0];
+                    localStorage.setItem('walletAddress', address);
+                    walletDisplay.textContent = address;
+                    connectButton.textContent = 'Disconnect';
+                    walletModal.classList.remove('active');
+                    console.log('Connected via MetaMask (WalletConnect):', address);
+
+                    wcProvider.on('accountsChanged', (accounts) => handleAccountsChanged(accounts));
+                    wcProvider.on('chainChanged', (chainId) => console.log('Chain changed:', parseInt(chainId, 16)));
+                    wcProvider.on('disconnect', () => disconnectWallet());
+                } catch (error) {
+                    console.error('MetaMask (WalletConnect) failed:', error.message);
+                    alert('Failed to connect MetaMask via WalletConnect.');
+                }
+            });
+
+            // Mobile: Generic WalletConnect
+            walletconnectOption.addEventListener('click', async () => {
+                if (!isMobile) return;
+                if (!wcProvider) {
+                    console.error('WalletConnect not initialized');
+                    window.location.href = 'wc:12d8a3187458ac3f9e5927d01dbcc52a@2?relay-protocol=irn&chainId=50';
+                    setTimeout(() => {
+                        if (document.hasFocus()) alert('WalletConnect-compatible wallet not installed or failed. Please install one.');
+                    }, 2000);
+                    return;
+                }
+                try {
+                    await wcProvider.connect();
+                    const web3 = new Web3(wcProvider);
+                    const accounts = await web3.eth.getAccounts();
+                    const address = accounts[0];
+                    localStorage.setItem('walletAddress', address);
+                    walletDisplay.textContent = address;
+                    connectButton.textContent = 'Disconnect';
+                    walletModal.classList.remove('active');
+                    console.log('Connected via WalletConnect:', address);
+
+                    wcProvider.on('accountsChanged', (accounts) => handleAccountsChanged(accounts));
+                    wcProvider.on('chainChanged', (chainId) => console.log('Chain changed:', parseInt(chainId, 16)));
+                    wcProvider.on('disconnect', () => disconnectWallet());
+                } catch (error) {
+                    console.error('WalletConnect failed:', error.message);
+                    alert('Failed to connect WalletConnect.');
+                }
+            });
+
+            // Disconnect helper
+            function disconnectWallet() {
+                localStorage.removeItem('walletAddress');
+                walletDisplay.textContent = 'No wallet connected';
+                connectButton.textContent = 'Connect Wallet';
+                if (isMobile && wcProvider) wcProvider.disconnect();
+                console.log('Wallet disconnected');
+            }
+
+            // Accounts changed handler
+            function handleAccountsChanged(accounts) {
+                if (accounts.length > 0) {
+                    localStorage.setItem('walletAddress', accounts[0]);
+                    walletDisplay.textContent = accounts[0];
+                    connectButton.textContent = 'Disconnect';
+                } else {
+                    disconnectWallet();
                 }
             }
 
             // Button handler
             connectButton.addEventListener('click', connectWallet);
 
-            // Event listeners
+            // Desktop event listeners
             if (window.ethereum) {
                 window.ethereum.on('accountsChanged', (accounts) => {
-                    if (accounts.length > 0) {
-                        localStorage.setItem('walletAddress', accounts[0]);
-                        walletDisplay.textContent = accounts[0];
-                        connectButton.textContent = 'Disconnect';
-                    } else {
-                        localStorage.removeItem('walletAddress');
-                        walletDisplay.textContent = 'No wallet connected';
-                        connectButton.textContent = 'Connect Wallet';
-                    }
+                    if (!isMobile) handleAccountsChanged(accounts);
                 });
             }
             if (window.solana) {
                 window.solana.on('disconnect', () => {
-                    localStorage.removeItem('walletAddress');
-                    walletDisplay.textContent = 'No wallet connected';
-                    connectButton.textContent = 'Connect Wallet';
+                    if (!isMobile) disconnectWallet();
                 });
             }
         });
