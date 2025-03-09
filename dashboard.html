@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
-        /* Your unchanged CSS remains here—skipped for brevity */
+        /* Unchanged CSS—skipped for brevity */
         html { height: 100%; scroll-behavior: smooth; }
         body { margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #0B0B0B; background-image: url('X1-5.png'); background-size: cover; background-position: center top; background-repeat: no-repeat; background-attachment: fixed; color: #E0E0E0; min-height: 100vh; display: flex; flex-direction: column; }
         body::-webkit-scrollbar { display: none; }
@@ -31,9 +31,7 @@
         .stat-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.1em; color: #4CAF50; margin: 0 0 10px 0; }
         .stat-card p { font-size: 1.4em; margin: 0; color: #E0E0E0; }
         .stat-card .label { font-size: 0.85em; color: #A0A0A0; }
-        @media (max-width: 1200px) {
-            .stats-grid { grid-template-columns: repeat(2, minmax(200px, 1fr)); }
-        }
+        @media (max-width: 1200px) { .stats-grid { grid-template-columns: repeat(2, minmax(200px, 1fr)); } }
         @media (max-width: 768px) {
             .header { padding: 10px; }
             .header h1 { font-size: 2em; }
@@ -64,62 +62,22 @@
             <span class="label">Out of 100</span>
         </div>
         <div class="stats-grid">
-            <div class="stat-card">
-                <h3>CA Contracts Verified</h3>
-                <p>0</p>
-                <span class="label">Smart Contracts</span>
-            </div>
-            <div class="stat-card">
-                <h3>Site Source Codes Scanned</h3>
-                <p>0</p>
-                <span class="label">Websites</span>
-            </div>
-            <div class="stat-card">
-                <h3>Verified Transactions</h3>
-                <p>0</p>
-                <span class="label">On Blockchain</span>
-            </div>
-            <div class="stat-card">
-                <h3>Malware Warnings</h3>
-                <p>0</p>
-                <span class="label">Malicious Scripts</span>
-            </div>
-            <div class="stat-card">
-                <h3>Threats Blocked</h3>
-                <p>0</p>
-                <span class="label">Potential Risks</span>
-            </div>
-            <div class="stat-card">
-                <h3>Last Scan Date</h3>
-                <p>N/A</p>
-                <span class="label">Latest Activity</span>
-            </div>
-            <div class="stat-card">
-                <h3>Phishing Attempts Blocked</h3>
-                <p>0</p>
-                <span class="label">Fake Sites</span>
-            </div>
-            <div class="stat-card">
-                <h3>Secure Connections</h3>
-                <p>0</p>
-                <span class="label">Safe Interactions</span>
-            </div>
-            <div class="stat-card">
-                <h3>Scan Success Rate</h3>
-                <p>0%</p>
-                <span class="label">3-Check Passes</span>
-            </div>
-            <div class="stat-card">
-                <h3>Suspicious Scripts Flagged</h3>
-                <p>0</p>
-                <span class="label">Early Detections</span>
-            </div>
+            <div class="stat-card"><h3>CA Contracts Verified</h3><p>0</p><span class="label">Smart Contracts</span></div>
+            <div class="stat-card"><h3>Site Source Codes Scanned</h3><p>0</p><span class="label">Websites</span></div>
+            <div class="stat-card"><h3>Verified Transactions</h3><p>0</p><span class="label">On Blockchain</span></div>
+            <div class="stat-card"><h3>Malware Warnings</h3><p>0</p><span class="label">Malicious Scripts</span></div>
+            <div class="stat-card"><h3>Threats Blocked</h3><p>0</p><span class="label">Potential Risks</span></div>
+            <div class="stat-card"><h3>Last Scan Date</h3><p>N/A</p><span class="label">Latest Activity</span></div>
+            <div class="stat-card"><h3>Phishing Attempts Blocked</h3><p>0</p><span class="label">Fake Sites</span></div>
+            <div class="stat-card"><h3>Secure Connections</h3><p>0</p><span class="label">Safe Interactions</span></div>
+            <div class="stat-card"><h3>Scan Success Rate</h3><p>0%</p><span class="label">3-Check Passes</span></div>
+            <div class="stat-card"><h3>Suspicious Scripts Flagged</h3><p>0</p><span class="label">Early Detections</span></div>
         </div>
     </div>
 
     <!-- Web3.js for Ethereum/MetaMask -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js"></script>
-    <!-- WalletConnect v2 Ethereum Provider (more reliable CDN) -->
+    <!-- WalletConnect v2 Ethereum Provider -->
     <script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.14.0/dist/index.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
@@ -147,13 +105,14 @@
                     }
                     wcProvider = await EthereumProvider.init({
                         projectId: '12d8a3187458ac3f9e5927d01dbcc52a', // Your Reown Project ID
-                        chains: [1], // Ethereum Mainnet
-                        optionalChains: [137, 56], // Polygon, BSC as optional
+                        chains: [50], // XDC Mainnet
+                        optionalChains: [51], // XDC Apothem Testnet
                         showQrModal: false, // No QR on mobile
                         methods: ['eth_requestAccounts', 'eth_accounts'],
                         events: ['accountsChanged', 'chainChanged', 'disconnect'],
                         rpcMap: {
-                            1: 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'
+                            50: 'https://rpc.xinfin.network', // XDC Mainnet RPC
+                            51: 'https://rpc.apothem.network' // XDC Apothem Testnet RPC
                         },
                         metadata: {
                             name: 'xOne Dashboard',
@@ -165,7 +124,7 @@
                     console.log('WalletConnect v2 provider initialized successfully');
                 } catch (error) {
                     console.error('Failed to initialize WalletConnect v2:', error.message);
-                    wcProvider = null; // Ensure it's null if init fails
+                    wcProvider = null;
                 }
             }
 
@@ -193,7 +152,8 @@
                         console.error('WalletConnect provider not initialized');
                         // Fallback to manual deep link
                         console.log('Falling back to manual deep link');
-                        window.location.href = 'wc:connect?projectId=12d8a3187458ac3f9e5927d01dbcc52a&url=https://xonesecure.github.io/xone/dashboard.html';
+                        const uri = `wc:12d8a3187458ac3f9e5927d01dbcc52a@2?relay-protocol=irn&symKey=your-sym-key-here&chainId=50&url=https://xonesecure.github.io/xone/dashboard.html`;
+                        window.location.href = uri;
                         setTimeout(() => {
                             if (document.hasFocus()) {
                                 alert('Please install MetaMask or a WalletConnect-compatible wallet.');
@@ -237,7 +197,7 @@
                         });
                     } catch (error) {
                         console.error('WalletConnect v2 connection failed:', error.message);
-                        alert('Failed to connect wallet. Ensure MetaMask or a compatible wallet is installed.');
+                        alert('Failed to connect wallet. Ensure MetaMask is installed and configured for XDC.');
                     }
                 }
                 // Desktop: Original working logic
