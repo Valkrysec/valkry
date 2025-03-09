@@ -45,6 +45,11 @@
             .stats-grid { grid-template-columns: 1fr; }
             .stat-card { max-width: 90%; }
         }
+        /* Wallet selection popup */
+        .wallet-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1A1A1A; padding: 20px; border-radius: 10px; z-index: 100; box-shadow: 0 0 20px rgba(76, 175, 80, 0.5); }
+        .wallet-modal.active { display: block; }
+        .wallet-modal button { display: block; width: 100%; margin: 10px 0; padding: 10px; background: #4CAF50; border: none; border-radius: 5px; color: white; font-size: 16px; cursor: pointer; }
+        .wallet-modal button:hover { background: #45a049; }
     </style>
 </head>
 <body>
@@ -115,6 +120,11 @@
             </div>
         </div>
     </div>
+    <!-- Wallet selection modal -->
+    <div class="wallet-modal" id="wallet-modal">
+        <button id="metamask-option">MetaMask</button>
+        <button id="phantom-option">Phantom</button>
+    </div>
 
     <!-- Web3.js for Ethereum/MetaMask -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js"></script>
@@ -122,6 +132,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             const walletDisplay = document.getElementById('wallet-address');
             const connectButton = document.getElementById('connect-wallet');
+            const walletModal = document.getElementById('wallet-modal');
+            const metamaskOption = document.getElementById('metamask-option');
+            const phantomOption = document.getElementById('phantom-option');
 
             // Check for stored wallet address
             const storedWallet = localStorage.getItem('walletAddress');
@@ -129,6 +142,10 @@
                 walletDisplay.textContent = storedWallet;
                 connectButton.textContent = 'Disconnect';
             }
+
+            // Detect mobile and Safari
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
             // Connect wallet function
             async function connectWallet() {
@@ -139,54 +156,83 @@
                     return;
                 }
 
-                // Check if on mobile (Safari/iOS)
-                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-                // Ethereum/MetaMask
-                if (window.ethereum || (isMobile && isSafari)) {
-                    try {
-                        const web3 = new Web3(window.ethereum || window.web3.currentProvider);
-                        const accounts = await (window.ethereum ? window.ethereum.request({ method: 'eth_requestAccounts' }) : web3.eth.getAccounts());
-                        const address = accounts[0];
-                        localStorage.setItem('walletAddress', address);
-                        walletDisplay.textContent = address;
-                        connectButton.textContent = 'Disconnect';
-                        console.log('Connected to MetaMask:', address);
-                    } catch (error) {
-                        console.error('MetaMask connection failed:', error);
-                        alert('Failed to connect MetaMask. Open the MetaMask app and try again.');
-                    }
-                }
-                // Solana/Phantom
-                else if (window.solana && window.solana.isPhantom) {
-                    try {
-                        const response = await window.solana.connect();
-                        const address = response.publicKey.toString();
-                        localStorage.setItem('walletAddress', address);
-                        walletDisplay.textContent = address;
-                        connectButton.textContent = 'Disconnect';
-                        console.log('Connected to Phantom:', address);
-                    } catch (error) {
-                        console.error('Phantom connection failed:', error);
-                        alert('Failed to connect Phantom. Open the Phantom app and try again.');
-                    }
-                }
-                else {
-                    // Mobile fallback: Prompt user to open wallet app
-                    if (isMobile && isSafari) {
-                        alert('Please open the MetaMask or Phantom app, then return to Safari and retry.');
-                        // Attempt deep link for MetaMask
-                        window.location.href = 'metamask://';
-                        setTimeout(() => {
-                            // If MetaMask fails, try Phantom
-                            window.location.href = 'phantom://';
-                        }, 1000);
+                if (isMobile && isSafari) {
+                    // Show wallet selection modal on mobile Safari
+                    walletModal.classList.add('active');
+                } else {
+                    // Desktop flow
+                    if (window.ethereum) {
+                        try {
+                            const web3 = new Web3(window.ethereum);
+                            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                            const address = accounts[0];
+                            localStorage.setItem('walletAddress', address);
+                            walletDisplay.textContent = address;
+                            connectButton.textContent = 'Disconnect';
+                            console.log('Connected to MetaMask:', address);
+                        } catch (error) {
+                            console.error('MetaMask connection failed:', error);
+                            alert('Failed to connect MetaMask.');
+                        }
+                    } else if (window.solana && window.solana.isPhantom) {
+                        try {
+                            const response = await window.solana.connect();
+                            const address = response.publicKey.toString();
+                            localStorage.setItem('walletAddress', address);
+                            walletDisplay.textContent = address;
+                            connectButton.textContent = 'Disconnect';
+                            console.log('Connected to Phantom:', address);
+                        } catch (error) {
+                            console.error('Phantom connection failed:', error);
+                            alert('Failed to connect Phantom.');
+                        }
                     } else {
                         alert('No wallet detected. Please install MetaMask or Phantom.');
                     }
                 }
             }
+
+            // Wallet selection handlers for mobile
+            metamaskOption.addEventListener('click', async () => {
+                walletModal.classList.remove('active');
+                try {
+                    window.location.href = 'metamask://';
+                    setTimeout(async () => {
+                        if (window.ethereum) {
+                            const web3 = new Web3(window.ethereum);
+                            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                            const address = accounts[0];
+                            localStorage.setItem('walletAddress', address);
+                            walletDisplay.textContent = address;
+                            connectButton.textContent = 'Disconnect';
+                            console.log('Connected to MetaMask:', address);
+                        }
+                    }, 1000); // Wait for app to open
+                } catch (error) {
+                    console.error('MetaMask connection failed:', error);
+                    alert('Failed to connect MetaMask. Ensure the app is installed.');
+                }
+            });
+
+            phantomOption.addEventListener('click', async () => {
+                walletModal.classList.remove('active');
+                try {
+                    window.location.href = 'phantom://';
+                    setTimeout(async () => {
+                        if (window.solana && window.solana.isPhantom) {
+                            const response = await window.solana.connect();
+                            const address = response.publicKey.toString();
+                            localStorage.setItem('walletAddress', address);
+                            walletDisplay.textContent = address;
+                            connectButton.textContent = 'Disconnect';
+                            console.log('Connected to Phantom:', address);
+                        }
+                    }, 1000); // Wait for app to open
+                } catch (error) {
+                    console.error('Phantom connection failed:', error);
+                    alert('Failed to connect Phantom. Ensure the app is installed.');
+                }
+            });
 
             // Button click handler
             connectButton.addEventListener('click', connectWallet);
