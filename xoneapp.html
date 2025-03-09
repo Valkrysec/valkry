@@ -6,243 +6,99 @@
     <title>xOne - xOne App</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <!-- WalletConnect v1 as fallback (UMD, proven to work) -->
+    <!-- WalletConnect v1 -->
     <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
+    <!-- Web3Modal v1 -->
+    <script src="https://unpkg.com/web3modal@1.9.12/dist/index.min.js"></script>
+    <!-- Ethers.js for provider management -->
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <style>
-        html {
-            height: 100%;
-            scroll-behavior: smooth;
-        }
+        /* All your existing styles unchanged */
+        html { height: 100%; scroll-behavior: smooth; }
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #0B0B0B;
-            background-image: url('X1-5.png');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #E0E0E0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            margin: 0; padding: 0; font-family: 'Arial', sans-serif;
+            background-color: #0B0B0B; background-image: url('X1-5.png');
+            background-size: cover; background-position: center top;
+            background-repeat: no-repeat; background-attachment: fixed;
+            color: #E0E0E0; min-height: 100vh; display: flex; flex-direction: column;
         }
-        body::-webkit-scrollbar {
-            display: none;
-        }
+        body::-webkit-scrollbar { display: none; }
         .award-banner {
-            text-align: center;
-            padding: 15px 0;
-            background: #0B0B0B;
-            color: #4CAF50;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5em;
-            font-weight: 700;
-            z-index: 15;
-            animation: fadeIn 1s ease-in-out;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            text-align: center; padding: 15px 0; background: #0B0B0B; color: #4CAF50;
+            font-family: 'Orbitron', sans-serif; font-size: 1.5em; font-weight: 700;
+            z-index: 15; animation: fadeIn 1s ease-in-out; position: fixed; top: 0; left: 0; right: 0;
         }
-        .award-banner span {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 18px;
-        }
-        .award-banner svg {
-            width: 30px;
-            height: 30px;
-            fill: #4CAF50;
-        }
+        .award-banner span { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; }
+        .award-banner svg { width: 30px; height: 30px; fill: #4CAF50; }
         .award-banner img {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            max-width: 180px;
-            height: auto;
-            object-fit: contain;
+            position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+            max-width: 180px; height: auto; object-fit: contain;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .header {
-            background: transparent;
-            padding: 0 10px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            z-index: 10;
-            position: absolute;
-            top: 45px;
-            left: 0;
-            right: 0;
+            background: transparent; padding: 0 10px; display: flex; justify-content: flex-end;
+            align-items: center; z-index: 10; position: absolute; top: 45px; left: 0; right: 0;
         }
-        .menu {
-            position: relative;
-            z-index: 11;
-        }
+        .menu { position: relative; z-index: 11; }
         .connect-wallet {
-            background: none;
-            border: 1px solid #4CAF50;
-            border-radius: 6px;
-            width: 140px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            top: 44px;
-            right: 10px;
-            color: #4CAF50;
-            font-size: 18px;
-            transition: background-color 0.3s, color 0.3s;
+            background: none; border: 1px solid #4CAF50; border-radius: 6px; width: 140px; height: 40px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; position: relative;
+            top: 44px; right: 10px; color: #4CAF50; font-size: 18px; transition: background-color 0.3s, color 0.3s;
         }
-        .connect-wallet svg {
-            margin-right: 8px;
-        }
-        .connect-wallet:hover {
-            background-color: #4CAF50;
-            color: #FFFFFF;
-        }
-        .connect-wallet:hover svg path:first-child {
-            fill: #FFFFFF;
-        }
-        .connect-wallet:hover svg path:last-child {
-            fill: #4CAF50;
-        }
+        .connect-wallet svg { margin-right: 8px; }
+        .connect-wallet:hover { background-color: #4CAF50; color: #FFFFFF; }
+        .connect-wallet:hover svg path:first-child { fill: #FFFFFF; }
+        .connect-wallet:hover svg path:last-child { fill: #4CAF50; }
         h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5em;
-            font-weight: 700;
-            text-align: center;
-            color: white;
-            text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
-            margin: 80px 0 44px 0;
+            font-family: 'Orbitron', sans-serif; font-size: 3.5em; font-weight: 700; text-align: center;
+            color: white; text-shadow: 0 0 10px rgba(76, 175, 80, 0.7); margin: 80px 0 44px 0;
         }
-        h1 .highlight {
-            color: #4CAF50;
-        }
+        h1 .highlight { color: #4CAF50; }
         h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2em;
-            font-weight: 700;
-            text-align: center;
-            color: #4CAF50;
-            margin: 0 0 15px 0;
+            font-family: 'Orbitron', sans-serif; font-size: 2em; font-weight: 700; text-align: center;
+            color: #4CAF50; margin: 0 0 15px 0;
         }
         section {
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 10px 20px;
+            min-height: 60vh; display: flex; flex-direction: column; justify-content: flex-start;
+            align-items: center; padding: 10px 20px;
         }
         .service-box {
-            background: linear-gradient(145deg, #1A1A1A, #2B2B2B);
-            border: 1px solid #4CAF50;
-            border-radius: 10px;
-            padding: 25px;
-            width: 90%;
-            max-width: 800px;
-            text-align: center;
+            background: linear-gradient(145deg, #1A1A1A, #2B2B2B); border: 1px solid #4CAF50; border-radius: 10px;
+            padding: 25px; width: 90%; max-width: 800px; text-align: center;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 5px rgba(76, 175, 80, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-            font-family: 'Arial', sans-serif;
-            font-size: 1.1em;
-            color: #E0E0E0;
+            transition: transform 0.3s, box-shadow 0.3s; font-family: 'Arial', sans-serif; font-size: 1.1em; color: #E0E0E0;
         }
         .service-box:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 10px rgba(76, 175, 80, 0.5);
+            transform: scale(1.03); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 10px rgba(76, 175, 80, 0.5);
         }
-        .service-box p {
-            margin: 0;
-            line-height: 1.6;
-        }
+        .service-box p { margin: 0; line-height: 1.6; }
         @media (max-width: 768px) {
-            .award-banner {
-                padding: 10px 5px;
-            }
-            .award-banner span {
-                font-size: 14px;
-                padding-left: 190px;
-            }
-            .award-banner svg {
-                width: 24px;
-                height: 24px;
-            }
-            .award-banner img {
-                max-width: 150px;
-            }
-            h1 {
-                font-size: 2.5em;
-                margin: 150px 0 34px 0;
-            }
-            h2 {
-                font-size: 1.5em;
-            }
-            section {
-                min-height: 50vh;
-                padding: 5px 10px;
-            }
-            .service-box {
-                width: calc(95% - 40px);
-                font-size: 1.0em;
-                margin-bottom: 20px;
-            }
+            .award-banner { padding: 10px 5px; }
+            .award-banner span { font-size: 14px; padding-left: 190px; }
+            .award-banner svg { width: 24px; height: 24px; }
+            .award-banner img { max-width: 150px; }
+            h1 { font-size: 2.5em; margin: 150px 0 34px 0; }
+            h2 { font-size: 1.5em; }
+            section { min-height: 50vh; padding: 5px 10px; }
+            .service-box { width: calc(95% - 40px); font-size: 1.0em; margin-bottom: 20px; }
         }
-        /* Custom Wallet Modal Styles */
         #wallet-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); z-index: 100; justify-content: center; align-items: center;
         }
         #wallet-modal-content {
-            background: #1A1A1A;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #4CAF50;
-            text-align: center;
-            color: #E0E0E0;
-            font-family: 'Orbitron', sans-serif;
+            background: #1A1A1A; padding: 20px; border-radius: 10px; border: 1px solid #4CAF50;
+            text-align: center; color: #E0E0E0; font-family: 'Orbitron', sans-serif;
         }
         #wallet-modal-content button {
-            background: none;
-            border: 1px solid #4CAF50;
-            color: #4CAF50;
-            padding: 10px 20px;
-            margin: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
+            background: none; border: 1px solid #4CAF50; color: #4CAF50; padding: 10px 20px; margin: 10px;
+            border-radius: 5px; cursor: pointer; transition: background-color 0.3s, color 0.3s;
         }
-        #wallet-modal-content button:hover {
-            background-color: #4CAF50;
-            color: #FFFFFF;
-        }
+        #wallet-modal-content button:hover { background-color: #4CAF50; color: #FFFFFF; }
         #close-modal {
-            background: #FF4500;
-            border: none;
-            padding: 10px 20px;
-            margin-top: 10px;
+            background: #FF4500; border: none; padding: 10px 20px; margin-top: 10px;
         }
-        #close-modal:hover {
-            background: #FF6347;
-        }
+        #close-modal:hover { background: #FF6347; }
     </style>
 </head>
 <body>
@@ -296,7 +152,7 @@
     <div id="wallet-modal">
         <div id="wallet-modal-content">
             <h3>Connect Your Wallet</h3>
-            <button id="connect-walletconnect">Connect Wallet</button>
+            <button id="connect-wallet-btn-modal">Connect Wallet</button>
             <button id="close-modal">Close</button>
         </div>
     </div>
@@ -305,8 +161,53 @@
     document.addEventListener('DOMContentLoaded', function() {
         const connectButton = document.getElementById('connect-wallet-btn');
         const modal = document.getElementById('wallet-modal');
-        const connectWalletConnect = document.getElementById('connect-walletconnect');
+        const connectWalletBtnModal = document.getElementById('connect-wallet-btn-modal');
         const closeModal = document.getElementById('close-modal');
+
+        // Web3Modal setup
+        const providerOptions = {
+            walletconnect: {
+                package: WalletConnectProvider,
+                options: {
+                    infuraId: '8386e4d5fb4f4398a202a53f74e08e7b', // Optional: Ethereum RPC via Infura
+                    rpc: {
+                        1: 'https://mainnet.infura.io/v3/8386e4d5fb4f4398a202a53f74e08e7b', // Ethereum
+                        137: 'https://polygon-rpc.com/' // Polygon (optional)
+                    },
+                    qrcodeModalOptions: {
+                        mobileLinks: ['metamask', 'phantom', 'trust', 'rainbow']
+                    }
+                }
+            },
+            injected: {
+                display: {
+                    name: 'MetaMask',
+                    description: 'Connect with MetaMask extension'
+                },
+                package: null // Uses window.ethereum
+            },
+            phantom: {
+                display: {
+                    name: 'Phantom',
+                    description: 'Connect with Phantom extension'
+                },
+                package: null // Uses window.solana
+            }
+        };
+
+        const web3Modal = new Web3Modal({
+            cacheProvider: false, // Don’t cache wallet choice
+            providerOptions,
+            theme: {
+                background: '#1A1A1A',
+                main: '#E0E0E0',
+                secondary: '#4CAF50',
+                border: '#4CAF50',
+                hover: '#4CAF50'
+            }
+        });
+
+        let provider;
 
         // Show wallet selection modal
         connectButton.addEventListener('click', () => {
@@ -319,34 +220,44 @@
             modal.style.display = 'none';
         });
 
-        // WalletConnect connection
-        connectWalletConnect.addEventListener('click', async () => {
+        // Connect wallet via Web3Modal
+        connectWalletBtnModal.addEventListener('click', async () => {
             try {
-                if (typeof window.WalletConnectProvider === 'undefined') {
-                    throw new Error('WalletConnect library not loaded');
-                }
-                const provider = new window.WalletConnectProvider.default({
-                    rpc: {
-                        1: 'https://mainnet.infura.io/v3/8386e4d5fb4f4398a202a53f74e08e7b', // Ethereum
-                        56: 'https://bsc-dataseed.binance.org/', // BSC (optional)
-                        137: 'https://polygon-rpc.com/' // Polygon (optional)
-                    },
-                    qrcodeModalOptions: {
-                        mobileLinks: ['phantom', 'metamask', 'trust', 'rainbow']
-                    }
-                });
-                await provider.enable(); // Triggers app on mobile or QR on desktop
-                const accounts = provider.accounts;
+                provider = await web3Modal.connect();
+                const ethersProvider = new ethers.providers.Web3Provider(provider);
+                const accounts = await ethersProvider.listAccounts();
                 const walletAddress = accounts[0];
+                
+                if (!walletAddress) {
+                    throw new Error('No accounts found');
+                }
+
                 console.log('Connected wallet:', walletAddress);
                 localStorage.setItem('walletAddress', walletAddress);
                 modal.style.display = 'none';
                 window.location.href = 'dashboard.html';
             } catch (error) {
-                console.error('WalletConnect connection failed:', error);
+                console.error('Wallet connection failed:', error);
                 alert('Failed to connect wallet: ' + error.message);
             }
         });
+
+        // Handle provider events (e.g., disconnect)
+        if (provider && provider.on) {
+            provider.on('accountsChanged', (accounts) => {
+                if (accounts.length === 0) {
+                    localStorage.removeItem('walletAddress');
+                    web3Modal.clearCachedProvider();
+                }
+            });
+            provider.on('chainChanged', () => {
+                window.location.reload();
+            });
+            provider.on('disconnect', () => {
+                localStorage.removeItem('walletAddress');
+                web3Modal.clearCachedProvider();
+            });
+        }
     });
     </script>
 </body>
