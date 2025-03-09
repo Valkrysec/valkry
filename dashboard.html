@@ -89,12 +89,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js"></script>
     <script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js"></script>
     <script>
-        // Verify WalletConnectProvider is loaded
-        console.log('Checking WalletConnectProvider:', typeof window.WalletConnectProvider);
+        // Debug WalletConnectProvider
+        console.log('Checking WalletConnectProvider:', typeof window.WalletConnectProvider, window.WalletConnectProvider);
         if (typeof window.WalletConnectProvider === 'undefined') {
             console.error('WalletConnectProvider not loaded from script');
+        } else if (typeof window.WalletConnectProvider.default === 'function') {
+            console.log('Using WalletConnectProvider.default as constructor');
         } else {
-            console.log('WalletConnectProvider loaded successfully');
+            console.log('WalletConnectProvider loaded but not a constructor:', window.WalletConnectProvider);
         }
 
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -103,11 +105,12 @@
         async function initWalletConnect() {
             if (!isMobile || walletConnectProvider) return;
             try {
-                if (typeof window.WalletConnectProvider !== 'function') {
+                const Provider = window.WalletConnectProvider.default || window.WalletConnectProvider;
+                if (typeof Provider !== 'function') {
                     throw new Error('WalletConnectProvider is not a constructor');
                 }
                 console.log('Initializing WalletConnect...');
-                walletConnectProvider = new window.WalletConnectProvider({
+                walletConnectProvider = new Provider({
                     rpc: {
                         50: 'https://rpc.xinfin.network',
                         51: 'https://rpc.apothem.network'
