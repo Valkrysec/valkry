@@ -69,7 +69,7 @@
             <div class="stat-card"><h3>CA Contracts Verified</h3><p>0</p><span class="label">Smart Contracts</span></div>
             <div class="stat-card"><h3>Site Source Codes Scanned</h3><p>0</p><span class="label">Websites</span></div>
             <div class="stat-card"><h3>Verified Transactions</h3><p>0</p><span class="label">On Blockchain</span></div>
-            <div class="stat-card"><h3>Malware Warnings</h3><p>0</p><span class="label">Malicious Scripts</span></div>
+            <div class Perhapsclass="stat-card"><h3>Malware Warnings</h3><p>0</p><span class="label">Malicious Scripts</span></div>
             <div class="stat-card"><h3>Threats Blocked</h3><p>0</p><span class="label">Potential Risks</span></div>
             <div class="stat-card"><h3>Last Scan Date</h3><p>N/A</p><span class="label">Latest Activity</span></div>
             <div class="stat-card"><h3>Phishing Attempts Blocked</h3><p>0</p><span class="label">Fake Sites</span></div>
@@ -90,27 +90,36 @@
     <script>
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         let wcProvider = null;
+        let wcScriptLoaded = false;
 
-        // Dynamically load WalletConnect script on mobile only
-        if (isMobile) {
-            const script = document.createElement('script');
-            script.src = 'https://unpkg.com/@walletconnect/ethereum-provider@2.14.0/dist/index.min.js';
-            script.onload = initWalletConnect;
-            script.onerror = () => {
-                console.error('Failed to load WalletConnect script');
-                alert('WalletConnect library failed to load. Please install MetaMask manually.');
-            };
-            document.head.appendChild(script);
+        async function loadWalletConnectScript() {
+            return new Promise((resolve, reject) => {
+                if (wcScriptLoaded) {
+                    resolve();
+                    return;
+                }
+                const script = document.createElement('script');
+                script.src = 'https://unpkg.com/@walletconnect/ethereum-provider@2.14.0/dist/index.min.js';
+                script.onload = () => {
+                    wcScriptLoaded = true;
+                    console.log('WalletConnect script loaded successfully');
+                    resolve();
+                };
+                script.onerror = () => {
+                    console.error('Failed to load WalletConnect script');
+                    reject(new Error('WalletConnect script failed to load'));
+                };
+                document.head.appendChild(script);
+            });
         }
 
         async function initWalletConnect() {
-            if (!isMobile) return; // Ensure this runs only on mobile
-            console.log('Initializing WalletConnect v2 for mobile');
-            if (typeof EthereumProvider === 'undefined') {
-                console.error('EthereumProvider not available after script load');
-                return;
-            }
+            if (!isMobile || wcProvider) return;
             try {
+                await loadWalletConnectScript();
+                if (typeof EthereumProvider === 'undefined') {
+                    throw new Error('EthereumProvider not available after script load');
+                }
                 wcProvider = await EthereumProvider.init({
                     projectId: '12d8a3187458ac3f9e5927d01dbcc52a',
                     chains: [50], // XDC Mainnet
@@ -133,6 +142,7 @@
             } catch (error) {
                 console.error('WalletConnect initialization failed:', error.message);
                 wcProvider = null;
+                throw error;
             }
         }
 
@@ -201,15 +211,11 @@
             // Mobile: MetaMask via WalletConnect
             metamaskOption.addEventListener('click', async () => {
                 if (!isMobile) return;
-                if (!wcProvider) {
-                    console.error('WalletConnect not initialized for MetaMask');
-                    window.location.href = 'metamask://wc?uri=wc:12d8a3187458ac3f9e5927d01dbcc52a@2?relay-protocol=irn&chainId=50';
-                    setTimeout(() => {
-                        if (document.hasFocus()) alert('MetaMask not installed or WalletConnect failed. Please install MetaMask.');
-                    }, 2000);
-                    return;
-                }
                 try {
+                    await initWalletConnect();
+                    if (!wcProvider) {
+                        throw new Error('WalletConnect not initialized');
+                    }
                     await wcProvider.request({
                         method: 'wallet_switchEthereumChain',
                         params: [{ chainId: '0x32' }]
@@ -230,22 +236,21 @@
                     wcProvider.on('disconnect', () => disconnectWallet());
                 } catch (error) {
                     console.error('MetaMask (WalletConnect) failed:', error.message);
-                    alert('Failed to connect MetaMask via WalletConnect.');
+                    window.location.href = 'metamask://wc?uri=wc:12d8a3187458ac3f9e5927d01dbcc52a@2?relay-protocol=irn&chainId=50';
+                    setTimeout(() => {
+                        if (document.hasFocus()) alert('MetaMask not installed or WalletConnect failed. Please install MetaMask.');
+                    }, 2000);
                 }
             });
 
             // Mobile: Generic WalletConnect
             walletconnectOption.addEventListener('click', async () => {
                 if (!isMobile) return;
-                if (!wcProvider) {
-                    console.error('WalletConnect not initialized');
-                    window.location.href = 'wc:12d8a3187458ac3f9e5927d01dbcc52a@2?relay-protocol=irn&chainId=50';
-                    setTimeout(() => {
-                        if (document.hasFocus()) alert('WalletConnect-compatible wallet not installed or failed. Please install one.');
-                    }, 2000);
-                    return;
-                }
                 try {
+                    await initWalletConnect();
+                    if (!wcProvider) {
+                        throw new Error('WalletConnect not initialized');
+                    }
                     await wcProvider.connect();
                     const web3 = new Web3(wcProvider);
                     const accounts = await web3.eth.getAccounts();
@@ -261,7 +266,10 @@
                     wcProvider.on('disconnect', () => disconnectWallet());
                 } catch (error) {
                     console.error('WalletConnect failed:', error.message);
-                    alert('Failed to connect WalletConnect.');
+                    window.location.href = 'wc:12d8a3187458ac3f9e5927d01dbcc52a@2?relay-protocol=irn&chainId=50';
+                    setTimeout(() => {
+                        if (document.hasFocus()) alert('WalletConnect-compatible wallet not installed or failed. Please install one.');
+                    }, 2000);
                 }
             });
 
