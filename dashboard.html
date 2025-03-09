@@ -24,7 +24,7 @@
         .stat-card .label { font-size: 0.85em; color: #A0A0A0; }
         .chart-container { padding: 40px 20px; text-align: center; }
         .chart-container h2 { font-family: 'Orbitron', sans-serif; font-size: 1.8em; color: #4CAF50; margin-bottom: 20px; }
-        #securityChart { max-width: 400px; margin: 0 auto; }
+        #securityChart { width: 500px; height: 500px; margin: 0 auto; }
         @media (max-width: 1200px) {
             .dashboard { grid-template-columns: repeat(2, minmax(200px, 1fr)); }
         }
@@ -33,6 +33,7 @@
             .wallet-address { font-size: 1em; }
             .dashboard { margin-top: 100px; grid-template-columns: 1fr; }
             .stat-card { max-width: 90%; }
+            #securityChart { width: 300px; height: 300px; }
         }
     </style>
 </head>
@@ -100,6 +101,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Wallet Address
             const walletAddress = localStorage.getItem('walletAddress');
             const walletDisplay = document.getElementById('wallet-address');
             if (walletAddress) {
@@ -116,7 +118,7 @@
                 data: {
                     labels: ['Safe Sites', 'Warned Sites', 'Blocked Sites'],
                     datasets: [{
-                        data: [0, 0, 0], // Placeholder until extension data
+                        data: [1, 1, 1], // Equal slices for "no data" placeholder
                         backgroundColor: ['#4CAF50', '#FFA500', '#FF4500'],
                         borderColor: '#1A1A1A',
                         borderWidth: 2
@@ -124,9 +126,15 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'top', labels: { color: '#E0E0E0' } },
-                        title: { display: true, text: 'Site Scan Breakdown', color: '#4CAF50', font: { size: 16 } }
+                        legend: { position: 'top', labels: { color: '#E0E0E0', font: { size: 14 } } },
+                        title: { display: true, text: 'Site Scan Breakdown (No Data Yet)', color: '#4CAF50', font: { size: 18 } },
+                        tooltip: { enabled: false } // Hide tooltips since it's placeholder
+                    },
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeInOutQuart'
                     }
                 }
             });
@@ -134,4 +142,3 @@
     </script>
 </body>
 </html>
-
