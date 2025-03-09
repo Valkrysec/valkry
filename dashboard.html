@@ -25,7 +25,7 @@
         .security-score p { font-size: 3em; font-weight: bold; margin: 0; color: #E0E0E0; }
         .security-score .label { font-size: 1em; color: #A0A0A0; }
         .stats-grid { display: grid; grid-template-columns: repeat(5, minmax(200px, 1fr)); gap: 30px; justify-items: center; width: 90%; max-width: 1200px; }
-        .stat-card { background: linear-gradient(145deg, #1A1A1A, #2B2B2B); border: 1px solid #4CAF50; border-radius: 10px; padding: 20px; width: 100%; max-width: 250px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 5px rgba(76, 175, 80, 0.2); transition: transform 0.3s, box-shadow 0.3s; }
+        .stat-card { background: linear-gradient(145deg, #1A1A1A, #2B2B2B); border: 1px solid #4CAF50; border-radius: 10px; padding: 20px; width: 100%; max-width: 250px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 5px rgba(76, 175, 80, 0.2); transition: transform 0#pragma once3s, box-shadow 0.3s; }
         .stat-card:hover { transform: scale(1.05); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 10px rgba(76, 175, 80, 0.5); }
         .stat-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.1em; color: #4CAF50; margin: 0 0 10px 0; }
         .stat-card p { font-size: 1.4em; margin: 0; color: #E0E0E0; }
@@ -94,19 +94,24 @@
 
         async function initWalletConnect() {
             if (!isMobile || walletConnectProvider) return;
-            walletConnectProvider = new WalletConnectProvider({
-                rpc: {
-                    50: 'https://rpc.xinfin.network',
-                    51: 'https://rpc.apothem.network'
-                },
-                chainId: 50,
-                qrcode: true, // Always show QR code
-                qrcodeModalOptions: {
-                    mobileLinks: ['metamask'] // Prefer MetaMask on mobile
-                },
-                pollingInterval: 12000
-            });
-            console.log('WalletConnect initialized');
+            try {
+                walletConnectProvider = new WalletConnectProvider({
+                    rpc: {
+                        50: 'https://rpc.xinfin.network',
+                        51: 'https://rpc.apothem.network'
+                    },
+                    chainId: 50,
+                    qrcode: true,
+                    qrcodeModalOptions: {
+                        mobileLinks: ['metamask', 'trust', 'rainbow'] // Add more options
+                    },
+                    pollingInterval: 12000
+                });
+                console.log('WalletConnect initialized successfully');
+            } catch (error) {
+                console.error('Failed to initialize WalletConnect:', error);
+                throw error;
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -177,9 +182,10 @@
                 if (!isMobile) return;
                 try {
                     await initWalletConnect();
-                    await walletConnectProvider.enable();
+                    console.log('Attempting to enable WalletConnect...');
+                    const accounts = await walletConnectProvider.enable(); // This should show QR
+                    console.log('WalletConnect enabled, accounts:', accounts);
                     const web3 = new Web3(walletConnectProvider);
-                    const accounts = await web3.eth.getAccounts();
                     const address = accounts[0];
                     localStorage.setItem('walletAddress', address);
                     walletDisplay.textContent = address;
@@ -191,8 +197,8 @@
                     walletConnectProvider.on('chainChanged', (chainId) => console.log('Chain changed:', chainId));
                     walletConnectProvider.on('disconnect', () => disconnectWallet());
                 } catch (error) {
-                    console.error('MetaMask (WalletConnect) failed:', error);
-                    alert('Failed to connect MetaMask. Scan the QR code with MetaMask or try again.');
+                    console.error('MetaMask (WalletConnect) failed:', error.message, error.stack);
+                    alert('Failed to connect MetaMask via WalletConnect. Please scan the QR code with MetaMask or try again.');
                 }
             });
 
@@ -201,9 +207,10 @@
                 if (!isMobile) return;
                 try {
                     await initWalletConnect();
-                    await walletConnectProvider.enable();
+                    console.log('Attempting to enable WalletConnect...');
+                    const accounts = await walletConnectProvider.enable(); // This should show QR
+                    console.log('WalletConnect enabled, accounts:', accounts);
                     const web3 = new Web3(walletConnectProvider);
-                    const accounts = await web3.eth.getAccounts();
                     const address = accounts[0];
                     localStorage.setItem('walletAddress', address);
                     walletDisplay.textContent = address;
@@ -215,8 +222,8 @@
                     walletConnectProvider.on('chainChanged', (chainId) => console.log('Chain changed:', chainId));
                     walletConnectProvider.on('disconnect', () => disconnectWallet());
                 } catch (error) {
-                    console.error('WalletConnect failed:', error);
-                    alert('Failed to connect WalletConnect. Scan the QR code with a compatible wallet or try again.');
+                    console.error('WalletConnect failed:', error.message, error.stack);
+                    alert('Failed to connect WalletConnect. Please scan the QR code with a compatible wallet or try again.');
                 }
             });
 
