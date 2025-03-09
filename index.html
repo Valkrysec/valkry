@@ -411,6 +411,7 @@
 
         /* Updated Getting Started Section */
         .getting-started-section {
+            min-height: 100vh;
             padding: 60px 20px;
             text-align: center;
             background: #0B0B0B;
@@ -421,7 +422,7 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 2.5em;
             color: #4CAF50;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             text-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
         }
         .guide-container {
@@ -430,18 +431,29 @@
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 15px; /* Tightened spacing between boxes */
+            gap: 30px; /* More space between boxes */
         }
         .guide-box {
             background: #1C2526;
             border: 2px solid #4CAF50;
             border-radius: 8px;
-            padding: 20px; /* Reduced padding for compactness */
+            padding: 25px;
             box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+            text-align: center;
+        }
+        .guide-box h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            color: #4CAF50;
+            margin: 0 0 15px 0;
+            text-shadow: 0 0 3px rgba(76, 175, 80, 0.6);
+        }
+        .guide-box p {
             font-family: 'IBM Plex Mono', 'Courier New', monospace;
             font-size: 1.1em;
             color: #E0E0E0;
             line-height: 1.5;
+            margin: 0;
         }
 
         footer {
@@ -547,17 +559,21 @@
             .stat-label {
                 font-size: 1em;
             }
-            /* Mobile styles for Getting Started */
             .getting-started-section h2 {
                 font-size: 2em;
             }
             .guide-box {
                 width: calc(95% - 40px);
+                padding: 20px;
+            }
+            .guide-box h2 {
+                font-size: 1.3em;
+            }
+            .guide-box p {
                 font-size: 1em;
-                padding: 15px; /* Reduced for mobile */
             }
             .guide-container {
-                gap: 10px; /* Tighter on mobile */
+                gap: 20px; /* Slightly less space on mobile */
             }
         }
     </style>
@@ -581,11 +597,11 @@
                 <span></span>
             </button>
             <div class="menu-content">
+                <a href="#getting-started">Getting Started</a>
                 <a href="#about-section">About</a>
                 <a href="#web3-stats">Web3 Stats</a>
                 <a href="services.html">Services</a>
                 <a href="team.html">Team</a>
-                <a href="#getting-started">Getting Started</a> <!-- Updated -->
             </div>
         </div>
     </div>
@@ -619,6 +635,30 @@
         </div>
     </div>
 
+    <!-- Moved to First Section: Getting Started -->
+    <section class="getting-started-section" id="getting-started">
+        <h2>Getting Started</h2>
+        <div class="guide-container">
+            <div class="guide-box">
+                <h2>Accessing Your User Dashboard</h2>
+                <p>Click "Launch App" to hit your dashboard. Connect your wallet (MetaMask, Phantom, etc.)—it’s your ID. See Web3 Security Scores and verified transactions from the xOne extension. Sync it with your Chrome app wallet for the full effect.</p>
+            </div>
+            <div class="guide-box">
+                <h2>xOne App Intro</h2>
+                <p>Meet xOne App—crafted by ethical hackers to secure your Web3 journey. Connect your wallet for real-time stats: verified sites, security scores, and more, keeping your assets locked down.</p>
+            </div>
+            <div class="guide-box">
+                <h2>Security Features</h2>
+                <p>xOne acts as a man-in-the-middle blockchain proxy with a 3-step security check: 1) Scans CA contracts for validation, 2) Analyzes smart contracts for vulnerabilities, 3) Inspects site source code to block scams. Plus, real-time phishing detection and instant threat alerts keep you safe.</p>
+            </div>
+            <div class="guide-box">
+                <h2>How to Install</h2>
+                <p>xOne Extension drops on the Chrome Web Store June 6th. Stay tuned! - xOne Dev Team</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Moved to Second Section: Web3 Stats -->
     <section class="web3-stats-section" id="web3-stats">
         <div class="stats-container">
             <div class="stat-box">
@@ -640,6 +680,7 @@
         </div>
     </section>
 
+    <!-- Moved to Third Section: About -->
     <section class="about-section" id="about-section">
         <h1>Who is xOne?</h1>
         <div class="terminal-window">
@@ -649,25 +690,6 @@
             <p>Our team, composed of seasoned PenTesters and DevOps Engineers, conducts meticulous smart contract audits, dApp security evaluations, and network assessments to ensure your projects are robust against vulnerabilities.</p>
             <p>We provide insights and solutions to keep your digital assets safe in this dynamic landscape.</p>
             <p>Additionally, our xOne Secure Extension enhances your Web3 security experience with real-time alerts, and we're gearing up for our token launch to further integrate security into the Web3 framework.</p>
-        </div>
-    </section>
-
-    <!-- Updated Getting Started Section with All Boxes -->
-    <section class="getting-started-section" id="getting-started">
-        <h2>Getting Started</h2>
-        <div class="guide-container">
-            <div class="guide-box">
-                <p>Click "Launch App" to access your dashboard. Connect your wallet (MetaMask, Phantom, etc.)—it’s your unique ID. See stats like Web3 Security Scores from the xOne extension. Use the same wallet as your Chrome app for best results.</p>
-            </div>
-            <div class="guide-box">
-                <p>Welcome to xOne App—your Web3 security tool by ethical hackers. Connect your wallet to unlock real-time stats: verified sites, security scores, and more, keeping your assets safe.</p>
-            </div>
-            <div class="guide-box">
-                <p>xOne scans sites in real-time, blocks phishing, and analyzes smart contracts for vulnerabilities. Get instant threat alerts and a personalized security score to navigate Web3 confidently.</p>
-            </div>
-            <div class="guide-box">
-                <p>xOne Extension hits the Chrome Web Store June 6th. Stay tuned! - xOne Dev Team</p>
-            </div>
         </div>
     </section>
 
