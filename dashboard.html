@@ -118,7 +118,7 @@
 
     <!-- Web3.js for Ethereum/MetaMask -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js"></script>
-    <!-- WalletConnect Ethereum Provider -->
+    <!-- WalletConnect Ethereum Provider (for mobile only) -->
     <script src="https://unpkg.com/@walletconnect/ethereum-provider@2.14.0/dist/index.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
@@ -136,13 +136,13 @@
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-            // WalletConnect provider setup (only for mobile or fallback)
+            // WalletConnect provider for mobile
             let wcProvider;
-            if (isMobile || (!window.ethereum && !window.solana)) {
+            if (isMobile && isSafari) {
                 wcProvider = new WalletConnectEthereumProvider({
-                    projectId: 'YOUR_WALLETCONNECT_PROJECT_ID', // Replace with your WalletConnect Project ID
-                    chains: [1], // Ethereum Mainnet; add more if needed
-                    showQrModal: true, // QR code for desktop fallback
+                    projectId: 'c4f79cc682af...', // Your existing Project ID
+                    chains: [1], // Ethereum Mainnet
+                    showQrModal: false, // No QR on mobile, use deep links
                 });
             }
 
@@ -156,43 +156,10 @@
                     return;
                 }
 
-                // Desktop: Try injected providers first
-                if (!isMobile && window.ethereum) {
+                // Mobile Safari: Use WalletConnect
+                if (isMobile && isSafari) {
                     try {
-                        const web3 = new Web3(window.ethereum);
-                        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                        const address = accounts[0];
-                        localStorage.setItem('walletAddress', address);
-                        walletDisplay.textContent = address;
-                        connectButton.textContent = 'Disconnect';
-                        console.log('Connected to MetaMask:', address);
-                    } catch (error) {
-                        console.error('MetaMask connection failed:', error);
-                        alert('Failed to connect MetaMask.');
-                    }
-                } else if (!isMobile && window.solana && window.solana.isPhantom) {
-                    try {
-                        const response = await window.solana.connect();
-                        const address = response.publicKey.toString();
-                        localStorage.setItem('walletAddress', address);
-                        walletDisplay.textContent = address;
-                        connectButton.textContent = 'Disconnect';
-                        console.log('Connected to Phantom:', address);
-                    } catch (error) {
-                        console.error('Phantom connection failed:', error);
-                        alert('Failed to connect Phantom.');
-                    }
-                } else {
-                    // Mobile or no extension: Use WalletConnect
-                    try {
-                        if (!wcProvider) {
-                            wcProvider = new WalletConnectEthereumProvider({
-                                projectId: 'YOUR_WALLETCONNECT_PROJECT_ID',
-                                chains: [1],
-                                showQrModal: true,
-                            });
-                        }
-                        await wcProvider.enable();
+                        await wcProvider.enable(); // Triggers wallet app connection
                         const web3 = new Web3(wcProvider);
                         const accounts = await web3.eth.getAccounts();
                         const address = accounts[0];
@@ -204,6 +171,37 @@
                         console.error('WalletConnect connection failed:', error);
                         alert('Failed to connect wallet. Ensure MetaMask or Phantom is installed.');
                     }
+                }
+                // Desktop: Original working logic
+                else if (window.ethereum) {
+                    try {
+                        const web3 = new Web3(window.ethereum);
+                        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                        const address = accounts[0];
+                        localStorage.setItem('walletAddress', address);
+                        walletDisplay.textContent = address;
+                        connectButton.textContent = 'Disconnect';
+                        console.log('Connected to MetaMask:', address);
+                    } catch (error) {
+                        console.error('MetaMask connection failed:', error);
+                        alert('Failed to connect MetaMask. Please try again.');
+                    }
+                }
+                else if (window.solana && window.solana.isPhantom) {
+                    try {
+                        const response = await window.solana.connect();
+                        const address = response.publicKey.toString();
+                        localStorage.setItem('walletAddress', address);
+                        walletDisplay.textContent = address;
+                        connectButton.textContent = 'Disconnect';
+                        console.log('Connected to Phantom:', address);
+                    } catch (error) {
+                        console.error('Phantom connection failed:', error);
+                        alert('Failed to connect Phantom. Please try again.');
+                    }
+                }
+                else {
+                    alert('No wallet detected. Please install MetaMask or Phantom.');
                 }
             }
 
@@ -225,7 +223,16 @@
                 });
             }
 
-            // WalletConnect account change
+            // Auto-reconnect on Phantom disconnect
+            if (window.solana) {
+                window.solana.on('disconnect', () => {
+                    localStorage.removeItem('walletAddress');
+                    walletDisplay.textContent = 'No wallet connected';
+                    connectButton.textContent = 'Connect Wallet';
+                });
+            }
+
+            // WalletConnect account change (mobile only)
             if (wcProvider) {
                 wcProvider.on('accountsChanged', (accounts) => {
                     if (accounts.length > 0) {
@@ -237,15 +244,6 @@
                         walletDisplay.textContent = 'No wallet connected';
                         connectButton.textContent = 'Connect Wallet';
                     }
-                });
-            }
-
-            // Auto-reconnect on Phantom disconnect
-            if (window.solana) {
-                window.solana.on('disconnect', () => {
-                    localStorage.removeItem('walletAddress');
-                    walletDisplay.textContent = 'No wallet connected';
-                    connectButton.textContent = 'Connect Wallet';
                 });
             }
         });
