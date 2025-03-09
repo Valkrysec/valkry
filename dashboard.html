@@ -6,109 +6,33 @@
     <title>xOne - User Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <!-- Chart.js for Pie Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        html {
-            height: 100%;
-            scroll-behavior: smooth;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #0B0B0B;
-            background-image: url('X1-5.png');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #E0E0E0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        body::-webkit-scrollbar {
-            display: none;
-        }
-        .header {
-            padding: 20px;
-            text-align: center;
-            background: rgba(11, 11, 11, 0.8);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 10;
-        }
-        .header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5em;
-            margin: 0;
-            color: white;
-            text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
-        }
-        .header h1 .highlight {
-            color: #4CAF50;
-        }
-        .wallet-address {
-            font-family: 'VT323', monospace;
-            font-size: 1.2em;
-            color: #4CAF50;
-            margin-top: 10px;
-            word-break: break-all;
-        }
-        .dashboard {
-            margin-top: 120px;
-            padding: 20px;
-            flex-grow: 1;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            justify-items: center;
-        }
-        .stat-card {
-            background: linear-gradient(145deg, #1A1A1A, #2B2B2B);
-            border: 1px solid #4CAF50;
-            border-radius: 10px;
-            padding: 20px;
-            width: 100%;
-            max-width: 300px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 5px rgba(76, 175, 80, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .stat-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 10px rgba(76, 175, 80, 0.5);
-        }
-        .stat-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2em;
-            color: #4CAF50;
-            margin: 0 0 10px 0;
-        }
-        .stat-card p {
-            font-size: 1.5em;
-            margin: 0;
-            color: #E0E0E0;
-        }
-        .stat-card .label {
-            font-size: 0.9em;
-            color: #A0A0A0;
+        html { height: 100%; scroll-behavior: smooth; }
+        body { margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #0B0B0B; background-image: url('X1-5.png'); background-size: cover; background-position: center top; background-repeat: no-repeat; background-attachment: fixed; color: #E0E0E0; min-height: 100vh; display: flex; flex-direction: column; }
+        body::-webkit-scrollbar { display: none; }
+        .header { padding: 20px; text-align: center; background: rgba(11, 11, 11, 0.8); position: fixed; top: 0; left: 0; right: 0; z-index: 10; }
+        .header h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5em; margin: 0; color: white; text-shadow: 0 0 10px rgba(76, 175, 80, 0.7); }
+        .header h1 .highlight { color: #4CAF50; }
+        .wallet-address { font-family: 'VT323', monospace; font-size: 1.2em; color: #4CAF50; margin-top: 10px; word-break: break-all; }
+        .dashboard { margin-top: 120px; padding: 40px 20px; flex-grow: 1; display: grid; grid-template-columns: repeat(5, minmax(200px, 1fr)); gap: 30px; justify-items: center; }
+        .stat-card { background: linear-gradient(145deg, #1A1A1A, #2B2B2B); border: 1px solid #4CAF50; border-radius: 10px; padding: 20px; width: 100%; max-width: 250px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 5px rgba(76, 175, 80, 0.2); transition: transform 0.3s, box-shadow 0.3s; }
+        .stat-card:hover { transform: scale(1.05); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 10px rgba(76, 175, 80, 0.5); }
+        .stat-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.1em; color: #4CAF50; margin: 0 0 10px 0; }
+        .stat-card p { font-size: 1.4em; margin: 0; color: #E0E0E0; }
+        .stat-card .label { font-size: 0.85em; color: #A0A0A0; }
+        .chart-container { padding: 40px 20px; text-align: center; }
+        .chart-container h2 { font-family: 'Orbitron', sans-serif; font-size: 1.8em; color: #4CAF50; margin-bottom: 20px; }
+        #securityChart { max-width: 400px; margin: 0 auto; }
+        @media (max-width: 1200px) {
+            .dashboard { grid-template-columns: repeat(2, minmax(200px, 1fr)); }
         }
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
-            }
-            .wallet-address {
-                font-size: 1em;
-            }
-            .dashboard {
-                margin-top: 100px;
-                grid-template-columns: 1fr;
-            }
-            .stat-card {
-                max-width: 90%;
-            }
+            .header h1 { font-size: 2em; }
+            .wallet-address { font-size: 1em; }
+            .dashboard { margin-top: 100px; grid-template-columns: 1fr; }
+            .stat-card { max-width: 90%; }
         }
     </style>
 </head>
@@ -153,20 +77,61 @@
             <p>N/A</p>
             <span class="label">Latest Activity</span>
         </div>
+        <div class="stat-card">
+            <h3>Phishing Attempts Blocked</h3>
+            <p>0</p>
+            <span class="label">Fake Sites</span>
+        </div>
+        <div class="stat-card">
+            <h3>Secure Connections</h3>
+            <p>0</p>
+            <span class="label">Safe Interactions</span>
+        </div>
+        <div class="stat-card">
+            <h3>Scan Success Rate</h3>
+            <p>0%</p>
+            <span class="label">3-Check Passes</span>
+        </div>
+    </div>
+    <div class="chart-container">
+        <h2>Security Snapshot</h2>
+        <canvas id="securityChart"></canvas>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const walletAddress = localStorage.getItem('walletAddress');
             const walletDisplay = document.getElementById('wallet-address');
-
             if (walletAddress) {
                 walletDisplay.textContent = walletAddress;
             } else {
                 walletDisplay.textContent = 'No wallet connected';
                 console.error('No wallet address found in localStorage');
             }
+
+            // Pie Chart
+            const ctx = document.getElementById('securityChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Safe Sites', 'Warned Sites', 'Blocked Sites'],
+                    datasets: [{
+                        data: [0, 0, 0], // Placeholder until extension data
+                        backgroundColor: ['#4CAF50', '#FFA500', '#FF4500'],
+                        borderColor: '#1A1A1A',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top', labels: { color: '#E0E0E0' } },
+                        title: { display: true, text: 'Site Scan Breakdown', color: '#4CAF50', font: { size: 16 } }
+                    }
+                }
+            });
         });
     </script>
 </body>
 </html>
+
