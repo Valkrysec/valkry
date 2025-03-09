@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
-        /* Unchanged CSS—keeping your layout pristine */
         html { height: 100%; scroll-behavior: smooth; }
         body { margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #0B0B0B; background-image: url('X1-5.png'); background-size: cover; background-position: center top; background-repeat: no-repeat; background-attachment: fixed; color: #E0E0E0; min-height: 100vh; display: flex; flex-direction: column; }
         body::-webkit-scrollbar { display: none; }
@@ -86,17 +85,11 @@
         </div>
     </div>
 
-    <!-- Web3 React Core and Connectors -->
-    <script src="https://unpkg.com/@web3-react/core@8.0.35/dist/index.umd.js"></script>
-    <script src="https://unpkg.com/@web3-react/injected-connector@8.0.35/dist/index.umd.js"></script>
-    <script src="https://unpkg.com/@web3-react/walletconnect-v2-connector@8.0.35/dist/index.umd.js"></script>
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.14.0/dist/index.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
-            const { Web3Provider } = Web3ReactCore;
-            const { InjectedConnector } = Web3ReactInjectedConnector;
-            const { WalletConnectV2Connector } = Web3ReactWalletConnectV2Connector;
-
             const walletDisplay = document.getElementById('wallet-address');
             const connectButton = document.getElementById('connect-wallet');
             const walletModal = document.getElementById('wallet-modal');
@@ -110,128 +103,185 @@
                 connectButton.textContent = 'Disconnect';
             }
 
-            // Wallet connectors
-            const injectedConnector = new InjectedConnector({
-                supportedChainIds: [50, 51] // XDC Mainnet, Apothem
-            });
+            // Detect mobile
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            let wcProvider = null;
 
-            const walletConnectConnector = new WalletConnectV2Connector({
-                projectId: '12d8a3187458ac3f9e5927d01dbcc52a',
-                chains: [50], // XDC Mainnet
-                optionalChains: [51], // Apothem
-                rpcMap: {
-                    50: 'https://rpc.xinfin.network',
-                    51: 'https://rpc.apothem.network'
-                },
-                qrcode: false // Mobile uses deep links, no QR
-            });
-
-            let provider, connector;
-
-            // Modal toggle
-            connectButton.addEventListener('click', () => {
-                if (connectButton.textContent === 'Disconnect') {
-                    disconnectWallet();
-                } else {
-                    walletModal.classList.add('active');
-                }
-            });
-
-            // MetaMask connect
-            metamaskOption.addEventListener('click', async () => {
+            // Initialize WalletConnect for mobile
+            if (isMobile) {
+                console.log('Initializing WalletConnect v2 for mobile');
                 try {
-                    connector = injectedConnector;
-                    await connector.activate();
-                    provider = new Web3Provider(connector.provider);
-                    await connect(provider);
-                    walletModal.classList.remove('active');
+                    wcProvider = await EthereumProvider.init({
+                        projectId: '12d8a3187458ac3f9e5927d01dbcc52a',
+                        chains: [50], // XDC Mainnet
+                        optionalChains: [51], // Apothem
+                        showQrModal: false,
+                        methods: ['eth_requestAccounts'],
+                        events: ['accountsChanged', 'chainChanged', 'disconnect'],
+                        rpcMap: {
+                            50: 'https://rpc.xinfin.network',
+                            51: 'https://rpc.apothem.network'
+                        },
+                        metadata: {
+                            name: 'xOne Dashboard',
+                            description: 'Web3 Security Dashboard',
+                            url: 'https://xonesecure.github.io',
+                            icons: ['https://xonesecure.github.io/xone/X1-5.png']
+                        }
+                    });
+                    console.log('WalletConnect v2 initialized');
                 } catch (error) {
-                    console.error('MetaMask connection failed:', error.message);
+                    console.error('WalletConnect init failed:', error.message);
+                }
+            }
+
+            // Connect wallet function
+            async function connectWallet() {
+                if (connectButton.textContent === 'Disconnect') {
+                    localStorage.removeItem('walletAddress');
+                    walletDisplay.textContent = 'No wallet connected';
+                    connectButton.textContent = 'Connect Wallet';
+                    if (isMobile && wcProvider) {
+                        await wcProvider.disconnect();
+                        console.log('WalletConnect disconnected');
+                    }
+                    return;
+                }
+
+                if (isMobile) {
+                    walletModal.classList.add('active'); // Show modal on mobile
+                } else {
+                    // Desktop: Original working logic
+                    if (window.ethereum) {
+                        try {
+                            const web3 = new Web3(window.ethereum);
+                            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                            const address = accounts[0];
+                            localStorage.setItem('walletAddress', address);
+                            walletDisplay.textContent = address;
+                            connectButton.textContent = 'Disconnect';
+                            console.log('Connected to MetaMask:', address);
+                        } catch (error) {
+                            console.error('MetaMask connection failed:', error);
+                            alert('Failed to connect MetaMask.');
+                        }
+                    } else if (window.solana && window.solana.isPhantom) {
+                        try {
+                            const response = await window.solana.connect();
+                            const address = response.publicKey.toString();
+                            localStorage.setItem('walletAddress', address);
+                            walletDisplay.textContent = address;
+                            connectButton.textContent = 'Disconnect';
+                            console.log('Connected to Phantom:', address);
+                        } catch (error) {
+                            console.error('Phantom connection failed:', error);
+                            alert('Failed to connect Phantom.');
+                        }
+                    } else {
+                        alert('No wallet detected. Please install MetaMask or Phantom.');
+                    }
+                }
+            }
+
+            // Mobile: MetaMask via WalletConnect
+            metamaskOption.addEventListener('click', async () => {
+                if (!wcProvider) {
+                    alert('WalletConnect not initialized.');
+                    return;
+                }
+                try {
+                    await wcProvider.request({
+                        method: 'wallet_switchEthereumChain',
+                        params: [{ chainId: '0x32' }]
+                    });
+                    await wcProvider.connect();
+                    const web3 = new Web3(wcProvider);
+                    const accounts = await web3.eth.getAccounts();
+                    const address = accounts[0];
+                    localStorage.setItem('walletAddress', address);
+                    walletDisplay.textContent = address;
+                    connectButton.textContent = 'Disconnect';
+                    walletModal.classList.remove('active');
+                    console.log('Connected via MetaMask (WalletConnect):', address);
+
+                    wcProvider.on('accountsChanged', (accounts) => {
+                        if (accounts.length > 0) {
+                            localStorage.setItem('walletAddress', accounts[0]);
+                            walletDisplay.textContent = accounts[0];
+                            connectButton.textContent = 'Disconnect';
+                        } else {
+                            disconnectWallet();
+                        }
+                    });
+                    wcProvider.on('chainChanged', (chainId) => console.log('Chain changed:', parseInt(chainId, 16)));
+                    wcProvider.on('disconnect', () => disconnectWallet());
+                } catch (error) {
+                    console.error('MetaMask (WalletConnect) failed:', error.message);
                     alert('Failed to connect MetaMask.');
                 }
             });
 
-            // WalletConnect connect
+            // Mobile: Generic WalletConnect
             walletconnectOption.addEventListener('click', async () => {
+                if (!wcProvider) {
+                    alert('WalletConnect not initialized.');
+                    return;
+                }
                 try {
-                    connector = walletConnectConnector;
-                    await connector.activate();
-                    provider = new Web3Provider(connector.provider);
-                    await connect(provider);
+                    await wcProvider.connect();
+                    const web3 = new Web3(wcProvider);
+                    const accounts = await web3.eth.getAccounts();
+                    const address = accounts[0];
+                    localStorage.setItem('walletAddress', address);
+                    walletDisplay.textContent = address;
+                    connectButton.textContent = 'Disconnect';
                     walletModal.classList.remove('active');
+                    console.log('Connected via WalletConnect:', address);
+
+                    wcProvider.on('accountsChanged', (accounts) => {
+                        if (accounts.length > 0) {
+                            localStorage.setItem('walletAddress', accounts[0]);
+                            walletDisplay.textContent = accounts[0];
+                            connectButton.textContent = 'Disconnect';
+                        } else {
+                            disconnectWallet();
+                        }
+                    });
+                    wcProvider.on('chainChanged', (chainId) => console.log('Chain changed:', parseInt(chainId, 16)));
+                    wcProvider.on('disconnect', () => disconnectWallet());
                 } catch (error) {
-                    console.error('WalletConnect connection failed:', error.message);
+                    console.error('WalletConnect failed:', error.message);
                     alert('Failed to connect WalletConnect.');
                 }
             });
 
-            // Connect logic
-            async function connect(web3Provider) {
-                const web3 = new Web3(web3Provider.provider);
-                const chainId = await web3.eth.getChainId();
-                console.log('Connected chain ID:', chainId);
-                if (chainId !== 50) {
-                    try {
-                        await web3Provider.provider.request({
-                            method: 'wallet_switchEthereumChain',
-                            params: [{ chainId: '0x32' }]
-                        });
-                        console.log('Switched to XDC chain (50)');
-                    } catch (switchError) {
-                        if (switchError.code === 4902) {
-                            await web3Provider.provider.request({
-                                method: 'wallet_addEthereumChain',
-                                params: [{
-                                    chainId: '0x32',
-                                    chainName: 'XDC Network',
-                                    nativeCurrency: { name: 'XinFin', symbol: 'XDC', decimals: 18 },
-                                    rpcUrls: ['https://rpc.xinfin.network'],
-                                    blockExplorerUrls: ['https://xdc.blocksscan.io']
-                                }]
-                            });
-                            console.log('Added and switched to XDC chain (50)');
-                        } else {
-                            throw switchError;
-                        }
-                    }
-                }
-                const accounts = await web3.eth.getAccounts();
-                console.log('Accounts retrieved:', accounts);
-                const address = accounts[0];
-                localStorage.setItem('walletAddress', address);
-                walletDisplay.textContent = address;
-                connectButton.textContent = 'Disconnect';
-                console.log('Connected wallet:', address);
-            }
-
-            // Disconnect logic
-            async function disconnectWallet() {
-                if (connector && connector.deactivate) {
-                    await connector.deactivate();
-                }
+            // Disconnect helper
+            function disconnectWallet() {
                 localStorage.removeItem('walletAddress');
                 walletDisplay.textContent = 'No wallet connected';
                 connectButton.textContent = 'Connect Wallet';
-                provider = null;
-                connector = null;
+                if (isMobile && wcProvider) wcProvider.disconnect();
                 console.log('Wallet disconnected');
             }
 
-            // Event listeners for desktop
+            // Button handler
+            connectButton.addEventListener('click', connectWallet);
+
+            // Desktop event listeners
             if (window.ethereum) {
-                window.ethereum.on('accountsChanged', async (accounts) => {
-                    if (accounts.length > 0 && connector === injectedConnector) {
+                window.ethereum.on('accountsChanged', (accounts) => {
+                    if (accounts.length > 0 && !isMobile) {
                         localStorage.setItem('walletAddress', accounts[0]);
                         walletDisplay.textContent = accounts[0];
                         connectButton.textContent = 'Disconnect';
-                    } else {
+                    } else if (!isMobile) {
                         disconnectWallet();
                     }
                 });
-                window.ethereum.on('chainChanged', () => {
-                    if (connector === injectedConnector) {
-                        connect(new Web3Provider(window.ethereum));
-                    }
+            }
+            if (window.solana) {
+                window.solana.on('disconnect', () => {
+                    if (!isMobile) disconnectWallet();
                 });
             }
         });
