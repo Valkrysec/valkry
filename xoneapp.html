@@ -135,9 +135,16 @@
     document.addEventListener('DOMContentLoaded', function() {
         const connectButton = document.getElementById('connect-wallet-btn');
 
+        // Wait for Web3Modal to load
+        if (typeof window.Web3Modal === 'undefined') {
+            console.error('Web3Modal library not loaded');
+            alert('Wallet connection library failed to load. Please refresh the page.');
+            return;
+        }
+
         // Web3Modal setup
         const projectId = 'YOUR_PROJECT_ID_HERE'; // Replace with your WalletConnect Cloud projectId
-        const web3Modal = new Web3Modal.default({
+        const web3Modal = new window.Web3Modal({
             projectId: projectId,
             standaloneChains: [
                 'eip155:1',      // Ethereum Mainnet
@@ -195,4 +202,3 @@
     </script>
 </body>
 </html>
-
