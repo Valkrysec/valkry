@@ -10,15 +10,15 @@
         html { height: 100%; scroll-behavior: smooth; }
         body { margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #0B0B0B; background-image: url('X1-5.png'); background-size: cover; background-position: center top; background-repeat: no-repeat; background-attachment: fixed; color: #E0E0E0; min-height: 100vh; display: flex; flex-direction: column; }
         body::-webkit-scrollbar { display: none; }
-        .header { padding: 20px; background: rgba(11, 11, 11, 0.8); position: fixed; top: 0; left: 0; right: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+        .header { padding: 15px; background: rgba(11, 11, 11, 0.8); position: fixed; top: 0; left: 0; right: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .header h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5em; margin: 0; color: white; text-shadow: 0 0 10px rgba(76, 175, 80, 0.7); }
         .header h1 .highlight { color: #4CAF50; }
         .user-info { text-align: center; margin-top: 10px; }
         .user-info .label { font-family: 'Orbitron', sans-serif; font-size: 1.2em; color: #4CAF50; margin: 0; }
         .wallet-address { font-family: 'VT323', monospace; font-size: 1.2em; color: #E0E0E0; margin-top: 5px; word-break: break-all; }
-        .connect-wallet-btn { position: absolute; top: 20px; right: 20px; background-color: #4CAF50; color: white; padding: 8px 16px; text-decoration: none; font-size: 18px; border-radius: 4px; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.2s; z-index: 11; }
+        .connect-wallet-btn { background-color: #4CAF50; color: white; padding: 8px 16px; text-decoration: none; font-size: 18px; border-radius: 4px; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.2s; z-index: 11; margin-top: 10px; }
         .connect-wallet-btn:hover { background-color: #45a049; transform: scale(1.05); }
-        .dashboard { margin-top: 100px; padding: 40px 20px; flex-grow: 1; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+        .dashboard { margin-top: 80px; padding: 20px; flex-grow: 1; display: flex; flex-direction: column; align-items: center; gap: 30px; }
         .security-score { background: linear-gradient(145deg, #1A1A1A, #2B2B2B); border: 2px solid #4CAF50; border-radius: 15px; padding: 30px; width: 90%; max-width: 600px; text-align: center; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(76, 175, 80, 0.3); transition: transform 0.3s, box-shadow 0.3s; }
         .security-score:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 20px rgba(76, 175, 80, 0.5); }
         .security-score h2 { font-family: 'Orbitron', sans-serif; font-size: 1.8em; color: #4CAF50; margin: 0 0 15px 0; text-shadow: 0 0 5px rgba(76, 175, 80, 0.5); }
@@ -34,12 +34,12 @@
             .stats-grid { grid-template-columns: repeat(2, minmax(200px, 1fr)); }
         }
         @media (max-width: 768px) {
-            .header { padding: 15px 10px; }
+            .header { padding: 10px; }
             .header h1 { font-size: 2em; }
             .user-info .label { font-size: 1em; }
             .wallet-address { font-size: 1em; }
-            .connect-wallet-btn { top: 10px; right: 10px; padding: 6px 12px; font-size: 16px; }
-            .dashboard { margin-top: 90px; }
+            .connect-wallet-btn { padding: 6px 12px; font-size: 16px; margin-top: 8px; }
+            .dashboard { margin-top: 70px; padding: 15px; gap: 20px; }
             .security-score { padding: 20px; max-width: 90%; }
             .security-score p { font-size: 2.5em; }
             .stats-grid { grid-template-columns: 1fr; }
@@ -203,3 +203,4 @@
     </script>
 </body>
 </html>
+
