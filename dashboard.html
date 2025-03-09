@@ -6,8 +6,6 @@
     <title>xOne - User Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <!-- Chart.js for Pie Chart -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         html { height: 100%; scroll-behavior: smooth; }
         body { margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #0B0B0B; background-image: url('X1-5.png'); background-size: cover; background-position: center top; background-repeat: no-repeat; background-attachment: fixed; color: #E0E0E0; min-height: 100vh; display: flex; flex-direction: column; }
@@ -16,24 +14,29 @@
         .header h1 { font-family: 'Orbitron', sans-serif; font-size: 2.5em; margin: 0; color: white; text-shadow: 0 0 10px rgba(76, 175, 80, 0.7); }
         .header h1 .highlight { color: #4CAF50; }
         .wallet-address { font-family: 'VT323', monospace; font-size: 1.2em; color: #4CAF50; margin-top: 10px; word-break: break-all; }
-        .dashboard { margin-top: 120px; padding: 40px 20px; flex-grow: 1; display: grid; grid-template-columns: repeat(5, minmax(200px, 1fr)); gap: 30px; justify-items: center; }
+        .dashboard { margin-top: 120px; padding: 40px 20px; flex-grow: 1; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+        .security-score { background: linear-gradient(145deg, #1A1A1A, #2B2B2B); border: 2px solid #4CAF50; border-radius: 15px; padding: 30px; width: 90%; max-width: 600px; text-align: center; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(76, 175, 80, 0.3); transition: transform 0.3s, box-shadow 0.3s; }
+        .security-score:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 20px rgba(76, 175, 80, 0.5); }
+        .security-score h2 { font-family: 'Orbitron', sans-serif; font-size: 1.8em; color: #4CAF50; margin: 0 0 15px 0; text-shadow: 0 0 5px rgba(76, 175, 80, 0.5); }
+        .security-score p { font-size: 3em; font-weight: bold; margin: 0; color: #E0E0E0; }
+        .security-score .label { font-size: 1em; color: #A0A0A0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(5, minmax(200px, 1fr)); gap: 30px; justify-items: center; width: 90%; max-width: 1200px; }
         .stat-card { background: linear-gradient(145deg, #1A1A1A, #2B2B2B); border: 1px solid #4CAF50; border-radius: 10px; padding: 20px; width: 100%; max-width: 250px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 5px rgba(76, 175, 80, 0.2); transition: transform 0.3s, box-shadow 0.3s; }
         .stat-card:hover { transform: scale(1.05); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 10px rgba(76, 175, 80, 0.5); }
         .stat-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.1em; color: #4CAF50; margin: 0 0 10px 0; }
         .stat-card p { font-size: 1.4em; margin: 0; color: #E0E0E0; }
         .stat-card .label { font-size: 0.85em; color: #A0A0A0; }
-        .chart-container { padding: 40px 20px; text-align: center; }
-        .chart-container h2 { font-family: 'Orbitron', sans-serif; font-size: 1.8em; color: #4CAF50; margin-bottom: 20px; }
-        #securityChart { width: 500px; height: 500px; margin: 0 auto; }
         @media (max-width: 1200px) {
-            .dashboard { grid-template-columns: repeat(2, minmax(200px, 1fr)); }
+            .stats-grid { grid-template-columns: repeat(2, minmax(200px, 1fr)); }
         }
         @media (max-width: 768px) {
             .header h1 { font-size: 2em; }
             .wallet-address { font-size: 1em; }
-            .dashboard { margin-top: 100px; grid-template-columns: 1fr; }
+            .dashboard { margin-top: 100px; }
+            .security-score { padding: 20px; max-width: 90%; }
+            .security-score p { font-size: 2.5em; }
+            .stats-grid { grid-template-columns: 1fr; }
             .stat-card { max-width: 90%; }
-            #securityChart { width: 300px; height: 300px; }
         }
     </style>
 </head>
@@ -43,65 +46,67 @@
         <div class="wallet-address" id="wallet-address">Loading...</div>
     </div>
     <div class="dashboard">
-        <div class="stat-card">
-            <h3>Web3 Security Score</h3>
+        <div class="security-score">
+            <h2>Web3 Security Score</h2>
             <p>0</p>
             <span class="label">Out of 100</span>
         </div>
-        <div class="stat-card">
-            <h3>CA Contracts Verified</h3>
-            <p>0</p>
-            <span class="label">Smart Contracts</span>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>CA Contracts Verified</h3>
+                <p>0</p>
+                <span class="label">Smart Contracts</span>
+            </div>
+            <div class="stat-card">
+                <h3>Site Source Codes Scanned</h3>
+                <p>0</p>
+                <span class="label">Websites</span>
+            </div>
+            <div class="stat-card">
+                <h3>Verified Transactions</h3>
+                <p>0</p>
+                <span class="label">On Blockchain</span>
+            </div>
+            <div class="stat-card">
+                <h3>Malware Warnings</h3>
+                <p>0</p>
+                <span class="label">Malicious Scripts</span>
+            </div>
+            <div class="stat-card">
+                <h3>Threats Blocked</h3>
+                <p>0</p>
+                <span class="label">Potential Risks</span>
+            </div>
+            <div class="stat-card">
+                <h3>Last Scan Date</h3>
+                <p>N/A</p>
+                <span class="label">Latest Activity</span>
+            </div>
+            <div class="stat-card">
+                <h3>Phishing Attempts Blocked</h3>
+                <p>0</p>
+                <span class="label">Fake Sites</span>
+            </div>
+            <div class="stat-card">
+                <h3>Secure Connections</h3>
+                <p>0</p>
+                <span class="label">Safe Interactions</span>
+            </div>
+            <div class="stat-card">
+                <h3>Scan Success Rate</h3>
+                <p>0%</p>
+                <span class="label">3-Check Passes</span>
+            </div>
+            <div class="stat-card">
+                <h3>Suspicious Scripts Flagged</h3>
+                <p>0</p>
+                <span class="label">Early Detections</span>
+            </div>
         </div>
-        <div class="stat-card">
-            <h3>Site Source Codes Scanned</h3>
-            <p>0</p>
-            <span class="label">Websites</span>
-        </div>
-        <div class="stat-card">
-            <h3>Verified Transactions</h3>
-            <p>0</p>
-            <span class="label">On Blockchain</span>
-        </div>
-        <div class="stat-card">
-            <h3>Malware Warnings</h3>
-            <p>0</p>
-            <span class="label">Malicious Scripts</span>
-        </div>
-        <div class="stat-card">
-            <h3>Threats Blocked</h3>
-            <p>0</p>
-            <span class="label">Potential Risks</span>
-        </div>
-        <div class="stat-card">
-            <h3>Last Scan Date</h3>
-            <p>N/A</p>
-            <span class="label">Latest Activity</span>
-        </div>
-        <div class="stat-card">
-            <h3>Phishing Attempts Blocked</h3>
-            <p>0</p>
-            <span class="label">Fake Sites</span>
-        </div>
-        <div class="stat-card">
-            <h3>Secure Connections</h3>
-            <p>0</p>
-            <span class="label">Safe Interactions</span>
-        </div>
-        <div class="stat-card">
-            <h3>Scan Success Rate</h3>
-            <p>0%</p>
-            <span class="label">3-Check Passes</span>
-        </div>
-    </div>
-    <div class="chart-container">
-        <h2>Security Snapshot</h2>
-        <canvas id="securityChart"></canvas>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Wallet Address
             const walletAddress = localStorage.getItem('walletAddress');
             const walletDisplay = document.getElementById('wallet-address');
             if (walletAddress) {
@@ -110,34 +115,6 @@
                 walletDisplay.textContent = 'No wallet connected';
                 console.error('No wallet address found in localStorage');
             }
-
-            // Pie Chart
-            const ctx = document.getElementById('securityChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Safe Sites', 'Warned Sites', 'Blocked Sites'],
-                    datasets: [{
-                        data: [1, 1, 1], // Equal slices for "no data" placeholder
-                        backgroundColor: ['#4CAF50', '#FFA500', '#FF4500'],
-                        borderColor: '#1A1A1A',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'top', labels: { color: '#E0E0E0', font: { size: 14 } } },
-                        title: { display: true, text: 'Site Scan Breakdown (No Data Yet)', color: '#4CAF50', font: { size: 18 } },
-                        tooltip: { enabled: false } // Hide tooltips since it's placeholder
-                    },
-                    animation: {
-                        duration: 1500,
-                        easing: 'easeInOutQuart'
-                    }
-                }
-            });
         });
     </script>
 </body>
