@@ -108,7 +108,7 @@
                         chains: [50], // XDC Mainnet
                         optionalChains: [51], // XDC Apothem Testnet
                         showQrModal: false, // No QR on mobile
-                        methods: ['eth_requestAccounts', 'eth_accounts'],
+                        methods: ['eth_requestAccounts'], // Only request accounts
                         events: ['accountsChanged', 'chainChanged', 'disconnect'],
                         rpcMap: {
                             50: 'https://rpc.xinfin.network', // XDC Mainnet RPC
@@ -145,14 +145,13 @@
                     return;
                 }
 
-                // Mobile Safari: Use WalletConnect v2 with fallback
+                // Mobile Safari: Use WalletConnect v2 with chain enforcement
                 if (isMobile && isSafari) {
                     console.log('Attempting WalletConnect v2 connection');
                     if (!wcProvider) {
                         console.error('WalletConnect provider not initialized');
-                        // Fallback to manual deep link
                         console.log('Falling back to manual deep link');
-                        const uri = `wc:12d8a3187458ac3f9e5927d01dbcc52a@2?relay-protocol=irn&symKey=your-sym-key-here&chainId=50&url=https://xonesecure.github.io/xone/dashboard.html`;
+                        const uri = `wc:12d8a3187458ac3f9e5927d01dbcc52a@2?relay-protocol=irn&chainId=50&url=https://xonesecure.github.io/xone/dashboard.html`;
                         window.location.href = uri;
                         setTimeout(() => {
                             if (document.hasFocus()) {
@@ -162,9 +161,36 @@
                         return;
                     }
                     try {
+                        // Ensure XDC chain is added
+                        await wcProvider.request({
+                            method: 'wallet_addEthereumChain',
+                            params: [{
+                                chainId: '0x32', // 50 in hex
+                                chainName: 'XDC Network',
+                                nativeCurrency: {
+                                    name: 'XinFin',
+                                    symbol: 'XDC',
+                                    decimals: 18
+                                },
+                                rpcUrls: ['https://rpc.xinfin.network'],
+                                blockExplorerUrls: ['https://xdc.blocksscan.io']
+                            }]
+                        });
+                        console.log('XDC chain added to MetaMask');
+
+                        // Switch to XDC chain
+                        await wcProvider.request({
+                            method: 'wallet_switchEthereumChain',
+                            params: [{ chainId: '0x32' }] // 50 in hex
+                        });
+                        console.log('Switched to XDC chain (50)');
+
+                        // Connect and get accounts
                         await wcProvider.connect();
                         console.log('WalletConnect v2 connected');
                         const web3 = new Web3(wcProvider);
+                        const chainId = await web3.eth.getChainId();
+                        console.log('Current chain ID:', chainId);
                         const accounts = await web3.eth.getAccounts();
                         const address = accounts[0];
                         localStorage.setItem('walletAddress', address);
@@ -193,11 +219,11 @@
                         });
 
                         wcProvider.on('chainChanged', (chainId) => {
-                            console.log('Chain changed to:', chainId);
+                            console.log('Chain changed to:', parseInt(chainId, 16));
                         });
                     } catch (error) {
                         console.error('WalletConnect v2 connection failed:', error.message);
-                        alert('Failed to connect wallet. Ensure MetaMask is installed and configured for XDC.');
+                        alert('Failed to connect wallet. Ensure MetaMask is installed and XDC Network is added.');
                     }
                 }
                 // Desktop: Original working logic
