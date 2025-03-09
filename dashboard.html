@@ -139,11 +139,18 @@
             // WalletConnect provider for mobile
             let wcProvider;
             if (isMobile && isSafari) {
-                wcProvider = new WalletConnectEthereumProvider({
-                    projectId: 'c4f79cc682af...', // Your existing Project ID
-                    chains: [1], // Ethereum Mainnet
-                    showQrModal: false, // No QR on mobile, use deep links
-                });
+                console.log('Initializing WalletConnect for Mobile Safari');
+                try {
+                    wcProvider = new WalletConnectEthereumProvider({
+                        projectId: '12d8a3187458ac3f9e5927d01dbcc52a', // Correct Reown Project ID
+                        chains: [1], // Ethereum Mainnet
+                        showQrModal: false, // No QR on mobile
+                        methods: ['eth_requestAccounts'], // Explicitly request accounts
+                    });
+                    console.log('WalletConnect provider initialized:', wcProvider);
+                } catch (error) {
+                    console.error('Failed to initialize WalletConnect:', error);
+                }
             }
 
             // Connect wallet function
@@ -152,14 +159,27 @@
                     localStorage.removeItem('walletAddress');
                     walletDisplay.textContent = 'No wallet connected';
                     connectButton.textContent = 'Connect Wallet';
-                    if (wcProvider) await wcProvider.disconnect();
+                    if (wcProvider) {
+                        try {
+                            await wcProvider.disconnect();
+                            console.log('WalletConnect disconnected');
+                        } catch (error) {
+                            console.error('Disconnect failed:', error);
+                        }
+                    }
                     return;
                 }
 
                 // Mobile Safari: Use WalletConnect
                 if (isMobile && isSafari) {
+                    if (!wcProvider) {
+                        console.error('WalletConnect provider not initialized');
+                        alert('Wallet connection setup failed. Please try again.');
+                        return;
+                    }
+                    console.log('Attempting WalletConnect connection');
                     try {
-                        await wcProvider.enable(); // Triggers wallet app connection
+                        await wcProvider.enable(); // Should trigger wallet app
                         const web3 = new Web3(wcProvider);
                         const accounts = await web3.eth.getAccounts();
                         const address = accounts[0];
@@ -239,10 +259,12 @@
                         localStorage.setItem('walletAddress', accounts[0]);
                         walletDisplay.textContent = accounts[0];
                         connectButton.textContent = 'Disconnect';
+                        console.log('WalletConnect accounts changed:', accounts[0]);
                     } else {
                         localStorage.removeItem('walletAddress');
                         walletDisplay.textContent = 'No wallet connected';
                         connectButton.textContent = 'Connect Wallet';
+                        console.log('WalletConnect disconnected');
                     }
                 });
             }
