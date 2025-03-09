@@ -100,8 +100,11 @@
                     51: 'https://rpc.apothem.network'
                 },
                 chainId: 50,
-                qrcode: true,
-                pollingInterval: 15000 // Avoid hang with reasonable polling
+                qrcode: true, // Always show QR code
+                qrcodeModalOptions: {
+                    mobileLinks: ['metamask'] // Prefer MetaMask on mobile
+                },
+                pollingInterval: 12000
             });
             console.log('WalletConnect initialized');
         }
@@ -137,7 +140,7 @@
                 if (isMobile) {
                     walletModal.classList.add('active'); // Show modal on mobile
                 } else {
-                    // Desktop: Original working logic
+                    // Desktop: Working logic
                     if (window.ethereum) {
                         try {
                             const web3 = new Web3(window.ethereum);
@@ -169,7 +172,7 @@
                 }
             }
 
-            // Mobile: MetaMask via WalletConnect
+            // Mobile: MetaMask via WalletConnect with QR
             metamaskOption.addEventListener('click', async () => {
                 if (!isMobile) return;
                 try {
@@ -189,11 +192,11 @@
                     walletConnectProvider.on('disconnect', () => disconnectWallet());
                 } catch (error) {
                     console.error('MetaMask (WalletConnect) failed:', error);
-                    alert('Failed to connect MetaMask via WalletConnect. Please try again.');
+                    alert('Failed to connect MetaMask. Scan the QR code with MetaMask or try again.');
                 }
             });
 
-            // Mobile: Generic WalletConnect
+            // Mobile: Generic WalletConnect with QR
             walletconnectOption.addEventListener('click', async () => {
                 if (!isMobile) return;
                 try {
@@ -213,7 +216,7 @@
                     walletConnectProvider.on('disconnect', () => disconnectWallet());
                 } catch (error) {
                     console.error('WalletConnect failed:', error);
-                    alert('Failed to connect WalletConnect. Please try again.');
+                    alert('Failed to connect WalletConnect. Scan the QR code with a compatible wallet or try again.');
                 }
             });
 
