@@ -140,10 +140,10 @@
             // Web3Modal setup
             const providerOptions = {
                 walletconnect: {
-                    package: WalletConnectProvider, // From the CDN script
+                    package: WalletConnectProvider,
                     options: {
                         projectId: '12d8a3187458ac3f9e5927d01dbcc52a', // Your Reown Project ID
-                        rpc: { 1: 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161' } // Fallback RPC
+                        rpc: { 1: 'https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161' }
                     }
                 }
             };
@@ -154,17 +154,22 @@
                 providerOptions
             });
 
+            let provider; // Global provider for disconnect
+
             // Connect wallet function
             async function connectWallet() {
                 if (connectButton.textContent === 'Disconnect') {
                     localStorage.removeItem('walletAddress');
                     walletDisplay.textContent = 'No wallet connected';
                     connectButton.textContent = 'Connect Wallet';
-                    try {
-                        await web3Modal.clearCachedProvider();
-                        if (provider) provider.disconnect();
-                    } catch (error) {
-                        console.error('Disconnect failed:', error);
+                    if (isMobile && isSafari && provider) {
+                        try {
+                            await provider.disconnect();
+                            await web3Modal.clearCachedProvider();
+                            console.log('Mobile provider disconnected');
+                        } catch (error) {
+                            console.error('Mobile disconnect failed:', error);
+                        }
                     }
                     return;
                 }
@@ -173,7 +178,7 @@
                 if (isMobile && isSafari) {
                     console.log('Attempting Web3Modal connection on Mobile Safari');
                     try {
-                        const provider = await web3Modal.connect();
+                        provider = await web3Modal.connect();
                         const web3 = new Web3(provider);
                         const accounts = await web3.eth.getAccounts();
                         const address = accounts[0];
@@ -182,7 +187,6 @@
                         connectButton.textContent = 'Disconnect';
                         console.log('Connected via Web3Modal:', address);
 
-                        // Handle provider events
                         provider.on('accountsChanged', (accounts) => {
                             if (accounts.length > 0) {
                                 localStorage.setItem('walletAddress', accounts[0]);
