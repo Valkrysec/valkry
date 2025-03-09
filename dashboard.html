@@ -139,11 +139,15 @@
                     return;
                 }
 
+                // Check if on mobile (Safari/iOS)
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
                 // Ethereum/MetaMask
-                if (window.ethereum) {
+                if (window.ethereum || (isMobile && isSafari)) {
                     try {
-                        const web3 = new Web3(window.ethereum);
-                        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                        const web3 = new Web3(window.ethereum || window.web3.currentProvider);
+                        const accounts = await (window.ethereum ? window.ethereum.request({ method: 'eth_requestAccounts' }) : web3.eth.getAccounts());
                         const address = accounts[0];
                         localStorage.setItem('walletAddress', address);
                         walletDisplay.textContent = address;
@@ -151,7 +155,7 @@
                         console.log('Connected to MetaMask:', address);
                     } catch (error) {
                         console.error('MetaMask connection failed:', error);
-                        alert('Failed to connect MetaMask. Please try again.');
+                        alert('Failed to connect MetaMask. Open the MetaMask app and try again.');
                     }
                 }
                 // Solana/Phantom
@@ -165,11 +169,22 @@
                         console.log('Connected to Phantom:', address);
                     } catch (error) {
                         console.error('Phantom connection failed:', error);
-                        alert('Failed to connect Phantom. Please try again.');
+                        alert('Failed to connect Phantom. Open the Phantom app and try again.');
                     }
                 }
                 else {
-                    alert('No wallet detected. Please install MetaMask or Phantom.');
+                    // Mobile fallback: Prompt user to open wallet app
+                    if (isMobile && isSafari) {
+                        alert('Please open the MetaMask or Phantom app, then return to Safari and retry.');
+                        // Attempt deep link for MetaMask
+                        window.location.href = 'metamask://';
+                        setTimeout(() => {
+                            // If MetaMask fails, try Phantom
+                            window.location.href = 'phantom://';
+                        }, 1000);
+                    } else {
+                        alert('No wallet detected. Please install MetaMask or Phantom.');
+                    }
                 }
             }
 
