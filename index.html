@@ -33,7 +33,7 @@
         .award-banner {
             text-align: center;
             padding: 15px 0;
-            background: #0B0B0B; /* Solid jet matte black */
+            background: #0B0B0B;
             color: #4CAF50;
             font-family: 'Orbitron', sans-serif;
             font-size: 1.5em;
@@ -49,7 +49,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            font-size: 18px; /* Absolute size, smaller than 1.5em (~24px) */
+            font-size: 18px;
         }
         .award-banner svg {
             width: 30px;
@@ -78,7 +78,7 @@
             align-items: center;
             z-index: 10;
             position: absolute;
-            top: 45px; /* Moved below banner (15px padding top + bottom + content) */
+            top: 45px;
             left: 0;
             right: 0;
         }
@@ -98,24 +98,24 @@
         .hamburger {
             background: none;
             border: none;
-            width: 40px; /* Bigger */
+            width: 40px;
             height: 30px;
             cursor: pointer;
             display: block;
             position: relative;
-            top: 44px; /* 70px banner height + 48px nudge */
-            right: 10px; /* Nudge left by 10px */
+            top: 44px;
+            right: 10px;
         }
         .hamburger span {
             display: block;
             width: 100%;
-            height: 4px; /* Thicker lines */
+            height: 4px;
             background: #808080;
             position: absolute;
             transition: background 0.3s;
         }
         .hamburger span:nth-child(1) { top: 0; }
-        .hamburger span:nth-child(2) { top: 13px; } /* Middle line */
+        .hamburger span:nth-child(2) { top: 13px; }
         .hamburger span:nth-child(3) { bottom: 0; }
         .hamburger:hover span {
             background: #45a049;
@@ -123,7 +123,7 @@
         .menu-content {
             display: none;
             position: absolute;
-            top: 40px; /* Adjusted for bigger hamburger */
+            top: 40px;
             right: 10px;
             background: #1F1F1F;
             flex-direction: column;
@@ -150,8 +150,8 @@
         }
         .launch-app-btn {
             position: absolute;
-            top: 42px; /* Aligns with hamburger’s top: 44px + slight offset */
-            right: 80px; /* Left of hamburger’s right: 10px */
+            top: 42px;
+            right: 80px;
             background-color: #4CAF50;
             color: white;
             padding: 8px 16px;
@@ -184,7 +184,7 @@
             padding: 0 20px;
             z-index: 1;
             position: relative;
-            margin-top: -50px; /* Nudges title and buttons up 50px */
+            margin-top: -50px;
         }
         .welcome-section::after {
             content: '';
@@ -303,7 +303,6 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* New Web3 Stats Section */
         .web3-stats-section {
             min-height: 100vh;
             display: flex;
@@ -410,35 +409,39 @@
             line-height: 1.6;
         }
 
-        /* New User Guide Section */
-        .user-guide-section {
-            min-height: 100vh;
+        /* Updated Getting Started Section */
+        .getting-started-section {
             padding: 60px 20px;
             text-align: center;
             background: #0B0B0B;
             z-index: 1;
             position: relative;
         }
-        .user-guide-section h2 {
+        .getting-started-section h2 {
             font-family: 'Orbitron', sans-serif;
             font-size: 2.5em;
             color: #4CAF50;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
         }
-        .guide-box {
+        .guide-container {
             width: 90%;
             max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Tightened spacing between boxes */
+        }
+        .guide-box {
             background: #1C2526;
             border: 2px solid #4CAF50;
             border-radius: 8px;
-            padding: 30px;
-            margin: 0 auto;
+            padding: 20px; /* Reduced padding for compactness */
             box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
             font-family: 'IBM Plex Mono', 'Courier New', monospace;
             font-size: 1.1em;
             color: #E0E0E0;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         footer {
@@ -470,8 +473,8 @@
                 padding: 10px 5px;
             }
             .award-banner span {
-                font-size: 14px; /* Absolute size, smaller than 18px */
-                padding-left: 190px; /* Prevents overlap with logo */
+                font-size: 14px;
+                padding-left: 190px;
             }
             .award-banner svg {
                 width: 24px;
@@ -483,7 +486,7 @@
             .welcome-section h1 {
                 font-size: 2.5em;
                 display: flex;
-                flex-direction: column; /* Stack icon above text */
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 flex-wrap: wrap;
@@ -491,8 +494,8 @@
             .sphere-icon {
                 width: 30px;
                 height: 30px;
-                margin-right: 0; /* Remove right margin */
-                margin-bottom: 10px; /* Space between icon and text */
+                margin-right: 0;
+                margin-bottom: 10px;
             }
             .title-text {
                 display: inline-block;
@@ -535,7 +538,6 @@
                 font-size: 2.5em;
                 margin-bottom: 20px;
             }
-            /* Mobile styles for Web3 Stats */
             .stats-container {
                 max-width: 250px;
             }
@@ -545,13 +547,17 @@
             .stat-label {
                 font-size: 1em;
             }
-            /* Mobile styles for User Guide */
-            .user-guide-section h2 {
+            /* Mobile styles for Getting Started */
+            .getting-started-section h2 {
                 font-size: 2em;
             }
             .guide-box {
                 width: calc(95% - 40px);
                 font-size: 1em;
+                padding: 15px; /* Reduced for mobile */
+            }
+            .guide-container {
+                gap: 10px; /* Tighter on mobile */
             }
         }
     </style>
@@ -579,7 +585,7 @@
                 <a href="#web3-stats">Web3 Stats</a>
                 <a href="services.html">Services</a>
                 <a href="team.html">Team</a>
-                <a href="#user-guide">User Guide</a> <!-- Updated from xoneapp.html -->
+                <a href="#getting-started">Getting Started</a> <!-- Updated -->
             </div>
         </div>
     </div>
@@ -613,7 +619,6 @@
         </div>
     </div>
 
-    <!-- New Section 2: Web3 Stats -->
     <section class="web3-stats-section" id="web3-stats">
         <div class="stats-container">
             <div class="stat-box">
@@ -635,7 +640,6 @@
         </div>
     </section>
 
-    <!-- Moved to Section 3: About -->
     <section class="about-section" id="about-section">
         <h1>Who is xOne?</h1>
         <div class="terminal-window">
@@ -648,11 +652,22 @@
         </div>
     </section>
 
-    <!-- New User Guide Section from xoneapp.html -->
-    <section class="user-guide-section" id="user-guide">
-        <h2>Accessing Your User Dashboard</h2>
-        <div class="guide-box">
-            <p>Get started with your xOne.app in a snap! Click "Launch App" above to go to your dashboard. There, connect your wallet (e.g., MetaMask, Phantom, or any WalletConnect-supported wallet). Your wallet serves as your unique account identifier (name). You’ll see personalized stats like your Web3 Security Scores and Verified Transactions, reflecting activity from the xOne extension in your browser. For the best experience, use the same wallet here as with our Chrome app or extension.</p>
+    <!-- Updated Getting Started Section with All Boxes -->
+    <section class="getting-started-section" id="getting-started">
+        <h2>Getting Started</h2>
+        <div class="guide-container">
+            <div class="guide-box">
+                <p>Click "Launch App" to access your dashboard. Connect your wallet (MetaMask, Phantom, etc.)—it’s your unique ID. See stats like Web3 Security Scores from the xOne extension. Use the same wallet as your Chrome app for best results.</p>
+            </div>
+            <div class="guide-box">
+                <p>Welcome to xOne App—your Web3 security tool by ethical hackers. Connect your wallet to unlock real-time stats: verified sites, security scores, and more, keeping your assets safe.</p>
+            </div>
+            <div class="guide-box">
+                <p>xOne scans sites in real-time, blocks phishing, and analyzes smart contracts for vulnerabilities. Get instant threat alerts and a personalized security score to navigate Web3 confidently.</p>
+            </div>
+            <div class="guide-box">
+                <p>xOne Extension hits the Chrome Web Store June 6th. Stay tuned! - xOne Dev Team</p>
+            </div>
         </div>
     </section>
 
