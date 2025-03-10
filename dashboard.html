@@ -75,99 +75,52 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js"></script>
-    <script src="https://unpkg.com/@reown/appkit@1.0.0-beta.2/dist/cdn/index.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async function() {
-            const walletDisplay = document.getElementById('wallet-address');
-            const connectButton = document.getElementById('connect-wallet');
+    <script src="https://unpkg.com/@reown/appkit@1.0.0/dist/cdn/index.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        const walletDisplay = document.getElementById('wallet-address');
+        const connectButton = document.getElementById('connect-wallet');
 
-            // Check stored wallet
-            const storedWallet = localStorage.getItem('walletAddress');
-            if (storedWallet) {
-                walletDisplay.textContent = storedWallet;
-                connectButton.textContent = 'Disconnect';
-            }
+        if (storedWallet = localStorage.getItem('walletAddress')) {
+            walletDisplay.textContent = storedWallet;
+            connectButton.textContent = 'Disconnect';
+        }
 
-            // Check if AppKit loaded
-            if (!window.Reown || !window.Reown.createAppKit) {
-                console.error('Reown AppKit not loaded');
-                alert('Wallet connection library failed to load. Please refresh the page.');
+        if (!window.Reown || !window.Reown.createAppKit) {
+            console.error('Reown AppKit not loaded');
+            alert('Wallet connection unavailable—refresh or try later.');
+            return;
+        }
+
+        const { createAppKit } = window.Reown;
+        const modal = await createAppKit({
+            projectId: '12d8a3187458ac3f9e5927d01dbcc52a',
+            networks: [{ chainId: 50, name: 'XDC Network', currency: 'XDC', rpcUrl: 'https://rpc.xinfin.network', explorerUrl: 'https://explorer.xinfin.network' }],
+            metadata: { name: 'xOne', description: 'Security Dashboard', url: 'https://xonesecure.github.io', icons: ['https://xonesecure.github.io/xone/X1-5.png'] }
+        });
+
+        async function connectWallet() {
+            if (connectButton.textContent === 'Disconnect') {
+                localStorage.removeItem('walletAddress');
+                walletDisplay.textContent = 'No wallet connected';
+                connectButton.textContent = 'Connect Wallet';
+                await modal.disconnect();
                 return;
             }
-
-            const { createAppKit } = window.Reown;
-
-            const projectId = '12d8a3187458ac3f9e5927d01dbcc52a'; // Your Reown Cloud projectId
-            const xdcNetwork = {
-                chainId: 50,
-                name: 'XDC Network',
-                currency: 'XDC',
-                rpcUrl: 'https://rpc.xinfin.network',
-                explorerUrl: 'https://explorer.xinfin.network'
-            };
-
-            const modal = await createAppKit({
-                projectId,
-                networks: [xdcNetwork],
-                metadata: {
-                    name: 'xOne Dashboard',
-                    description: 'Web3 Security Dashboard',
-                    url: 'https://xonesecure.github.io',
-                    icons: ['https://xonesecure.github.io/xone/X1-5.png']
-                },
-                defaultNetwork: xdcNetwork,
-                features: { analytics: true }
-            });
-
-            console.log('AppKit initialized');
-
-            // Connect wallet function
-            async function connectWallet() {
-                if (connectButton.textContent === 'Disconnect') {
-                    localStorage.removeItem('walletAddress');
-                    walletDisplay.textContent = 'No wallet connected';
-                    connectButton.textContent = 'Connect Wallet';
-                    await modal.disconnect();
-                    console.log('Wallet disconnected');
-                    return;
-                }
-
-                try {
-                    await modal.open();
-                    modal.subscribeState((state) => {
-                        if (state.selectedNetworkId === 50 && state.address) {
-                            const formattedAddress = state.address.startsWith('0x') ? 'xdc' + state.address.slice(2) : state.address;
-                            localStorage.setItem('walletAddress', formattedAddress);
-                            walletDisplay.textContent = formattedAddress;
-                            connectButton.textContent = 'Disconnect';
-                            console.log('Connected wallet:', formattedAddress);
-                            modal.close();
-                        }
-                    });
-                } catch (error) {
-                    console.error('Wallet connection failed:', error);
-                    alert('Failed to connect wallet.');
-                }
-            }
-
-            // Button handler
-            connectButton.addEventListener('click', connectWallet);
-
-            // Initial state check
+            await modal.open();
             modal.subscribeState((state) => {
-                if (state.selectedNetworkId === 50 && state.address) {
-                    const formattedAddress = state.address.startsWith('0x') ? 'xdc' + state.address.slice(2) : state.address;
-                    localStorage.setItem('walletAddress', formattedAddress);
-                    walletDisplay.textContent = formattedAddress;
+                if (state.address) {
+                    const addr = state.address.startsWith('0x') ? 'xdc' + state.address.slice(2) : state.address;
+                    localStorage.setItem('walletAddress', addr);
+                    walletDisplay.textContent = addr;
                     connectButton.textContent = 'Disconnect';
-                } else if (!state.address) {
-                    localStorage.removeItem('walletAddress');
-                    walletDisplay.textContent = 'No wallet connected';
-                    connectButton.textContent = 'Connect Wallet';
+                    modal.close();
                 }
             });
-        });
-    </script>
+        }
+
+        connectButton.addEventListener('click', connectWallet);
+    });
+</script>
 </body>
 </html>
