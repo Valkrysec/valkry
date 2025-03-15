@@ -440,6 +440,52 @@
             margin-top: 10px;
         }
 
+        /* Globe Animation for Web3 Stats */
+        .web3-stats-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .stats-animation {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        .globe {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.3), transparent);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: spin 20s linear infinite;
+        }
+        .data-point {
+            width: 10px;
+            height: 10px;
+            background: #4CAF50;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            animation: orbit 6s infinite ease-in-out;
+            animation-delay: var(--delay);
+        }
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        @keyframes orbit {
+            0% { transform: translate(-50%, -50%) translateX(0) translateY(-120px); }
+            50% { transform: translate(-50%, -50%) translateX(120px) translateY(0); }
+            100% { transform: translate(-50%, -50%) translateX(0) translateY(-120px); }
+        }
+
         /* About Section */
         .about-section {
             min-height: 120vh;
@@ -498,167 +544,183 @@
         }
 
         /* Media Queries */
-@media (max-width: 768px) {
-    /* General Scroll Offset */
-    html {
-        scroll-padding-top: 60px;
-    }
+        @media (max-width: 768px) {
+            /* General Scroll Offset */
+            html {
+                scroll-padding-top: 60px;
+            }
 
-    /* Award Banner */
-    .award-banner {
-        padding: 8px 0;
-        font-size: 1.1em;
-    }
-    .award-banner img {
-        max-width: 120px;
-        left: 5px;
-    }
-    .award-banner span {
-        font-size: 12px;
-        padding-left: 130px;
-    }
-    .award-banner svg {
-        width: 18px;
-        height: 18px;
-    }
+            /* Award Banner */
+            .award-banner {
+                padding: 10px 0; /* Taller banner */
+                font-size: 1.1em;
+            }
+            .award-banner img {
+                max-width: 120px;
+                left: 5px;
+            }
+            .award-banner span {
+                font-size: 12px;
+                padding-left: 130px;
+            }
+            .award-banner svg {
+                width: 18px;
+                height: 18px;
+            }
 
-    /* Header */
-    .header {
-        top: 40px;
-        padding: 0 5px;
-        z-index: 11; /* Ensure above banner */
-    }
-    .launch-app-btn {
-        top: 8px;
-        right: 65px;
-        padding: 6px 12px;
-        font-size: 0.9em;
-        z-index: 12; /* Above header */
-    }
-    .hamburger {
-        top: 8px;
-        right: 10px;
-        width: 40px;
-        height: 30px;
-        display: block; /* Force visibility */
-        z-index: 12; /* Above header */
-    }
-    .hamburger span {
-        background: #808080;
-        height: 4px;
-        display: block; /* Ensure spans show */
-        position: absolute; /* Match base */
-        width: 100%; /* Match base */
-        transition: background 0.3s; /* Match base */
-    }
-    .hamburger span:nth-child(1) {
-        top: 0;
-    }
-    .hamburger span:nth-child(2) {
-        top: 13px;
-    }
-    .hamburger span:nth-child(3) {
-        bottom: 0;
-    }
-    .hamburger:hover span {
-        background: #45a049; /* Match base hover */
-    }
-    .menu-content {
-        top: 45px;
-        width: 160px;
-        right: 10px;
-        z-index: 11; /* Ensure dropdown shows */
-    }
+            /* Header */
+            .header {
+                top: 40px;
+                padding: 0 5px;
+                z-index: 11;
+            }
+            .launch-app-btn {
+                top: 10px; /* Nudged down from 8px */
+                right: 65px;
+                padding: 6px 12px;
+                font-size: 0.9em;
+                z-index: 12;
+            }
+            .hamburger {
+                top: 10px; /* Nudged down from 8px */
+                right: 10px;
+                width: 40px;
+                height: 30px;
+                display: block;
+                z-index: 12;
+            }
+            .hamburger span {
+                background: #808080;
+                height: 4px;
+                display: block;
+                position: absolute;
+                width: 100%;
+                transition: background 0.3s;
+            }
+            .hamburger span:nth-child(1) {
+                top: 0;
+            }
+            .hamburger span:nth-child(2) {
+                top: 13px;
+            }
+            .hamburger span:nth-child(3) {
+                bottom: 0;
+            }
+            .hamburger:hover span {
+                background: #45a049;
+            }
+            .menu-content {
+                top: 47px; /* Adjusted for nudge from 45px */
+                width: 160px;
+                right: 10px;
+                z-index: 11;
+            }
 
-    /* Welcome Section */
-    .welcome-section {
-        padding: 40px 10px;
-        gap: 15px;
-        margin-top: 0;
-        min-height: 80vh;
-    }
-    .welcome-section h1 {
-        font-size: 2.5em;
-        margin: 0 0 10px;
-        text-align: center;
-        line-height: 1.1;
-        padding: 0 10px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
-    .sphere-icon {
-        width: 25px;
-        height: 25px;
-        margin-right: 5px;
-    }
-    .btn {
-        padding: 8px 18px;
-        font-size: 14px;
-    }
-    .scroll-down {
-        bottom: 100px;
-        font-size: 1.5em;
-    }
+            /* Welcome Section */
+            .welcome-section {
+                padding: 40px 10px;
+                gap: 15px;
+                margin-top: 0;
+                min-height: 80vh;
+            }
+            .welcome-section h1 {
+                font-size: 2.5em;
+                margin: 0 0 10px;
+                text-align: center;
+                line-height: 1.1;
+                padding: 0 10px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+            .sphere-icon {
+                width: 25px;
+                height: 25px;
+                margin-right: 5px;
+            }
+            .btn {
+                padding: 8px 18px;
+                font-size: 14px;
+            }
+            .scroll-down {
+                bottom: 100px;
+                font-size: 1.5em;
+            }
 
-    /* Web3 Services Section */
-    .web3-services-section {
-        padding: 50px 10px;
-    }
-    .web3-services-section h2 {
-        font-size: 1.8em;
-    }
-    .service-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    .service-item h3 {
-        font-size: 1.3em;
-    }
-    .service-item p {
-        font-size: 0.95em;
-    }
-    .service-item lottie-player {
-        width: 45px;
-        height: 45px;
-    }
+            /* Web3 Services Section */
+            .web3-services-section {
+                padding: 50px 10px;
+            }
+            .web3-services-section h2 {
+                font-size: 1.8em;
+            }
+            .service-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            .service-item h3 {
+                font-size: 1.3em;
+            }
+            .service-item p {
+                font-size: 0.95em;
+            }
+            .service-item lottie-player {
+                width: 45px;
+                height: 45px;
+            }
 
-    /* Web3 Stats Section */
-    .web3-stats-section {
-        padding: 50px 10px;
-    }
-    .web3-stats-section h2 {
-        font-size: 1.8em;
-    }
-    .stats-container {
-        gap: 15px;
-    }
-    .stat-number {
-        font-size: 1.6em;
-    }
-    .stat-label {
-        font-size: 0.95em;
-    }
+            /* Web3 Stats Section */
+            .web3-stats-section {
+                padding: 50px 10px;
+            }
+            .web3-stats-section h2 {
+                font-size: 1.8em;
+            }
+            .stats-container {
+                gap: 15px;
+            }
+            .stat-number {
+                font-size: 1.6em;
+            }
+            .stat-label {
+                font-size: 0.95em;
+            }
+            .stats-animation {
+                width: 200px;
+                height: 200px;
+            }
+            .globe {
+                width: 120px;
+                height: 120px;
+            }
+            .data-point {
+                animation: orbit 5s infinite ease-in-out;
+            }
+            @keyframes orbit {
+                0% { transform: translate(-50%, -50%) translateX(0) translateY(-80px); }
+                50% { transform: translate(-50%, -50%) translateX(80px) translateY(0); }
+                100% { transform: translate(-50%, -50%) translateX(0) translateY(-80px); }
+            }
 
-    /* About Section */
-    .about-section {
-        padding: 50px 10px;
-    }
-    .about-section h2 {
-        font-size: 1.8em;
-    }
-    .about-content p {
-        font-size: 0.95em;
-    }
+            /* About Section */
+            .about-section {
+                padding: 50px 10px;
+            }
+            .about-section h2 {
+                font-size: 1.8em;
+            }
+            .about-content p {
+                font-size: 0.95em;
+            }
 
-    /* Footer */
-    .footer-links a {
-        font-size: 0.9em;
-        margin: 0 6px;
-    }
-}
+            /* Footer */
+            .footer-links a {
+                font-size: 0.9em;
+                margin: 0 6px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -745,32 +807,32 @@
     <hr class="section-divider">
 
     <section class="web3-stats-section" id="web3-stats">
-    <h2>Web3 Stats</h2>
-    <div class="stats-container">
-        <div class="stat-item">
-            <span class="stat-number">5,065</span>
-            <span class="stat-label">Bugs Detected</span>
+        <h2>Web3 Stats</h2>
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-number">5,065</span>
+                <span class="stat-label">Bugs Detected</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2,010</span>
+                <span class="stat-label">Clients Serviced</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">506</span>
+                <span class="stat-label">Platforms Monitored</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">250</span>
+                <span class="stat-label">Audits Performed</span>
+            </div>
         </div>
-        <div class="stat-item">
-            <span class="stat-number">2,010</span>
-            <span class="stat-label">Clients Serviced</span>
+        <div class="stats-animation">
+            <div class="globe"></div>
+            <div class="data-point" style="--delay: 0s;"></div>
+            <div class="data-point" style="--delay: 1s;"></div>
+            <div class="data-point" style="--delay: 2s;"></div>
         </div>
-        <div class="stat-item">
-            <span class="stat-number">506</span>
-            <span class="stat-label">Platforms Monitored</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-number">250</span>
-            <span class="stat-label">Audits Performed</span>
-        </div>
-    </div>
-    <div class="stats-animation">
-        <div class="globe"></div>
-        <div class="data-point" style="--delay: 0s;"></div>
-        <div class="data-point" style="--delay: 1s;"></div>
-        <div class="data-point" style="--delay: 2s;"></div>
-    </div>
-</section>
+    </section>
 
     <hr class="section-divider">
 
