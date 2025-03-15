@@ -510,12 +510,12 @@
         font-size: 1.1em; /* Slightly smaller */
     }
     .award-banner img {
-        max-width: 100px; /* Smaller logo */
+        max-width: 120px; /* Slightly bigger logo (was 100px) */
         left: 5px;
     }
     .award-banner span {
         font-size: 12px; /* Smaller text */
-        padding-left: 110px; /* Adjust for logo */
+        padding-left: 130px; /* Adjust for larger logo */
     }
     .award-banner svg {
         width: 18px;
@@ -524,61 +524,63 @@
 
     /* Header */
     .header {
-        top: 35px; /* Just below banner (~35px tall) */
-        padding: 0 5px; /* Tighter padding */
+        top: 40px; /* Slightly lower (was 35px) */
+        padding: 0 5px;
     }
     .launch-app-btn {
-        top: 5px; /* Slight offset from header top */
-        right: 50px; /* Space for hamburger */
-        padding: 5px 10px;
-        font-size: 0.85em;
+        top: 8px; /* Nudged down (was 5px) */
+        right: 65px; /* Shifted left (was 50px) */
+        padding: 6px 12px; /* Bigger (was 5px 10px) */
+        font-size: 0.9em; /* Slightly larger (was 0.85em) */
     }
     .hamburger {
-        top: 5px; /* Align with button */
-        right: 5px;
-        width: 35px; /* Slightly smaller */
-        height: 25px;
+        top: 8px; /* Nudged down (was 5px) */
+        right: 10px; /* Shifted left (was 5px) */
+        width: 40px; /* Bigger (was 35px) */
+        height: 30px; /* Bigger (was 25px) */
     }
     .hamburger span:nth-child(2) {
-        top: 10px; /* Adjust middle bar */
+        top: 13px; /* Adjust middle bar for larger size */
     }
     .menu-content {
-        top: 35px; /* Below hamburger */
-        width: 160px; /* Narrower */
-        right: 5px;
+        top: 45px; /* Below larger hamburger (was 35px) */
+        width: 160px;
+        right: 10px; /* Match hamburger shift */
     }
 
     /* Welcome Section */
     .welcome-section {
-        padding: 40px 10px; /* Less top padding */
-        gap: 15px; /* Tighter gap */
-        margin-top: 0; /* No negative margin */
-        min-height: 80vh; /* Shorter section */
+        padding: 40px 10px;
+        gap: 15px;
+        margin-top: 0;
+        min-height: 80vh;
     }
     .welcome-section h1 {
-        font-size: 2.5em; /* Keep size (~40px) */
-        margin: 0 0 10px; /* Minimal margins */
-        text-align: center; /* Force center */
-        line-height: 1.1; /* Tighter line height */
-        padding: 0 10px; /* Prevent overflow */
+        font-size: 2.5em; /* Unchanged (~40px) */
+        margin: 0 0 10px;
+        text-align: center;
+        line-height: 1.1;
+        padding: 0 10px;
     }
     .sphere-icon {
-        width: 25px; /* Smaller icon */
+        width: 25px;
         height: 25px;
-        vertical-align: middle; /* Align with text */
+        display: inline-block; /* Ensure inline flow */
+        vertical-align: middle;
+        margin-right: 5px; /* Reduced (was 10px) */
     }
     .btn {
-        padding: 8px 18px; /* Smaller buttons */
+        padding: 8px 18px;
         font-size: 14px;
     }
     .scroll-down {
-        bottom: 100px; /* Higher up */
+        bottom: 100px;
         font-size: 1.5em;
     }
 
     /* Web3 Services Section */
     .web3-services-section {
-        padding: 50px 10px; /* Tighter */
+        padding: 50px 10px;
     }
     .web3-services-section h2 {
         font-size: 1.8em;
