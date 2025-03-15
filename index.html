@@ -465,52 +465,81 @@
             left: 50%;
             transform: translate(-50%, -50%);
             animation: spin 20s linear infinite;
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5); /* Subtle glow */
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5); /* Glow */
+            overflow: hidden; /* Contain the continents */
         }
-        .globe::before {
-            content: '';
+        .continents {
             position: absolute;
-            top: 10%;
-            left: 20%;
-            width: 50%;
-            height: 30%;
-            border: 2px solid #4CAF50; /* Green outline for North America-ish */
-            border-radius: 50%;
-            transform: rotate(-20deg);
-            background: transparent; /* Hollow */
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: transparent;
         }
-        .globe::after {
-            content: '';
+        .north-america {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 30%;
+            height: 30%;
+            border: 2px solid #4CAF50;
+            border-radius: 50% 50% 20% 20%;
+            background: transparent;
+            transform: rotate(-20deg);
+        }
+        .south-america {
+            position: absolute;
+            top: 45%;
+            left: 25%;
+            width: 20%;
+            height: 25%;
+            border: 2px solid #4CAF50;
+            border-radius: 20% 20% 50% 50%;
+            background: transparent;
+            transform: rotate(10deg);
+        }
+        .africa {
+            position: absolute;
+            top: 40%;
+            right: 25%;
+            width: 25%;
+            height: 35%;
+            border: 2px solid #4CAF50;
+            border-radius: 40% 40% 50% 50%;
+            background: transparent;
+            transform: rotate(15deg);
+        }
+        .europe {
+            position: absolute;
+            top: 15%;
+            right: 35%;
+            width: 20%;
+            height: 20%;
+            border: 2px solid #4CAF50;
+            border-radius: 50%;
+            background: transparent;
+            transform: rotate(-10deg);
+        }
+        .australia {
             position: absolute;
             bottom: 15%;
-            right: 25%;
-            width: 40%;
-            height: 25%;
-            border: 2px solid #4CAF50; /* Green outline for Africa-ish */
-            border-radius: 50%;
-            transform: rotate(30deg);
-            background: transparent; /* Hollow */
-        }
-        .globe-americas {
-            position: absolute;
-            top: 25%;
-            left: 15%;
-            width: 40%;
-            height: 50%;
-            border: 2px solid #4CAF50; /* Additional outline for Americas */
-            border-radius: 40%;
-            transform: rotate(-10deg);
-            background: transparent;
-        }
-        .globe-australia {
-            position: absolute;
-            bottom: 10%;
-            right: 10%;
-            width: 20%;
+            right: 15%;
+            width: 15%;
             height: 15%;
-            border: 2px solid #4CAF50; /* Outline for Australia-ish */
+            border: 2px solid #4CAF50;
             border-radius: 30%;
             background: transparent;
+        }
+        .asia {
+            position: absolute;
+            top: 25%;
+            right: 10%;
+            width: 35%;
+            height: 40%;
+            border: 2px solid #4CAF50;
+            border-radius: 40%;
+            background: transparent;
+            transform: rotate(5deg);
         }
         .data-point {
             width: 10px;
@@ -876,8 +905,14 @@
         </div>
         <div class="stats-animation">
             <div class="globe">
-                <div class="globe-americas"></div>
-                <div class="globe-australia"></div>
+                <div class="continents">
+                    <div class="north-america"></div>
+                    <div class="south-america"></div>
+                    <div class="africa"></div>
+                    <div class="europe"></div>
+                    <div class="australia"></div>
+                    <div class="asia"></div>
+                </div>
             </div>
             <div class="data-point" style="--delay: 0s;"></div>
             <div class="data-point" style="--delay: 1s;"></div>
