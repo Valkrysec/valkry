@@ -169,15 +169,6 @@
             background-color: #45a049;
             transform: scale(1.05);
         }
-        @media (max-width: 768px) {
-            .launch-app-btn {
-                top: 44px;
-                right: 74px;
-                padding: 6px 12px;
-                font-size: 0.9em;
-            }
-        }
-
         /* Popup Styles */
         .popup {
             display: none;
@@ -507,17 +498,121 @@
         }
 
         /* Media Queries */
-        @media (max-width: 768px) {
-            .web3-services-section h2, .web3-stats-section h2, .about-section h2 { font-size: 2.5em; }
-            .service-item { flex-direction: column; text-align: center; }
-            .service-item h3 { font-size: 1.5em; }
-            .service-item p { font-size: 1.1em; }
-            .stat-number { font-size: 2em; }
-            .stat-label { font-size: 1.1em; }
-            .about-content p { font-size: 1.1em; }
-            .web3-services-section, .web3-stats-section, .about-section { padding: 60px 20px; }
-            .footer-links a { font-size: 1em; margin: 0 10px; }
-        }
+@media (max-width: 768px) {
+    /* General Scroll Offset */
+    html {
+        scroll-padding-top: 80px; /* Offset for fixed banner */
+    }
+
+    /* Award Banner */
+    .award-banner {
+        padding: 10px 0; /* Reduce padding */
+        font-size: 1.2em; /* Smaller base size */
+    }
+    .award-banner img {
+        max-width: 120px; /* Shrink logo */
+        left: 5px; /* Closer to edge */
+    }
+    .award-banner span {
+        font-size: 14px; /* Absolute size for text */
+        padding-left: 130px; /* Prevent overlap with logo */
+    }
+    .award-banner svg {
+        width: 20px; /* Smaller icon */
+        height: 20px;
+    }
+
+    /* Header */
+    .launch-app-btn {
+        top: 60px; /* Move below banner */
+        right: 60px; /* Adjust for hamburger */
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+    .hamburger {
+        top: 60px; /* Align with button */
+        right: 10px;
+    }
+    .menu-content {
+        top: 100px; /* Ensure dropdown clears header */
+        width: 180px; /* Slightly narrower */
+    }
+
+    /* Welcome Section */
+    .welcome-section h1 {
+        font-size: 2em; /* Reduce title size */
+        margin-bottom: 20px;
+    }
+    .sphere-icon {
+        width: 30px; /* Smaller icon */
+        height: 30px;
+    }
+    .btn {
+        padding: 10px 20px; /* Slightly smaller buttons */
+        font-size: 16px;
+    }
+    .scroll-down {
+        bottom: 50px; /* Higher up for visibility */
+        font-size: 1.5em;
+    }
+
+    /* Web3 Services Section */
+    .web3-services-section {
+        padding: 80px 15px; /* Less padding */
+    }
+    .web3-services-section h2 {
+        font-size: 2em; /* Smaller title */
+    }
+    .service-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px; /* Tighter spacing */
+    }
+    .service-item h3 {
+        font-size: 1.4em;
+    }
+    .service-item p {
+        font-size: 1em;
+    }
+    .service-item lottie-player {
+        width: 50px; /* Smaller icons */
+        height: 50px;
+    }
+
+    /* Web3 Stats Section */
+    .web3-stats-section {
+        padding: 60px 15px;
+    }
+    .web3-stats-section h2 {
+        font-size: 2em;
+    }
+    .stats-container {
+        gap: 20px; /* Tighter grid */
+    }
+    .stat-number {
+        font-size: 1.8em;
+    }
+    .stat-label {
+        font-size: 1em;
+    }
+
+    /* About Section */
+    .about-section {
+        padding: 60px 15px;
+    }
+    .about-section h2 {
+        font-size: 2em;
+    }
+    .about-content p {
+        font-size: 1em;
+    }
+
+    /* Footer */
+    .footer-links a {
+        font-size: 1em;
+        margin: 0 8px;
+    }
+}
     </style>
 </head>
 <body>
