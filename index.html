@@ -401,7 +401,7 @@
         /* Web3 Stats Section */
         .web3-stats-section {
             min-height: 120vh;
-            padding: 100px 20px;
+            padding: 100px 20px 20px; /* Reduced bottom padding to nudge title up */
             text-align: center;
             position: relative;
             z-index: 1;
@@ -447,17 +447,18 @@
         }
         .stats-animation {
             position: absolute;
-            bottom: 0;
+            bottom: 50px; /* Nudged up from bottom: 0 */
             left: 50%;
             transform: translateX(-50%);
-            width: 300px;
-            height: 300px;
+            width: 400px; /* Bigger container */
+            height: 400px;
             margin-bottom: 20px;
         }
         .globe {
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(76, 175, 80, 0.3), transparent);
+            width: 300px; /* Bigger globe */
+            height: 300px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Blue_Marble_2002.png/1024px-Blue_Marble_2002.png') no-repeat center;
+            background-size: cover;
             border-radius: 50%;
             position: absolute;
             top: 50%;
@@ -481,9 +482,9 @@
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
         @keyframes orbit {
-            0% { transform: translate(-50%, -50%) translateX(0) translateY(-120px); }
-            50% { transform: translate(-50%, -50%) translateX(120px) translateY(0); }
-            100% { transform: translate(-50%, -50%) translateX(0) translateY(-120px); }
+            0% { transform: translate(-50%, -50%) translateX(0) translateY(-150px); } /* Adjusted for bigger globe */
+            50% { transform: translate(-50%, -50%) translateX(150px) translateY(0); }
+            100% { transform: translate(-50%, -50%) translateX(0) translateY(-150px); }
         }
 
         /* About Section */
@@ -552,7 +553,7 @@
 
             /* Award Banner */
             .award-banner {
-                padding: 10px 0; /* Taller banner */
+                padding: 10px 0;
                 font-size: 1.1em;
             }
             .award-banner img {
@@ -575,14 +576,14 @@
                 z-index: 11;
             }
             .launch-app-btn {
-                top: 10px; /* Nudged down from 8px */
+                top: 10px;
                 right: 65px;
                 padding: 6px 12px;
                 font-size: 0.9em;
                 z-index: 12;
             }
             .hamburger {
-                top: 10px; /* Nudged down from 8px */
+                top: 10px;
                 right: 10px;
                 width: 40px;
                 height: 30px;
@@ -610,7 +611,7 @@
                 background: #45a049;
             }
             .menu-content {
-                top: 47px; /* Adjusted for nudge from 45px */
+                top: 47px;
                 width: 160px;
                 right: 10px;
                 z-index: 11;
@@ -622,6 +623,9 @@
                 gap: 15px;
                 margin-top: 0;
                 min-height: 80vh;
+            }
+            .welcome-section h2 {
+                font-size: 1.8em;
             }
             .welcome-section h1 {
                 font-size: 2.5em;
@@ -673,7 +677,7 @@
 
             /* Web3 Stats Section */
             .web3-stats-section {
-                padding: 50px 10px;
+                padding: 50px 10px 20px; /* Adjusted to match title nudge */
             }
             .web3-stats-section h2 {
                 font-size: 1.8em;
@@ -688,20 +692,21 @@
                 font-size: 0.95em;
             }
             .stats-animation {
-                width: 200px;
-                height: 200px;
+                width: 240px; /* Adjusted for mobile */
+                height: 240px;
+                bottom: 30px; /* Nudged up from 50px */
             }
             .globe {
-                width: 120px;
-                height: 120px;
+                width: 180px; /* Bigger mobile globe */
+                height: 180px;
             }
             .data-point {
                 animation: orbit 5s infinite ease-in-out;
             }
             @keyframes orbit {
-                0% { transform: translate(-50%, -50%) translateX(0) translateY(-80px); }
-                50% { transform: translate(-50%, -50%) translateX(80px) translateY(0); }
-                100% { transform: translate(-50%, -50%) translateX(0) translateY(-80px); }
+                0% { transform: translate(-50%, -50%) translateX(0) translateY(-90px); } /* Adjusted for mobile */
+                50% { transform: translate(-50%, -50%) translateX(90px) translateY(0); }
+                100% { transform: translate(-50%, -50%) translateX(0) translateY(-90px); }
             }
 
             /* About Section */
