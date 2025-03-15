@@ -501,7 +501,7 @@
 @media (max-width: 768px) {
     /* General Scroll Offset */
     html {
-        scroll-padding-top: 60px; /* Adjusted for banner height */
+        scroll-padding-top: 60px;
     }
 
     /* Award Banner */
@@ -526,22 +526,30 @@
     .header {
         top: 40px;
         padding: 0 5px;
+        z-index: 11; /* Ensure above banner */
     }
     .launch-app-btn {
         top: 8px;
         right: 65px;
         padding: 6px 12px;
         font-size: 0.9em;
+        z-index: 12; /* Above header */
     }
     .hamburger {
         top: 8px;
         right: 10px;
         width: 40px;
         height: 30px;
+        display: block; /* Force visibility */
+        z-index: 12; /* Above header */
     }
     .hamburger span {
-        background: #808080; /* Ensure visibility */
-        height: 4px; /* Match base style */
+        background: #808080;
+        height: 4px;
+        display: block; /* Ensure spans show */
+        position: absolute; /* Match base */
+        width: 100%; /* Match base */
+        transition: background 0.3s; /* Match base */
     }
     .hamburger span:nth-child(1) {
         top: 0;
@@ -552,10 +560,14 @@
     .hamburger span:nth-child(3) {
         bottom: 0;
     }
+    .hamburger:hover span {
+        background: #45a049; /* Match base hover */
+    }
     .menu-content {
         top: 45px;
         width: 160px;
         right: 10px;
+        z-index: 11; /* Ensure dropdown shows */
     }
 
     /* Welcome Section */
@@ -571,10 +583,10 @@
         text-align: center;
         line-height: 1.1;
         padding: 0 10px;
-        display: flex; /* Flex for centering */
-        flex-wrap: wrap; /* Allow wrapping */
-        justify-content: center; /* Center contents */
-        align-items: center; /* Vertically align */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
     }
     .sphere-icon {
         width: 25px;
