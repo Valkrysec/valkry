@@ -506,7 +506,7 @@
 
     /* Award Banner */
     .award-banner {
-        padding: 10px 0; /* Reduce padding */
+        padding: 10px 0; /* Reduced padding */
         font-size: 1.2em; /* Smaller base size */
     }
     .award-banner img {
@@ -523,25 +523,34 @@
     }
 
     /* Header */
+    .header {
+        top: 35px; /* Align closer to banner bottom */
+    }
     .launch-app-btn {
-        top: 60px; /* Move below banner */
-        right: 60px; /* Adjust for hamburger */
+        top: 0; /* Flush with header */
+        right: 60px; /* Keep space for hamburger */
         padding: 6px 12px;
         font-size: 0.9em;
     }
     .hamburger {
-        top: 60px; /* Align with button */
+        top: 0; /* Flush with header */
         right: 10px;
     }
     .menu-content {
-        top: 100px; /* Ensure dropdown clears header */
+        top: 40px; /* Dropdown right below hamburger */
         width: 180px; /* Slightly narrower */
     }
 
     /* Welcome Section */
+    .welcome-section {
+        padding: 60px 15px; /* Tighten top padding */
+        gap: 20px; /* Reduce gap between elements */
+        margin-top: 0; /* Remove negative margin */
+    }
     .welcome-section h1 {
-        font-size: 2em; /* Reduce title size */
-        margin-bottom: 20px;
+        font-size: 2.5em; /* Slightly bigger title (~40px) */
+        margin-bottom: 15px; /* Less space below */
+        margin-top: 0; /* Tighten from top */
     }
     .sphere-icon {
         width: 30px; /* Smaller icon */
@@ -552,13 +561,13 @@
         font-size: 16px;
     }
     .scroll-down {
-        bottom: 50px; /* Higher up for visibility */
+        bottom: 70px; /* Higher up */
         font-size: 1.5em;
     }
 
     /* Web3 Services Section */
     .web3-services-section {
-        padding: 80px 15px; /* Less padding */
+        padding: 60px 15px; /* Less padding */
     }
     .web3-services-section h2 {
         font-size: 2em; /* Smaller title */
