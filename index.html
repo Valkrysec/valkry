@@ -506,16 +506,16 @@
 
     /* Award Banner */
     .award-banner {
-        padding: 8px 0; /* Tighter padding */
-        font-size: 1.1em; /* Slightly smaller */
+        padding: 8px 0;
+        font-size: 1.1em;
     }
     .award-banner img {
-        max-width: 120px; /* Slightly bigger logo (was 100px) */
+        max-width: 120px;
         left: 5px;
     }
     .award-banner span {
-        font-size: 12px; /* Smaller text */
-        padding-left: 130px; /* Adjust for larger logo */
+        font-size: 12px;
+        padding-left: 130px;
     }
     .award-banner svg {
         width: 18px;
@@ -524,28 +524,38 @@
 
     /* Header */
     .header {
-        top: 40px; /* Slightly lower (was 35px) */
+        top: 40px;
         padding: 0 5px;
     }
     .launch-app-btn {
-        top: 10px; /* Nudged down (was 5px) */
-        right: 70px; /* Shifted left (was 50px) */
-        padding: 6px 12px; /* Bigger (was 5px 10px) */
-        font-size: 0.9em; /* Slightly larger (was 0.85em) */
+        top: 8px;
+        right: 65px;
+        padding: 6px 12px;
+        font-size: 0.9em;
     }
     .hamburger {
-        top: 10px; /* Nudged down (was 5px) */
-        right: 15px; /* Shifted left (was 5px) */
-        width: 40px; /* Bigger (was 35px) */
-        height: 30px; /* Bigger (was 25px) */
+        top: 8px;
+        right: 10px;
+        width: 40px;
+        height: 30px;
+    }
+    .hamburger span {
+        background: #808080; /* Ensure visibility */
+        height: 4px; /* Match base style */
+    }
+    .hamburger span:nth-child(1) {
+        top: 0;
     }
     .hamburger span:nth-child(2) {
-        top: 13px; /* Adjust middle bar for larger size */
+        top: 13px;
+    }
+    .hamburger span:nth-child(3) {
+        bottom: 0;
     }
     .menu-content {
-        top: 47px; /* Below larger hamburger (was 35px) */
+        top: 45px;
         width: 160px;
-        right: 15px; /* Match hamburger shift */
+        right: 10px;
     }
 
     /* Welcome Section */
@@ -556,18 +566,20 @@
         min-height: 80vh;
     }
     .welcome-section h1 {
-        font-size: 2.5em; /* Unchanged (~40px) */
+        font-size: 2.5em;
         margin: 0 0 10px;
         text-align: center;
         line-height: 1.1;
         padding: 0 10px;
+        display: flex; /* Flex for centering */
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center; /* Center contents */
+        align-items: center; /* Vertically align */
     }
     .sphere-icon {
         width: 25px;
         height: 25px;
-        display: inline-block; /* Ensure inline flow */
-        vertical-align: middle;
-        margin-right: 5px; /* Reduced (was 10px) */
+        margin-right: 5px;
     }
     .btn {
         padding: 8px 18px;
