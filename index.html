@@ -360,22 +360,22 @@
             opacity: 0.7;
         }
 
-        /* Getting Started Section (Rewritten) */
-        .getting-started-section {
+        /* Web3 Services Section (Replaces Getting Started) */
+        .web3-services-section {
             min-height: 120vh;
             padding: 100px 20px;
             text-align: center;
             position: relative;
             z-index: 1;
         }
-        .getting-started-section h2 {
+        .web3-services-section h2 {
             font-family: 'Orbitron', sans-serif;
             font-size: 3em;
             color: #4CAF50;
             margin-bottom: 60px;
             text-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
         }
-        .guide-container {
+        .services-container {
             width: 90%;
             max-width: 900px;
             margin: 0 auto;
@@ -383,38 +383,31 @@
             flex-direction: column;
             gap: 50px;
         }
-        .guide-item {
+        .service-item {
             display: flex;
             align-items: center;
             gap: 20px;
             text-align: left;
         }
-        .guide-item h3 {
+        .service-item h3 {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.8em;
             color: #4CAF50;
             margin: 0 0 15px 0;
         }
-        .guide-item p, .guide-item ul {
+        .service-item p {
             font-family: 'IBM Plex Mono', 'Courier New', monospace;
             font-size: 1.3em;
             color: #E0E0E0;
             line-height: 1.6;
             margin: 0;
         }
-        .guide-item ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        .guide-item li {
-            margin-bottom: 10px;
-        }
-        .guide-item lottie-player {
+        .service-item lottie-player {
             width: 60px;
             height: 60px;
         }
 
-        /* Web3 Stats Section (Rewritten) */
+        /* Web3 Stats Section (Unchanged) */
         .web3-stats-section {
             min-height: 120vh;
             padding: 100px 20px;
@@ -456,7 +449,7 @@
             margin-top: 10px;
         }
 
-        /* About Section (Rewritten) */
+        /* About Section (Unchanged) */
         .about-section {
             min-height: 120vh;
             padding: 100px 20px;
@@ -489,7 +482,7 @@
             margin: 0 auto 20px;
         }
 
-        /* Footer (Rewritten but functionally the same) */
+        /* Footer (Unchanged) */
         footer {
             padding: 40px 20px;
             text-align: center;
@@ -515,14 +508,14 @@
 
         /* Media Queries */
         @media (max-width: 768px) {
-            .getting-started-section h2, .web3-stats-section h2, .about-section h2 { font-size: 2.5em; }
-            .guide-item { flex-direction: column; text-align: center; }
-            .guide-item h3 { font-size: 1.5em; }
-            .guide-item p, .guide-item ul { font-size: 1.1em; }
+            .web3-services-section h2, .web3-stats-section h2, .about-section h2 { font-size: 2.5em; }
+            .service-item { flex-direction: column; text-align: center; }
+            .service-item h3 { font-size: 1.5em; }
+            .service-item p { font-size: 1.1em; }
             .stat-number { font-size: 2em; }
             .stat-label { font-size: 1.1em; }
             .about-content p { font-size: 1.1em; }
-            .getting-started-section, .web3-stats-section, .about-section { padding: 60px 20px; }
+            .web3-services-section, .web3-stats-section, .about-section { padding: 60px 20px; }
             .footer-links a { font-size: 1em; margin: 0 10px; }
         }
     </style>
@@ -545,11 +538,11 @@
                 <span></span>
             </button>
             <div class="menu-content">
-                <a href="#getting-started">Getting Started</a>
+                <a href="#web3-services">Services</a>
                 <a href="#web3-stats">Web3 Stats</a>
                 <a href="#about-section">About</a>
-                <a href="services.html">Services</a>
                 <a href="team.html">Team</a>
+                <a href="#xone-app">xOne App</a> <!-- Placeholder for later -->
             </div>
         </div>
     </div>
@@ -577,43 +570,36 @@
         </div>
     </div>
 
-    <!-- Getting Started Section (Rewritten) -->
-    <section class="getting-started-section" id="getting-started">
-        <h2>Getting Started</h2>
-        <div class="guide-container">
-            <div class="guide-item">
+    <!-- Web3 Services Section (New, Replaces Getting Started) -->
+    <section class="web3-services-section" id="web3-services">
+        <h2>Web3 Services</h2>
+        <div class="services-container">
+            <div class="service-item">
                 <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_jcikwtgl.json" background="transparent" speed="1" loop autoplay></lottie-player>
                 <div>
-                    <h3>Accessing Your User Dashboard</h3>
-                    <p>Click "Launch App" to access your dashboard (coming soon). Once live, you’ll see Web3 Security Scores and verified transactions via the xOne extension—your gateway to a secure Web3 experience.</p>
+                    <h3>Web3 Infrastructure Assessment</h3>
+                    <p>Analyze your blockchain setup—networks, smart contracts, and scalability—to ensure security and performance.</p>
                 </div>
             </div>
-            <div class="guide-item">
-                <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_Vwc4Pka4Mh.json" background="transparent" speed="1" loop autoplay></lottie-player>
-                <div>
-                    <h3>xOne App Intro</h3>
-                    <p>Meet xOne App—built by ethical hackers to lock down your Web3 journey. Real-time stats like verified sites and security scores are coming to keep your assets safe.</p>
-                </div>
-            </div>
-            <div class="guide-item">
+            <div class="service-item">
                 <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_kxdh1wel.json" background="transparent" speed="1" loop autoplay></lottie-player>
                 <div>
-                    <h3>Security Features</h3>
-                    <p>xOne Secure’s 5-step process will protect your Web3 interactions in real-time:</p>
-                    <ul>
-                        <li><strong>Detect:</strong> Logs every Web3 interaction’s metadata.</li>
-                        <li><strong>Verify Site:</strong> Checks domains against phishing blacklists.</li>
-                        <li><strong>Verify Contract:</strong> Confirms contract authenticity.</li>
-                        <li><strong>Analyze Code:</strong> Scans for malicious patterns.</li>
-                        <li><strong>Secure:</strong> Approves or blocks interactions, updating your metrics.</li>
-                    </ul>
+                    <h3>Auditing & Compliance</h3>
+                    <p>Audit smart contracts and ensure regulatory compliance with ongoing monitoring.</p>
                 </div>
             </div>
-            <div class="guide-item">
+            <div class="service-item">
+                <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_Vwc4Pka4Mh.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                <div>
+                    <h3>Penetration Testing</h3>
+                    <p>Simulate attacks on your dApps to uncover and fix vulnerabilities with ethical hacking.</p>
+                </div>
+            </div>
+            <div class="service-item">
                 <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_3k9xsfsp.json" background="transparent" speed="1" loop autoplay></lottie-player>
                 <div>
-                    <h3>How to Install</h3>
-                    <p>xOne Extension hits the Chrome Web Store June 6th. Stay tuned! - xOne Dev Team</p>
+                    <h3>xOne App & Extension</h3>
+                    <p>Validate sites, contracts, and scripts for secure Web3 interactions (coming soon).</p>
                 </div>
             </div>
         </div>
@@ -621,7 +607,7 @@
 
     <hr class="section-divider">
 
-    <!-- Web3 Stats Section (Rewritten) -->
+    <!-- Web3 Stats Section (Unchanged) -->
     <section class="web3-stats-section" id="web3-stats">
         <h2>Web3 Stats</h2>
         <div class="stats-container">
@@ -646,7 +632,7 @@
 
     <hr class="section-divider">
 
-    <!-- About Section (Rewritten) -->
+    <!-- About Section (Unchanged) -->
     <section class="about-section" id="about-section">
         <h2>Who is xOne?</h2>
         <div class="about-content">
@@ -660,7 +646,7 @@
 
     <hr class="section-divider">
 
-    <!-- Footer (Rewritten but functionally the same) -->
+    <!-- Footer (Unchanged) -->
     <footer>
         <div class="footer-links">
             <a href="https://twitter.com/xOnesecure">X</a>
