@@ -461,34 +461,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: url('https://visibleearth.nasa.gov/assets/74395/blue_marble_2002_2400x2400.jpg') no-repeat center;
+            background: url('https://www.solarsystemscope.com/textures/download/2k_earth_daymap.jpg') no-repeat center;
             background-size: cover;
             border-radius: 50%;
             animation: spin 20s linear infinite;
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.7); /* Green glow */
-            /* Hollow effect with radial gradient mask */
-            -webkit-mask-image: radial-gradient(circle at center, transparent 20%, black 60%);
-            mask-image: radial-gradient(circle at center, transparent 20%, black 60%);
-        }
-        .data-point {
-            width: 10px;
-            height: 10px;
-            background: #4CAF50;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            animation: orbit 6s infinite ease-in-out;
-            animation-delay: var(--delay);
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.7); /* Green glow like StockCake */
         }
         @keyframes spin {
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        @keyframes orbit {
-            0% { transform: translate(-50%, -50%) translateX(0) translateY(-150px); }
-            50% { transform: translate(-50%, -50%) translateX(150px) translateY(0); }
-            100% { transform: translate(-50%, -50%) translateX(0) translateY(-150px); }
         }
 
         /* About Section */
@@ -701,31 +682,6 @@
                 width: 180px;
                 height: 180px;
             }
-            .data-point {
-                animation: orbit 5s infinite ease-in-out;
-            }
-            @keyframes orbit {
-                0% { transform: translate(-50%, -50%) translateX(0) translateY(-90px); }
-                50% { transform: translate(-50%, -50%) translateX(90px) translateY(0); }
-                100% { transform: translate(-50%, -50%) translateX(0) translateY(-90px); }
-            }
-
-            /* About Section */
-            .about-section {
-                padding: 20px 10px 50px;
-            }
-            .about-section h2 {
-                font-size: 1.8em;
-            }
-            .about-content p {
-                font-size: 0.95em;
-            }
-
-            /* Footer */
-            .footer-links a {
-                font-size: 0.9em;
-                margin: 0 6px;
-            }
         }
     </style>
 </head>
@@ -834,9 +790,6 @@
         </div>
         <div class="stats-animation">
             <div class="globe"></div>
-            <div class="data-point" style="--delay: 0s;"></div>
-            <div class="data-point" style="--delay: 1s;"></div>
-            <div class="data-point" style="--delay: 2s;"></div>
         </div>
     </section>
 
