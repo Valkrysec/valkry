@@ -447,7 +447,7 @@
         }
         .stats-animation {
             position: absolute;
-            bottom: 70px; /* Nudged up from 50px */
+            bottom: 150px; /* Moved up significantly from 70px */
             left: 50%;
             transform: translateX(-50%);
             width: 400px;
@@ -457,14 +457,15 @@
         .globe {
             width: 300px;
             height: 300px;
-            background: #4CAF50; /* Neon green oceans */
+            background: #1F1F1F; /* Dark base like menu */
+            border: 3px solid #4CAF50; /* Green outline like dashboard boxes */
             border-radius: 50%;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             animation: spin 20s linear infinite;
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.8); /* Neon glow */
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5); /* Subtle glow */
         }
         .globe::before {
             content: '';
@@ -473,7 +474,7 @@
             left: 20%;
             width: 50%;
             height: 30%;
-            background: #45a049; /* Darker green continent (North America-ish) */
+            background: rgba(76, 175, 80, 0.2); /* Faint neon green for continents */
             border-radius: 50%;
             transform: rotate(-20deg);
         }
@@ -484,7 +485,7 @@
             right: 25%;
             width: 40%;
             height: 25%;
-            background: #45a049; /* Darker green continent (Africa-ish) */
+            background: rgba(76, 175, 80, 0.2); /* Faint neon green for continents */
             border-radius: 50%;
             transform: rotate(30deg);
         }
@@ -713,7 +714,7 @@
             .stats-animation {
                 width: 240px;
                 height: 240px;
-                bottom: 50px; /* Nudged up from 30px */
+                bottom: 100px; /* Moved up significantly from 50px */
             }
             .globe {
                 width: 180px;
