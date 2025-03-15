@@ -501,125 +501,136 @@
 @media (max-width: 768px) {
     /* General Scroll Offset */
     html {
-        scroll-padding-top: 80px; /* Offset for fixed banner */
+        scroll-padding-top: 60px; /* Adjusted for banner height */
     }
 
     /* Award Banner */
     .award-banner {
-        padding: 10px 0; /* Reduced padding */
-        font-size: 1.2em; /* Smaller base size */
+        padding: 8px 0; /* Tighter padding */
+        font-size: 1.1em; /* Slightly smaller */
     }
     .award-banner img {
-        max-width: 120px; /* Shrink logo */
-        left: 5px; /* Closer to edge */
+        max-width: 100px; /* Smaller logo */
+        left: 5px;
     }
     .award-banner span {
-        font-size: 14px; /* Absolute size for text */
-        padding-left: 130px; /* Prevent overlap with logo */
+        font-size: 12px; /* Smaller text */
+        padding-left: 110px; /* Adjust for logo */
     }
     .award-banner svg {
-        width: 20px; /* Smaller icon */
-        height: 20px;
+        width: 18px;
+        height: 18px;
     }
 
     /* Header */
     .header {
-        top: 35px; /* Align closer to banner bottom */
+        top: 35px; /* Just below banner (~35px tall) */
+        padding: 0 5px; /* Tighter padding */
     }
     .launch-app-btn {
-        top: 0; /* Flush with header */
-        right: 60px; /* Keep space for hamburger */
-        padding: 6px 12px;
-        font-size: 0.9em;
+        top: 5px; /* Slight offset from header top */
+        right: 50px; /* Space for hamburger */
+        padding: 5px 10px;
+        font-size: 0.85em;
     }
     .hamburger {
-        top: 0; /* Flush with header */
-        right: 10px;
+        top: 5px; /* Align with button */
+        right: 5px;
+        width: 35px; /* Slightly smaller */
+        height: 25px;
+    }
+    .hamburger span:nth-child(2) {
+        top: 10px; /* Adjust middle bar */
     }
     .menu-content {
-        top: 40px; /* Dropdown right below hamburger */
-        width: 180px; /* Slightly narrower */
+        top: 35px; /* Below hamburger */
+        width: 160px; /* Narrower */
+        right: 5px;
     }
 
     /* Welcome Section */
     .welcome-section {
-        padding: 60px 15px; /* Tighten top padding */
-        gap: 20px; /* Reduce gap between elements */
-        margin-top: 0; /* Remove negative margin */
+        padding: 40px 10px; /* Less top padding */
+        gap: 15px; /* Tighter gap */
+        margin-top: 0; /* No negative margin */
+        min-height: 80vh; /* Shorter section */
     }
     .welcome-section h1 {
-        font-size: 2.5em; /* Slightly bigger title (~40px) */
-        margin-bottom: 15px; /* Less space below */
-        margin-top: 0; /* Tighten from top */
+        font-size: 2.5em; /* Keep size (~40px) */
+        margin: 0 0 10px; /* Minimal margins */
+        text-align: center; /* Force center */
+        line-height: 1.1; /* Tighter line height */
+        padding: 0 10px; /* Prevent overflow */
     }
     .sphere-icon {
-        width: 30px; /* Smaller icon */
-        height: 30px;
+        width: 25px; /* Smaller icon */
+        height: 25px;
+        vertical-align: middle; /* Align with text */
     }
     .btn {
-        padding: 10px 20px; /* Slightly smaller buttons */
-        font-size: 16px;
+        padding: 8px 18px; /* Smaller buttons */
+        font-size: 14px;
     }
     .scroll-down {
-        bottom: 70px; /* Higher up */
+        bottom: 100px; /* Higher up */
         font-size: 1.5em;
     }
 
     /* Web3 Services Section */
     .web3-services-section {
-        padding: 60px 15px; /* Less padding */
+        padding: 50px 10px; /* Tighter */
     }
     .web3-services-section h2 {
-        font-size: 2em; /* Smaller title */
+        font-size: 1.8em;
     }
     .service-item {
         flex-direction: column;
         text-align: center;
-        gap: 15px; /* Tighter spacing */
+        gap: 10px;
     }
     .service-item h3 {
-        font-size: 1.4em;
+        font-size: 1.3em;
     }
     .service-item p {
-        font-size: 1em;
+        font-size: 0.95em;
     }
     .service-item lottie-player {
-        width: 50px; /* Smaller icons */
-        height: 50px;
+        width: 45px;
+        height: 45px;
     }
 
     /* Web3 Stats Section */
     .web3-stats-section {
-        padding: 60px 15px;
+        padding: 50px 10px;
     }
     .web3-stats-section h2 {
-        font-size: 2em;
-    }
-    .stats-container {
-        gap: 20px; /* Tighter grid */
-    }
-    .stat-number {
         font-size: 1.8em;
     }
+    .stats-container {
+        gap: 15px;
+    }
+    .stat-number {
+        font-size: 1.6em;
+    }
     .stat-label {
-        font-size: 1em;
+        font-size: 0.95em;
     }
 
     /* About Section */
     .about-section {
-        padding: 60px 15px;
+        padding: 50px 10px;
     }
     .about-section h2 {
-        font-size: 2em;
+        font-size: 1.8em;
     }
     .about-content p {
-        font-size: 1em;
+        font-size: 0.95em;
     }
 
     /* Footer */
     .footer-links a {
-        font-size: 1em;
-        margin: 0 8px;
+        font-size: 0.9em;
+        margin: 0 6px;
     }
 }
     </style>
