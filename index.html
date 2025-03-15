@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <!-- Lottie Player for Animated Icons -->
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
     <style>
         html {
             height: 100%;
@@ -32,7 +32,7 @@
             display: none;
         }
 
-        /* Header and Award Banner (Unchanged) */
+        /* Header and Award Banner */
         .award-banner {
             text-align: center;
             padding: 15px 0;
@@ -178,7 +178,7 @@
             }
         }
 
-        /* Popup Styles (Unchanged) */
+        /* Popup Styles */
         .popup {
             display: none;
             position: fixed;
@@ -219,7 +219,7 @@
             display: block;
         }
 
-        /* Welcome Section (Unchanged) */
+        /* Welcome Section */
         .welcome-section {
             min-height: 100vh;
             display: flex;
@@ -317,7 +317,7 @@
             100% { transform: scale(1); }
         }
 
-        /* Marquee Banner (Unchanged) */
+        /* Marquee Banner */
         .marquee-banner {
             background: rgba(0, 0, 0, 0.9);
             padding: 20px 0;
@@ -360,7 +360,7 @@
             opacity: 0.7;
         }
 
-        /* Web3 Services Section (Replaces Getting Started) */
+        /* Web3 Services Section */
         .web3-services-section {
             min-height: 120vh;
             padding: 100px 20px;
@@ -407,7 +407,7 @@
             height: 60px;
         }
 
-        /* Web3 Stats Section (Unchanged) */
+        /* Web3 Stats Section */
         .web3-stats-section {
             min-height: 120vh;
             padding: 100px 20px;
@@ -449,7 +449,7 @@
             margin-top: 10px;
         }
 
-        /* About Section (Unchanged) */
+        /* About Section */
         .about-section {
             min-height: 120vh;
             padding: 100px 20px;
@@ -482,7 +482,7 @@
             margin: 0 auto 20px;
         }
 
-        /* Footer (Unchanged) */
+        /* Footer */
         footer {
             padding: 40px 20px;
             text-align: center;
@@ -521,7 +521,6 @@
     </style>
 </head>
 <body>
-    <!-- Header and Award Banner (Unchanged) -->
     <div class="award-banner">
         <a href="index.html"><img src="X1-7.png" alt="xOne Secure Logo"></a>
         <span>
@@ -542,7 +541,7 @@
                 <a href="#web3-stats">Web3 Stats</a>
                 <a href="#about-section">About</a>
                 <a href="team.html">Team</a>
-                <a href="#xone-app">xOne App</a> <!-- Placeholder for later -->
+                <a href="#xone-app">xOne App</a>
             </div>
         </div>
     </div>
@@ -553,7 +552,6 @@
         </div>
     </div>
 
-    <!-- Welcome Section (Unchanged) -->
     <section class="welcome-section">
         <h1><span class="sphere-icon"></span>Zero Trust<span class="highlight"> Web3</span> Security Solution</h1>
         <a href="assessment-form.html" class="btn">Free Web3 Assessment</a>
@@ -561,16 +559,14 @@
         <div class="scroll-down">↓</div>
     </section>
 
-    <!-- Marquee Banner (Unchanged) -->
     <div class="marquee-banner">
         <div class="marquee-content">
             <span><svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>Pentesting Web3 Pioneers</span>
-            <span><svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>DeFi Vulernability Slayers</span>
+            <span><svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>DeFi Vulnerability Slayers</span>
             <span><svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>Ethical Hackers With Real Experience</span>
         </div>
     </div>
 
-    <!-- Web3 Services Section (New, Replaces Getting Started) -->
     <section class="web3-services-section" id="web3-services">
         <h2>Web3 Services</h2>
         <div class="services-container">
@@ -607,7 +603,6 @@
 
     <hr class="section-divider">
 
-    <!-- Web3 Stats Section (Unchanged) -->
     <section class="web3-stats-section" id="web3-stats">
         <h2>Web3 Stats</h2>
         <div class="stats-container">
@@ -632,7 +627,6 @@
 
     <hr class="section-divider">
 
-    <!-- About Section (Unchanged) -->
     <section class="about-section" id="about-section">
         <h2>Who is xOne?</h2>
         <div class="about-content">
@@ -646,7 +640,6 @@
 
     <hr class="section-divider">
 
-    <!-- Footer (Unchanged) -->
     <footer>
         <div class="footer-links">
             <a href="https://twitter.com/xOnesecure">X</a>
@@ -658,7 +651,6 @@
         </div>
     </footer>
 
-    <!-- JavaScript (Unchanged) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
@@ -673,6 +665,14 @@
                     menuContent.classList.remove('active');
                 }
             });
+
+            // Fallback for Lottie if it fails to load
+            if (typeof lottie === 'undefined') {
+                console.warn('Lottie Player failed to load. Animations will not display.');
+                document.querySelectorAll('lottie-player').forEach(player => {
+                    player.style.display = 'none';
+                });
+            }
         });
 
         function showPopup() {
