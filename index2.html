@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xOne Secure - Cybersecurity Defense Contractors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <!-- Lottie Player for Animated Icons -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
+    <style>
+        html {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #0B0B0B;
+            background-image: url('X1-5.png');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #E0E0E0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Header and Award Banner */
+        .award-banner {
+            text-align: center;
+            padding: 15px 0;
+            background: #0B0B0B;
+            color: #4CAF50;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            z-index: 15;
+            animation: fadeIn 1s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        .award-banner span {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+        .award-banner svg {
+            width: 30px;
+            height: 30px;
+            fill: #4CAF50;
+        }
+        .award-banner img {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 180px;
+            height: auto;
+            object-fit: contain;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .header {
+            background: transparent;
+            padding: 0 10px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 10;
+            position: absolute;
+            top: 45px;
+            left: 0;
+            right: 0;
+        }
+        .header img {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
+        }
+        .menu {
+            position: relative;
+            z-index: 11;
+        }
+        .hamburger {
+            background: none;
+            border: none;
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            display: block;
+            position: relative;
+            top: 44px;
+            right: 10px;
+        }
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: #808080;
+            position: absolute;
+            transition: background 0.3s;
+        }
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 13px; }
+        .hamburger span:nth-child(3) { bottom: 0; }
+        .hamburger:hover span {
+            background: #45a049;
+        }
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            background: #1F1F1F;
+            flex-direction: column;
+            width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .menu-content.active {
+            display: flex;
+        }
+        .menu-content a {
+            color: #E0E0E0;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .menu-content a:hover {
+            background-color: #4CAF50;
+            border-radius: 4px;
+        }
+        .launch-app-btn {
+            position: absolute;
+            top: 42px;
+            right: 80px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            z-index: 10;
+        }
+        .launch-app-btn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1C2526;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+            z-index: 20;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        .popup-content p {
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-size: 1.1em;
+            color: #E0E0E0;
+            margin: 0 0 20px 0;
+        }
+        .popup-close-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .popup-close-btn:hover {
+            background: #45a049;
+        }
+        .popup.active {
+            display: block;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 30px;
+            padding: 0 20px;
+            z-index: 1;
+            position: relative;
+            margin-top: -50px;
+        }
+        .welcome-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: float 20s infinite linear;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        .welcome-section h1 {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+        }
+        .sphere-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: url('sphere-icon.png') no-repeat center;
+            animation: rotate 10s infinite linear;
+            margin-right: 10px;
+        }
+        .highlight {
+            background: linear-gradient(45deg, #000000, #3533cd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: #4CAF50;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 28px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 6px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        .btn:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(76, 175, 80, 0.8);
+        }
+        .scroll-down {
+            position: absolute;
+            bottom: 100px;
+            font-size: 2em;
+            color: #4CAF50;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+        .scroll-down:hover {
+            animation: pulse 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Marquee Banner */
+        .marquee-banner {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px 0;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8em;
+            color: #4CAF50;
+            overflow: hidden;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+        }
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+        }
+        .marquee-content span {
+            margin: 0 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .marquee-content svg {
+            width: 30px;
+            height: 30px;
+            fill: #4CAF50;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Section Divider */
+        hr.section-divider {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #4CAF50, transparent);
+            margin: 60px 0;
+            opacity: 0.7;
+        }
+
+        /* Cybersecurity Services Section */
+        .cybersecurity-services-section {
+            min-height: 120vh;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .cybersecurity-services-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em;
+            color: #4CAF50;
+            margin-bottom: 60px;
+            text-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+        }
+        .services-container {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+        .service-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+        }
+        .service-item h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8em;
+            color: #4CAF50;
+            margin: 0 0 15px 0;
+        }
+        .service-item p {
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-size: 1.3em;
+            color: #E0E0E0;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .service-item lottie-player {
+            width: 60px;
+            height: 60px;
+        }
+
+        /* Cybersecurity Stats Section */
+        .cybersecurity-stats-section {
+            min-height: 120vh;
+            padding: 40px 20px 100px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .cybersecurity-stats-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em;
+            color: #4CAF50;
+            margin-bottom: 60px;
+            text-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+        }
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            color: #4CAF50;
+            font-weight: 700;
+        }
+        .stat-label {
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-size: 1.3em;
+            color: #E0E0E0;
+            margin-top: 10px;
+        }
+
+        /* Globe Animation for Stats */
+        .cybersecurity-stats-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .stats-animation {
+            position: absolute;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+        .globe {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: url('https://www.solarsystemscope.com/textures/download/2k_earth_daymap.jpg') no-repeat center;
+            background-size: cover;
+            border-radius: 50%;
+            animation: spin 20s linear infinite;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.7);
+        }
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* About Section */
+        .about-section {
+            min-height: 120vh;
+            padding: 40px 20px 100px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .about-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em;
+            color: #4CAF50;
+            margin-bottom: 60px;
+            text-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+        }
+        .about-content {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .about-content p {
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-size: 1.3em;
+            color: #E0E0E0;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+        .about-content lottie-player {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: transparent;
+            z-index: 1;
+        }
+        .footer-links a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #45a049;
+            text-decoration: underline;
+        }
+        .copyright {
+            margin-top: 20px;
+            color: #6c757d;
+            font-size: 1em;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            /* General Scroll Offset */
+            html {
+                scroll-padding-top: 60px;
+            }
+
+            /* Award Banner */
+            .award-banner {
+                padding: 10px 0;
+                font-size: 1.1em;
+            }
+            .award-banner img {
+                max-width: 120px;
+                left: 5px;
+            }
+            .award-banner span {
+                font-size: 12px;
+                padding-left: 130px;
+            }
+            .award-banner svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            /* Header */
+            .header {
+                top: 40px;
+                padding: 0 5px;
+                z-index: 11;
+            }
+            .launch-app-btn {
+                top: 10px;
+                right: 65px;
+                padding: 6px 12px;
+                font-size: 0.9em;
+                z-index: 12;
+            }
+            .hamburger {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 30px;
+                display: block;
+                z-index: 12;
+            }
+            .hamburger span {
+                background: #808080;
+                height: 4px;
+                display: block;
+                position: absolute;
+                width: 100%;
+                transition: background 0.3s;
+            }
+            .hamburger span:nth-child(1) {
+                top: 0;
+            }
+            .hamburger span:nth-child(2) {
+                top: 13px;
+            }
+            .hamburger span:nth-child(3) {
+                bottom: 0;
+            }
+            .hamburger:hover span {
+                background: #45a049;
+            }
+            .menu-content {
+                top: 47px;
+                width: 160px;
+                right: 10px;
+                z-index: 11;
+            }
+
+            /* Welcome Section */
+            .welcome-section {
+                padding: 40px 10px;
+                gap: 15px;
+                margin-top: 0;
+                min-height: 80vh;
+            }
+            .welcome-section h1 {
+                font-size: 2.5em;
+                margin: 0 0 10px;
+                text-align: center;
+                line-height: 1.1;
+                padding: 0 10px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+            .sphere-icon {
+                width: 25px;
+                height: 25px;
+                margin-right: 5px;
+            }
+            .btn {
+                padding: 8px 18px;
+                font-size: 14px;
+            }
+            .scroll-down {
+                bottom: 100px;
+                font-size: 1.5em;
+            }
+
+            /* Cybersecurity Services Section */
+            .cybersecurity-services-section {
+                padding: 50px 10px;
+            }
+            .cybersecurity-services-section h2 {
+                font-size: 1.8em;
+            }
+            .service-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            .service-item h3 {
+                font-size: 1.3em;
+            }
+            .service-item p {
+                font-size: 0.95em;
+            }
+            .service-item lottie-player {
+                width: 45px;
+                height: 45px;
+            }
+
+            /* Cybersecurity Stats Section */
+            .cybersecurity-stats-section {
+                padding: 20px 10px 50px;
+            }
+            .cybersecurity-stats-section h2 {
+                font-size: 1.8em;
+            }
+            .stats-container {
+                gap: 15px;
+            }
+            .stat-number {
+                font-size: 1.6em;
+            }
+            .stat-label {
+                font-size: 0.95em;
+            }
+            .stats-animation {
+                width: 240px;
+                height: 240px;
+                bottom: 100px;
+            }
+            .globe {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="award-banner">
+        <a href="index.html"><img src="X1-7.png" alt="xOne Secure Logo"></a>
+        <span>
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>
+            250 + Cybersecurity Awards
+        </span>
+    </div>
+    <div class="header">
+        <button class="launch-app-btn" onclick="showPopup()">Launch App</button>
+        <div class="menu">
+            <button class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="menu-content">
+                <a href="#cybersecurity-services">Services</a>
+                <a href="#cybersecurity-stats">Stats</a>
+                <a href="#about-section">About</a>
+                <a href="team.html">Team</a>
+                <a href="dashboard.html">xOne App</a>
+            </div>
+        </div>
+    </div>
+    <div id="launch-popup" class="popup">
+        <div class="popup-content">
+            <p>The xOne Secure app and extension are in final development. Our cybersecurity tools will be available on the App Store and Chrome Web Store on June 6th.</p>
+            <button class="popup-close-btn" onclick="hidePopup()">Close</button>
+        </div>
+    </div>
+
+    <section class="welcome-section">
+        <h1><span class="sphere-icon"></span>Zero Trust<span class="highlight"> Cybersecurity</span> Defense Contractors</h1>
+        <a href="assessment-form.html" class="btn">Free Cybersecurity Assessment</a>
+        <a href="https://xone-secure-protocol.gitbook.io/xone-secure" class="btn">Docs</a>
+        <div class="scroll-down">↓</div>
+    </section>
+
+    <div class="marquee-banner">
+        <div class="marquee-content">
+            <span><svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>Cybersecurity Defense Experts</span>
+            <span><svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>Trusted by Government & Enterprise</span>
+            <span><svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>Ethical Hackers Securing the Future</span>
+        </div>
+    </div>
+
+    <section class="cybersecurity-services-section" id="cybersecurity-services">
+        <h2>Cybersecurity Services</h2>
+        <div class="services-container">
+            <div class="service-item">
+                <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_jcikwtgl.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                <div>
+                    <h3>Network Infrastructure Assessment</h3>
+                    <p>Evaluate your network architecture, cloud systems, and endpoints to ensure robust security and resilience against cyber threats.</p>
+                </div>
+            </div>
+            <div class="service-item">
+                <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_kxdh1wel.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                <div>
+                    <h3>Auditing & Compliance</h3>
+                    <p>Conduct thorough audits to ensure compliance with NIST, FISMA, and other federal standards, with ongoing monitoring for defense and enterprise clients.</p>
+                </div>
+            </div>
+            <div class="service-item">
+                <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_Vwc4Pka4Mh.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                <div>
+                    <h3>Penetration Testing</h3>
+                    <p>Simulate advanced cyber attacks on your systems to identify and remediate vulnerabilities, tailored for government and commercial environments.</p>
+                </div>
+            </div>
+            <div class="service-item">
+                <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_3k9xsfsp.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                <div>
+                    <h3>xOne Secure App & Extension</h3>
+                    <p>Real-time threat detection and validation for secure interactions across enterprise and defense systems (coming soon).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="cybersecurity-stats-section" id="cybersecurity-stats">
+        <h2>Cybersecurity Stats</h2>
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-number">5,065</span>
+                <span class="stat-label">Threats Mitigated</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2,010</span>
+                <span class="stat-label">Clients Protected</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">506</span>
+                <span class="stat-label">Systems Secured</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">250</span>
+                <span class="stat-label">Audits Completed</span>
+            </div>
+        </div>
+        <div class="stats-animation">
+            <div class="globe"></div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="about-section" id="about-section">
+        <h2>Who is xOne Secure?</h2>
+        <div class="about-content">
+            <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_u4jjb9zw.json" background="transparent" speed="1" loop autoplay></lottie-player>
+            <p>xOne Secure is a premier cybersecurity defense contractor, delivering cutting-edge solutions to government, commercial, and enterprise clients.</p>
+            <p>Our team of expert penetration testers, DevOps engineers, and compliance specialists provides comprehensive network assessments, system audits, and threat mitigation services, ensuring compliance with federal standards like NIST and FISMA.</p>
+            <p>We are trusted partners on gsa.gov and sam.gov, securing critical infrastructure for defense and enterprise sectors with actionable insights and robust solutions.</p>
+            <p>Our upcoming xOne Secure App and Extension will deliver real-time threat detection, reinforcing our commitment to safeguarding your digital assets.</p>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://twitter.com/xOnesecure">X</a>
+            <a href="https://github.com/xOneSecure">Gitbook</a>
+            <a href="https://github.com/xOneSecure/xone">Github</a>
+        </div>
+        <div class="copyright">
+            <p>© 2025 All Rights Reserved by xOne Secure LLC</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const menuContent = document.querySelector('.menu-content');
+
+            hamburger.addEventListener('click', function() {
+                menuContent.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
+                    menuContent.classList.remove('active');
+                }
+            });
+
+            // Fallback for Lottie if it fails to load
+            if (typeof lottie === 'undefined') {
+                console.warn('Lottie Player failed to load. Animations will not display.');
+                document.querySelectorAll('lottie-player').forEach(player => {
+                    player.style.display = 'none';
+                });
+            }
+        });
+
+        function showPopup() {
+            document.getElementById('launch-popup').classList.add('active');
+        }
+
+        function hidePopup() {
+            document.getElementById('launch-popup').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
