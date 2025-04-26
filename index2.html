@@ -292,6 +292,40 @@
             margin-top: 10px;
         }
 
+        /* Compliance Section */
+        .compliance-section {
+            padding: 80px 40px;
+            background: #FFFFFF;
+            text-align: center;
+        }
+        .compliance-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            color: #333333;
+            margin-bottom: 40px;
+        }
+        .compliance-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .compliance-btn {
+            display: inline-block;
+            background-color: #C8102E;
+            color: #FFFFFF;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .compliance-btn:hover {
+            background-color: #A00D24;
+        }
+
         /* Footer */
         footer {
             padding: 60px 40px 40px;
@@ -407,10 +441,10 @@
             .hero-section p {
                 font-size: 1em;
             }
-            .services-section, .about-section, .stats-section {
+            .services-section, .about-section, .stats-section, .compliance-section {
                 padding: 40px 20px;
             }
-            .services-section h2, .about-section h2, .stats-section h2 {
+            .services-section h2, .about-section h2, .stats-section h2, .compliance-section h2 {
                 font-size: 2em;
             }
             .service-item h3 {
@@ -418,6 +452,10 @@
             }
             .service-item p {
                 font-size: 0.95em;
+            }
+            .compliance-btn {
+                font-size: 14px;
+                padding: 10px 20px;
             }
         }
     </style>
@@ -510,6 +548,21 @@
                 <span class="stat-label">Audits Completed</span>
             </div>
         </div>
+    </section>
+
+    <section class="compliance-section" id="compliance">
+        <h2>NIST Compliance</h2>
+        <div class="compliance-container">
+            <div class="stat-item">
+                <span class="stat-number">97 Controls</span>
+                <span class="stat-label">NIST SP 800-171</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">5 Functions</span>
+                <span class="stat-label">NIST CSF 2.0</span>
+            </div>
+        </div>
+        <a href="xone-standards.html" class="compliance-btn">Learn More About xOne Compliance</a>
     </section>
 
     <footer>
