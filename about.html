@@ -3,133 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - xOne Secure</title>
+    <title>xOne Secure - About Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* Base styles */
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #0B0B0B;
-            color: #E0E0E0;
-            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F5;
+            color: #333333;
+            line-height: 1.6;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
         }
-        
-        /* Futuristic Background */
-        .ai-security-bg {
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Award Banner */
+        .award-banner {
+            text-align: center;
+            padding: 15px 0;
+            background: #0B0B0B;
+            color: #C8102E;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            z-index: 15;
+            animation: fadeIn 1s ease-in-out;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 0 L100 0 L100 100 L0 100 Z" fill="url(%23circuitPattern)"/><defs><pattern id="circuitPattern" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)"><path d="M0 10 L10 10 M10 0 L10 20" stroke="%234A90E2" stroke-width="0.5" fill="none"/></pattern></defs></svg>');
-            opacity: 0.1;
-            z-index: -1;
+            right: 0;
+        }
+        .award-banner span {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+        .award-banner svg {
+            width: 30px;
+            height: 30px;
+            fill: #C8102E;
+        }
+        .award-banner img {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 180px;
+            height: auto;
+            object-fit: contain;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* Header styles */
+        /* Header */
         .header {
-            background: transparent;
-            padding: 10px 20px;
+            background: #FFFFFF;
+            padding: 20px 40px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
+            z-index: 10;
+            position: sticky;
+            top: 60px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
         }
         .menu {
             position: relative;
+            z-index: 11;
         }
         .hamburger {
             background: none;
             border: none;
-            font-size: 30px;
-            color: #4CAF50;
+            width: 40px;
+            height: 30px;
             cursor: pointer;
+            display: block;
+            position: relative;
+            top: 0;
+            right: 0;
+        }
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: #333333;
+            position: absolute;
+            transition: background 0.3s;
+        }
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 13px; }
+        .hamburger span:nth-child(3) { bottom: 0; }
+        .hamburger:hover span {
+            background: #C8102E;
         }
         .menu-content {
             display: none;
             position: absolute;
             top: 40px;
             right: 0;
-            background-color: #1F1F1F;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            background: #FFFFFF;
+            flex-direction: column;
+            width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             border-radius: 4px;
             padding: 10px;
         }
+        .menu-content.active {
+            display: flex;
+        }
         .menu-content a {
-            display: block;
-            color: #E0E0E0;
+            color: #333333;
             text-decoration: none;
-            padding: 10px;
+            padding: 10px 15px;
             font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
         }
         .menu-content a:hover {
-            background-color: #45a049;
-        }
-        .menu.open .menu-content {
-            display: block;
+            background-color: #C8102E;
+            color: #FFFFFF;
+            border-radius: 4px;
         }
 
         /* About Section */
         .about-section {
-            flex: 1;
-            background-color: transparent;
-            padding: 50px 20px;
+            padding: 100px 40px;
+            background: #FFFFFF;
             text-align: center;
+            flex: 1;
+            margin-top: 60px;
         }
         .about-section h2 {
+            font-family: 'Montserrat', sans-serif;
             font-size: 2.5em;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #333333;
+            margin-bottom: 40px;
         }
-        .about-section p {
-            font-size: 1.5em;
-            line-height: 1.8;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        .about-content {
             max-width: 800px;
             margin: 0 auto;
         }
+        .about-content p {
+            font-size: 1.1em;
+            color: #666666;
+            margin-bottom: 20px;
+        }
 
-        /* Footer styles */
+        /* Footer */
         footer {
-            width: 100%;
+            padding: 40px 20px;
             text-align: center;
-            padding: 20px 0;
-            background-color: #1f8f9fa;
+            background: #333333;
+            color: #FFFFFF;
+            z-index: 1;
+            margin-top: auto;
         }
         .footer-links a {
-            color: #007bff;
+            color: #C8102E;
             text-decoration: none;
-            margin: 0 10px;
+            margin: 0 15px;
+            font-size: 1.2em;
+            transition: color 0.3s;
         }
         .footer-links a:hover {
+            color: #A00D24;
             text-decoration: underline;
         }
         .copyright {
-            margin-top: 10px;
-            color: #6c757d;
+            margin-top: 20px;
+            color: #BBBBBB;
+            font-size: 1em;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .award-banner {
+                padding: 10px 0;
+                font-size: 1.1em;
+            }
+            .award-banner img {
+                max-width: 120px;
+                left: 5px;
+            }
+            .award-banner span {
+                font-size: 12px;
+                padding-left: 130px;
+            }
+            .award-banner svg {
+                width: 18px;
+                height: 18px;
+            }
+            .header {
+                padding: 15px 20px;
+                top: 40px;
+            }
+            .header img {
+                left: 20px;
+                max-width: 120px;
+            }
+            .hamburger {
+                top: 0;
+                right: 0;
+            }
+            .menu-content {
+                top: 40px;
+                width: 160px;
+                right: 10px;
+            }
+            .about-section {
+                padding: 80px 20px;
+                margin-top: 40px;
+            }
+            .about-section h2 {
+                font-size: 2em;
+            }
+            .about-content p {
+                font-size: 0.95em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="ai-security-bg"></div>
-    
+    <div class="award-banner">
+        <a href="index.html"><img src="X1-7.png" alt="xOne Secure Logo"></a>
+        <span>
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>
+            250 + Cybersecurity Awards
+        </span>
+    </div>
     <div class="header">
-        <img src="logo4.png" alt="xOne Secure Logo" width="100" height="100">
         <div class="menu">
-            <button class="hamburger">☰</button>
+            <button class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="menu-content">
-                <a href="index.html">Home</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#stats">Stats</a>
+                <a href="index.html#about">About</a>
+                <a href="team.html">Team</a>
                 <a href="services.html">Services</a>
-                <a href="#" class="app-link">xOne App</a>
+                <a href="dashboard.html">xOne App</a>
             </div>
         </div>
     </div>
-    
+
     <section class="about-section">
-        <h2>About Us</h2>
-        <p>At xOne Secure, we're at the forefront of Web3 security, offering specialized Web3 Assessments and Audits to protect the decentralized ecosystem. Our team, composed of seasoned PenTesters and DevOps Engineers, conducts meticulous smart contract audits, dApp security evaluations, and network assessments to ensure your projects are robust against vulnerabilities. We provide insights and solutions to keep your digital assets safe in this dynamic landscape. Additionally, our xOne Secure Extension enhances your Web3 security experience with real-time alerts, and we're gearing up for our token launch to further integrate security into the Web3 framework.</p>
+        <h2>About xOne Secure</h2>
+        <div class="about-content">
+            <p>xOne Secure is a premier defense contractor specializing in cybersecurity solutions for Department of Defense (DoD) agencies and commercial businesses. As a small, independent team of 3–5 ethical hackers and engineers, we bring a passion for securing critical systems, offering tailored penetration testing, network assessments, and NIST-compliant auditing. Our focused expertise ensures compliance with standards like NIST SP 800-171 and CMMC, making us a trusted partner on gsa.gov and sam.gov for safeguarding government and enterprise infrastructure.</p>
+            <p>Our compact size allows us to work closely with clients, providing personalized, one-on-one service that larger firms can’t match. We are selective, only engaging with organizations that meet stringent NIST criteria, ensuring our efforts align with the highest cybersecurity standards. Driven by a mission to protect both government and commercial clients from evolving threats, xOne Secure combines technical prowess with a commitment to building resilient, secure systems for a safer digital future.</p>
+        </div>
     </section>
 
     <footer>
@@ -146,19 +294,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
-            const menu = document.querySelector('.menu');
-            const appLink = document.querySelector('.app-link');
+            const menuContent = document.querySelector('.menu-content');
 
-            hamburger.addEventListener('click', () => {
-                menu.classList.toggle('open');
+            hamburger.addEventListener('click', function() {
+                menuContent.classList.toggle('active');
             });
 
-            if (appLink) {
-                appLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert("We are in the process of finalizing the last steps on testnet. The app will be available soon!");
-                });
-            }
+            document.addEventListener('click', function(e) {
+                if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
+                    menuContent.classList.remove('active');
+                }
+            });
         });
     </script>
 </body>
