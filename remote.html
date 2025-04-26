@@ -191,6 +191,11 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
+        .remote-form p {
+            font-size: 1em;
+            color: #666666;
+            margin-bottom: 20px;
+        }
         .remote-form form {
             display: flex;
             flex-direction: column;
@@ -205,6 +210,34 @@
             font-size: 1em;
             color: #333333;
             background: #F5F5F5;
+        }
+        .teamviewer-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .teamviewer-button a {
+            display: inline-block;
+            position: relative;
+            width: 200px;
+            height: 125px;
+        }
+        .teamviewer-button img {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .teamviewer-button span {
+            position: absolute;
+            top: 93px;
+            left: 5px;
+            display: block;
+            color: #333333 !important; /* Override TeamViewer’s white text */
+            font-family: 'Inter', sans-serif !important;
+            font-size: 14px !important;
+            line-height: 1.2em;
+            font-weight: 600;
+            text-align: center;
+            width: 190px;
         }
 
         /* Footer */
@@ -284,6 +317,19 @@
             .remote-form input {
                 font-size: 0.95em;
             }
+            .remote-form p {
+                font-size: 0.95em;
+            }
+            .teamviewer-button a {
+                width: 160px;
+                height: 100px;
+            }
+            .teamviewer-button span {
+                top: 75px;
+                left: 4px;
+                font-size: 12px !important;
+                width: 152px;
+            }
             .go-back-btn {
                 font-size: 12px;
                 padding: 8px 16px;
@@ -320,11 +366,18 @@
     <section class="remote-section">
         <a href="index.html" class="go-back-btn">Go Back</a>
         <h1>Remote Support</h1>
-        <div class="subtitle">Our Remote Support portal, powered by ConnectWise, allows xOne Secure technicians to connect directly to government and commercial client systems for secure, efficient troubleshooting and maintenance.</div>
+        <div class="subtitle">Our Remote Support portal, powered by TeamViewer, allows xOne Secure technicians to connect directly to government and commercial client systems for secure, efficient troubleshooting and maintenance.</div>
         <div class="remote-form">
+            <p>Download TeamViewer if not installed, then enter the session ID provided by your xOne Secure admin.</p>
             <form>
-                <input type="text" name="remote-id" placeholder="Enter Remote ID supplied by an xOne Secure admin">
+                <input type="text" name="session-id" placeholder="Enter Session ID supplied by an xOne Secure admin">
             </form>
+            <div class="teamviewer-button">
+                <a href="https://www.teamviewer.com/link/?url=842558" style="text-decoration:none;">
+                    <img src="https://static.teamviewer.com/resources/badges/teamviewer_badge_flat2.png" alt="Download TeamViewer Remote Control" title="Download TeamViewer Remote Control" border="0" />
+                    <span>Download TeamViewer</span>
+                </a>
+            </div>
         </div>
     </section>
 
