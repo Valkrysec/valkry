@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xOne Secure - Remote Support</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F5;
+            color: #333333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Award Banner */
+        .award-banner {
+            text-align: center;
+            padding: 15px 0;
+            background: #0B0B0B;
+            color: #C8102E;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            z-index: 15;
+            animation: fadeIn 1s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        .award-banner span {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+        .award-banner svg {
+            width: 30px;
+            height: 30px;
+            fill: #C8102E;
+        }
+        .award-banner img {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 180px;
+            height: auto;
+            object-fit: contain;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 10;
+            position: sticky;
+            top: 60px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
+        }
+        .menu {
+            position: relative;
+            z-index: 11;
+        }
+        .hamburger {
+            background: none;
+            border: none;
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            display: block;
+            position: relative;
+            top: 0;
+            right: 0;
+        }
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: #333333;
+            position: absolute;
+            transition: background 0.3s;
+        }
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 13px; }
+        .hamburger span:nth-child(3) { bottom: 0; }
+        .hamburger:hover span {
+            background: #C8102E;
+        }
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background: #FFFFFF;
+            flex-direction: column;
+            width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .menu-content.active {
+            display: flex;
+        }
+        .menu-content a {
+            color: #333333;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .menu-content a:hover {
+            background-color: #C8102E;
+            color: #FFFFFF;
+            border-radius: 4px;
+        }
+
+        /* Remote Section */
+        .remote-section {
+            padding: 100px 40px 80px;
+            background: #FFFFFF;
+            text-align: center;
+            flex: 1;
+            margin-top: 60px;
+        }
+        .remote-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        .remote-section .subtitle {
+            font-size: 1.2em;
+            color: #666666;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        .go-back-btn {
+            display: inline-block;
+            background-color: #C8102E;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+        .go-back-btn:hover {
+            background-color: #A00D24;
+        }
+        .remote-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .remote-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .remote-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1em;
+            color: #333333;
+            background: #F5F5F5;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #333333;
+            color: #FFFFFF;
+            z-index: 1;
+            margin-top: auto;
+        }
+        .footer-links a {
+            color: #C8102E;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #A00D24;
+            text-decoration: underline;
+        }
+        .copyright {
+            margin-top: 20px;
+            color: #BBBBBB;
+            font-size: 1em;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .award-banner {
+                padding: 10px 0;
+                font-size: 1.1em;
+            }
+            .award-banner img {
+                max-width: 120px;
+                left: 5px;
+            }
+            .award-banner span {
+                font-size: 12px;
+                padding-left: 130px;
+            }
+            .award-banner svg {
+                width: 18px;
+                height: 18px;
+            }
+            .header {
+                padding: 15px 20px;
+                top: 40px;
+            }
+            .header img {
+                left: 20px;
+                max-width: 120px;
+            }
+            .hamburger {
+                top: 0;
+                right: 0;
+            }
+            .menu-content {
+                top: 40px;
+                width: 160px;
+                right: 10px;
+            }
+            .remote-section {
+                padding: 80px 20px 40px;
+            }
+            .remote-section h1 {
+                font-size: 2em;
+            }
+            .remote-section .subtitle {
+                font-size: 1em;
+            }
+            .remote-form {
+                padding: 20px;
+                margin: 0 10px;
+            }
+            .remote-form input {
+                font-size: 0.95em;
+            }
+            .go-back-btn {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="award-banner">
+        <a href="index.html"><img src="X1-7.png" alt="xOne Secure Logo"></a>
+        <span>
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>
+            250 + Cybersecurity Awards
+        </span>
+    </div>
+    <div class="header">
+        <div class="menu">
+            <button class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="menu-content">
+                <a href="index.html#services">Services</a>
+                <a href="index.html#stats">Stats</a>
+                <a href="index.html#about">About</a>
+                <a href="team.html">Team</a>
+                <a href="services.html">Services</a>
+                <a href="dashboard.html">xOne App</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="remote-section">
+        <a href="index.html" class="go-back-btn">Go Back</a>
+        <h1>Remote Support</h1>
+        <div class="subtitle">Our Remote Support portal, powered by ConnectWise, allows xOne Secure technicians to connect directly to government and commercial client systems for secure, efficient troubleshooting and maintenance.</div>
+        <div class="remote-form">
+            <form>
+                <input type="text" name="remote-id" placeholder="Enter Remote ID supplied by an xOne Secure admin">
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://twitter.com/xOnesecure">X</a>
+            <a href="https://github.com/xOneSecure">Gitbook</a>
+            <a href="https://github.com/xOneSecure/xone">Github</a>
+        </div>
+        <div class="copyright">
+            <p>© 2025 All Rights Reserved by xOne Secure LLC</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const menuContent = document.querySelector('.menu-content');
+
+            hamburger.addEventListener('click', function() {
+                menuContent.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
+                    menuContent.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
