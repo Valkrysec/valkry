@@ -1,1 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xOne Secure - Privacy Policy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F5;
+            color: #333333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
 
+        /* Award Banner */
+        .award-banner {
+            text-align: center;
+            padding: 15px 0;
+            background: #0B0B0B;
+            color: #C8102E;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            z-index: 15;
+            animation: fadeIn 1s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        .award-banner span {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+        .award-banner svg {
+            width: 30px;
+            height: 30px;
+            fill: #C8102E;
+        }
+        .award-banner img {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 180px;
+            height: auto;
+            object-fit: contain;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 10;
+            position: sticky;
+            top: 60px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
+        }
+        .menu {
+            position: relative;
+            z-index: 11;
+        }
+        .hamburger {
+            background: none;
+            border: none;
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            display: block;
+            position: relative;
+            top: 0;
+            right: 0;
+        }
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: #333333;
+            position: absolute;
+            transition: background 0.3s;
+        }
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 13px; }
+        .hamburger span:nth-child(3) { bottom: 0; }
+        .hamburger:hover span {
+            background: #C8102E;
+        }
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background: #FFFFFF;
+            flex-direction: column;
+            width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .menu-content.active {
+            display: flex;
+        }
+        .menu-content a {
+            color: #333333;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .menu-content a:hover {
+            background-color: #C8102E;
+            color: #FFFFFF;
+            border-radius: 4px;
+        }
+
+        /* Privacy Policy Section */
+        .privacy-section {
+            padding: 100px 40px 80px;
+            background: #FFFFFF;
+            text-align: center;
+            flex: 1;
+            margin-top: 60px;
+        }
+        .privacy-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        .privacy-section .subtitle {
+            font-size: 1.2em;
+            color: #666666;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        .go-back-btn {
+            display: inline-block;
+            background-color: #C8102E;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+        .go-back-btn:hover {
+            background-color: #A00D24;
+        }
+        .privacy-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: left;
+        }
+        .privacy-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3em;
+            color: #333333;
+            margin: 20px 0 10px;
+        }
+        .privacy-section p {
+            font-size: 1em;
+            color: #666666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .privacy-section a {
+            color: #C8102E;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .privacy-section a:hover {
+            color: #A00D24;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #333333;
+            color: #FFFFFF;
+            z-index: 1;
+            margin-top: auto;
+        }
+        .footer-links a {
+            color: #C8102E;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #A00D24;
+            text-decoration: underline;
+        }
+        .copyright {
+            margin-top: 20px;
+            color: #BBBBBB;
+            font-size: 1em;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .award-banner {
+                padding: 10px 0;
+                font-size: 1.1em;
+            }
+            .award-banner img {
+                max-width: 120px;
+                left: 5px;
+            }
+            .award-banner span {
+                font-size: 12px;
+                padding-left: 130px;
+            }
+            .award-banner svg {
+                width: 18px;
+                height: 18px;
+            }
+            .header {
+                padding: 15px 20px;
+                top: 40px;
+            }
+            .header img {
+                left: 20px;
+                max-width: 120px;
+            }
+            .hamburger {
+                top: 0;
+                right: 0;
+            }
+            .menu-content {
+                top: 40px;
+                width: 160px;
+                right: 10px;
+            }
+            .privacy-section {
+                padding: 80px 20px 40px;
+            }
+            .privacy-section h1 {
+                font-size: 2em;
+            }
+            .privacy-section .subtitle {
+                font-size: 1em;
+            }
+            .privacy-container {
+                padding: 15px;
+                margin: 0 10px;
+            }
+            .privacy-section h3 {
+                font-size: 1.2em;
+            }
+            .privacy-section p {
+                font-size: 0.95em;
+            }
+            .go-back-btn {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="award-banner">
+        <a href="index.html"><img src="X1-7.png" alt="xOne Secure Logo"></a>
+        <span>
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>
+            250 + Cybersecurity Awards
+        </span>
+    </div>
+    <div class="header">
+        <div class="menu">
+            <button class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="menu-content">
+                <a href="index.html#services">Services</a>
+                <a href="index.html#stats">Stats</a>
+                <a href="index.html#about">About</a>
+                <a href="team.html">Team</a>
+                <a href="services.html">Services</a>
+                <a href="dashboard.html">xOne App</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="privacy-section">
+        <a href="index.html" class="go-back-btn">Go Back</a>
+        <h1>Privacy Policy</h1>
+        <div class="subtitle">At xOne Secure, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information.</div>
+        <div class="privacy-container">
+            <h3>Introduction</h3>
+            <p>xOne Secure LLC (“xOne Secure,” “we,” “us,” or “our”) provides cybersecurity services, including penetration testing, compliance auditing, and remote support, to government and commercial clients. This Privacy Policy governs the personal information we collect through our website (<a href="index.html">xonesecure.com</a>), services, and client interactions. By using our website or services, you agree to the practices described in this policy.</p>
+
+            <h3>Information We Collect</h3>
+            <p>We may collect the following types of information:</p>
+            <p><strong>Personal Information:</strong> Name, email address, phone number, and company details provided via our <a href="assessment-form.html">assessment form</a> or client communications.</p>
+            <p><strong>Technical Data:</strong> IP addresses, browser types, and device information collected automatically when you visit our website.</p>
+            <p><strong>Service-Related Data:</strong> Information provided during cybersecurity assessments or remote support sessions, such as system configurations or session IDs, which may include personal data.</p>
+
+            <h3>How We Use Your Information</h3>
+            <p>We use your information to:</p>
+            <p>- Deliver cybersecurity services, including penetration testing, compliance audits, and remote support.</p>
+            <p>- Communicate with you about service inquiries, project updates, or proposals.</p>
+            <p>- Ensure compliance with DoD standards (e.g., NIST 800-171, CMMC) and other regulations.</p>
+            <p>- Improve our website and services through aggregated, anonymized analytics.</p>
+
+            <h3>How We Protect Your Information</h3>
+            <p>We employ industry-leading security measures, including:</p>
+            <p>- Encryption of data in transit and at rest using AES-256 standards.</p>
+            <p>- Strict access controls and multi-factor authentication for our team.</p>
+            <p>- Secure data storage compliant with DoD and enterprise requirements.</p>
+            <p>- Regular security audits to maintain the integrity of our systems.</p>
+            <p>Our pentesters operate under strict NDAs, and all client data is handled with the utmost confidentiality.</p>
+
+            <h3>Sharing Your Information</h3>
+            <p>We do not sell or rent your personal information. We may share your data only:</p>
+            <p>- With xOne Secure admins or technicians to provide services (e.g., during remote support via TeamViewer).</p>
+            <p>- To comply with legal obligations, such as DoD regulations or law enforcement requests.</p>
+            <p>- With your consent, such as when coordinating with third-party auditors for CMMC compliance.</p>
+
+            <h3>Your Rights and Choices</h3>
+            <p>You have the right to:</p>
+            <p>- Access, correct, or delete your personal information, subject to legal and contractual obligations.</p>
+            <p>- Opt out of marketing communications (if applicable) by contacting us.</p>
+            <p>- Request information about how your data is processed, particularly for GDPR or CCPA compliance.</p>
+            <p>To exercise these rights, contact us at <a href="mailto:privacy@xonesecure.com">privacy@xonesecure.com</a>.</p>
+
+            <h3>Cookies and Tracking</h3>
+            <p>Our website uses minimal cookies for basic analytics (e.g., Google Analytics) to understand site usage. These cookies do not collect personal information. You can disable cookies via your browser settings, though this may affect site functionality.</p>
+
+            <h3>Third-Party Services</h3>
+            <p>We use third-party services, such as TeamViewer for remote support, which have their own privacy policies. Please review TeamViewer’s <a href="https://www.teamviewer.com/en/privacy-policy/" target="_blank">Privacy Policy</a> for details. We ensure all third-party providers meet our security standards.</p>
+
+            <h3>Children’s Privacy</h3>
+            <p>Our services are not intended for individuals under 13 years of age. We do not knowingly collect personal information from children. If you believe we have such data, please contact us immediately.</p>
+
+            <h3>Changes to This Policy</h3>
+            <p>We may update this Privacy Policy to reflect changes in our practices or legal requirements. Updates will be posted on this page, and significant changes will be communicated via email or website notices. This policy was last updated on April 26, 2025.</p>
+
+            <h3>Contact Us</h3>
+            <p>For questions or concerns about this Privacy Policy or our data practices, please contact us:</p>
+            <p>Email: <a href="mailto:privacy@xonesecure.com">privacy@xonesecure.com</a><br>
+            Address: xOne Secure LLC, 123 Cyber Lane, Secure City, VA 12345<br>
+            Phone: (555) 123-4567</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://twitter.com/xOnesecure">X</a>
+            <a href="https://github.com/xOneSecure">Gitbook</a>
+            <a href="https://github.com/xOneSecure/xone">Github</a>
+        </div>
+        <div class="copyright">
+            <p>© 2025 All Rights Reserved by xOne Secure LLC</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const menuContent = document.querySelector('.menu-content');
+
+            hamburger.addEventListener('click', function() {
+                menuContent.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
+                    menuContent.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
