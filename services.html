@@ -3,34 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xOne - Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <title>xOne Secure - Cybersecurity Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #0B0B0B;
-            background-image: url('X1-5.png');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #E0E0E0;
-            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F5;
+            color: #333333;
+            line-height: 1.6;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
         }
         body::-webkit-scrollbar {
             display: none;
         }
 
+        /* Award Banner */
         .award-banner {
             text-align: center;
             padding: 15px 0;
-            background: rgba(28, 28, 28, 0.8);
-            color: #4CAF50;
-            font-family: 'Orbitron', sans-serif;
+            background: #0B0B0B;
+            color: #C8102E;
+            font-family: 'Montserrat', sans-serif;
             font-size: 1.5em;
             font-weight: 700;
             z-index: 15;
@@ -39,18 +42,17 @@
             top: 0;
             left: 0;
             right: 0;
-    
         }
         .award-banner span {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            font-size: 18px; /* Absolute size, smaller than 1.5em (~24px) */
+            font-size: 18px;
         }
         .award-banner svg {
             width: 30px;
             height: 30px;
-            fill: #4CAF50;
+            fill: #C8102E;
         }
         .award-banner img {
             position: absolute;
@@ -66,30 +68,26 @@
             to { opacity: 1; }
         }
 
-        .ai-security-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0B0B0B 0%, #1A1F2E 100%), url('futuristic-spheres-bg.png');
-            background-size: cover;
-            opacity: 0.3;
-            z-index: -1;
-        }
-
-        /* Hamburger Menu Styles from index.html */
+        /* Header */
         .header {
-            background: transparent;
-            padding: 0 10px;
+            background: #FFFFFF;
+            padding: 20px 40px;
             display: flex;
             justify-content: flex-end;
             align-items: center;
             z-index: 10;
+            position: sticky;
+            top: 60px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
             position: absolute;
-            top: 45px;
-            left: 0;
-            right: 0;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
         }
         .menu {
             position: relative;
@@ -98,214 +96,225 @@
         .hamburger {
             background: none;
             border: none;
-            width: 40px; /* Bigger */
+            width: 40px;
             height: 30px;
             cursor: pointer;
             display: block;
             position: relative;
-            top: 44px; /* Nudge down from index.html */
-            right: 10px; /* Nudge left from index.html */
+            top: 0;
+            right: 0;
         }
         .hamburger span {
             display: block;
             width: 100%;
-            height: 4px; /* Thicker lines */
-            background: #808080;
+            height: 4px;
+            background: #333333;
             position: absolute;
             transition: background 0.3s;
         }
         .hamburger span:nth-child(1) { top: 0; }
-        .hamburger span:nth-child(2) { top: 13px; } /* Middle line */
+        .hamburger span:nth-child(2) { top: 13px; }
         .hamburger span:nth-child(3) { bottom: 0; }
         .hamburger:hover span {
-            background: #45a049;
+            background: #C8102E;
         }
         .menu-content {
             display: none;
             position: absolute;
-            top: 40px; /* Adjusted for bigger hamburger */
-            right: 10px;
-            background: #1F1F1F;
+            top: 40px;
+            right: 0;
+            background: #FFFFFF;
             flex-direction: column;
             width: 200px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
             padding: 10px;
         }
         .menu-content.active {
             display: flex;
         }
         .menu-content a {
-            color: #E0E0E0;
+            color: #333333;
             text-decoration: none;
             padding: 10px 15px;
             font-size: 16px;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
             width: 100%;
             box-sizing: border-box;
         }
         .menu-content a:hover {
-            background-color: #4CAF50;
+            background-color: #C8102E;
+            color: #FFFFFF;
             border-radius: 4px;
         }
 
+        /* Page Title */
         .page-title {
             text-align: center;
-            padding: 175px 20px 20px;
-            color: #FFFFFF;
+            padding: 100px 20px 60px;
+            background: #FFFFFF;
+            margin-top: 60px;
+        }
+        .page-title h1 {
+            font-family: 'Montserrat', sans-serif;
             font-size: 2.5em;
-            font-weight: bold;
-            text-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
-            z-index: 1;
+            color: #333333;
+            margin-bottom: 20px;
         }
-        .page-title span {
-            color: #4CAF50;
-        }
-
-        .service-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 84px 20px 50px;
-        }
-        .service-box {
-            background: linear-gradient(145deg, #1A1A1A, #2B2B2B);
-            border: 1px solid #4CAF50;
-            border-radius: 10px;
-            padding: 25px;
-            width: calc(50% - 30px);
-            min-width: 300px;
-            margin: 15px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 5px rgba(76, 175, 80, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .service-box:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 0 10px rgba(76, 175, 80, 0.5);
-        }
-        .service-box h3 {
-            color: #FFFFFF;
-            font-size: 1.8em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        .service-box h3:hover {
-            color: #4CAF50;
-        }
-        .service-box h3 span {
-            color: #4CAF50;
-        }
-        .dropdown-content {
-            display: none;
-            background: #2B2B2B;
-            padding: 15px;
-            text-align: left;
-            border-radius: 5px;
-            margin-top: 10px;
-            border-left: 3px solid #4CAF50;
-            color: #E0E0E0;
-            font-size: 1em;
-            line-height: 1.5;
-        }
-        .service-box.active .dropdown-content {
-            display: block;
-        }
-        .expand-prompt {
-            cursor: pointer;
-            color: #4CAF50;
-            margin-top: 15px;
-            font-size: 0.9em;
-            transition: color 0.3s;
-        }
-        .expand-prompt:hover {
-            color: #66BB6A;
+        .page-title p {
+            font-size: 1.2em;
+            color: #666666;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .service-box ul {
-            text-align: left;
-            padding-left: 25px;
-            margin: 0;
+        /* Services Section */
+        .services-section {
+            padding: 80px 40px;
+            background: #F5F5F5;
+        }
+        .service-item {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 40px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            transition: box-shadow 0.3s;
+        }
+        .service-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .service-item img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+        }
+        .service-item h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2em;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        .service-item p {
+            font-size: 1.1em;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+        .service-item ul {
             list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
         }
-        .service-box li {
-            margin: 12px 0;
+        .service-item li {
+            font-size: 1em;
+            color: #666666;
+            margin-bottom: 10px;
             position: relative;
             padding-left: 20px;
         }
-        .service-box li:before {
+        .service-item li:before {
             content: "▹";
-            color: #4CAF50;
+            color: #C8102E;
             position: absolute;
             left: 0;
         }
+        .assessment-btn {
+            background-color: #C8102E;
+            color: #FFFFFF;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        .assessment-btn:hover {
+            background-color: #A00D24;
+        }
 
+        /* Footer */
         footer {
-            width: 100%;
+            padding: 40px 20px;
             text-align: center;
-            padding: 20px 0;
-            background: transparent;
-            position: relative;
+            background: #333333;
+            color: #FFFFFF;
             z-index: 1;
+            margin-top: auto;
         }
         .footer-links a {
-            color: #4CAF50;
+            color: #C8102E;
             text-decoration: none;
             margin: 0 15px;
-            font-size: 16px;
+            font-size: 1.2em;
             transition: color 0.3s;
         }
         .footer-links a:hover {
-            color: #66BB6A;
+            color: #A00D24;
+            text-decoration: underline;
         }
         .copyright {
-            margin-top: 10px;
-            color: #6c757d;
-            font-size: 14px;
+            margin-top: 20px;
+            color: #BBBBBB;
+            font-size: 1em;
         }
 
+        /* Media Queries */
         @media (max-width: 768px) {
-            .header {
-                padding: 0 5px;
+            .award-banner {
+                padding: 10px 0;
+                font-size: 1.1em;
             }
             .award-banner img {
-                max-width: 150px;
+                max-width: 120px;
+                left: 5px;
             }
             .award-banner span {
-                font-size: 14px; /* Absolute size, smaller than 18px */
-                padding-left: 190px; /* Prevents overlap with logo */
-            .page-title {
-                font-size: 2em;
-                padding: 55px 20px 10px;
-            }
-            .service-container {
-                padding: 160px 20px 40px;
-            }
-            .service-box {
-                width: calc(100% - 30px);
-            }
-            .header-buttons {
-                flex-direction: column;
-                gap: 5px;
-            }
-            .btn {
-                padding: 8px 16px;
-                font-size: 14px;
-            }
-            .service-box h3 {
-                font-size: 1.5em;
-            }
-            .award-banner {
-                padding: 10px 5px;
-            }
-            .award-banner span {
-                font-size: 1.2em;
+                font-size: 12px;
+                padding-left: 130px;
             }
             .award-banner svg {
-                width: 24px;
-                height: 24px;
+                width: 18px;
+                height: 18px;
+            }
+            .header {
+                padding: 15px 20px;
+                top: 40px;
+            }
+            .header img {
+                left: 20px;
+                max-width: 120px;
+            }
+            .hamburger {
+                top: 0;
+                right: 0;
+            }
+            .menu-content {
+                top: 40px;
+                width: 160px;
+                right: 10px;
+            }
+            .page-title {
+                padding: 80px 20px 40px;
+            }
+            .page-title h1 {
+                font-size: 2em;
+            }
+            .page-title p {
+                font-size: 1em;
+            }
+            .services-section {
+                padding: 40px 20px;
+            }
+            .service-item {
+                padding: 20px;
+                margin-bottom: 40px;
+            }
+            .service-item h2 {
+                font-size: 1.8em;
+            }
+            .service-item p, .service-item li {
+                font-size: 0.95em;
             }
         }
     </style>
@@ -314,14 +323,10 @@
     <div class="award-banner">
         <a href="index.html"><img src="X1-7.png" alt="xOne Secure Logo"></a>
         <span>
-            <svg viewBox="0 0 24 24">
-                <path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" />
-            </svg>
-            250 + Bug Bounty Awards
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>
+            250 + Cybersecurity Awards
         </span>
     </div>
-    <div class="ai-security-bg"></div>
-    <!-- Hamburger menu from index.html -->
     <div class="header">
         <div class="menu">
             <button class="hamburger">
@@ -330,63 +335,56 @@
                 <span></span>
             </button>
             <div class="menu-content">
-                <a href="#about-section">About</a>
-                <a href="services.html">Services</a>
-                <a href="#" class="app-link">xOne App</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#stats">Stats</a>
+                <a href="index.html#about">About</a>
+                <a href="team.html">Team</a>
+                <a href="dashboard.html">xOne App</a>
             </div>
         </div>
     </div>
 
-    <div class="page-title"><span>Web3</span> Security Services</div>
+    <section class="page-title">
+        <h1>Cybersecurity Services</h1>
+        <p>Comprehensive defense-grade solutions tailored for DoD and enterprise clients, ensuring NIST and CMMC compliance.</p>
+    </section>
 
-    <section class="service-container">
-        <div class="service-box" id="box1" onclick="toggleDropdown('box1')">
-            <h3><span>Web3</span> Infrastructure Assessment</h3>
+    <section class="services-section">
+        <div class="service-item">
+            <img src="https://img.icons8.com/ios-filled/100/333333/network.png" alt="Network Assessment Icon">
+            <h2>Network Infrastructure Assessment</h2>
+            <p>Our Network Infrastructure Assessment evaluates your network architecture, cloud systems, and endpoints to ensure robust security and resilience against cyber threats. Aligned with NIST SP 800-171 and DoD’s Cybersecurity Maturity Model Certification (CMMC), we identify vulnerabilities and provide actionable remediation plans to protect Controlled Unclassified Information (CUI).</p>
             <ul>
-                <li>Comprehensive Network Analysis</li>
-                <li>Smart Contract Evaluation</li>
-                <li>Performance and Scalability Check</li>
+                <li>Network architecture analysis for zero-trust compliance</li>
+                <li>Cloud and endpoint security assessments</li>
+                <li>Vulnerability scanning using CVE-based methodologies</li>
+                <li>DoD-compliant remediation strategies</li>
             </ul>
-            <p class="expand-prompt">Click to expand service details</p>
-            <div class="dropdown-content">
-                <p>Our Web3 Infrastructure Assessment provides a comprehensive analysis, from network connectivity to smart contract security. We delve into the intricacies of your blockchain setup, ensuring your infrastructure is not only secure but also optimized for performance and scalability. This service is crucial for identifying vulnerabilities before they can be exploited, safeguarding your digital assets in the complex landscape of decentralized technologies.</p>
-            </div>
+            <a href="assessment.html" class="assessment-btn">Receive Free Assessment</a>
         </div>
-        <div class="service-box" id="box2" onclick="toggleDropdown('box2')">
-            <h3>Auditing & <span>Compliance</span></h3>
+        <div class="service-item">
+            <img src="https://img.icons8.com/ios-filled/100/333333/checked-checkbox.png" alt="Auditing & Compliance Icon">
+            <h2>Auditing & Compliance</h2>
+            <p>We conduct thorough audits to ensure compliance with NIST, FISMA, and other federal standards, with ongoing monitoring for defense and enterprise clients. Our services support DoD contractors in achieving CMMC certification and maintaining compliance with DFARS 252.204-7012, safeguarding critical systems against evolving threats.</p>
             <ul>
-                <li>Smart Contract Audits</li>
-                <li>Regulatory Compliance Assessment</li>
-                <li>Continuous Monitoring</li>
+                <li>NIST SP 800-171 and CMMC compliance audits</li>
+                <li>FISMA and DFARS 252.204-7012 assessments</li>
+                <li>Continuous monitoring for CVE-identified threats</li>
+                <li>System Security Plan (SSP) development</li>
             </ul>
-            <p class="expand-prompt">Click to expand service details</p>
-            <div class="dropdown-content">
-                <p>Through our Auditing & Compliance services, we conduct thorough smart contract audits to detect any coding errors or security loopholes. We ensure your projects adhere to the latest regulatory frameworks, providing peace of mind in the ever-evolving Web3 regulatory environment. Our continuous monitoring post-audit helps in maintaining compliance and security over time, adapting to new threats and regulatory changes.</p>
-            </div>
+            <a href="assessment.html" class="assessment-btn">Receive Free Assessment</a>
         </div>
-        <div class="service-box" id="box3" onclick="toggleDropdown('box3')">
-            <h3><span>Penetration</span> Testing</h3>
+        <div class="service-item">
+            <img src="https://img.icons8.com/ios-filled/100/333333/hacker.png" alt="Penetration Testing Icon">
+            <h2>Penetration Testing</h2>
+            <p>Our Penetration Testing service simulates advanced cyber attacks to identify and remediate vulnerabilities, tailored for DoD and commercial environments. Leveraging CVE databases and NIST-aligned methodologies, we emulate real-world threats to strengthen your defenses, ensuring compliance with DoD cybersecurity requirements.</p>
             <ul>
-                <li>Ethical Hacking</li>
-                <li>dApp Security Testing</li>
-                <li>Tailored Attack Scenarios</li>
+                <li>Ethical hacking to uncover system weaknesses</li>
+                <li>Targeted testing for DoD-critical systems</li>
+                <li>Exploitation of CVE-listed vulnerabilities</li>
+                <li>Detailed remediation reports for CMMC compliance</li>
             </ul>
-            <p class="expand-prompt">Click to expand service details</p>
-            <div class="dropdown-content">
-                <p>Our Penetration Testing service involves ethical hacking where we simulate attacks on your Web3 applications to uncover security flaws. We focus on testing decentralized apps for vulnerabilities unique to blockchain technology, like reentrancy or front-running attacks. By creating tailored attack scenarios, we ensure your infrastructure is resilient against both common and sophisticated threats, offering concrete recommendations for security enhancements.</p>
-            </div>
-        </div>
-        <div class="service-box" id="box4" onclick="toggleDropdown('box4')">
-            <h3>xOne <span>App</span> & Extension</h3>
-            <ul>
-                <li>Site Source Code Validation</li>
-                <li>Smart Contract & Token CA Validation</li>
-                <li>Malicious Script Scanning</li>
-            </ul>
-            <p class="expand-prompt">Click to expand service details</p>
-            <div class="dropdown-content">
-                <p>The xOne App & Extension is designed to provide users with an additional layer of security in their Web3 interactions. It performs three critical checks: validating website source code to prevent phishing, ensuring smart contracts and token contract addresses are legitimate, and scanning for any malicious scripts that might compromise user security. This tool acts as a vigilant guardian, ensuring your transactions are safe in the decentralized digital space.</p>
-            </div>
+            <a href="assessment.html" class="assessment-btn">Receive Free Assessment</a>
         </div>
     </section>
 
@@ -405,30 +403,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
             const menuContent = document.querySelector('.menu-content');
-            const appLink = document.querySelector('.app-link');
 
             hamburger.addEventListener('click', function() {
                 menuContent.classList.toggle('active');
             });
 
             document.addEventListener('click', function(e) {
-            if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
-                menuContent.classList.remove('active');
-            }
+                if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
+                    menuContent.classList.remove('active');
+                }
+            });
         });
-
-            if (appLink) {
-                appLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert("We are in the process of finalizing the last steps on testnet. The app will be available soon!");
-                });
-            }
-        });
-
-        function toggleDropdown(id) {
-            var element = document.getElementById(id);
-            element.classList.toggle("active");
-        }
     </script>
 </body>
 </html>
