@@ -196,34 +196,6 @@
             color: #666666;
             margin-bottom: 20px;
         }
-        .remote-form form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .remote-form input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #E0E0E0;
-            border-radius: 4px;
-            font-family: 'Inter', sans-serif;
-            font-size: 1em;
-            color: #333333;
-            background: #F5F5F5;
-        }
-        .remote-form button {
-            background-color: #C8102E;
-            color: #FFFFFF;
-            padding: 12px 24px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .remote-form button:hover {
-            background-color: #A00D24;
-        }
         .download-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -319,10 +291,6 @@
                 padding: 20px;
                 margin: 0 10px;
             }
-            .remote-form input,
-            .remote-form button {
-                font-size: 0.95em;
-            }
             .remote-form p {
                 font-size: 0.9em;
             }
@@ -368,11 +336,7 @@
         <h1>Remote Support</h1>
         <div class="subtitle">Our Remote Support portal, powered by TeamViewer, allows xOne Secure technicians to connect directly to government and commercial client systems for secure, efficient troubleshooting and maintenance.</div>
         <div class="remote-form">
-            <p>Government and commercial clients: Download and install TeamViewer for your platform, then enter the session ID provided by your xOne Secure admin and click Connect.</p>
-            <form id="remoteForm">
-                <input type="text" name="session-id" placeholder="Enter Session ID supplied by an xOne Secure admin" required>
-                <button type="submit">Connect</button>
-            </form>
+            <p>Government and commercial clients: Download and install TeamViewer for your platform. Once installed, open the app and enter the session ID provided by your xOne Secure admin to connect.</p>
             <div class="download-buttons">
                 <a href="https://download.teamviewer.com/download/TeamViewer_Setup.exe">Download TeamViewer (Windows)</a>
                 <a href="https://download.teamviewer.com/download/TeamViewer.dmg">Download TeamViewer (macOS)</a>
@@ -395,7 +359,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
             const menuContent = document.querySelector('.menu-content');
-            const remoteForm = document.getElementById('remoteForm');
 
             // Hamburger menu toggle
             hamburger.addEventListener('click', function() {
@@ -406,26 +369,6 @@
                 if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
                     menuContent.classList.remove('active');
                 }
-            });
-
-            // Handle session ID submission
-            remoteForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const sessionId = this.querySelector('input[name="session-id"]').value.trim();
-                
-                if (!sessionId) {
-                    alert('Please enter a valid session ID.');
-                    return;
-                }
-
-                // Attempt to launch TeamViewer with the session ID
-                const teamviewerUrl = `teamviewer://start?session=${encodeURIComponent(sessionId)}`;
-                window.location.href = teamviewerUrl;
-
-                // Fallback if TeamViewer is not installed
-                setTimeout(() => {
-                    alert('TeamViewer is not installed. Please download and install TeamViewer for your platform from the links below, then try again.');
-                }, 1000); // 1-second delay to check if TeamViewer launches
             });
         });
     </script>
