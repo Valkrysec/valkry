@@ -3,195 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xOne - Web3 Security Assessment</title>
+    <title>xOne Secure - Free Cybersecurity Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         html {
-            height: 100%;
             scroll-behavior: smooth;
         }
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #0B0B0B;
-            background-image: url('X1-5.png');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #E0E0E0;
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F5;
+            color: #333333;
+            line-height: 1.6;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            min-height: 100vh;
         }
         body::-webkit-scrollbar {
             display: none;
         }
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5em;
+
+        /* Award Banner */
+        .award-banner {
+            text-align: center;
+            padding: 15px 0;
+            background: #0B0B0B;
+            color: #C8102E;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
             font-weight: 700;
+            z-index: 15;
+            animation: fadeIn 1s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        .award-banner span {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+        .award-banner svg {
+            width: 30px;
+            height: 30px;
+            fill: #C8102E;
+        }
+        .award-banner img {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 180px;
+            height: auto;
+            object-fit: contain;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Header */
+        .header {
+            background: #FFFFFF;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 10;
+            position: sticky;
+            top: 60px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
+        }
+        .menu {
+            position: relative;
+            z-index: 11;
+        }
+        .hamburger {
+            background: none;
+            border: none;
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            display: block;
+            position: relative;
+            top: 0;
+            right: 0;
+        }
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: #333333;
+            position: absolute;
+            transition: background 0.3s;
+        }
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 13px; }
+        .hamburger span:nth-child(3) { bottom: 0; }
+        .hamburger:hover span {
+            background: #C8102E;
+        }
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background: #FFFFFF;
+            flex-direction: column;
+            width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .menu-content.active {
+            display: flex;
+        }
+        .menu-content a {
+            color: #333333;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .menu-content a:hover {
+            background-color: #C8102E;
+            color: #FFFFFF;
+            border-radius: 4px;
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 100px 40px 80px;
+            background: #FFFFFF;
             text-align: center;
-            color: white;
-            text-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
-            margin-bottom: 10px;
-            margin-top: 20px;
+            flex: 1;
+            margin-top: 60px;
         }
-        h1 .highlight {
-            color: #4CAF50;
+        .form-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            color: #333333;
+            margin-bottom: 20px;
         }
-        .subtitle {
-            font-family: 'Orbitron', sans-serif;
+        .form-section .subtitle {
             font-size: 1.2em;
-            color: white;
-            text-align: center;
-            margin-bottom: 30px;
+            color: #666666;
+            max-width: 800px;
+            margin: 0 auto 40px;
         }
         .assessment-form {
-            width: 90%;
-            max-width: 1200px;
-            background: #1C2526;
-            border: 4px solid #4CAF50;
-            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
             padding: 40px;
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
-            font-family: 'IBM Plex Mono', 'Courier New', monospace;
-            font-size: 1.5em;
-            color: #E0E0E0;
-            position: relative;
-            margin: 0 auto 20px auto;
-            box-sizing: border-box;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
-        .terminal-header {
-            position: absolute;
-            top: 5px;
-            left: 10px;
-            font-size: 0.5em;
-            color: #4CAF50;
-            font-family: 'VT323', monospace;
-        }
-        form {
+        .assessment-form form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
-        input, textarea {
+        .assessment-form input,
+        .assessment-form textarea {
             width: 100%;
-            padding: 10px;
-            margin: 0;
-            border: 1px solid #4CAF50;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
             border-radius: 4px;
-            background: #333333;
-            color: #E0E0E0;
-            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-family: 'Inter', sans-serif;
             font-size: 1em;
-            box-sizing: border-box;
+            color: #333333;
+            background: #F5F5F5;
         }
-        textarea {
+        .assessment-form textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 120px;
         }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 1em;
-            cursor: pointer;
+        .assessment-form button {
+            background-color: #C8102E;
+            color: #FFFFFF;
+            padding: 12px 24px;
+            font-size: 16px;
             border: none;
             border-radius: 4px;
+            cursor: pointer;
             transition: background-color 0.3s;
-            font-family: 'IBM Plex Mono', 'Courier New', monospace;
         }
-        button:hover {
-            background-color: #45a049;
+        .assessment-form button:hover {
+            background-color: #A00D24;
         }
         .go-back-btn {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #4CAF50;
-            color: white;
-            padding: 8px 16px; /* Slightly smaller than form button */
-            text-align: center;
-            text-decoration: none;
-            font-size: 0.9em; /* Slightly smaller text */
-            cursor: pointer;
-            border: none;
+            display: inline-block;
+            background-color: #C8102E;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            font-size: 14px;
             border-radius: 4px;
+            text-decoration: none;
             transition: background-color 0.3s;
-            font-family: 'IBM Plex Mono', 'Courier New', monospace;
-            z-index: 10; /* Above other elements */
+            margin-bottom: 20px;
         }
         .go-back-btn:hover {
-            background-color: #45a049;
+            background-color: #A00D24;
         }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #333333;
+            color: #FFFFFF;
+            z-index: 1;
+            margin-top: auto;
+        }
+        .footer-links a {
+            color: #C8102E;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #A00D24;
+            text-decoration: underline;
+        }
+        .copyright {
+            margin-top: 20px;
+            color: #BBBBBB;
+            font-size: 1em;
+        }
+
+        /* Media Queries */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
+            .award-banner {
+                padding: 10px 0;
+                font-size: 1.1em;
             }
-            .subtitle {
+            .award-banner img {
+                max-width: 120px;
+                left: 5px;
+            }
+            .award-banner span {
+                font-size: 12px;
+                padding-left: 130px;
+            }
+            .award-banner svg {
+                width: 18px;
+                height: 18px;
+            }
+            .header {
+                padding: 15px 20px;
+                top: 40px;
+            }
+            .header img {
+                left: 20px;
+                max-width: 120px;
+            }
+            .hamburger {
+                top: 0;
+                right: 0;
+            }
+            .menu-content {
+                top: 40px;
+                width: 160px;
+                right: 10px;
+            }
+            .form-section {
+                padding: 80px 20px 40px;
+            }
+            .form-section h1 {
+                font-size: 2em;
+            }
+            .form-section .subtitle {
                 font-size: 1em;
             }
             .assessment-form {
-                width: calc(95% - 40px);
-                font-size: 1.3em;
-                padding: 30px;
+                padding: 20px;
+                margin: 0 10px;
+            }
+            .assessment-form input,
+            .assessment-form textarea {
+                font-size: 0.95em;
+            }
+            .assessment-form button {
+                font-size: 14px;
+            }
+            .go-back-btn {
+                font-size: 12px;
+                padding: 8px 16px;
             }
         }
     </style>
 </head>
 <body>
-    <button class="go-back-btn" onclick="window.location.href='index.html'">Go Back</button>
-    <h1>xOne <span class="highlight">Web3</span> Assessment Terminal</h1>
-    <div class="subtitle">Reach out to our Web3 specialists for a Free no-hassle assessment of your current infrastructure.</div>
-    <div class="assessment-form">
-        <span class="terminal-header">Linux '95 (v1.2)</span>
-        <form id="assessmentForm" action="https://formspree.io/f/xpwqyrka" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="description" placeholder="Describe your security needs" rows="4" required></textarea>
-            <button type="submit">Submit Assessment Request</button>
-        </form>
+    <div class="award-banner">
+        <a href="index.html"><img src="X1-7.png" alt="xOne Secure Logo"></a>
+        <span>
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>
+            250 + Cybersecurity Awards
+        </span>
+    </div>
+    <div class="header">
+        <div class="menu">
+            <button class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="menu-content">
+                <a href="index.html#services">Services</a>
+                <a href="index.html#stats">Stats</a>
+                <a href="index.html#about">About</a>
+                <a href="team.html">Team</a>
+                <a href="services.html">Services</a>
+                <a href="dashboard.html">xOne App</a>
+            </div>
+        </div>
     </div>
 
+    <section class="form-section">
+        <a href="index.html" class="go-back-btn">Go Back</a>
+        <h1>Free Cybersecurity Assessment</h1>
+        <div class="subtitle">Request a no-obligation assessment from our DoD-trusted specialists to evaluate your systems for NIST and CMMC compliance.</div>
+        <div class="assessment-form">
+            <form id="assessmentForm" action="https://formspree.io/f/xpwqyrka" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="description" placeholder="Describe your security needs" rows="4" required></textarea>
+                <button type="submit">Submit Assessment Request</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://twitter.com/xOnesecure">X</a>
+            <a href="https://github.com/xOneSecure">Gitbook</a>
+            <a href="https://github.com/xOneSecure/xone">Github</a>
+        </div>
+        <div class="copyright">
+            <p>© 2025 All Rights Reserved by xOne Secure LLC</p>
+        </div>
+    </footer>
+
     <script>
-        document.getElementById('assessmentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
-            
-            fetch('https://formspree.io/f/xpwqyrka', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const menuContent = document.querySelector('.menu-content');
+
+            hamburger.addEventListener('click', function() {
+                menuContent.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
+                    menuContent.classList.remove('active');
                 }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Success:', data);
+            });
+
+            document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData.entries());
                 
-                // Show alert and redirect after user clicks OK
-                alert('Your assessment request has been sent. We will get back to you soon!');
-                this.reset(); // Reset the form after successful submission
-                
-                // Use setTimeout to wait for the alert to be dismissed
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 100); // 100ms delay to ensure alert has been dismissed
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('There was an error sending your request. Please try again.');
+                fetch('https://formspree.io/f/xpwqyrka', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('Your assessment request has been sent. We will get back to you soon!');
+                    this.reset();
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 100);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('There was an error sending your request. Please try again.');
+                });
             });
         });
     </script>
