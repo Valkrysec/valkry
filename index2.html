@@ -32,7 +32,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
+            padding: 15px 0; /* Original padding */
             background: #0B0B0B;
             color: #BBBBBB; /* Light gray for award text */
             font-family: 'Montserrat', sans-serif;
@@ -44,6 +44,7 @@
             top: 0;
             left: 0;
             right: 0;
+            height: 60px; /* Explicit height to match original */
         }
         .award-banner span {
             display: inline-flex;
@@ -62,6 +63,7 @@
             max-width: 150px;
             height: auto;
             object-fit: contain;
+            margin-left: 10px; /* Original left positioning */
         }
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -72,6 +74,7 @@
         .menu {
             position: relative;
             z-index: 11;
+            margin-right: 40px; /* Original header padding */
         }
         .hamburger {
             background: none;
@@ -135,7 +138,7 @@
             padding: 150px 20px;
             position: relative;
             z-index: 1;
-            margin-top: 60px; /* Aligns with banner height */
+            margin-top: 60px; /* Matches banner height */
         }
         .hero-section::before {
             content: '';
@@ -364,11 +367,13 @@
         /* Media Queries */
         @media (max-width: 768px) {
             .award-banner {
-                padding: 10px 20px;
+                padding: 10px 0;
                 font-size: 1.1em;
+                height: 40px; /* Adjusted for smaller screens */
             }
             .award-banner img {
                 max-width: 120px;
+                margin-left: 5px;
             }
             .award-banner span {
                 font-size: 12px;
@@ -376,6 +381,9 @@
             .award-banner svg {
                 width: 18px;
                 height: 18px;
+            }
+            .menu {
+                margin-right: 20px;
             }
             .hamburger {
                 width: 30px;
@@ -392,7 +400,7 @@
             }
             .hero-section {
                 padding: 100px 20px;
-                margin-top: 40px; /* Adjusted for smaller banner */
+                margin-top: 40px; /* Matches smaller banner height */
             }
             .hero-section h1 {
                 font-size: 2.5em;
