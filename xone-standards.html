@@ -29,10 +29,12 @@
 
         /* Award Banner */
         .award-banner {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 15px 0;
             background: #0B0B0B;
-            color: #C8102E;
+            color: #BBBBBB; /* Light gray for award text */
             font-family: 'Montserrat', sans-serif;
             font-size: 1.5em;
             font-weight: 700;
@@ -42,12 +44,15 @@
             top: 0;
             left: 0;
             right: 0;
+            height: 60px; /* Matches original banner size */
         }
         .award-banner span {
             display: inline-flex;
             align-items: center;
             gap: 10px;
             font-size: 18px;
+            flex-grow: 1;
+            justify-content: center;
         }
         .award-banner svg {
             width: 30px;
@@ -55,43 +60,21 @@
             fill: #C8102E;
         }
         .award-banner img {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            max-width: 180px;
+            max-width: 150px;
             height: auto;
             object-fit: contain;
+            margin-left: 10px;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
-        /* Header */
-        .header {
-            background: #FFFFFF;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            z-index: 10;
-            position: sticky;
-            top: 60px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .header img {
-            position: absolute;
-            left: 40px;
-            top: 50%;
-            transform: translateY(-50%);
-            max-width: 150px;
-            height: auto;
-            object-fit: contain;
-        }
+        /* Hamburger Menu */
         .menu {
             position: relative;
             z-index: 11;
+            margin-right: 40px;
         }
         .hamburger {
             background: none;
@@ -101,14 +84,12 @@
             cursor: pointer;
             display: block;
             position: relative;
-            top: 0;
-            right: 0;
         }
         .hamburger span {
             display: block;
             width: 100%;
             height: 4px;
-            background: #333333;
+            background: #FFFFFF; /* White hamburger lines */
             position: absolute;
             transition: background 0.3s;
         }
@@ -154,7 +135,7 @@
             background: #FFFFFF;
             text-align: center;
             flex: 1;
-            margin-top: 60px;
+            margin-top: 60px; /* Matches banner height */
         }
         .standards-section h1 {
             font-family: 'Montserrat', sans-serif;
@@ -270,59 +251,44 @@
             color: #BBBBBB;
             font-size: 1em;
         }
-        @media (max-width: 768px) {
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .footer-column {
-                text-align: center;
-            }
-            .footer-column ul li {
-                margin-bottom: 8px;
-            }
-            footer {
-                padding: 40px 20px;
-            }
-        }
 
         /* Media Queries */
         @media (max-width: 768px) {
             .award-banner {
                 padding: 10px 0;
                 font-size: 1.1em;
+                height: 40px;
             }
             .award-banner img {
                 max-width: 120px;
-                left: 5px;
+                margin-left: 5px;
             }
             .award-banner span {
                 font-size: 12px;
-                padding-left: 130px;
             }
             .award-banner svg {
                 width: 18px;
                 height: 18px;
             }
-            .header {
-                padding: 15px 20px;
-                top: 40px;
-            }
-            .header img {
-                left: 20px;
-                max-width: 120px;
+            .menu {
+                margin-right: 20px;
             }
             .hamburger {
-                top: 0;
-                right: 0;
+                width: 30px;
+                height: 24px;
             }
+            .hamburger span {
+                height: 3px;
+            }
+            .hamburger span:nth-child(2) { top: 10px; }
             .menu-content {
-                top: 40px;
+                top: 34px;
                 width: 160px;
                 right: 10px;
             }
             .standards-section {
                 padding: 80px 20px 40px;
+                margin-top: 40px; /* Matches smaller banner height */
             }
             .standards-section h1 {
                 font-size: 2em;
@@ -344,6 +310,19 @@
                 font-size: 12px;
                 padding: 8px 16px;
             }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-column {
+                text-align: center;
+            }
+            .footer-column ul li {
+                margin-bottom: 8px;
+            }
+            footer {
+                padding: 40px 20px;
+            }
         }
     </style>
 </head>
@@ -354,8 +333,6 @@
             <svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>
             250 + Cybersecurity Awards
         </span>
-    </div>
-    <div class="header">
         <div class="menu">
             <button class="hamburger">
                 <span></span>
@@ -376,11 +353,11 @@
     <section class="standards-section">
         <a href="index2.html" class="go-back-btn">Go Back</a>
         <h1>NIST/NSA Compliance Standards</h1>
-        <div class="subtitle">Discover how xOne Secure’s steadfast commitment to NIST and NSA standards ensures unparalleled security for DoD, NSA, and commercial clients. <a href="assessment-form.html">Request a free assessment</a> to fortify your defenses.</div>
+        <div class="subtitle">Discover how Watchdog Cybersecurity’s steadfast commitment to NIST and NSA standards ensures unparalleled security for DoD, NSA, and commercial clients. <a href="assessment-form.html">Request a free assessment</a> to fortify your defenses.</div>
         <div class="standards-container">
     
             <h3>Our Commitment to NIST and NSA Standards</h3>
-            <p>xOne Secure’s cybersecurity services are anchored in the robust frameworks of NIST and NSA, mandated for federal agencies and contractors handling sensitive data. We align with three cornerstone standards: **NIST SP 800-171 Revision 3**, **NIST CSF 2.0**, and **NSA Cybersecurity Guidelines**, ensuring compliance with DoD and NSA requirements while delivering best-in-class security for all clients.</p>
+            <p>Watchdog Cybersecurity’s services are anchored in the robust frameworks of NIST and NSA, mandated for federal agencies and contractors handling sensitive data. We align with three cornerstone standards: **NIST SP 800-171 Revision 3**, **NIST CSF 2.0**, and **NSA Cybersecurity Guidelines**, ensuring compliance with DoD and NSA requirements while delivering best-in-class security for all clients.</p>
             <p><strong>NIST SP 800-171 Revision 3</strong>, finalized in May 2024, provides 97 controls to protect CUI in non-federal systems, critical for DoD contractors handling intellectual property or weapons system data. We implement controls like access management, incident response, and supply chain risk management to safeguard CUI. NIST’s machine-readable formats (JSON, Excel) streamline our compliance process, making audits transparent and efficient. Our team ensures your systems meet these standards, reducing the risk of breaches that could jeopardize DoD contracts. <a href="https://www.nist.gov">Learn more at NIST.gov</a>.</p>
             <p><strong>NIST CSF 2.0</strong>, updated in February 2024, offers a flexible framework with six core functions: Govern, Identify, Protect, Detect, Respond, and Recover. Mandated by Executive Order 13800, it’s the gold standard for cybersecurity risk management across industries. We use CSF 2.0 to map your assets, assess risks, and develop proactive strategies, ensuring your organization can detect threats early and recover swiftly. It’s like a cybersecurity GPS—our experts navigate the threat landscape with NIST as our guide.</p>
             <p><strong>NSA Cybersecurity Guidelines</strong>, driven by the NSA’s Cybersecurity Directorate and Center for Cybersecurity Standards, provide cutting-edge protections against nation-state actors. We align with **CNSS Policy 15-1** for cryptographic security, **NSA Cybersecurity Advisories** for real-time threat mitigation, and the **NSA/CSS Technical Cyber Threat Framework** to prioritize vulnerabilities. For example, we implement NSA’s **Protective Domain Name Systems (PDNS)** to block malicious domains, enhancing CUI protection for NSA and DoD contracts. Our collaboration with NSA’s signals intelligence ensures your systems counter advanced threats, as outlined in NSA’s mission to safeguard national security systems. <a href="https://www.nsa.gov">Explore NSA’s standards</a>.</p>
@@ -401,16 +378,16 @@
                 <strong>Process:</strong> Certified pentesters conduct tailored external and internal attacks, including social engineering, followed by detailed reports with NIST- and NSA-compliant mitigation strategies.<br>
                 <strong>Benefit:</strong> Like cyber war games sanctioned by NIST and NSA, our tests uncover vulnerabilities, ensuring your systems are battle-ready for DoD, NSA, and commercial threats.</p>
 
-            <h3>Why Trust xOne Secure?</h3>
-            <p>xOne Secure isn’t just another cybersecurity firm—we’re your NIST- and NSA-certified allies in the fight against cyber threats. Listed on <a href="https://www.gsa.gov">gsa.gov</a> and <a href="https://sam.gov">sam.gov</a>, our small, elite team brings over 250 cybersecurity awards and a passion for precision to every project. We tailor our NIST- and NSA-driven services to your unique needs, whether you’re a DoD contractor protecting CUI, an NSA partner countering nation-state actors, or a commercial client aiming for world-class security.</p>
-            <p>Our commitment to NIST and NSA standards, alongside government contracting guidelines, ensures compliance, resilience, and peace of mind. We don’t just build firewalls; we forge partnerships that empower you to thrive in a threat-filled world. With xOne Secure, NIST, and NSA as your allies, no cyber threat stands a chance! Ready to fortify your defenses? <a href="assessment-form.html">Request a free assessment</a> today and let’s build your cybersecurity fortress together.</p>
+            <h3>Why Trust Watchdog Cybersecurity?</h3>
+            <p>Watchdog Cybersecurity isn’t just another cybersecurity firm—we’re your NIST- and NSA-certified allies in the fight against cyber threats. Listed on <a href="https://www.gsa.gov">gsa.gov</a> and <a href="https://sam.gov">sam.gov</a>, our small, elite team brings over 250 cybersecurity awards and a passion for precision to every project. We tailor our NIST- and NSA-driven services to your unique needs, whether you’re a DoD contractor protecting CUI, an NSA partner countering nation-state actors, or a commercial client aiming for world-class security.</p>
+            <p>Our commitment to NIST and NSA standards, alongside government contracting guidelines, ensures compliance, resilience, and peace of mind. We don’t just build firewalls; we forge partnerships that empower you to thrive in a threat-filled world. With Watchdog Cybersecurity, NIST, and NSA as your allies, no cyber threat stands a chance! Ready to fortify your defenses? <a href="assessment-form.html">Request a free assessment</a> today and let’s build your cybersecurity fortress together.</p>
         </div>
     </section>
 
     <footer>
         <div class="footer-content">
             <div class="footer-column">
-                <h3>xOne Secure LLC</h3>
+                <h3>Watchdog Cybersecurity</h3>
                 <p>Premier cybersecurity defense contractors delivering cutting-edge solutions for government and commercial clients.</p>
             </div>
             <div class="footer-column">
@@ -431,7 +408,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="copyright">© 2025 All Rights Reserved by xOne Secure LLC</p>
+            <p class="copyright">© 2025 All Rights Reserved by Watchdog Cybersecurity</p>
         </div>
     </footer>
 
