@@ -29,10 +29,12 @@
 
         /* Award Banner */
         .award-banner {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 15px 0;
             background: #0B0B0B;
-            color: #C8102E;
+            color: #BBBBBB; /* Light gray for award text */
             font-family: 'Montserrat', sans-serif;
             font-size: 1.5em;
             font-weight: 700;
@@ -42,12 +44,15 @@
             top: 0;
             left: 0;
             right: 0;
+            height: 60px; /* Matches original banner size */
         }
         .award-banner span {
             display: inline-flex;
             align-items: center;
             gap: 10px;
             font-size: 18px;
+            flex-grow: 1;
+            justify-content: center;
         }
         .award-banner svg {
             width: 30px;
@@ -55,43 +60,21 @@
             fill: #C8102E;
         }
         .award-banner img {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            max-width: 180px;
+            max-width: 150px;
             height: auto;
             object-fit: contain;
+            margin-left: 10px;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
-        /* Header */
-        .header {
-            background: #FFFFFF;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            z-index: 10;
-            position: sticky;
-            top: 60px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .header img {
-            position: absolute;
-            left: 40px;
-            top: 50%;
-            transform: translateY(-50%);
-            max-width: 150px;
-            height: auto;
-            object-fit: contain;
-        }
+        /* Hamburger Menu */
         .menu {
             position: relative;
             z-index: 11;
+            margin-right: 40px;
         }
         .hamburger {
             background: none;
@@ -101,14 +84,12 @@
             cursor: pointer;
             display: block;
             position: relative;
-            top: 0;
-            right: 0;
         }
         .hamburger span {
             display: block;
             width: 100%;
             height: 4px;
-            background: #333333;
+            background: #FFFFFF; /* White hamburger lines */
             position: absolute;
             transition: background 0.3s;
         }
@@ -154,7 +135,7 @@
             background: #FFFFFF;
             text-align: center;
             flex: 1;
-            margin-top: 60px;
+            margin-top: 60px; /* Matches banner height */
         }
         .docs-section h1 {
             font-family: 'Montserrat', sans-serif;
@@ -270,59 +251,44 @@
             color: #BBBBBB;
             font-size: 1em;
         }
-        @media (max-width: 768px) {
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .footer-column {
-                text-align: center;
-            }
-            .footer-column ul li {
-                margin-bottom: 8px;
-            }
-            footer {
-                padding: 40px 20px;
-            }
-        }
 
         /* Media Queries */
         @media (max-width: 768px) {
             .award-banner {
                 padding: 10px 0;
                 font-size: 1.1em;
+                height: 40px;
             }
             .award-banner img {
                 max-width: 120px;
-                left: 5px;
+                margin-left: 5px;
             }
             .award-banner span {
                 font-size: 12px;
-                padding-left: 130px;
             }
             .award-banner svg {
                 width: 18px;
                 height: 18px;
             }
-            .header {
-                padding: 15px 20px;
-                top: 40px;
-            }
-            .header img {
-                left: 20px;
-                max-width: 120px;
+            .menu {
+                margin-right: 20px;
             }
             .hamburger {
-                top: 0;
-                right: 0;
+                width: 30px;
+                height: 24px;
             }
+            .hamburger span {
+                height: 3px;
+            }
+            .hamburger span:nth-child(2) { top: 10px; }
             .menu-content {
-                top: 40px;
+                top: 34px;
                 width: 160px;
                 right: 10px;
             }
             .docs-section {
                 padding: 80px 20px 40px;
+                margin-top: 40px; /* Matches smaller banner height */
             }
             .docs-section h1 {
                 font-size: 2em;
@@ -344,6 +310,19 @@
                 font-size: 12px;
                 padding: 8px 16px;
             }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-column {
+                text-align: center;
+            }
+            .footer-column ul li {
+                margin-bottom: 8px;
+            }
+            footer {
+                padding: 40px 20px;
+            }
         }
     </style>
 </head>
@@ -354,8 +333,6 @@
             <svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>
             250 + Cybersecurity Awards
         </span>
-    </div>
-    <div class="header">
         <div class="menu">
             <button class="hamburger">
                 <span></span>
@@ -376,15 +353,15 @@
     <section class="docs-section">
         <a href="index.html" class="go-back-btn">Go Back</a>
         <h1>Service Documentation</h1>
-        <div class="subtitle">Explore detailed documentation of xOne Secure’s cybersecurity services, designed for government and commercial clients to secure critical infrastructure. <a href="assessment-form.html">Request a free assessment</a> to begin.</div>
+        <div class="subtitle">Explore detailed documentation of Watchdog Cybersecurity’s services, designed for government and commercial clients to secure critical infrastructure. <a href="assessment-form.html">Request a free assessment</a> to begin.</div>
         <div class="docs-container">
             <h3>Introduction</h3>
-            <p>xOne Secure LLC is a premier cybersecurity defense contractor dedicated to safeguarding the critical infrastructure of government and commercial clients. Founded with a mission to deliver cutting-edge cybersecurity solutions, our small, elite team of penetration testers, systems engineers, and compliance specialists brings unparalleled expertise to every engagement. We specialize in network infrastructure assessments, auditing and compliance services, and advanced penetration testing, tailored to meet the stringent requirements of the Department of Defense (DoD) and enterprise organizations. As trusted partners listed on platforms like gsa.gov and sam.gov, we combine technical prowess with a deep understanding of federal standards to protect our clients from evolving cyber threats.</p>
-            <p>Our goal is to empower clients with robust, DoD-grade cybersecurity solutions that not only mitigate risks but also enhance operational resilience and regulatory compliance. We strive to deliver actionable insights through meticulous assessments, ensuring that vulnerabilities are identified and addressed before they can be exploited. Whether securing military systems or enterprise networks, xOne Secure prioritizes precision, confidentiality, and client-specific strategies to deliver measurable results.</p>
-            <p>At xOne Secure, we view cybersecurity as a partnership. Our services are designed to align with each client’s unique needs, from achieving NIST 800-171 or CMMC compliance to fortifying cloud environments against advanced persistent threats. By fostering trust and transparency, we aim to build long-term relationships that help our clients stay ahead of the cyber threat landscape. This documentation outlines our core service offerings, detailing how we protect and empower our clients to achieve their security objectives.</p>
+            <p>Watchdog Cybersecurity is a premier cybersecurity defense contractor dedicated to safeguarding the critical infrastructure of government and commercial clients. Founded with a mission to deliver cutting-edge cybersecurity solutions, our small, elite team of penetration testers, systems engineers, and compliance specialists brings unparalleled expertise to every engagement. We specialize in network infrastructure assessments, auditing and compliance services, and advanced penetration testing, tailored to meet the stringent requirements of the Department of Defense (DoD) and enterprise organizations. As trusted partners listed on platforms like gsa.gov and sam.gov, we combine technical prowess with a deep understanding of federal standards to protect our clients from evolving cyber threats.</p>
+            <p>Our goal is to empower clients with robust, DoD-grade cybersecurity solutions that not only mitigate risks but also enhance operational resilience and regulatory compliance. We strive to deliver actionable insights through meticulous assessments, ensuring that vulnerabilities are identified and addressed before they can be exploited. Whether securing military systems or enterprise networks, Watchdog Cybersecurity prioritizes precision, confidentiality, and client-specific strategies to deliver measurable results.</p>
+            <p>At Watchdog Cybersecurity, we view cybersecurity as a partnership. Our services are designed to align with each client’s unique needs, from achieving NIST 800-171 or CMMC compliance to fortifying cloud environments against advanced persistent threats. By fostering trust and transparency, we aim to build long-term relationships that help our clients stay ahead of the cyber threat landscape. This documentation outlines our core service offerings, detailing how we protect and empower our clients to achieve their security objectives.</p>
 
             <h3>Network Infrastructure Assessment</h3>
-            <p><strong>Purpose:</strong> xOne Secure’s Network Infrastructure Assessment evaluates the security and resilience of your network architecture, cloud systems, and endpoints to protect against cyber threats. This service ensures your infrastructure is robust and capable of withstanding sophisticated attacks.</p>
+            <p><strong>Purpose:</strong> Watchdog Cybersecurity’s Network Infrastructure Assessment evaluates the security and resilience of your network architecture, cloud systems, and endpoints to protect against cyber threats. This service ensures your infrastructure is robust and capable of withstanding sophisticated attacks.</p>
             <p><strong>Process:</strong> Our expert team conducts an in-depth analysis of your network configurations, including routers, firewalls, and cloud environments. We perform vulnerability scanning, traffic analysis, and risk assessments to identify weaknesses. A comprehensive report is provided, detailing findings and prioritized recommendations for remediation.</p>
             <p><strong>Benefits:</strong> Clients receive actionable insights to strengthen their defenses, reduce attack surfaces, and enhance system reliability. This service is critical for DoD contractors and enterprises seeking to maintain secure, compliant networks.</p>
 
@@ -403,7 +380,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-column">
-                <h3>xOne Secure LLC</h3>
+                <h3>Watchdog Cybersecurity</h3>
                 <p>Premier cybersecurity defense contractors delivering cutting-edge solutions for government and commercial clients.</p>
             </div>
             <div class="footer-column">
@@ -424,7 +401,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="copyright">© 2025 All Rights Reserved by xOne Secure LLC</p>
+            <p class="copyright">© 2025 All Rights Reserved by Watchdog Cybersecurity</p>
         </div>
     </footer>
 
