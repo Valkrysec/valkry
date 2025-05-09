@@ -29,10 +29,12 @@
 
         /* Award Banner */
         .award-banner {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 15px 0;
             background: #0B0B0B;
-            color: #C8102E;
+            color: #BBBBBB; /* Light gray for award text */
             font-family: 'Montserrat', sans-serif;
             font-size: 1.5em;
             font-weight: 700;
@@ -42,12 +44,15 @@
             top: 0;
             left: 0;
             right: 0;
+            height: 60px; /* Matches original banner size */
         }
         .award-banner span {
             display: inline-flex;
             align-items: center;
             gap: 10px;
             font-size: 18px;
+            flex-grow: 1;
+            justify-content: center;
         }
         .award-banner svg {
             width: 30px;
@@ -55,43 +60,21 @@
             fill: #C8102E;
         }
         .award-banner img {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            max-width: 180px;
+            max-width: 150px;
             height: auto;
             object-fit: contain;
+            margin-left: 10px;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
-        /* Header */
-        .header {
-            background: #FFFFFF;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            z-index: 10;
-            position: sticky;
-            top: 60px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .header img {
-            position: absolute;
-            left: 40px;
-            top: 50%;
-            transform: translateY(-50%);
-            max-width: 150px;
-            height: auto;
-            object-fit: contain;
-        }
+        /* Hamburger Menu */
         .menu {
             position: relative;
             z-index: 11;
+            margin-right: 40px;
         }
         .hamburger {
             background: none;
@@ -101,14 +84,12 @@
             cursor: pointer;
             display: block;
             position: relative;
-            top: 0;
-            right: 0;
         }
         .hamburger span {
             display: block;
             width: 100%;
             height: 4px;
-            background: #333333;
+            background: #FFFFFF; /* White hamburger lines */
             position: absolute;
             transition: background 0.3s;
         }
@@ -154,7 +135,7 @@
             background: #FFFFFF;
             text-align: center;
             flex: 1;
-            margin-top: 60px;
+            margin-top: 60px; /* Matches banner height */
         }
         .services-section h1 {
             font-family: 'Montserrat', sans-serif;
@@ -303,38 +284,38 @@
             .award-banner {
                 padding: 10px 0;
                 font-size: 1.1em;
+                height: 40px;
             }
             .award-banner img {
                 max-width: 120px;
-                left: 5px;
+                margin-left: 5px;
             }
             .award-banner span {
                 font-size: 12px;
-                padding-left: 130px;
             }
             .award-banner svg {
                 width: 18px;
                 height: 18px;
             }
-            .header {
-                padding: 15px 20px;
-                top: 40px;
-            }
-            .header img {
-                left: 20px;
-                max-width: 120px;
+            .menu {
+                margin-right: 20px;
             }
             .hamburger {
-                top: 0;
-                right: 0;
+                width: 30px;
+                height: 24px;
             }
+            .hamburger span {
+                height: 3px;
+            }
+            .hamburger span:nth-child(2) { top: 10px; }
             .menu-content {
-                top: 40px;
+                top: 34px;
                 width: 160px;
                 right: 10px;
             }
             .services-section {
                 padding: 80px 20px 40px;
+                margin-top: 40px; /* Matches smaller banner height */
             }
             .services-section h1 {
                 font-size: 2em;
@@ -379,8 +360,6 @@
             <svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>
             250 + Cybersecurity Awards
         </span>
-    </div>
-    <div class="header">
         <div class="menu">
             <button class="hamburger">
                 <span></span>
