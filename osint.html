@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchdog - OSINT Reports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F5;
+            color: #333333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Award Banner */
+        .award-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            background: #0B0B0B;
+            color: #BBBBBB;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            z-index: 15;
+            animation: fadeIn 1s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+        }
+        .award-banner span {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            flex-grow: 1;
+            justify-content: center;
+        }
+        .award-banner svg {
+            width: 30px;
+            height: 30px;
+            fill: #C8102E;
+        }
+        .award-banner img {
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
+            margin-left: 10px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hamburger Menu */
+        .menu {
+            position: relative;
+            z-index: 11;
+            margin-right: 40px;
+        }
+        .hamburger {
+            background: none;
+            border: none;
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            display: block;
+            position: relative;
+        }
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: #FFFFFF;
+            position: absolute;
+            transition: background 0.3s;
+        }
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 13px; }
+        .hamburger span:nth-child(3) { bottom: 0; }
+        .hamburger:hover span {
+            background: #C8102E;
+        }
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background: #FFFFFF;
+            flex-direction: column;
+            width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .menu-content.active {
+            display: flex;
+        }
+        .menu-content a {
+            color: #333333;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .menu-content a:hover {
+            background-color: #C8102E;
+            color: #FFFFFF;
+            border-radius: 4px;
+        }
+
+        /* OSINT Section */
+        .osint-section {
+            padding: 100px 40px 80px;
+            background: #FFFFFF;
+            text-align: center;
+            flex: 1;
+            margin-top: 60px;
+        }
+        .osint-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+        .osint-section .subtitle {
+            font-size: 1.2em;
+            color: #666666;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        .go-back-btn {
+            display: inline-block;
+            background-color: #C8102E;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+        .go-back-btn:hover {
+            background-color: #A00D24;
+        }
+        .osint-posts {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .osint-post {
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .osint-post h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8em;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+        .osint-post .meta {
+            font-size: 0.9em;
+            color: #666666;
+            margin-bottom: 15px;
+        }
+        .osint-post p {
+            font-size: 1em;
+            color: #333333;
+            margin-bottom: 15px;
+        }
+        .osint-post a {
+            color: #C8102E;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .osint-post a:hover {
+            color: #A00D24;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 40px 40px;
+            background: #333333;
+            color: #FFFFFF;
+            text-align: center;
+            z-index: 1;
+            margin-top: auto;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .footer-column {
+            text-align: left;
+        }
+        .footer-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+        }
+        .footer-column p {
+            font-size: 1em;
+            color: #BBBBBB;
+            margin-bottom: 15px;
+        }
+        .footer-column ul {
+            list-style: none;
+        }
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        .footer-column ul li a {
+            color: #C8102E;
+            text-decoration: none;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+        .footer-column ul li a:hover {
+            color: #A00D24;
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            border-top: 1px solid #555555;
+            padding-top: 20px;
+        }
+        .footer-bottom .copyright {
+            color: #BBBBBB;
+            font-size: 1em;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .award-banner {
+                padding: 10px 0;
+                font-size: 1.1em;
+                height: 40px;
+            }
+            .award-banner img {
+                max-width: 120px;
+                margin-left: 5px;
+            }
+            .award-banner span {
+                font-size: 12px;
+            }
+            .award-banner svg {
+                width: 18px;
+                height: 18px;
+            }
+            .menu {
+                margin-right: 20px;
+            }
+            .hamburger {
+                width: 30px;
+                height: 24px;
+            }
+            .hamburger span {
+                height: 3px;
+            }
+            .hamburger span:nth-child(2) { top: 10px; }
+            .menu-content {
+                top: 34px;
+                width: 160px;
+                right: 10px;
+            }
+            .osint-section {
+                padding: 80px 20px 40px;
+                margin-top: 40px;
+            }
+            .osint-section h1 {
+                font-size: 2em;
+            }
+            .osint-section .subtitle {
+                font-size: 1em;
+            }
+            .osint-posts {
+                margin: 0 10px;
+            }
+            .osint-post {
+                padding: 15px;
+            }
+            .osint-post h2 {
+                font-size: 1.5em;
+            }
+            .osint-post .meta {
+                font-size: 0.8em;
+            }
+            .osint-post p {
+                font-size: 0.9em;
+            }
+            .go-back-btn {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-column {
+                text-align: center;
+            }
+            .footer-column ul li {
+                margin-bottom: 8px;
+            }
+            footer {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="award-banner">
+        <a href="index2.html"><img src="redfox (4).png" alt="Watchdog Cybersecurity Logo"></a>
+        <span>
+            <svg viewBox="0 0 24 24"><path d="M12 2L9 7H5L7 11L4 14L8 14L10 18H14L16 14L20 14L17 11L19 7H15L12 2ZM12 4.5L14 8H17L15.5 11L18 13H15L13 17H11L9 13H6L8.5 11L7 8H10L12 4.5Z" /></svg>
+            250 + Cybersecurity Awards
+        </span>
+        <div class="menu">
+            <button class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="menu-content">
+                <a href="https://xonesecure.github.io/xone/about.html">About</a>
+                <a href="https://xonesecure.github.io/xone/services.html">Services</a>
+                <a href="https://xonesecure.github.io/xone/docs.html">Docs</a>
+                <a href="https://xonesecure.github.io/xone/xone-standards.html">NSA/NIST Comp</a>
+                <a href="https://xonesecure.github.io/xone/remote.html">Remote Support</a>
+                <a href="https://xonesecure.github.io/xone/assessment-form.html">Contact</a>
+                <a href="https://xonesecure.github.io/xone/osint.html">OSINT Reports</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="osint-section">
+        <a href="index.html" class="go-back-btn">Go Back</a>
+        <h1>Watchdog OSINT Reports</h1>
+        <div class="subtitle">Our Open-Source Intelligence (OSINT) hub provides weekly updates on critical vulnerabilities and bugs in enterprise systems like Azure, Red Hat Enterprise Linux, and Windows, empowering government and commercial clients with actionable insights from our Red Hat and White Hat hacking experts.</div>
+        <div class="osint-posts">
+            <!-- Post 1 -->
+            <div class="osint-post">
+                <h2>CVE-2025-29824: Windows CLFS Privilege Escalation</h2>
+                <div class="meta">Posted on May 5, 2025 | Affected: Windows Server 2019, 2022</div>
+                <p>A zero-day vulnerability in the Windows Common Log File System (CLFS) driver allows attackers to elevate privileges. Exploited by the Play ransomware group, this flaw impacts enterprise Windows Server deployments. Apply Microsoft’s April 2025 patch immediately.</p>
+                <p><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-29824">View CVE Details</a> | <a href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-29824">Microsoft Advisory</a></p>
+            </div>
+            <!-- Post 2 -->
+            <div class="osint-post">
+                <h2>CVE-2024-6409: OpenSSH Race Condition in RHEL 9</h2>
+                <div class="meta">Posted on April 28, 2025 | Affected: Red Hat Enterprise Linux 9</div>
+                <p>A race condition in OpenSSH versions 8.7p1 and 8.8p1 allows remote code execution on unprivileged child processes. RHEL 9 users should update to the latest OpenSSH package to mitigate potential exploits.</p>
+                <p><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-6409">View CVE Details</a> | <a href="https://access.redhat.com/security/cve/CVE-2024-6409">Red Hat Advisory</a></p>
+            </div>
+            <!-- Post 3 -->
+            <div class="osint-post">
+                <h2>CVE-2024-4577: PHP-CGI Command Injection on Windows</h2>
+                <div class="meta">Posted on April 21, 2025 | Affected: Windows Server with PHP</div>
+                <p>A high-severity PHP-CGI vulnerability allows remote command execution on Windows servers. Observed in ransomware attacks, this flaw requires immediate patching to PHP 8.3.7 or later.</p>
+                <p><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-4577">View CVE Details</a> | <a href="https://www.php.net/ChangeLog-8.php#8.3.7">PHP Advisory</a></p>
+            </div>
+            <!-- Post 4 -->
+            <div class="osint-post">
+                <h2>CVE-2025-27363: Android RCE in Azure-Connected Devices</h2>
+                <div class="meta">Posted on April 14, 2025 | Affected: Azure IoT Hub, Android</div>
+                <p>A remote code execution flaw in Android’s Parcel serialization affects devices connected to Azure IoT Hub. Update to Android’s May 2025 security patch to prevent exploitation.</p>
+                <p><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-27363">View CVE Details</a> | <a href="https://source.android.com/security/bulletin/2025-05-01">Android Advisory</a></p>
+            </div>
+            <!-- Post 5 -->
+            <div class="osint-post">
+                <h2>CVE-2024-20475: Cisco Catalyst SD-WAN XSS</h2>
+                <div class="meta">Posted on April 7, 2025 | Affected: Azure-integrated Cisco SD-WAN</div>
+                <p>A cross-site scripting vulnerability in Cisco Catalyst SD-WAN Manager, often integrated with Azure, allows attackers to execute malicious scripts. Apply Cisco’s latest firmware update.</p>
+                <p><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-20475">View CVE Details</a> | <a href="https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-sdwan-xss-9mT2vT5M">Cisco Advisory</a></p>
+            </div>
+            <!-- Post 6 -->
+            <div class="osint-post">
+                <h2>CVE-2025-20212: Cisco Meraki VPN DoS</h2>
+                <div class="meta">Posted on March 31, 2025 | Affected: Windows, Azure VPN Clients</div>
+                <p>A denial-of-service vulnerability in Cisco Meraki MX and Z series VPNs impacts Windows and Azure-connected clients. Update to the latest Meraki firmware to mitigate risks.</p>
+                <p><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-20212">View CVE Details</a> | <a href="https://tools.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-meraki-mx-dos-4vL2W5b">Cisco Advisory</a></p>
+            </div>
+            <!-- Post 7 -->
+            <div class="osint-post">
+                <h2>CVE-2024-8190: Ivanti CSA Command Injection</h2>
+                <div class="meta">Posted on March 24, 2025 | Affected: Windows Server, Azure</div>
+                <p>An OS command injection flaw in Ivanti Cloud Services Appliance allows remote code execution. Observed in active exploits, this requires immediate patching.</p>
+                <p><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-8190">View CVE Details</a> | <a href="https://forums.ivanti.com/s/article/Security-Advisory-CVE-2024-8190?language=en_US">Ivanti Advisory</a></p>
+            </div>
+            <!-- Post 8 -->
+            <div class="osint-post">
+                <h2>CVE-2024-8963: Ivanti CSA Path Traversal</h2>
+                <div class="meta">Posted on March 17, 2025 | Affected: Windows Server, Azure</div>
+                <p>A path traversal vulnerability in Ivanti CSA allows unauthenticated attackers to access restricted functionality. Patch immediately to prevent privilege escalation.</p>
+                <p><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-8963">View CVE Details</a> | <a href="https://forums.ivanti.com/s/article/Security-Advisory-CVE-2024-8963?language=en_US">Ivanti Advisory</a></p>
+            </div>
+            <!-- Post 9 -->
+            <div class="osint-post">
+                <h2>CVE-2024-9380: Ivanti CSA Admin Console RCE</h2>
+                <div class="meta">Posted on March 10, 2025 | Affected: Windows Server, Azure</div>
+                <p>An OS command injection in Ivanti CSA’s admin console enables remote code execution with admin privileges. Apply Ivanti’s September 2024 patch urgently.</p>
+                <p><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-9380">View CVE Details</a> | <a href="https://forums.ivanti.com/s/article/Security-Advisory-CVE-2024-9380?language=en_US">Ivanti Advisory</a></p>
+            </div>
+            <!-- Post 10 -->
+            <div class="osint-post">
+                <h2>CVE-2025-2775: ServiceNow IT Service Management Flaw</h2>
+                <div class="meta">Posted on March 3, 2025 | Affected: Azure-integrated ServiceNow</div>
+                <p>A vulnerability in ServiceNow’s IT Service Management platform allows unauthorized access to sensitive data. Update to the latest ServiceNow release to mitigate risks.</p>
+                <p><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-2775">View CVE Details</a> | <a href="https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB1234567">ServiceNow Advisory</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Watchdog Cybersecurity</h3>
+                <p>Premier cybersecurity defense contractors delivering cutting-edge solutions for government and commercial clients.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="termsofuse.html">Terms of Use</a></li>
+                    <li><a href="privacypolicy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://twitter.com/xOnesecure">X</a></li>
+                    <li><a href="https://github.com/xOneSecure">Gitbook</a></li>
+                    <li><a href="https://github.com/xOneSecure/xone">Github</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">© 2025 All Rights Reserved by Watchdog Cybersecurity</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const menuContent = document.querySelector('.menu-content');
+
+            // Hamburger menu toggle
+            hamburger.addEventListener('click', function() {
+                menuContent.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
+                    menuContent.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
