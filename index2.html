@@ -26,491 +26,436 @@
         body::-webkit-scrollbar {
             display: none;
         }
-    /* Award Banner */
-    .award-banner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 0;
-        background: #0B0B0B;
-        color: #BBBBBB;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1.5em;
-        font-weight: 700;
-        z-index: 15;
-        animation: fadeIn 1s ease-in-out;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 90px;
-    }
-    .award-banner span {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 18px;
-        flex: 1;
-        justify-content: center;
-    }
-    .award-banner svg {
-        width: 30px;
-        height: 30px;
-        fill: #C8102E;
-    }
-    .award-banner img {
-        max-width: 250px;
-        height: auto;
-        object-fit: contain;
-        margin-left: 10px;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
 
-    /* Hamburger Menu */
-    .menu {
-        position: relative;
-        z-index: 11;
-        margin-right: 20px;
-    }
-    .hamburger {
-        background: none;
-        border: none;
-        width: 40px;
-        height: 30px;
-        cursor: pointer;
-        display: block;
-        position: relative;
-    }
-    .hamburger span {
-        display: block;
-        width: 100%;
-        height: 4px;
-        background: #FFFFFF;
-        position: absolute;
-        transition: background 0.3s;
-    }
-    .hamburger span:nth-child(1) { top: 0; }
-    .hamburger span:nth-child(2) { top: 13px; }
-    .hamburger span:nth-child(3) { bottom: 0; }
-    .hamburger:hover span {
-        background: #C8102E;
-    }
-    .menu-content {
-        display: none;
-        position: absolute;
-        top: 40px;
-        right: 0;
-        background: #FFFFFF;
-        flex-direction: column;
-        width: 200px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        border-radius: 4px;
-        padding: 10px;
-    }
-    .menu-content.active {
-        display: flex;
-    }
-    .menu-content a {
-        color: #333333;
-        text-decoration: none;
-        padding: 10px 15px;
-        font-size: 16px;
-        transition: background-color 0.3s, color 0.3s;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    .menu-content a:hover {
-        background-color: #C8102E;
-        color: #FFFFFF;
-        border-radius: 4px;
-    }
-
-    /* Hero Section with Video Background */
-    .hero-section {
-        position: relative;
-        color: #FFFFFF;
-        text-align: center;
-        padding: 150px 20px;
-        z-index: 1;
-        margin-top: 90px;
-        overflow: hidden;
-    }
-    .hero-section video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: -2;
-    }
-    .hero-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: -1;
-    }
-    .hero-section h1 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 3.5em;
-        margin-bottom: 20px;
-    }
-    .hero-section p {
-        font-size: 1.2em;
-        max-width: 800px;
-        margin: 0 auto 30px;
-    }
-    .cta-btn {
-        background-color: #C8102E;
-        color: #FFFFFF;
-        padding: 12px 24px;
-        font-size: 16px;
-        border-radius: 4px;
-        text-decoration: none;
-        transition: background-color 0.3s;
-    }
-    .cta-btn:hover {
-        background-color: #A00D24;
-    }
-
-    /* Mobile Fallback */
-    @media (max-width: 768px) {
+        /* Award Banner */
         .award-banner {
-            padding: 10px 0;
-            font-size: 1.1em;
-            height: 70px;
-        }
-        .award-banner img {
-            max-width: 220px !important;
-            margin-left: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            background: #0B0B0B;
+            color: #BBBBBB;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            z-index: 15;
+            animation: fadeIn 1s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 90px;
         }
         .award-banner span {
-            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
             flex: 1;
             justify-content: center;
         }
         .award-banner svg {
-            width: 18px;
-            height: 18px;
-        }
-        .menu {
-            margin-right: 20px;
-        }
-        .hamburger {
             width: 30px;
-            height: 24px;
-        }
-        .hamburger span {
-            height: 3px;
-        }
-        .hamburger span:nth-child(2) { top: 10px; }
-        .menu-content {
-            top: 34px;
-            width: 160px;
-            right: 10px;
-        }
-        .hero-section {
-            padding: 100px 20px;
-            margin-top: 70px;
-        }
-        .hero-section video {
-            display: none;
-        }
-        .hero-section {
-            background: url('https://res.cloudinary.com/dk98vn3a5/video/upload/v1747088111/Dark_Blue_Uplifting_Abstract_Corporate_Entrepreneurs_YouTube_Video_Intro_wnl7pi.mp4') no-repeat center center;
-            background-size: cover;
-        }
-        .hero-section h1 {
-            font-size: 2.5em;
-        }
-        .hero-section p {
-            font-size: 1em;
-        }
-    }
-
-    /* Services Section */
-    .services-section {
-        padding: 80px 40px;
-        background: #FFFFFF;
-        text-align: center;
-    }
-    .services-section h2 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 2.5em;
-        color: #333333;
-        margin-bottom: 40px;
-    }
-    .services-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    .service-item {
-        padding: 20px;
-        border: 1px solid #E0E0E0;
-        border-radius: 8px;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .service-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-    .service-item img {
-        width: 60px;
-        height: 60px;
-        margin-bottom: 20px;
-    }
-    .service-item h3 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1.5em;
-        color: #333333;
-        margin-bottom: 15px;
-    }
-    .service-item p {
-        font-size: 1em;
-        color: #666666;
-    }
-
-    /* About Section */
-    .about-section {
-        padding: 80px 40px;
-        background: #F5F5F5;
-        text-align: center;
-    }
-    .about-section h2 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 2.5em;
-        color: #333333;
-        margin-bottom: 40px;
-    }
-    .about-content {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    .about-content p {
-        font-size: 1.1em;
-        color: #666666;
-        margin-bottom: 20px;
-    }
-
-    /* Stats Section */
-    .stats-section {
-        padding: 80px 40px;
-        background: #FFFFFF;
-        text-align: center;
-    }
-    .stats-section h2 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 2.5em;
-        color: #333333;
-        margin-bottom: 40px;
-    }
-    .stats-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    .stat-item {
-        padding: 20px;
-    }
-    .stat-number {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 2.5em;
-        color: #C8102E;
-        font-weight: 700;
-    }
-    .stat-label {
-        font-size: 1.1em;
-        color: #666666;
-        margin-top: 10px;
-    }
-
-    /* Compliance Section */
-    .compliance-section {
-        padding: 80px 40px;
-        background: #F5F5F5;
-        text-align: center;
-    }
-    .compliance-section h2 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 2.5em;
-        color: #333333;
-        margin-bottom: 40px;
-    }
-    .compliance-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    .compliance-btn {
-        display: inline-block;
-        background-color: #C8102E;
-        color: #FFFFFF;
-        padding: 12px 24px;
-        font-size: 16px;
-        border-radius: 4px;
-        text-decoration: none;
-        transition: background-color 0.3s;
-        margin-top: 20px;
-    }
-    .compliance-btn:hover {
-        background-color: #A00D24;
-    }
-
-    /* Footer */
-    footer {
-        padding: 60px 40px 40px;
-        background: #000000;
-        color: #FFFFFF;
-        text-align: center;
-        z-index: 1;
-        margin-top: auto;
-    }
-    .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 30px;
-        margin-bottom: 40px;
-    }
-    .footer-column {
-        text-align: left;
-    }
-    .footer-column h3 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1.5em;
-        color: #FFFFFF;
-        margin-bottom: 20px;
-    }
-    .footer-column p {
-        font-size: 1em;
-        color: #BBBBBB;
-        margin-bottom: 15px;
-    }
-    .footer-column ul {
-        list-style: none;
-    }
-    .footer-column ul li {
-        margin-bottom: 10px;
-    }
-    .footer-column ul li a {
-        color: #C8102E;
-        text-decoration: none;
-        font-size: 1em;
-        transition: color 0.3s;
-    }
-    .footer-column ul li a:hover {
-        color: #A00D24;
-        text-decoration: underline;
-    }
-    .footer-bottom {
-        border-top: 1px solid #555555;
-        padding-top: 20px;
-    }
-    .copyright {
-        color: #BBBBBB;
-        font-size: 1em;
-    }
-
-    /* Media Queries */
-    @media (max-width: 768px) {
-        .award-banner {
-            padding: 10px 0;
-            font-size: 1.1em;
-            height: 50px;
+            height: 30px;
+            fill: #C8102E;
         }
         .award-banner img {
-            max-width: 180px;
-            margin-left: 5px;
+            max-width: 250px;
+            height: auto;
+            object-fit: contain;
+            margin-left: 10px;
         }
-        .award-banner span {
-            font-size: 12px;
-            flex: 1;
-            justify-content: center;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        .award-banner svg {
-            width: 18px;
-            height: 18px;
-        }
+
+        /* Hamburger Menu */
         .menu {
+            position: relative;
+            z-index: 11;
             margin-right: 20px;
         }
         .hamburger {
-            width: 30px;
-            height: 24px;
+            background: none;
+            border: none;
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            display: block;
+            position: relative;
         }
         .hamburger span {
-            height: 3px;
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: #FFFFFF;
+            position: absolute;
+            transition: background 0.3s;
         }
-        .hamburger span:nth-child(2) { top: 10px; }
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 13px; }
+        .hamburger span:nth-child(3) { bottom: 0; }
+        .hamburger:hover span {
+            background: #C8102E;
+        }
         .menu-content {
-            top: 34px;
-            width: 160px;
-            right: 10px;
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background: #FFFFFF;
+            flex-direction: column;
+            width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            padding: 10px;
         }
+        .menu-content.active {
+            display: flex;
+        }
+        .menu-content a {
+            color: #333333;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .menu-content a:hover {
+            background-color: #C8102E;
+            color: #FFFFFF;
+            border-radius: 4px;
+        }
+
+        /* Hero Section with Video Background */
         .hero-section {
-            padding: 100px 20px;
-            margin-top: 50px;
+            position: relative;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 150px 20px;
+            z-index: 1;
+            margin-top: 90px;
+            overflow: hidden;
         }
         .hero-section video {
-            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
         }
-        .hero-section {
-            background: url('https://res.cloudinary.com/dk98vn3a5/image/upload/v1747089238/Navy_Blue_Futuristic_Technology_Linktree_Background_tox4nm.png') no-repeat center center;
-            background-size: cover;
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
         }
         .hero-section h1 {
-            font-size: 2.5em;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5em;
+            margin-bottom: 20px;
         }
         .hero-section p {
-            font-size: 1em;
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto 30px;
         }
-        .services-section, .about-section, .stats-section, .compliance-section {
-            padding: 40px 20px;
+        .cta-btn {
+            background-color: #C8102E;
+            color: #FFFFFF;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
         }
-        .services-section h2, .about-section h2, .stats-section h2, .compliance-section h2 {
-            font-size: 2em;
+        .cta-btn:hover {
+            background-color: #A00D24;
+        }
+
+        /* Mobile Fallback */
+        @media (max-width: 768px) {
+            .award-banner {
+                padding: 10px 0;
+                font-size: 1.1em;
+                height: 70px;
+            }
+            .award-banner img {
+                max-width: 220px !important;
+                margin-left: 5px;
+            }
+            .award-banner span {
+                font-size: 12px;
+                flex: 1;
+                justify-content: center;
+            }
+            .award-banner svg {
+                width: 18px;
+                height: 18px;
+            }
+            .menu {
+                margin-right: 20px;
+            }
+            .hamburger {
+                width: 30px;
+                height: 24px;
+            }
+            .hamburger span {
+                height: 3px;
+            }
+            .hamburger span:nth-child(2) { top: 10px; }
+            .menu-content {
+                top: 34px;
+                width: 160px;
+                right: 10px;
+            }
+            .hero-section {
+                padding: 100px 20px;
+                margin-top: 70px;
+            }
+            .hero-section video {
+                display: none;
+            }
+            .hero-section {
+                background: url('https://res.cloudinary.com/dk98vn3a5/image/upload/v1747089238/Navy_Blue_Futuristic_Technology_Linktree_Background_tox4nm.png') no-repeat center center;
+                background-size: cover;
+            }
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+            .hero-section p {
+                font-size: 1em;
+            }
+            .services-section, .about-section, .stats-section, .compliance-section {
+                padding: 40px 20px;
+            }
+            .services-section h2, .about-section h2, .stats-section h2, .compliance-section h2 {
+                font-size: 2em;
+            }
+            .service-item h3 {
+                font-size: 1.3em;
+            }
+            .service-item p {
+                font-size: 0.95em;
+            }
+            .compliance-btn {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-column {
+                text-align: center;
+            }
+            .footer-column ul li {
+                margin-bottom: 8px;
+            }
+            footer {
+                padding: 40px 20px;
+            }
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 80px 40px;
+            background: #FFFFFF;
+            text-align: center;
+        }
+        .services-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            color: #333333;
+            margin-bottom: 40px;
+        }
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .service-item {
+            padding: 20px;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .service-item img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
         }
         .service-item h3 {
-            font-size: 1.3em;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
+            color: #333333;
+            margin-bottom: 15px;
         }
         .service-item p {
-            font-size: 0.95em;
+            font-size: 1em;
+            color: #666666;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 40px;
+            background: #F5F5F5;
+            text-align: center;
+        }
+        .about-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            color: #333333;
+            margin-bottom: 40px;
+        }
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .about-content p {
+            font-size: 1.1em;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 40px;
+            background: #FFFFFF;
+            text-align: center;
+        }
+        .stats-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            color: #333333;
+            margin-bottom: 40px;
+        }
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .stat-item {
+            padding: 20px;
+        }
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            color: #C8102E;
+            font-weight: 700;
+        }
+        .stat-label {
+            font-size: 1.1em;
+            color: #666666;
+            margin-top: 10px;
+        }
+
+        /* Compliance Section */
+        .compliance-section {
+            padding: 80px 40px;
+            background: #F5F5F5;
+            text-align: center;
+        }
+        .compliance-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            color: #333333;
+            margin-bottom: 40px;
+        }
+        .compliance-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .compliance-btn {
-            font-size: 14px;
-            padding: 10px 20px;
+            display: inline-block;
+            background-color: #C8102E;
+            color: #FFFFFF;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .compliance-btn:hover {
+            background-color: #A00D24;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 40px 40px;
+            background: #000000;
+            color: #FFFFFF;
+            text-align: center;
+            z-index: 1;
+            margin-top: auto;
         }
         .footer-content {
-            grid-template-columns: 1fr;
-            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
         }
         .footer-column {
-            text-align: center;
+            text-align: left;
+        }
+        .footer-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+        }
+        .footer-column p {
+            font-size: 1em;
+            color: #BBBBBB;
+            margin-bottom: 15px;
+        }
+        .footer-column ul {
+            list-style: none;
         }
         .footer-column ul li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
-        footer {
-            padding: 40px 20px;
+        .footer-column ul li a {
+            color: #C8102E;
+            text-decoration: none;
+            font-size: 1em;
+            transition: color 0.3s;
         }
-    }
-</style>
-
+        .footer-column ul li a:hover {
+            color: #A00D24;
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            border-top: 1px solid #555555;
+            padding-top: 20px;
+        }
+        .copyright {
+            color: #BBBBBB;
+            font-size: 1em;
+        }
+    </style>
 </head>
 <body>
     <div class="award-banner">
@@ -533,134 +478,134 @@
             </div>
         </div>
     </div>
-<section class="hero-section" id="home">
-    <video autoplay muted loop playsinline poster="https://res.cloudinary.com/dk98vn3a5/video/upload/v1747088111/Dark_Blue_Uplifting_Abstract_Corporate_Entrepreneurs_YouTube_Video_Intro_wnl7pi.mp4">
-        <source src="https://res.cloudinary.com/dk98vn3a5/video/upload/v1747088111/Dark_Blue_Uplifting_Abstract_Corporate_Entrepreneurs_YouTube_Video_Intro_wnl7pi.mp4" type="video/mp4">
-    </video>
-    <h1>Secure Your Infrastructure</h1>
-    <p>Premier cybersecurity defense contractors delivering cutting-edge solutions for government and commercial clients.</p>
-    <a href="https://xonesecure.github.io/xone/assessment-form.html" class="cta-btn">Request a Free Assessment</a>
-</section>
 
-<section class="services-section" id="services">
-    <h2>Our Cybersecurity Services</h2>
-    <div class="services-container">
-        <a href="services.html" style="text-decoration: none; color: inherit;">
-            <div class="service-item">
-                <img src="https://img.icons8.com/ios-filled/100/333333/network.png" alt="Network Assessment Icon">
-                <h3>Network Infrastructure Assessment</h3>
-                <p>Evaluate network architecture, cloud systems, and endpoints to ensure robust security and resilience against cyber threats.</p>
+    <section class="hero-section" id="home">
+        <video autoplay muted loop playsinline poster="https://res.cloudinary.com/dk98vn3a5/video/upload/v1747088111/Dark_Blue_Uplifting_Abstract_Corporate_Entrepreneurs_YouTube_Video_Intro_wnl7pi.mp4">
+            <source src="https://res.cloudinary.com/dk98vn3a5/video/upload/v1747088111/Dark_Blue_Uplifting_Abstract_Corporate_Entrepreneurs_YouTube_Video_Intro_wnl7pi.mp4" type="video/mp4">
+        </video>
+        <h1>Secure Your Infrastructure</h1>
+        <p>Premier cybersecurity defense contractors delivering cutting-edge solutions for government and commercial clients.</p>
+        <a href="https://xonesecure.github.io/xone/assessment-form.html" class="cta-btn">Request a Free Assessment</a>
+    </section>
+
+    <section class="services-section" id="services">
+        <h2>Our Cybersecurity Services</h2>
+        <div class="services-container">
+            <a href="services.html" style="text-decoration: none; color: inherit;">
+                <div class="service-item">
+                    <img src="https://img.icons8.com/ios-filled/100/333333/network.png" alt="Network Assessment Icon">
+                    <h3>Network Infrastructure Assessment</h3>
+                    <p>Evaluate network architecture, cloud systems, and endpoints to ensure robust security and resilience against cyber threats.</p>
+                </div>
+            </a>
+            <a href="services.html" style="text-decoration: none; color: inherit;">
+                <div class="service-item">
+                    <img src="https://img.icons8.com/ios-filled/100/333333/checked-checkbox.png" alt="Auditing & Compliance Icon">
+                    <h3>Auditing & Compliance</h3>
+                    <p>Conduct thorough audits to ensure compliance with NIST, FISMA, and other federal standards, with ongoing monitoring for defense and enterprise clients.</p>
+                </div>
+            </a>
+            <a href="services.html" style="text-decoration: none; color: inherit;">
+                <div class="service-item">
+                    <img src="https://img.icons8.com/ios-filled/100/333333/hacker.png" alt="Penetration Testing Icon">
+                    <h3>Penetration Testing</h3>
+                    <p>Simulate advanced cyber attacks on your systems to identify and remediate vulnerabilities, tailored for government and commercial environments.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <h2>About Watchdog Cybersecurity</h2>
+        <div class="about-content">
+            <p>Watchdog is a premier cybersecurity defense contractor, delivering cutting-edge solutions to government and commercial clients.</p>
+            <p>Our team of expert penetration testers, security analysts, and compliance specialists provide comprehensive network assessments, system audits, and threat mitigation services, ensuring compliance with federal standards like NIST and FISMA.</p>
+            <p>Trusted partners on gsa.gov and sam.gov, we secure critical infrastructure for defense and enterprise sectors with actionable insights and robust solutions.</p>
+        </div>
+    </section>
+
+    <section class="stats-section" id="stats">
+        <h2>Our Impact</h2>
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-number">5,065</span>
+                <span class="stat-label">Threats Mitigated</span>
             </div>
-        </a>
-        <a href="services.html" style="text-decoration: none; color: inherit;">
-            <div class="service-item">
-                <img src="https://img.icons8.com/ios-filled/100/333333/checked-checkbox.png" alt="Auditing & Compliance Icon">
-                <h3>Auditing & Compliance</h3>
-                <p>Conduct thorough audits to ensure compliance with NIST, FISMA, and other federal standards, with ongoing monitoring for defense and enterprise clients.</p>
+            <div class="stat-item">
+                <span class="stat-number">2,010</span>
+                <span class="stat-label">Clients Protected</span>
             </div>
-        </a>
-        <a href="services.html" style="text-decoration: none; color: inherit;">
-            <div class="service-item">
-                <img src="https://img.icons8.com/ios-filled/100/333333/hacker.png" alt="Penetration Testing Icon">
-                <h3>Penetration Testing</h3>
-                <p>Simulate advanced cyber attacks on your systems to identify and remediate vulnerabilities, tailored for government and commercial environments.</p>
+            <div class="stat-item">
+                <span class="stat-number">506</span>
+                <span class="stat-label">Systems Secured</span>
             </div>
-        </a>
-    </div>
-</section>
+            <div class="stat-item">
+                <span class="stat-number">250</span>
+                <span class="stat-label">Audits Completed</span>
+            </div>
+        </div>
+    </section>
 
-<section class="about-section" id="about">
-    <h2>About Watchdog Cybersecurity</h2>
-    <div class="about-content">
-        <p>Watchdog is a premier cybersecurity defense contractor, delivering cutting-edge solutions to government and commercial clients.</p>
-        <p>Our team of expert penetration testers, security analysts, and compliance specialists provide comprehensive network assessments, system audits, and threat mitigation services, ensuring compliance with federal standards like NIST and FISMA.</p>
-        <p>Trusted partners on gsa.gov and sam.gov, we secure critical infrastructure for defense and enterprise sectors with actionable insights and robust solutions.</p>
-    </div>
-</section>
+    <section class="compliance-section" id="compliance">
+        <h2>NIST Compliance</h2>
+        <h3>CMMC Support</h3>
+        <p>Our services support several NIST 800-171 requirements for Risk Assessment, System and Communications Protection, and System and Information Integrity families of requirements.</p>
+        <div class="compliance-container">
+            <div class="stat-item">
+                <span class="stat-number">97 Controls</span>
+                <span class="stat-label">NIST SP 800-171</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">5 Functions</span>
+                <span class="stat-label">NIST CSF 2.0</span>
+            </div>
+        </div>
+        <a href="xone-standards.html" class="compliance-btn">Learn More About Watchdog Compliance</a>
+    </section>
 
-<section class="stats-section" id="stats">
-    <h2>Our Impact</h2>
-    <div class="stats-container">
-        <div class="stat-item">
-            <span class="stat-number">5,065</span>
-            <span class="stat-label">Threats Mitigated</span>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Watchdog Cybersecurity</h3>
+                <p>Premier cybersecurity defense contractors delivering cutting-edge solutions for government and commercial clients.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="termsofuse.html">Terms of Use</a></li>
+                    <li><a href="privacypolicy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://twitter.com/xOnesecure">X</a></li>
+                    <li><a href="https://github.com/xOneSecure">Gitbook</a></li>
+                    <li><a href="https://github.com/xOneSecure/xone">Github</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="stat-item">
-            <span class="stat-number">2,010</span>
-            <span class="stat-label">Clients Protected</span>
+        <div class="footer-bottom">
+            <p class="copyright">© 2025 All Rights Reserved by Watchdog Cybersecurity</p>
         </div>
-        <div class="stat-item">
-            <span class="stat-number">506</span>
-            <span class="stat-label">Systems Secured</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-number">250</span>
-            <span class="stat-label">Audits Completed</span>
-        </div>
-    </div>
-</section>
+    </footer>
 
-<section class="compliance-section" id="compliance">
-    <h2>NIST Compliance</h2>
-    <h3>CMMC Support</h3>
-    <p>Our services support several NIST 800-171 requirements for Risk Assessment, System and Communications Protection, and System and Information Integrity families of requirements.</p>
-    <div class="compliance-container">
-        <div class="stat-item">
-            <span class="stat-number">97 Controls</span>
-            <span class="stat-label">NIST SP 800-171</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-number">5 Functions</span>
-            <span class="stat-label">NIST CSF 2.0</span>
-        </div>
-    </div>
-    <a href="xone-standards.html" class="compliance-btn">Learn More About Watchdog Compliance</a>
-</section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const menuContent = document.querySelector('.menu-content');
 
-<footer>
-    <div class="footer-content">
-        <div class="footer-column">
-            <h3>Watchdog Cybersecurity</h3>
-            <p>Premier cybersecurity defense contractors delivering cutting-edge solutions for government and commercial clients.</p>
-        </div>
-        <div class="footer-column">
-            <h3>Legal</h3>
-            <ul>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="termsofuse.html">Terms of Use</a></li>
-                <li><a href="privacypolicy.html">Privacy Policy</a></li>
-            </ul>
-        </div>
-        <div class="footer-column">
-            <h3>Connect</h3>
-            <ul>
-                <li><a href="https://twitter.com/xOnesecure">X</a></li>
-                <li><a href="https://github.com/xOneSecure">Gitbook</a></li>
-                <li><a href="https://github.com/xOneSecure/xone">Github</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p class="copyright">© 2025 All Rights Reserved by Watchdog Cybersecurity</p>
-    </div>
-</footer>
+            hamburger.addEventListener('click', function() {
+                menuContent.classList.toggle('active');
+            });
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const hamburger = document.querySelector('.hamburger');
-        const menuContent = document.querySelector('.menu-content');
-
-        hamburger.addEventListener('click', function() {
-            menuContent.classList.toggle('active');
+            document.addEventListener('click', function(e) {
+                if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
+                    menuContent.classList.remove('active');
+                }
+            });
         });
-
-        document.addEventListener('click', function(e) {
-            if (!menuContent.contains(e.target) && !hamburger.contains(e.target)) {
-                menuContent.classList.remove('active');
-            }
-        });
-    });
-</script>
-
+    </script>
 </body>
 </html>
