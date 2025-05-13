@@ -32,7 +32,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 220px;
+            padding: 20px 0;
             background: #0B0B0B;
             color: #BBBBBB;
             font-family: 'Montserrat', sans-serif;
@@ -45,17 +45,14 @@
             left: 0;
             right: 0;
             height: 70px;
-            position: relative; /* Add this */
         }
         .award-banner span {
             display: inline-flex;
             align-items: center;
             gap: 10px;
             font-size: 18px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            flex: 1;
+            justify-content: center;
         }
         .award-banner svg {
             width: 30px;
@@ -186,12 +183,56 @@
 
         /* Mobile Fallback */
         @media (max-width: 768px) {
+            .award-banner {
+                padding: 10px 0;
+                font-size: 1.1em;
+                height: 50px;
+            }
+            .award-banner img {
+                max-width: 180px;
+                margin-left: 5px;
+            }
+            .award-banner span {
+                font-size: 12px;
+                flex: 1;
+                justify-content: center;
+            }
+            .award-banner svg {
+                width: 18px;
+                height: 18px;
+            }
+            .menu {
+                margin-right: 20px;
+            }
+            .hamburger {
+                width: 30px;
+                height: 24px;
+            }
+            .hamburger span {
+                height: 3px;
+            }
+            .hamburger span:nth-child(2) { top: 10px; }
+            .menu-content {
+                top: 34px;
+                width: 160px;
+                right: 10px;
+            }
+            .hero-section {
+                padding: 100px 20px;
+                margin-top: 50px;
+            }
             .hero-section video {
                 display: none;
             }
             .hero-section {
                 background: url('https://res.cloudinary.com/dk98vn3a5/image/upload/v1747089238/Navy_Blue_Futuristic_Technology_Linktree_Background_tox4nm.png') no-repeat center center;
                 background-size: cover;
+            }
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+            .hero-section p {
+                font-size: 1em;
             }
         }
 
@@ -389,7 +430,7 @@
         /* Media Queries */
         @media (max-width: 768px) {
             .award-banner {
-                padding: 10px 190px;
+                padding: 10px 0;
                 font-size: 1.1em;
                 height: 50px;
             }
@@ -399,10 +440,8 @@
             }
             .award-banner span {
                 font-size: 12px;
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
+                flex: 1;
+                justify-content: center;
             }
             .award-banner svg {
                 width: 18px;
@@ -427,6 +466,13 @@
             .hero-section {
                 padding: 100px 20px;
                 margin-top: 50px;
+            }
+            .hero-section video {
+                display: none;
+            }
+            .hero-section {
+                background: url('https://res.cloudinary.com/dk98vn3a5/image/upload/v1747089238/Navy_Blue_Futuristic_Technology_Linktree_Background_tox4nm.png') no-repeat center center;
+                background-size: cover;
             }
             .hero-section h1 {
                 font-size: 2.5em;
@@ -493,8 +539,8 @@
     </div>
 
     <section class="hero-section" id="home">
-        <video autoplay muted loop playsinline poster="watchdog1-poster.jpg">
-            <source src="https://res.cloudinary.com/dk98vn3a5/video/upload/v1747088111/Dark_Blue_Uplifting_Abstract_Corporate_Entrepreneurs_YouTube_Video_Intro_wnl7pi.mp4">
+        <video autoplay muted loop playsinline poster="https://res.cloudinary.com/dk98vn3a5/image/upload/v1747089238/Navy_Blue_Futuristic_Technology_Linktree_Background_tox4nm.png">
+            <source src="https://res.cloudinary.com/dk98vn3a5/video/upload/watchdog1.mp4" type="video/mp4">
         </video>
         <h1>Secure Your Infrastructure</h1>
         <p>Premier cybersecurity defense contractors delivering cutting-edge solutions for government and commercial clients.</p>
