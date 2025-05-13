@@ -32,7 +32,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 20px 220px;
             background: #0B0B0B;
             color: #BBBBBB;
             font-family: 'Montserrat', sans-serif;
@@ -45,14 +45,17 @@
             left: 0;
             right: 0;
             height: 70px;
+            position: relative; /* Add this */
         }
         .award-banner span {
             display: inline-flex;
             align-items: center;
             gap: 10px;
             font-size: 18px;
-            flex-grow: 1;
-            justify-content: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
         .award-banner svg {
             width: 30px;
@@ -386,7 +389,7 @@
         /* Media Queries */
         @media (max-width: 768px) {
             .award-banner {
-                padding: 10px 0;
+                padding: 10px 190px;
                 font-size: 1.1em;
                 height: 50px;
             }
@@ -396,6 +399,10 @@
             }
             .award-banner span {
                 font-size: 12px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
             }
             .award-banner svg {
                 width: 18px;
